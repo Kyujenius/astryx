@@ -1,0 +1,118 @@
+{
+  "iterationId": "6b0a9176",
+  "createdAt": "2026-07-25T11:05:19.485Z",
+  "config": {
+    "target": "html",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "fwc-9",
+      "category": "feature-with-constraint",
+      "prompt": "Build a meeting scheduler with a date picker and a time input for start time. The meeting duration should default to 30 minutes.",
+      "expectedComponents": [
+        "DateInput",
+        "TimeInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-4",
+      "category": "state-driven",
+      "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+      "expectedComponents": [
+        "CheckboxInput",
+        "Button",
+        "TextArea"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-3",
+      "category": "data-display",
+      "prompt": "Show a grid of product cards with image, title, price, and add to cart button",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-3",
+      "category": "integration-oriented",
+      "prompt": "A file upload button that shows progress and calls an upload endpoint",
+      "expectedComponents": [
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-1",
+      "category": "typography",
+      "prompt": "Show a page title with a short description underneath",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-1",
+      "category": "theme-customization",
+      "prompt": "Set up a dark mode toggle for my app. I want a button that switches between light and dark themes using the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Button"
+      ],
+      "status": "pending"
+    }
+  ]
+}

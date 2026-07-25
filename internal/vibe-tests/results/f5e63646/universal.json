@@ -1,0 +1,720 @@
+{
+  "averages": {
+    "correctness": 88,
+    "accessibility": 100,
+    "codeQuality": 100,
+    "efficiency": 83,
+    "maintainability": 99
+  },
+  "overall": 94,
+  "byPrompt": {
+    "cwm-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 91,
+        "findings": [],
+        "metrics": {
+          "totalLines": 48,
+          "codeLines": 44,
+          "stylingLines": 3,
+          "boilerplateLines": 7,
+          "logicLines": 34,
+          "stylingRatio": 0.06818181818181818,
+          "boilerplateRatio": 0.1590909090909091,
+          "decisionsPerElement": 1.4,
+          "elementCount": 13,
+          "stylingDecisionCount": 18,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 7,
+          "avgStateSpread": 22
+        }
+      }
+    },
+    "dd-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{id: \"_\", title: \"_\", price: N, image: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 40,
+          "codeLines": 37,
+          "stylingLines": 1,
+          "boilerplateLines": 7,
+          "logicLines": 29,
+          "stylingRatio": 0.02702702702702703,
+          "boilerplateRatio": 0.1891891891891892,
+          "decisionsPerElement": 1,
+          "elementCount": 12,
+          "stylingDecisionCount": 12,
+          "duplicateRatio": 0.11
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "fwc-9": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string | undefined' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+            "line": 20
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string | undefined' is not assignable to type 'ISOTimeString | undefined'.",
+            "line": 21
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 30,
+          "codeLines": 26,
+          "stylingLines": 0,
+          "boilerplateLines": 26,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 0.6,
+          "elementCount": 11,
+          "stylingDecisionCount": 7,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 11
+        }
+      }
+    },
+    "io-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 91,
+        "findings": [],
+        "metrics": {
+          "totalLines": 36,
+          "codeLines": 32,
+          "stylingLines": 1,
+          "boilerplateLines": 6,
+          "logicLines": 25,
+          "stylingRatio": 0.03125,
+          "boilerplateRatio": 0.1875,
+          "decisionsPerElement": 0.7,
+          "elementCount": 7,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 20
+        }
+      }
+    },
+    "ps-1": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/theme-neutral' or its corresponding type declarations.",
+            "line": 9
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'heading' is missing in type '{ children: string; }' but required in type 'SideNavHeadingProps'.",
+            "line": 22
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'title' is missing in type '{ children: Element[]; }' but required in type 'SideNavSectionProps'.",
+            "line": 23
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 46,
+          "codeLines": 43,
+          "stylingLines": 1,
+          "boilerplateLines": 10,
+          "logicLines": 32,
+          "stylingRatio": 0.023255813953488372,
+          "boilerplateRatio": 0.23255813953488372,
+          "decisionsPerElement": 0.3,
+          "elementCount": 16,
+          "stylingDecisionCount": 4,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 0,
+          "avgStateSpread": 19
+        }
+      }
+    },
+    "rc-1": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'title' is missing in type '{ children: Element[]; }' but required in type 'SideNavSectionProps'.",
+            "line": 26
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "totalLines": 41,
+          "codeLines": 39,
+          "stylingLines": 1,
+          "boilerplateLines": 7,
+          "logicLines": 31,
+          "stylingRatio": 0.02564102564102564,
+          "boilerplateRatio": 0.1794871794871795,
+          "decisionsPerElement": 0.3,
+          "elementCount": 15,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "sd-4": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; value: string; onChange: () => void; isReadOnly: true; rows: number; }' is not assignable to type 'IntrinsicAttributes & TextAreaProps'.",
+            "line": 21
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [],
+        "metrics": {
+          "totalLines": 31,
+          "codeLines": 27,
+          "stylingLines": 1,
+          "boilerplateLines": 7,
+          "logicLines": 19,
+          "stylingRatio": 0.037037037037037035,
+          "boilerplateRatio": 0.25925925925925924,
+          "decisionsPerElement": 0.8,
+          "elementCount": 9,
+          "stylingDecisionCount": 7,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 12
+        }
+      }
+    },
+    "tc-1": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/theme-neutral' or its corresponding type declarations.",
+            "line": 7
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [],
+        "metrics": {
+          "totalLines": 33,
+          "codeLines": 30,
+          "stylingLines": 1,
+          "boilerplateLines": 8,
+          "logicLines": 21,
+          "stylingRatio": 0.03333333333333333,
+          "boilerplateRatio": 0.26666666666666666,
+          "decisionsPerElement": 0.9,
+          "elementCount": 7,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 13
+        }
+      }
+    },
+    "ty-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 89,
+        "findings": [],
+        "metrics": {
+          "totalLines": 17,
+          "codeLines": 15,
+          "stylingLines": 1,
+          "boilerplateLines": 3,
+          "logicLines": 11,
+          "stylingRatio": 0.06666666666666667,
+          "boilerplateRatio": 0.2,
+          "decisionsPerElement": 1.3,
+          "elementCount": 4,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 80,
+          "codeLines": 72,
+          "stylingLines": 0,
+          "boilerplateLines": 72,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 0.7,
+          "elementCount": 34,
+          "stylingDecisionCount": 24,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 43
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "clone-with-modification": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 91,
+      "maintainability": 100
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 83,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 60,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 91,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 92,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "theme-customization": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 89,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 60,
+      "maintainability": 92
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 5037712,
+    "avgDurationMs": 503771,
+    "avgOutputChars": 1536,
+    "avgOutputLines": 40,
+    "avgDocsRead": 6.3,
+    "estimatedInputTokens": 43125,
+    "estimatedOutputTokens": 3840,
+    "byPrompt": {
+      "cwm-3": {
+        "durationMs": 503771,
+        "outputChars": 1751,
+        "outputLines": 48,
+        "docsRead": [
+          "Stack",
+          "Heading",
+          "Text",
+          "Button",
+          "Thumbnail",
+          "Popover"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 438
+      },
+      "dd-3": {
+        "durationMs": 503772,
+        "outputChars": 1584,
+        "outputLines": 40,
+        "docsRead": [
+          "Stack",
+          "Heading",
+          "Text",
+          "Button",
+          "Card",
+          "Thumbnail",
+          "Badge"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 396
+      },
+      "fwc-9": {
+        "durationMs": 503772,
+        "outputChars": 1402,
+        "outputLines": 30,
+        "docsRead": [
+          "DateInput",
+          "TimeInput",
+          "NumberInput",
+          "Button",
+          "Heading",
+          "Text",
+          "Stack"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 351
+      },
+      "io-3": {
+        "durationMs": 503771,
+        "outputChars": 1311,
+        "outputLines": 36,
+        "docsRead": [
+          "FileInput",
+          "ProgressBar",
+          "Button",
+          "Banner",
+          "Stack"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 328
+      },
+      "ps-1": {
+        "durationMs": 503771,
+        "outputChars": 1918,
+        "outputLines": 46,
+        "docsRead": [
+          "AppShell",
+          "TopNav",
+          "SideNav",
+          "Stack",
+          "Heading",
+          "Card",
+          "Switch",
+          "Theme"
+        ],
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 480
+      },
+      "rc-1": {
+        "durationMs": 503772,
+        "outputChars": 1360,
+        "outputLines": 41,
+        "docsRead": [
+          "AppShell",
+          "TopNav",
+          "MobileNav",
+          "SideNav",
+          "Stack",
+          "Heading",
+          "Text"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 340
+      },
+      "sd-4": {
+        "durationMs": 503772,
+        "outputChars": 1509,
+        "outputLines": 31,
+        "docsRead": [
+          "Stack",
+          "Heading",
+          "TextArea",
+          "CheckboxInput",
+          "Button",
+          "Card"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 377
+      },
+      "tc-1": {
+        "durationMs": 503768,
+        "outputChars": 1097,
+        "outputLines": 33,
+        "docsRead": [
+          "Theme",
+          "Button",
+          "Heading",
+          "Text",
+          "Card",
+          "Stack"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 274
+      },
+      "ty-1": {
+        "durationMs": 503771,
+        "outputChars": 485,
+        "outputLines": 17,
+        "docsRead": [
+          "Heading",
+          "Text",
+          "Stack"
+        ],
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 121
+      },
+      "wd-1": {
+        "durationMs": 503772,
+        "outputChars": 2939,
+        "outputLines": 80,
+        "docsRead": [
+          "Stack",
+          "Button",
+          "Heading",
+          "Text",
+          "TextInput",
+          "Card",
+          "TabList",
+          "Banner"
+        ],
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 735
+      }
+    }
+  }
+}
