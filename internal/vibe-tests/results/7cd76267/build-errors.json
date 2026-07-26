@@ -37,9 +37,15 @@
   },
   "sd-3": {
     "target": "baseline",
-    "errors": [],
-    "errorCount": 0,
-    "buildSuccess": true
+    "errors": [
+      {
+        "line": 32,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
   },
   "tc-7": {
     "target": "baseline",

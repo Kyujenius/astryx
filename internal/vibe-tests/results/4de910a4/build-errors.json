@@ -123,12 +123,12 @@
     "target": "astryx",
     "errors": [
       {
-        "line": 16,
+        "line": 18,
         "message": "Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
         "code": "TS2322"
       },
       {
-        "line": 20,
+        "line": 22,
         "message": "Type '\"medium\"' is not assignable to type 'AvatarSize | undefined'.",
         "code": "TS2322"
       }
@@ -140,17 +140,17 @@
     "target": "astryx",
     "errors": [
       {
-        "line": 2,
+        "line": 4,
         "message": "Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
         "code": "TS2307"
       },
       {
-        "line": 53,
+        "line": 55,
         "message": "Type '{ children: string; variant: \"ghost\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
         "code": "TS2322"
       },
       {
-        "line": 54,
+        "line": 56,
         "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
         "code": "TS2322"
       }
