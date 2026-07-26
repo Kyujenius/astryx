@@ -1,0 +1,119 @@
+{
+  "iterationId": "4de910a4",
+  "createdAt": "2026-07-26T11:10:11.839Z",
+  "config": {
+    "target": "astryx",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "fwc-4",
+      "category": "feature-with-constraint",
+      "prompt": "I need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.",
+      "expectedComponents": [
+        "Dialog",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-3",
+      "category": "state-driven",
+      "prompt": "Form that disables submit until all required fields are valid",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-1",
+      "category": "data-display",
+      "prompt": "A table of users with sortable columns and search",
+      "expectedComponents": [
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-2",
+      "category": "typography",
+      "prompt": "Create a blog post header with a big editorial headline, a publication date in small text, and an author name",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-7",
+      "category": "theme-customization",
+      "prompt": "I have a section of my app that needs a different theme than the rest — like a dark sidebar next to a light content area. How do I nest themes in Astryx?",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutPanel",
+        "LayoutContent"
+      ],
+      "status": "pending"
+    }
+  ]
+}

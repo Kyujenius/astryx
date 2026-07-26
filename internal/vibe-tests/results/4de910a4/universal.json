@@ -1,0 +1,814 @@
+{
+  "averages": {
+    "correctness": 79,
+    "accessibility": 100,
+    "codeQuality": 99,
+    "efficiency": 88,
+    "maintainability": 98
+  },
+  "overall": 93,
+  "byPrompt": {
+    "cwm-3": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 25
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 33
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"small\"' is not assignable to type '\"sm\" | \"lg\" | \"md\" | undefined'.",
+            "line": 25
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: Element; key: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 33
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 50,
+          "codeLines": 45,
+          "stylingLines": 5,
+          "boilerplateLines": 6,
+          "logicLines": 34,
+          "stylingRatio": 0.1111111111111111,
+          "boilerplateRatio": 0.13333333333333333,
+          "decisionsPerElement": 1.3,
+          "elementCount": 15,
+          "stylingDecisionCount": 20,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 7,
+          "avgStateSpread": 14
+        }
+      }
+    },
+    "dd-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 81,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 5 times",
+            "count": 5,
+            "example": "{id: N, name: \"_\", email: \"_\", role: \"_\", status: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 68,
+          "codeLines": 60,
+          "stylingLines": 4,
+          "boilerplateLines": 13,
+          "logicLines": 43,
+          "stylingRatio": 0.06666666666666667,
+          "boilerplateRatio": 0.21666666666666667,
+          "decisionsPerElement": 0.9,
+          "elementCount": 9,
+          "stylingDecisionCount": 8,
+          "duplicateRatio": 0.08
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 18
+        }
+      }
+    },
+    "fwc-4": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 15
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; variant: \"destructive\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 15
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "console-log",
+            "severity": "minor",
+            "detail": "console.log left in code",
+            "line": 9
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 96,
+        "findings": [],
+        "metrics": {
+          "totalLines": 31,
+          "codeLines": 27,
+          "stylingLines": 0,
+          "boilerplateLines": 3,
+          "logicLines": 24,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.1111111111111111,
+          "decisionsPerElement": 0.3,
+          "elementCount": 3,
+          "stylingDecisionCount": 1,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 13
+        }
+      }
+    },
+    "io-1": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; type: \"success\" | \"error\"; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+            "line": 38
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 40
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "totalLines": 44,
+          "codeLines": 38,
+          "stylingLines": 3,
+          "boilerplateLines": 5,
+          "logicLines": 30,
+          "stylingRatio": 0.07894736842105263,
+          "boilerplateRatio": 0.13157894736842105,
+          "decisionsPerElement": 2.3,
+          "elementCount": 4,
+          "stylingDecisionCount": 9,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 26
+        }
+      }
+    },
+    "ps-1": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 42
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; label: string; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+            "line": 47
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 86,
+        "findings": [],
+        "metrics": {
+          "totalLines": 54,
+          "codeLines": 50,
+          "stylingLines": 4,
+          "boilerplateLines": 13,
+          "logicLines": 33,
+          "stylingRatio": 0.08,
+          "boilerplateRatio": 0.26,
+          "decisionsPerElement": 0.7,
+          "elementCount": 19,
+          "stylingDecisionCount": 13,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 22
+        }
+      }
+    },
+    "rc-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 34,
+          "codeLines": 31,
+          "stylingLines": 0,
+          "boilerplateLines": 10,
+          "logicLines": 21,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.3225806451612903,
+          "decisionsPerElement": 0.1,
+          "elementCount": 14,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 0,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "sd-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "console-log",
+            "severity": "minor",
+            "detail": "console.log left in code",
+            "line": 27
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 89,
+        "findings": [],
+        "metrics": {
+          "totalLines": 36,
+          "codeLines": 30,
+          "stylingLines": 3,
+          "boilerplateLines": 5,
+          "logicLines": 22,
+          "stylingRatio": 0.1,
+          "boilerplateRatio": 0.16666666666666666,
+          "decisionsPerElement": 1.8,
+          "elementCount": 6,
+          "stylingDecisionCount": 11,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 17
+        }
+      }
+    },
+    "tc-7": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 27
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 28
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 27
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 28
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "heading-skip",
+            "severity": "minor",
+            "detail": "Heading level skipped: h2 → h4"
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 85,
+        "findings": [],
+        "metrics": {
+          "totalLines": 35,
+          "codeLines": 32,
+          "stylingLines": 5,
+          "boilerplateLines": 7,
+          "logicLines": 20,
+          "stylingRatio": 0.15625,
+          "boilerplateRatio": 0.21875,
+          "decisionsPerElement": 1.3,
+          "elementCount": 18,
+          "stylingDecisionCount": 23,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 82,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "2 magic values (hardcoded colors, spacing, or typography)",
+            "count": 2
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.75,
+          "magicValueCount": 2,
+          "semanticValueCount": 6,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "ty-2": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+            "line": 16
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"medium\"' is not assignable to type 'AvatarSize | undefined'.",
+            "line": 20
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 85,
+        "findings": [],
+        "metrics": {
+          "totalLines": 29,
+          "codeLines": 26,
+          "stylingLines": 4,
+          "boilerplateLines": 6,
+          "logicLines": 16,
+          "stylingRatio": 0.15384615384615385,
+          "boilerplateRatio": 0.23076923076923078,
+          "decisionsPerElement": 2.2,
+          "elementCount": 9,
+          "stylingDecisionCount": 20,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 7,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-1": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 53
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 54
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+            "line": 2
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; variant: \"ghost\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 53
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 54
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 59,
+          "codeLines": 54,
+          "stylingLines": 5,
+          "boilerplateLines": 9,
+          "logicLines": 40,
+          "stylingRatio": 0.09259259259259259,
+          "boilerplateRatio": 0.16666666666666666,
+          "decisionsPerElement": 0.8,
+          "elementCount": 28,
+          "stylingDecisionCount": 23,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 5,
+          "avgStateSpread": 23
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "clone-with-modification": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 100
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 81,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 96,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 92,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 86,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 89,
+      "maintainability": 100
+    },
+    "theme-customization": {
+      "correctness": 70,
+      "accessibility": 97,
+      "codeQuality": 100,
+      "efficiency": 85,
+      "maintainability": 82
+    },
+    "typography": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 85,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 100
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 5207812,
+    "avgDurationMs": 520781,
+    "avgOutputChars": 1869,
+    "avgOutputLines": 44,
+    "avgDocsRead": 5,
+    "estimatedInputTokens": 35000,
+    "estimatedOutputTokens": 4673,
+    "byPrompt": {
+      "cwm-3": {
+        "durationMs": 520782,
+        "outputChars": 2123,
+        "outputLines": 50,
+        "docsRead": [
+          "Button",
+          "Heading",
+          "Text",
+          "Popover"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 531
+      },
+      "dd-1": {
+        "durationMs": 520781,
+        "outputChars": 2678,
+        "outputLines": 68,
+        "docsRead": [
+          "Button",
+          "Table",
+          "TextInput",
+          "Text",
+          "Avatar",
+          "Badge"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 670
+      },
+      "fwc-4": {
+        "durationMs": 520783,
+        "outputChars": 815,
+        "outputLines": 31,
+        "docsRead": [
+          "AlertDialog",
+          "Dialog",
+          "Button"
+        ],
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 204
+      },
+      "io-1": {
+        "durationMs": 520781,
+        "outputChars": 1749,
+        "outputLines": 44,
+        "docsRead": [
+          "Button",
+          "TextInput",
+          "Text",
+          "Banner"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 437
+      },
+      "ps-1": {
+        "durationMs": 520780,
+        "outputChars": 2537,
+        "outputLines": 54,
+        "docsRead": [
+          "Button",
+          "TextInput",
+          "Card",
+          "Heading",
+          "Text",
+          "SideNav",
+          "AppShell",
+          "Switch"
+        ],
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 634
+      },
+      "rc-1": {
+        "durationMs": 520781,
+        "outputChars": 1261,
+        "outputLines": 34,
+        "docsRead": [
+          "Heading",
+          "SideNav",
+          "AppShell",
+          "TopNav",
+          "MobileNav"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 315
+      },
+      "sd-3": {
+        "durationMs": 520782,
+        "outputChars": 2024,
+        "outputLines": 36,
+        "docsRead": [
+          "Button",
+          "TextInput",
+          "Heading",
+          "Text"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 506
+      },
+      "tc-7": {
+        "durationMs": 520780,
+        "outputChars": 1570,
+        "outputLines": 35,
+        "docsRead": [
+          "Button",
+          "Card",
+          "Heading",
+          "Text",
+          "MediaTheme"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 393
+      },
+      "ty-2": {
+        "durationMs": 520780,
+        "outputChars": 1179,
+        "outputLines": 29,
+        "docsRead": [
+          "Heading",
+          "Text",
+          "Avatar",
+          "Badge"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 295
+      },
+      "wd-1": {
+        "durationMs": 520782,
+        "outputChars": 2750,
+        "outputLines": 59,
+        "docsRead": [
+          "Button",
+          "TextInput",
+          "Card",
+          "Heading",
+          "Text",
+          "Stepper",
+          "Divider"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 688
+      }
+    }
+  }
+}

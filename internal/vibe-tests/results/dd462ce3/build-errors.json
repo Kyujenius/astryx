@@ -1,0 +1,95 @@
+{
+  "cwm-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 18,
+        "message": "Type '\"small\"' is not assignable to type '\"sm\" | \"lg\" | \"md\" | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 22,
+        "message": "Type '{ children: Element; key: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 27,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-7": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 2,
+        "message": "Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 24,
+        "message": "Type '{ children: string; variant: \"ghost\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 25,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  }
+}

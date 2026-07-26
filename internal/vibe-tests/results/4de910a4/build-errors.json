@@ -1,0 +1,161 @@
+{
+  "cwm-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 25,
+        "message": "Type '\"small\"' is not assignable to type '\"sm\" | \"lg\" | \"md\" | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 33,
+        "message": "Type '{ children: Element; key: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 48,
+        "message": "Type '\"small\"' is not assignable to type 'AvatarSize | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 55,
+        "message": "Type '\"neutral\" | \"positive\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 62,
+        "message": "Type '{ label: string; value: string; onChange: Dispatch<SetStateAction<string>>; placeholder: string; hasClearButton: true; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 15,
+        "message": "Type '{ children: string; variant: \"destructive\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "io-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 38,
+        "message": "Type '{ children: string; type: \"success\" | \"error\"; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 40,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 42,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 47,
+        "message": "Type '{ isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; label: string; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 32,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "tc-7": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 27,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 28,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ty-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 16,
+        "message": "Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type '\"medium\"' is not assignable to type 'AvatarSize | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "wd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 2,
+        "message": "Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 53,
+        "message": "Type '{ children: string; variant: \"ghost\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 54,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  }
+}
