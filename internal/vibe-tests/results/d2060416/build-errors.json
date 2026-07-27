@@ -1,0 +1,171 @@
+{
+  "cwm-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 25,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 27,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 29,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 30,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: () => void; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 36,
+        "message": "Type '\"default\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 5,
+    "buildSuccess": false
+  },
+  "dd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-8": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 15,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 18,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 19,
+        "message": "Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 19,
+        "message": "Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 19,
+        "message": "Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 8,
+    "buildSuccess": false
+  },
+  "io-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 25,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 25,
+        "message": "Type 'string' is not assignable to type 'SearchableItem<unknown>'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 25,
+        "message": "Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(item: SearchableItem<unknown> | null) => void'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 2,
+        "message": "Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 8,
+        "message": "Cannot find module '@astryxdesign/core/NavItem' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 15,
+        "message": "Type '{ children: Element; position: string; width: number; }' is not assignable to type 'IntrinsicAttributes & LayoutPanelProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 20,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 5,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-6": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-8": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

@@ -1,0 +1,11 @@
+import {useState} from 'react';
+type Step = 'cart' | 'shipping' | 'payment' | 'confirmation';
+export default function CheckoutFlow() {
+  const [step, setStep] = useState<Step>('cart');
+  const steps: Step[] = ['cart', 'shipping', 'payment', 'confirmation'];
+  const idx = steps.indexOf(step);
+  const btn = {padding: '8px 16px', border: 'none', borderRadius: 4, cursor: 'pointer', backgroundColor: '#0070f3', color: 'white'};
+  const btnOut = {...btn, backgroundColor: 'transparent', border: '1px solid #ccc', color: '#333'};
+  const input = {width: '100%', padding: 8, border: '1px solid #ccc', borderRadius: 4, marginTop: 4};
+  return (<div style={{maxWidth: 600, margin: '0 auto', padding: 24}}><div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 32}}>{steps.map((s, i) => (<div key={s} style={{display: 'flex', alignItems: 'center', gap: 8}}><div style={{width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: i <= idx ? '#0070f3' : '#eee', color: i <= idx ? 'white' : '#999', fontSize: 14}}>{i + 1}</div><span style={{fontSize: 14, textTransform: 'capitalize'}}>{s}</span></div>))}</div><div style={{border: '1px solid #ddd', borderRadius: 8, padding: 24}}>{step === 'cart' && (<div><h2>Cart Summary</h2><p style={{color: '#666'}}>Review items.</p><hr style={{margin: '16px 0'}} /><button style={btn} onClick={() => setStep('shipping')}>Continue</button></div>)}{step === 'shipping' && (<div style={{display: 'grid', gap: 12}}><div><label>Name</label><input style={input} /></div><div><label>Address</label><input style={input} /></div><div style={{display: 'flex', gap: 8, marginTop: 8}}><button style={btnOut} onClick={() => setStep('cart')}>Back</button><button style={btn} onClick={() => setStep('payment')}>Continue</button></div></div>)}{step === 'payment' && (<div style={{display: 'grid', gap: 12}}><div><label>Card</label><input style={input} /></div><div style={{display: 'flex', gap: 8, marginTop: 8}}><button style={btnOut} onClick={() => setStep('shipping')}>Back</button><button style={btn} onClick={() => setStep('confirmation')}>Place Order</button></div></div>)}{step === 'confirmation' && (<div style={{textAlign: 'center'}}><h2>Order Confirmed!</h2><p style={{color: '#666'}}>Thank you.</p></div>)}</div></div>);
+}

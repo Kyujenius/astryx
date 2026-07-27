@@ -1,0 +1,6 @@
+import {useState} from 'react';
+export default function ResponsiveNav() {
+  const [open, setOpen] = useState(false);
+  const links = ['Home', 'About', 'Services', 'Contact'];
+  return (<><nav style={{borderBottom: '1px solid #eee', padding: '0 16px'}}><div style={{maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 64}}><span style={{fontSize: 18, fontWeight: 700}}>Logo</span><div className="desktop-links" style={{display: 'flex', gap: 8}}>{links.map(l => <button key={l} style={{background: 'none', border: 'none', padding: '8px 12px', cursor: 'pointer'}}>{l}</button>)}</div><button className="hamburger" onClick={() => setOpen(!open)} style={{display: 'none', background: 'none', border: 'none', fontSize: 24, cursor: 'pointer'}}>&#9776;</button></div></nav>{open && (<div className="mobile-menu" style={{display: 'none', borderBottom: '1px solid #eee', padding: 16}}>{links.map(l => <button key={l} style={{display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: '8px 12px', cursor: 'pointer'}}>{l}</button>)}</div>)}<style>{`@media(max-width:768px){.desktop-links{display:none!important}.hamburger{display:block!important}.mobile-menu{display:block!important}}`}</style></>);
+}

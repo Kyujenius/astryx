@@ -1,0 +1,894 @@
+{
+  "averages": {
+    "correctness": 71,
+    "accessibility": 100,
+    "codeQuality": 99,
+    "efficiency": 78,
+    "maintainability": 97
+  },
+  "overall": 89,
+  "byPrompt": {
+    "cwm-2": {
+      "correctness": {
+        "score": 25,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 36
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 25
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 27
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 29
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: () => void; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+            "line": 30
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"default\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 36
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 5 times",
+            "count": 5,
+            "example": "{name: \"_\", color: \"_\", description: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 41,
+          "codeLines": 37,
+          "stylingLines": 0,
+          "boilerplateLines": 7,
+          "logicLines": 30,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.1891891891891892,
+          "decisionsPerElement": 0.7,
+          "elementCount": 9,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0.14
+        }
+      },
+      "maintainability": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "5 magic values (hardcoded colors, spacing, or typography)",
+            "count": 5
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.55,
+          "magicValueCount": 5,
+          "semanticValueCount": 6,
+          "avgStateSpread": 10
+        }
+      }
+    },
+    "dd-4": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "heading-skip",
+            "severity": "minor",
+            "detail": "Heading level skipped: h1 → h3"
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 27,
+          "codeLines": 25,
+          "stylingLines": 0,
+          "boilerplateLines": 8,
+          "logicLines": 17,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.32,
+          "decisionsPerElement": 0.5,
+          "elementCount": 22,
+          "stylingDecisionCount": 11,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 8,
+          "avgStateSpread": 12
+        }
+      }
+    },
+    "fwc-8": {
+      "correctness": {
+        "score": 0,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 15
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 18
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+            "line": 19
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+            "line": 19
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+            "line": 19
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+            "line": 20
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+            "line": 20
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+            "line": 20
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 91,
+        "findings": [],
+        "metrics": {
+          "totalLines": 29,
+          "codeLines": 26,
+          "stylingLines": 0,
+          "boilerplateLines": 6,
+          "logicLines": 20,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.23076923076923078,
+          "decisionsPerElement": 0.3,
+          "elementCount": 10,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 14
+        }
+      }
+    },
+    "io-2": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 25
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SearchableItem<unknown>'.",
+            "line": 25
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(item: SearchableItem<unknown> | null) => void'.",
+            "line": 25
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "typescript-any",
+            "severity": "minor",
+            "detail": "Use of `any` type",
+            "line": 20
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 27,
+          "codeLines": 22,
+          "stylingLines": 0,
+          "boilerplateLines": 22,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 0.5,
+          "elementCount": 4,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 14
+        }
+      }
+    },
+    "ps-1": {
+      "correctness": {
+        "score": 25,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 16
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 17
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 18
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+            "line": 2
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/core/NavItem' or its corresponding type declarations.",
+            "line": 8
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: Element; position: string; width: number; }' is not assignable to type 'IntrinsicAttributes & LayoutPanelProps'.",
+            "line": 15
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 20
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 20
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 84,
+        "findings": [],
+        "metrics": {
+          "totalLines": 24,
+          "codeLines": 22,
+          "stylingLines": 0,
+          "boilerplateLines": 9,
+          "logicLines": 13,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.4090909090909091,
+          "decisionsPerElement": 0.3,
+          "elementCount": 13,
+          "stylingDecisionCount": 4,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 8
+        }
+      }
+    },
+    "rc-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 16
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 94,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 15
+          },
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 18
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [],
+        "metrics": {
+          "totalLines": 22,
+          "codeLines": 20,
+          "stylingLines": 0,
+          "boilerplateLines": 6,
+          "logicLines": 14,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.3,
+          "decisionsPerElement": 1,
+          "elementCount": 8,
+          "stylingDecisionCount": 8,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 7,
+          "avgStateSpread": 9
+        }
+      }
+    },
+    "sd-6": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 13
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 66,
+        "findings": [],
+        "metrics": {
+          "totalLines": 17,
+          "codeLines": 14,
+          "stylingLines": 0,
+          "boilerplateLines": 12,
+          "logicLines": 2,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.8571428571428571,
+          "decisionsPerElement": 0.6,
+          "elementCount": 8,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 4
+        }
+      }
+    },
+    "tc-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 13
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [],
+        "metrics": {
+          "totalLines": 18,
+          "codeLines": 16,
+          "stylingLines": 0,
+          "boilerplateLines": 7,
+          "logicLines": 9,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.4375,
+          "decisionsPerElement": 0.7,
+          "elementCount": 9,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 3
+        }
+      }
+    },
+    "ty-8": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 78,
+        "findings": [],
+        "metrics": {
+          "totalLines": 13,
+          "codeLines": 11,
+          "stylingLines": 0,
+          "boilerplateLines": 6,
+          "logicLines": 5,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.5454545454545454,
+          "decisionsPerElement": 1,
+          "elementCount": 7,
+          "stylingDecisionCount": 7,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 6,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 19
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 20
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 21
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 27,
+          "codeLines": 24,
+          "stylingLines": 0,
+          "boilerplateLines": 24,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 0.6,
+          "elementCount": 30,
+          "stylingDecisionCount": 17,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 13,
+          "avgStateSpread": 8
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "clone-with-modification": {
+      "correctness": 25,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 83,
+      "maintainability": 70
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 97,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 0,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 91,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 60,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 25,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 84,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 94,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 66,
+      "maintainability": 100
+    },
+    "theme-customization": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 83,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 78,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 60,
+      "maintainability": 100
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 7129678,
+    "avgDurationMs": 712968,
+    "avgOutputChars": 1304,
+    "avgOutputLines": 25,
+    "avgDocsRead": 6.3,
+    "estimatedInputTokens": 43125,
+    "estimatedOutputTokens": 3263,
+    "byPrompt": {
+      "cwm-2": {
+        "durationMs": 712968,
+        "outputChars": 1965,
+        "outputLines": 41,
+        "docsRead": [
+          "TextInput",
+          "Button",
+          "Card",
+          "Stack",
+          "Text",
+          "CheckboxInput"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 491
+      },
+      "dd-4": {
+        "durationMs": 712968,
+        "outputChars": 1447,
+        "outputLines": 27,
+        "docsRead": [
+          "TabList",
+          "Tab",
+          "Card",
+          "Stack",
+          "Heading",
+          "Text",
+          "Avatar"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 362
+      },
+      "fwc-8": {
+        "durationMs": 712970,
+        "outputChars": 1155,
+        "outputLines": 29,
+        "docsRead": [
+          "DateInput",
+          "Stack",
+          "Heading",
+          "Text",
+          "Card"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 289
+      },
+      "io-2": {
+        "durationMs": 712967,
+        "outputChars": 1240,
+        "outputLines": 27,
+        "docsRead": [
+          "Typeahead",
+          "Stack",
+          "Heading",
+          "Card"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 310
+      },
+      "ps-1": {
+        "durationMs": 712967,
+        "outputChars": 1430,
+        "outputLines": 24,
+        "docsRead": [
+          "Layout",
+          "LayoutHeader",
+          "LayoutContent",
+          "LayoutPanel",
+          "Theme",
+          "Stack",
+          "Heading",
+          "Text",
+          "Button",
+          "SideNav",
+          "NavItem"
+        ],
+        "estimatedInputTokens": 7250,
+        "estimatedOutputTokens": 358
+      },
+      "rc-1": {
+        "durationMs": 712968,
+        "outputChars": 1048,
+        "outputLines": 22,
+        "docsRead": [
+          "Button",
+          "HStack",
+          "Stack",
+          "Text",
+          "IconButton"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 262
+      },
+      "sd-6": {
+        "durationMs": 712968,
+        "outputChars": 970,
+        "outputLines": 17,
+        "docsRead": [
+          "EmptyState",
+          "Button",
+          "Stack",
+          "Heading",
+          "Card"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 243
+      },
+      "tc-1": {
+        "durationMs": 712966,
+        "outputChars": 1058,
+        "outputLines": 18,
+        "docsRead": [
+          "Theme",
+          "Button",
+          "Stack",
+          "Heading",
+          "Text",
+          "Card"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 265
+      },
+      "ty-8": {
+        "durationMs": 712966,
+        "outputChars": 700,
+        "outputLines": 13,
+        "docsRead": [
+          "Card",
+          "Heading",
+          "Text",
+          "Stack",
+          "Avatar",
+          "Badge"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 175
+      },
+      "wd-1": {
+        "durationMs": 712970,
+        "outputChars": 2031,
+        "outputLines": 27,
+        "docsRead": [
+          "Card",
+          "Button",
+          "TextInput",
+          "Stack",
+          "Heading",
+          "Text",
+          "Stepper",
+          "Divider"
+        ],
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 508
+      }
+    }
+  }
+}

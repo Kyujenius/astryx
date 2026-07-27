@@ -1,0 +1,6 @@
+import {useState} from 'react';
+const sections = ['General', 'Account', 'Notifications', 'Security'];
+export default function SettingsDashboard() {
+  const [active, setActive] = useState('General');
+  return (<div style={{minHeight: '100vh'}}><header style={{borderBottom: '1px solid #eee', padding: '16px 24px'}}><h1 style={{fontSize: 24, fontWeight: 700}}>Settings</h1></header><div style={{display: 'flex'}}><aside style={{width: 240, borderRight: '1px solid #eee', padding: 16}}>{sections.map(s => (<button key={s} onClick={() => setActive(s)} style={{display: 'block', width: '100%', textAlign: 'left', padding: '8px 12px', border: 'none', borderRadius: 4, backgroundColor: active === s ? '#f0f0f0' : 'transparent', cursor: 'pointer', marginBottom: 4}}>{s}</button>))}</aside><main style={{flex: 1, padding: 24}}><h2 style={{fontSize: 20, fontWeight: 600}}>{active}</h2><hr style={{margin: '16px 0', border: 'none', borderTop: '1px solid #eee'}} /><p style={{color: '#666'}}>Configure your {active.toLowerCase()} settings.</p><button style={{marginTop: 16, padding: '8px 16px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer'}}>Save Changes</button></main></div></div>);
+}

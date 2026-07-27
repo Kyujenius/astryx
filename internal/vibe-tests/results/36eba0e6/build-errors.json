@@ -1,0 +1,93 @@
+{
+  "cwm-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-8": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 16,
+        "message": "Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 16,
+        "message": "Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 16,
+        "message": "Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 17,
+        "message": "Type 'Date | null' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 17,
+        "message": "Type 'Dispatch<SetStateAction<Date | null>>' is not assignable to type '(value: `${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined) => void'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 17,
+        "message": "Type 'Date' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}`'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 6,
+    "buildSuccess": false
+  },
+  "io-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-6": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-8": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
