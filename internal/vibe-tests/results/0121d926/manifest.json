@@ -1,0 +1,119 @@
+{
+  "iterationId": "0121d926",
+  "createdAt": "2026-07-28T11:04:49.389Z",
+  "config": {
+    "target": "baseline",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "fwc-3",
+      "category": "feature-with-constraint",
+      "prompt": "Create a password input that shows strength indicator and has a show/hide toggle",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-3",
+      "category": "workflow-description",
+      "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-4",
+      "category": "state-driven",
+      "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+      "expectedComponents": [
+        "CheckboxInput",
+        "Button",
+        "TextArea"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-1",
+      "category": "data-display",
+      "prompt": "A table of users with sortable columns and search",
+      "expectedComponents": [
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-4",
+      "category": "integration-oriented",
+      "prompt": "Build a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.",
+      "expectedComponents": [
+        "NumberInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-4",
+      "category": "typography",
+      "prompt": "Create a settings page with 3 sections. Each section needs a heading, a brief description, and some form controls. Use different heading levels for the page title vs section titles.",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-6",
+      "category": "theme-customization",
+      "prompt": "Build a settings page where users can customize the app's appearance. Include controls for accent color, border radius, and spacing scale. Changes should apply via the Astryx theme system, not inline styles.",
+      "expectedComponents": [
+        "Theme",
+        "TextInput",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    }
+  ]
+}

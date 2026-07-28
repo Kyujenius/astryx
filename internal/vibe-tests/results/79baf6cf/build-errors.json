@@ -1,0 +1,74 @@
+{
+  "cwm-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 67,
+        "message": "Type '{ children: Element; key: string; label: string; onClick: () => void; variant: \"ghost\"; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "dd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 37,
+        "message": "Type '{ label: string; isLabelHidden: true; value: number; onChange: (value: number) => Promise<void>; min: number; max: number; isLoading: boolean; size: \"sm\"; }' is not assignable to type 'IntrinsicAttributes & NumberInputProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-6": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
