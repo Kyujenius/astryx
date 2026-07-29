@@ -1,0 +1,759 @@
+{
+  "averages": {
+    "correctness": 99,
+    "accessibility": 97,
+    "codeQuality": 99,
+    "efficiency": 86,
+    "maintainability": 93
+  },
+  "overall": 95,
+  "byPrompt": {
+    "cwm-3": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 36
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 56
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "input-no-label",
+            "severity": "critical",
+            "detail": "Form input without associated label",
+            "line": 68
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 81,
+          "codeLines": 76,
+          "stylingLines": 6,
+          "boilerplateLines": 13,
+          "logicLines": 57,
+          "stylingRatio": 0.07894736842105263,
+          "boilerplateRatio": 0.17105263157894737,
+          "decisionsPerElement": 2.9,
+          "elementCount": 10,
+          "stylingDecisionCount": 29,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 9,
+          "avgStateSpread": 31
+        }
+      }
+    },
+    "dd-8": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 41
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 89,
+        "findings": [],
+        "metrics": {
+          "totalLines": 60,
+          "codeLines": 54,
+          "stylingLines": 1,
+          "boilerplateLines": 14,
+          "logicLines": 39,
+          "stylingRatio": 0.018518518518518517,
+          "boilerplateRatio": 0.25925925925925924,
+          "decisionsPerElement": 0.2,
+          "elementCount": 18,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 0,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "fwc-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 17
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [],
+        "metrics": {
+          "totalLines": 26,
+          "codeLines": 23,
+          "stylingLines": 1,
+          "boilerplateLines": 6,
+          "logicLines": 16,
+          "stylingRatio": 0.043478260869565216,
+          "boilerplateRatio": 0.2608695652173913,
+          "decisionsPerElement": 1.3,
+          "elementCount": 3,
+          "stylingDecisionCount": 4,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "io-2": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 82
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "totalLines": 98,
+          "codeLines": 90,
+          "stylingLines": 4,
+          "boilerplateLines": 15,
+          "logicLines": 71,
+          "stylingRatio": 0.044444444444444446,
+          "boilerplateRatio": 0.16666666666666666,
+          "decisionsPerElement": 1.8,
+          "elementCount": 9,
+          "stylingDecisionCount": 16,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 48
+        }
+      }
+    },
+    "ps-3": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 20
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 31
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 34
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 37
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 43
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 46
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 59,
+          "codeLines": 55,
+          "stylingLines": 5,
+          "boilerplateLines": 9,
+          "logicLines": 41,
+          "stylingRatio": 0.09090909090909091,
+          "boilerplateRatio": 0.16363636363636364,
+          "decisionsPerElement": 0.9,
+          "elementCount": 19,
+          "stylingDecisionCount": 17,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 23
+        }
+      }
+    },
+    "rc-2": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 25
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "click-non-interactive",
+            "severity": "critical",
+            "detail": "onClick on <div> without role=\"button\" or tabIndex",
+            "line": 15
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 71,
+        "findings": [],
+        "metrics": {
+          "totalLines": 32,
+          "codeLines": 28,
+          "stylingLines": 4,
+          "boilerplateLines": 7,
+          "logicLines": 17,
+          "stylingRatio": 0.14285714285714285,
+          "boilerplateRatio": 0.25,
+          "decisionsPerElement": 7.4,
+          "elementCount": 5,
+          "stylingDecisionCount": 37,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 87,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "1 magic value (hardcoded colors, spacing, or typography)",
+            "count": 1
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.83,
+          "magicValueCount": 1,
+          "semanticValueCount": 5,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "sd-1": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 53
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 53
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 69,
+          "codeLines": 61,
+          "stylingLines": 5,
+          "boilerplateLines": 15,
+          "logicLines": 41,
+          "stylingRatio": 0.08196721311475409,
+          "boilerplateRatio": 0.2459016393442623,
+          "decisionsPerElement": 1,
+          "elementCount": 17,
+          "stylingDecisionCount": 17,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 77,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "1 magic value (hardcoded colors, spacing, or typography)",
+            "count": 1
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.8,
+          "magicValueCount": 1,
+          "semanticValueCount": 4,
+          "avgStateSpread": 34
+        }
+      }
+    },
+    "tc-5": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 91,
+        "findings": [],
+        "metrics": {
+          "totalLines": 34,
+          "codeLines": 31,
+          "stylingLines": 3,
+          "boilerplateLines": 4,
+          "logicLines": 24,
+          "stylingRatio": 0.0967741935483871,
+          "boilerplateRatio": 0.12903225806451613,
+          "decisionsPerElement": 1.8,
+          "elementCount": 9,
+          "stylingDecisionCount": 16,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "ty-7": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 34
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [],
+        "metrics": {
+          "totalLines": 46,
+          "codeLines": 41,
+          "stylingLines": 4,
+          "boilerplateLines": 13,
+          "logicLines": 24,
+          "stylingRatio": 0.0975609756097561,
+          "boilerplateRatio": 0.3170731707317073,
+          "decisionsPerElement": 0.7,
+          "elementCount": 14,
+          "stylingDecisionCount": 10,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 71
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 74
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{currentStep === \"_\" && ("
+          }
+        ],
+        "metrics": {
+          "totalLines": 82,
+          "codeLines": 75,
+          "stylingLines": 6,
+          "boilerplateLines": 14,
+          "logicLines": 55,
+          "stylingRatio": 0.08,
+          "boilerplateRatio": 0.18666666666666668,
+          "decisionsPerElement": 0.9,
+          "elementCount": 23,
+          "stylingDecisionCount": 21,
+          "duplicateRatio": 0.05
+        }
+      },
+      "maintainability": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "moderate-state-spread",
+            "severity": "minor",
+            "detail": "Average state variable spread: 63 lines"
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 8,
+          "avgStateSpread": 63
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "clone-with-modification": {
+      "correctness": 100,
+      "accessibility": 85,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 92
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 89,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 92,
+      "maintainability": 92
+    },
+    "page-setup": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 100,
+      "accessibility": 85,
+      "codeQuality": 100,
+      "efficiency": 71,
+      "maintainability": 87
+    },
+    "state-driven": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 77
+    },
+    "theme-customization": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 91,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 83,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 83,
+      "maintainability": 83
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 9273436,
+    "avgDurationMs": 927344,
+    "avgOutputChars": 1845,
+    "avgOutputLines": 59,
+    "avgDocsRead": 1,
+    "estimatedInputTokens": 10000,
+    "estimatedOutputTokens": 4615,
+    "byPrompt": {
+      "cwm-3": {
+        "durationMs": 927344,
+        "outputChars": 2371,
+        "outputLines": 81,
+        "docsRead": [
+          "Card"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 593
+      },
+      "dd-8": {
+        "durationMs": 927343,
+        "outputChars": 1697,
+        "outputLines": 60,
+        "docsRead": [
+          "Table"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 424
+      },
+      "fwc-1": {
+        "durationMs": 927345,
+        "outputChars": 697,
+        "outputLines": 26,
+        "docsRead": [
+          "Banner"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 174
+      },
+      "io-2": {
+        "durationMs": 927344,
+        "outputChars": 2813,
+        "outputLines": 98,
+        "docsRead": [
+          "TextInput"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 703
+      },
+      "ps-3": {
+        "durationMs": 927343,
+        "outputChars": 2410,
+        "outputLines": 59,
+        "docsRead": [
+          "Layout"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 603
+      },
+      "rc-2": {
+        "durationMs": 927343,
+        "outputChars": 1078,
+        "outputLines": 32,
+        "docsRead": [
+          "Card"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 270
+      },
+      "sd-1": {
+        "durationMs": 927344,
+        "outputChars": 2054,
+        "outputLines": 69,
+        "docsRead": [
+          "Card"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 514
+      },
+      "tc-5": {
+        "durationMs": 927343,
+        "outputChars": 1182,
+        "outputLines": 34,
+        "docsRead": [
+          "Card"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 296
+      },
+      "ty-7": {
+        "durationMs": 927343,
+        "outputChars": 1330,
+        "outputLines": 46,
+        "docsRead": [
+          "Heading"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 333
+      },
+      "wd-1": {
+        "durationMs": 927344,
+        "outputChars": 2820,
+        "outputLines": 82,
+        "docsRead": [
+          "Card"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 705
+      }
+    }
+  }
+}

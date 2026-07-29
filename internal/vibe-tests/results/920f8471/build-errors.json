@@ -1,0 +1,68 @@
+{
+  "cwm-3": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-8": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-2": {
+    "target": "html",
+    "errors": [
+      {
+        "line": 12,
+        "message": "Expected 1 arguments, but got 0.",
+        "code": "TS2554"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-3": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-2": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-5": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-7": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

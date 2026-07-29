@@ -1,0 +1,68 @@
+{
+  "cwm-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-8": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 53,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "tc-5": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-7": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

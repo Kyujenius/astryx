@@ -1,0 +1,118 @@
+{
+  "iterationId": "496e728a",
+  "createdAt": "2026-07-29T11:06:34.007Z",
+  "config": {
+    "target": "baseline",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "fwc-1",
+      "category": "feature-with-constraint",
+      "prompt": "I need a banner that warns users their trial expires in X days and lets them upgrade",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-8",
+      "category": "data-display",
+      "prompt": "Show a content library table where each row has a small colored pill for its type — Article, Video, Podcast, Newsletter, and Course each need their own distinct color so they're easy to tell apart at a glance. The colors should stay consistent everywhere a type appears.",
+      "expectedComponents": [
+        "XDSBadge",
+        "XDSTable"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-2",
+      "category": "responsive-context",
+      "prompt": "A sidebar that becomes a bottom sheet on mobile",
+      "expectedComponents": [
+        "Card",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-2",
+      "category": "integration-oriented",
+      "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+      "expectedComponents": [
+        "TextInput",
+        "Card",
+        "Typeahead"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-3",
+      "category": "page-setup",
+      "prompt": "Create an admin panel page layout with a fixed header, collapsible left sidebar, main content area, and a right panel for details. Wrap everything in the Astryx theme.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-7",
+      "category": "typography",
+      "prompt": "Render a markdown-formatted changelog that includes headings, paragraphs, bullet lists, and inline code. The content should use proper typography styling.",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-5",
+      "category": "theme-customization",
+      "prompt": "I want to customize the card component's appearance in my theme — add a gradient border and increase the border radius. How do I do component-level style overrides in the Astryx theme?",
+      "expectedComponents": [
+        "Theme",
+        "Card"
+      ],
+      "status": "pending"
+    }
+  ]
+}
