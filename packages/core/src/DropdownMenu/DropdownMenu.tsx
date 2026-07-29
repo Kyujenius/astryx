@@ -100,6 +100,13 @@ export interface DropdownMenuItemData {
   onClick?: () => void;
   isDisabled?: boolean;
   icon?: ReactNode | IconType;
+  /**
+   * Nested submenu entries. When present, this row becomes a submenu trigger
+   * (a flyout revealing `items`) instead of a leaf action — no separate item
+   * "type" is needed. Data-mode parity for the compound
+   * DropdownMenuSub / DropdownMenuSubTrigger / DropdownMenuSubContent API.
+   */
+  items?: DropdownMenuOption[];
 }
 
 export interface DropdownMenuDivider {

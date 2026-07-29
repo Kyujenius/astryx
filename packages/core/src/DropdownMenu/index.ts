@@ -34,6 +34,18 @@ export {
   type DropdownMenuRadioItemProps,
 } from './DropdownMenuRadioItem';
 
+// Submenus — a nested flyout revealed from a trigger row. Compound API
+// (Sub / SubTrigger / SubContent); data mode via DropdownMenuItemData.items.
+export {DropdownMenuSub, type DropdownMenuSubProps} from './DropdownMenuSub';
+export {
+  DropdownMenuSubTrigger,
+  type DropdownMenuSubTriggerProps,
+} from './DropdownMenuSubTrigger';
+export {
+  DropdownMenuSubContent,
+  type DropdownMenuSubContentProps,
+} from './DropdownMenuSubContent';
+
 // Menu-coordination context — public so consumers can build custom menu items
 // that read the menu size / close the menu.
 export {
