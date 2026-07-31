@@ -1,0 +1,95 @@
+{
+  "cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 27,
+        "message": "Type '{ value: string; onChange: Dispatch<SetStateAction<string>>; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "dd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-12": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-5": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-7": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 3,
+        "message": "Cannot find module '@astryxdesign/core/LayoutPanel' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 4,
+        "message": "Cannot find module '@astryxdesign/core/LayoutContent' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 11,
+        "message": "Object literal may only specify known properties, and 'mode' does not exist in type 'DefineThemeInput'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 16,
+        "message": "Object literal may only specify known properties, and 'mode' does not exist in type 'DefineThemeInput'.",
+        "code": "TS2353"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "ty-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 3,
+        "message": "Cannot find module '@astryxdesign/core/DialogHeader' or its corresponding type declarations.",
+        "code": "TS2307"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  }
+}
