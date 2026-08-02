@@ -1,0 +1,488 @@
+{
+  "a0989f95/cwm-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: Element[]; value: string; onChange: Dispatch<SetStateAction<string>>; }' but required in type 'SegmentedControlProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "a0989f95/dd-6": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: Element; key: string; trigger: Element; }' is not assignable to type 'IntrinsicAttributes & HoverCardProps'. Property 'trigger' does not exist on type 'IntrinsicAttributes & HoverCardProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ src: string; label: string; }' is not assignable to type 'IntrinsicAttributes & AvatarProps'. Property 'label' does not exist on type 'IntrinsicAttributes & AvatarProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "a0989f95/io-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; onPress: () => Promise<void>; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist on type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "a0989f95/ps-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "a0989f95/rc-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2305: Module '@astryxdesign/core/NavMenu' has no exported member 'NavMenu'.",
+        "code": "TS2305"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; href: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '() => React.JSX.Element' is not assignable to type 'ReactNode'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; href: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "a0989f95/sd-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ label: string; isChecked: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'. Property 'isChecked' does not exist.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; isDisabled: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "a0989f95/tc-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "a0989f95/wd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "a0989f95/ty-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "a0989f95/fwc-6": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "793378ed/fwc-6": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "793378ed/wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Stepper' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "793378ed/cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: Element[]; value: string; onChange: Dispatch<SetStateAction<string>>; }' but required in type 'SegmentedControlProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "793378ed/sd-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ label: string; isChecked: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'. Property 'isChecked' does not exist.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; isDisabled: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "793378ed/dd-6": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: Element; key: string; trigger: Element; }' is not assignable to type 'IntrinsicAttributes & HoverCardProps'. Property 'trigger' does not exist on type 'IntrinsicAttributes & HoverCardProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ src: string; label: string; }' is not assignable to type 'IntrinsicAttributes & AvatarProps'. Property 'label' does not exist on type 'IntrinsicAttributes & AvatarProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "793378ed/rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2305: Module '@astryxdesign/core/NavMenu' has no exported member 'NavMenu'.",
+        "code": "TS2305"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; href: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '() => React.JSX.Element' is not assignable to type 'ReactNode'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; href: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "793378ed/io-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2322: Type '{ children: string; onPress: () => Promise<void>; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'. Property 'onPress' does not exist on type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "793378ed/ps-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "793378ed/ty-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "793378ed/tc-2": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 0,
+        "message": "TS2307: Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 0,
+        "message": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 0,
+        "message": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "7d821f69/fwc-6": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/wd-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/cwm-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/sd-4": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/dd-6": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/rc-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/io-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/ps-4": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/ty-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "7d821f69/tc-2": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/fwc-6": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/wd-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/cwm-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/sd-4": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/dd-6": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/rc-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/io-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/ps-4": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/ty-1": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "69dc290c/tc-2": {
+    "target": "html",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
