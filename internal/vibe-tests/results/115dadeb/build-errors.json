@@ -1,0 +1,80 @@
+{
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 30,
+        "message": "Type '{ src: string; alt: string; width: string; aspectRatio: string; shape: string; }' is not assignable to type 'IntrinsicAttributes & ThumbnailProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "fwc-13": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 29,
+        "message": "Type '{ key: number; src: string; alt: string; width: number; height: number; shape: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & ThumbnailProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "io-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 27,
+        "message": "Type '{ src: string; alt: string; width: number; height: number; shape: string; }' is not assignable to type 'IntrinsicAttributes & ThumbnailProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "rc-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "tc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-9": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
