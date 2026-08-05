@@ -1,0 +1,119 @@
+{
+  "iterationId": "88fed71c",
+  "createdAt": "2026-08-05T11:06:48.892Z",
+  "config": {
+    "target": "baseline",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-8",
+      "category": "feature-with-constraint",
+      "prompt": "Create a date range picker for booking a hotel stay. Users should pick check-in and check-out dates. Past dates should be disabled.",
+      "expectedComponents": [
+        "DateInput",
+        "Calendar"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-4",
+      "category": "workflow-description",
+      "prompt": "Create a new internal tool called TodoTracker. UI Requirements: Display todos in a paginated table (default 25 per page). Columns: Title, Status, Created, Updated. Sortable by: Updated date (default desc), Created date, Title. Add a filter bar that filters by title (substring match) and status. Inline editing for todo title (with save/cancel). Status toggle button (Open <-> Closed). 'Create Todo' button that opens a modal with title input. Delete button with confirmation dialog. UI should update optimistically after any modification. Optimistic updates should be marked as 'pending' until the modification is complete.",
+      "expectedComponents": [
+        "Table",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-6",
+      "category": "data-display",
+      "prompt": "Create a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.",
+      "expectedComponents": [
+        "HoverCard",
+        "Avatar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-4",
+      "category": "page-setup",
+      "prompt": "Create a product detail page with breadcrumb navigation showing Home > Category > Subcategory > Product Name. The page should have a header, product info section, and a back button.",
+      "expectedComponents": [
+        "Breadcrumbs",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-8",
+      "category": "typography",
+      "prompt": "Create a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text",
+      "expectedComponents": [
+        "Card",
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
