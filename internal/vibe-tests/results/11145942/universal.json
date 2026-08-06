@@ -1,0 +1,677 @@
+{
+  "averages": {
+    "correctness": 100,
+    "accessibility": 96,
+    "codeQuality": 99,
+    "efficiency": 80,
+    "maintainability": 100
+  },
+  "overall": 95,
+  "byPrompt": {
+    "cs-4": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [],
+        "metrics": {
+          "totalLines": 31,
+          "codeLines": 29,
+          "stylingLines": 4,
+          "boilerplateLines": 5,
+          "logicLines": 20,
+          "stylingRatio": 0.13793103448275862,
+          "boilerplateRatio": 0.1724137931034483,
+          "decisionsPerElement": 0.4,
+          "elementCount": 16,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 18
+        }
+      }
+    },
+    "cwm-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 82,
+        "findings": [],
+        "metrics": {
+          "totalLines": 29,
+          "codeLines": 27,
+          "stylingLines": 7,
+          "boilerplateLines": 5,
+          "logicLines": 15,
+          "stylingRatio": 0.25925925925925924,
+          "boilerplateRatio": 0.18518518518518517,
+          "decisionsPerElement": 1.2,
+          "elementCount": 17,
+          "stylingDecisionCount": 20,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 7
+        }
+      }
+    },
+    "dd-5": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 76,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 3 times",
+            "count": 3,
+            "example": "{id: \"_\", sender: \"_\", subject: \"_\", date: \"_\", preview: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 25,
+          "codeLines": 22,
+          "stylingLines": 4,
+          "boilerplateLines": 4,
+          "logicLines": 14,
+          "stylingRatio": 0.18181818181818182,
+          "boilerplateRatio": 0.18181818181818182,
+          "decisionsPerElement": 0.6,
+          "elementCount": 22,
+          "stylingDecisionCount": 14,
+          "duplicateRatio": 0.14
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 8,
+          "avgStateSpread": 8
+        }
+      }
+    },
+    "fwc-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 16,
+          "codeLines": 15,
+          "stylingLines": 2,
+          "boilerplateLines": 3,
+          "logicLines": 10,
+          "stylingRatio": 0.13333333333333333,
+          "boilerplateRatio": 0.2,
+          "decisionsPerElement": 1.2,
+          "elementCount": 6,
+          "stylingDecisionCount": 7,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "io-4": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "input-no-label",
+            "severity": "critical",
+            "detail": "Form input without associated label",
+            "line": 13
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 79,
+        "findings": [],
+        "metrics": {
+          "totalLines": 17,
+          "codeLines": 15,
+          "stylingLines": 4,
+          "boilerplateLines": 4,
+          "logicLines": 7,
+          "stylingRatio": 0.26666666666666666,
+          "boilerplateRatio": 0.26666666666666666,
+          "decisionsPerElement": 2.2,
+          "elementCount": 6,
+          "stylingDecisionCount": 13,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 7,
+          "avgStateSpread": 7
+        }
+      }
+    },
+    "ps-1": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 14
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 79,
+        "findings": [],
+        "metrics": {
+          "totalLines": 19,
+          "codeLines": 17,
+          "stylingLines": 5,
+          "boilerplateLines": 4,
+          "logicLines": 8,
+          "stylingRatio": 0.29411764705882354,
+          "boilerplateRatio": 0.23529411764705882,
+          "decisionsPerElement": 1.4,
+          "elementCount": 14,
+          "stylingDecisionCount": 19,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 6
+        }
+      }
+    },
+    "rc-2": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 94,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 11
+          },
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 13
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 79,
+        "findings": [],
+        "metrics": {
+          "totalLines": 19,
+          "codeLines": 17,
+          "stylingLines": 6,
+          "boilerplateLines": 3,
+          "logicLines": 8,
+          "stylingRatio": 0.35294117647058826,
+          "boilerplateRatio": 0.17647058823529413,
+          "decisionsPerElement": 1.9,
+          "elementCount": 13,
+          "stylingDecisionCount": 25,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 5,
+          "avgStateSpread": 7
+        }
+      }
+    },
+    "sd-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 82,
+        "findings": [],
+        "metrics": {
+          "totalLines": 20,
+          "codeLines": 18,
+          "stylingLines": 4,
+          "boilerplateLines": 4,
+          "logicLines": 10,
+          "stylingRatio": 0.2222222222222222,
+          "boilerplateRatio": 0.2222222222222222,
+          "decisionsPerElement": 0.5,
+          "elementCount": 11,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 0,
+          "avgStateSpread": 7
+        }
+      }
+    },
+    "ty-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 7,
+          "codeLines": 6,
+          "stylingLines": 1,
+          "boilerplateLines": 1,
+          "logicLines": 4,
+          "stylingRatio": 0.16666666666666666,
+          "boilerplateRatio": 0.16666666666666666,
+          "decisionsPerElement": 1.4,
+          "elementCount": 5,
+          "stylingDecisionCount": 7,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-4": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "moderate",
+            "detail": "onChange on button, buttons do not fire change events",
+            "line": 25
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "moderate",
+            "detail": "onChange on button, buttons do not fire change events",
+            "line": 26
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "input-no-label",
+            "severity": "critical",
+            "detail": "Form input without associated label",
+            "line": 23
+          },
+          {
+            "rule": "input-no-label",
+            "severity": "critical",
+            "detail": "Form input without associated label",
+            "line": 26
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 35,
+          "codeLines": 31,
+          "stylingLines": 0,
+          "boilerplateLines": 31,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 0.2,
+          "elementCount": 25,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 11
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "complex-selector": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "clone-with-modification": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 82,
+      "maintainability": 100
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 76,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 100,
+      "accessibility": 85,
+      "codeQuality": 100,
+      "efficiency": 79,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 79,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 94,
+      "efficiency": 79,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 82,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 100,
+      "accessibility": 70,
+      "codeQuality": 100,
+      "efficiency": 60,
+      "maintainability": 100
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 5446274,
+    "avgDurationMs": 544627,
+    "avgOutputChars": 1320,
+    "avgOutputLines": 22,
+    "avgDocsRead": 2,
+    "estimatedInputTokens": 16250,
+    "estimatedOutputTokens": 3301,
+    "byPrompt": {
+      "cs-4": {
+        "durationMs": 544629,
+        "outputChars": 1565,
+        "outputLines": 31,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 391
+      },
+      "cwm-1": {
+        "durationMs": 544628,
+        "outputChars": 1865,
+        "outputLines": 29,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 466
+      },
+      "dd-5": {
+        "durationMs": 544627,
+        "outputChars": 1751,
+        "outputLines": 25,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 438
+      },
+      "fwc-1": {
+        "durationMs": 544628,
+        "outputChars": 708,
+        "outputLines": 16,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 177
+      },
+      "io-4": {
+        "durationMs": 544627,
+        "outputChars": 911,
+        "outputLines": 17,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 228
+      },
+      "ps-1": {
+        "durationMs": 544627,
+        "outputChars": 1158,
+        "outputLines": 19,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 290
+      },
+      "rc-2": {
+        "durationMs": 544627,
+        "outputChars": 1258,
+        "outputLines": 19,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 315
+      },
+      "sd-3": {
+        "durationMs": 544627,
+        "outputChars": 1050,
+        "outputLines": 20,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 263
+      },
+      "ty-3": {
+        "durationMs": 544626,
+        "outputChars": 413,
+        "outputLines": 7,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 103
+      },
+      "wd-4": {
+        "durationMs": 544628,
+        "outputChars": 2519,
+        "outputLines": 35,
+        "docsRead": [
+          "README.md",
+          "components/ui"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 630
+      }
+    }
+  }
+}
