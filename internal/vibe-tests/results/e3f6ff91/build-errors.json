@@ -1,0 +1,125 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 27,
+        "message": "Property 'heading' is missing in type '{ children: string; }' but required in type 'SideNavHeadingProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 31,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 32,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 33,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 36,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 37,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 6,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 21,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 22,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "sd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-9": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 38,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 39,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 40,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  }
+}

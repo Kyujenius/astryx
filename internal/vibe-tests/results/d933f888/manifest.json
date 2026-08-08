@@ -1,0 +1,120 @@
+{
+  "iterationId": "d933f888",
+  "createdAt": "2026-08-08T11:04:28.749Z",
+  "config": {
+    "target": "astryx-tailwind",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-4",
+      "category": "feature-with-constraint",
+      "prompt": "I need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.",
+      "expectedComponents": [
+        "Dialog",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-3",
+      "category": "workflow-description",
+      "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-2",
+      "category": "clone-with-modification",
+      "prompt": "A GitHub-style issue label picker with color dots and search",
+      "expectedComponents": [
+        "TextInput",
+        "Button",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-4",
+      "category": "state-driven",
+      "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+      "expectedComponents": [
+        "CheckboxInput",
+        "Button",
+        "TextArea"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-1",
+      "category": "data-display",
+      "prompt": "A table of users with sortable columns and search",
+      "expectedComponents": [
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-4",
+      "category": "integration-oriented",
+      "prompt": "Build a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.",
+      "expectedComponents": [
+        "NumberInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-3",
+      "category": "page-setup",
+      "prompt": "Create an admin panel page layout with a fixed header, collapsible left sidebar, main content area, and a right panel for details. Wrap everything in the Astryx theme.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-9",
+      "category": "typography",
+      "prompt": "Build a comparison table header where each column has a plan name heading and a price. The 'Enterprise' plan should have visually larger display-style typography compared to the other plans.",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
