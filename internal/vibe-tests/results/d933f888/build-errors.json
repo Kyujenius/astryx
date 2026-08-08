@@ -33,18 +33,8 @@
     "target": "astryx-tailwind",
     "errors": [
       {
-        "line": 23,
-        "message": "Property 'heading' is missing in type '{ children: string; }' but required in type 'SideNavHeadingProps'.",
-        "code": "TS2741"
-      },
-      {
         "line": 25,
-        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
-        "code": "TS2741"
-      },
-      {
-        "line": 26,
-        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "message": "Property 'heading' is missing in type '{ children: string; }' but required in type 'SideNavHeadingProps'.",
         "code": "TS2741"
       },
       {
@@ -53,12 +43,22 @@
         "code": "TS2741"
       },
       {
-        "line": 30,
+        "line": 28,
         "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
         "code": "TS2741"
       },
       {
-        "line": 31,
+        "line": 29,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 32,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 33,
         "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'SideNavItemProps'.",
         "code": "TS2741"
       }
@@ -70,17 +70,17 @@
     "target": "astryx-tailwind",
     "errors": [
       {
-        "line": 18,
-        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
-        "code": "TS2741"
-      },
-      {
-        "line": 19,
-        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
-        "code": "TS2741"
-      },
-      {
         "line": 20,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 21,
+        "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 22,
         "message": "Property 'label' is missing in type '{ children: string; isSelected: boolean; onClick: () => void; }' but required in type 'TopNavItemProps'.",
         "code": "TS2741"
       }
@@ -104,17 +104,17 @@
     "target": "astryx-tailwind",
     "errors": [
       {
-        "line": 40,
-        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
-        "code": "TS2322"
-      },
-      {
-        "line": 41,
-        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
-        "code": "TS2322"
-      },
-      {
         "line": 42,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 43,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 44,
         "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
         "code": "TS2322"
       }
