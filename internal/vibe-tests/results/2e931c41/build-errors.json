@@ -1,0 +1,94 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 53,
+        "message": "Type '{ isOpen: boolean; onOpenChange: Dispatch<SetStateAction<boolean>>; trigger: Element; content: Element; }' is not assignable to type 'IntrinsicAttributes & PopoverProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 59,
+        "message": "Type '{ children: Element[]; columns: number; gap: 1; padding: number; }' is not assignable to type 'IntrinsicAttributes & GridProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 9,
+        "message": "Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 10,
+        "message": "Cannot find module '@astryxdesign/theme-neutral' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 25,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavSectionProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 46,
+        "message": "Type '{ children: Element[]; gap: 4; size: string; }' is not assignable to type 'IntrinsicAttributes & StackProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "rc-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-8": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

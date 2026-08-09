@@ -1,0 +1,123 @@
+{
+  "iterationId": "24d77727",
+  "createdAt": "2026-08-09T11:04:35.849Z",
+  "config": {
+    "target": "astryx-tailwind",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-3",
+      "category": "feature-with-constraint",
+      "prompt": "Create a password input that shows strength indicator and has a show/hide toggle",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-5",
+      "category": "workflow-description",
+      "prompt": "Build a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.",
+      "expectedComponents": [
+        "Dialog",
+        "TextInput",
+        "TextArea",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-4",
+      "category": "state-driven",
+      "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+      "expectedComponents": [
+        "CheckboxInput",
+        "Button",
+        "TextArea"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-4",
+      "category": "data-display",
+      "prompt": "Create a user profile page with tabs for Overview, Activity, and Settings. Each tab should show different content. The Overview tab should be selected by default.",
+      "expectedComponents": [
+        "TabList",
+        "Tab",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-2",
+      "category": "integration-oriented",
+      "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+      "expectedComponents": [
+        "TextInput",
+        "Card",
+        "Typeahead"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-3",
+      "category": "page-setup",
+      "prompt": "Create an admin panel page layout with a fixed header, collapsible left sidebar, main content area, and a right panel for details. Wrap everything in the Astryx theme.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-8",
+      "category": "typography",
+      "prompt": "Create a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text",
+      "expectedComponents": [
+        "Card",
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
