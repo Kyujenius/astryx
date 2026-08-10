@@ -1,0 +1,96 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 48,
+        "message": "JSX element class does not support attributes because it does not have a 'props' property.",
+        "code": "TS2607"
+      },
+      {
+        "line": 48,
+        "message": "'Text' cannot be used as a JSX component.",
+        "code": "TS2786"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 26,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 27,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-7": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-12": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 59,
+        "message": "Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 39,
+        "message": "Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ty-5": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

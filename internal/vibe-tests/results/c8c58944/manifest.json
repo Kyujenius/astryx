@@ -1,0 +1,119 @@
+{
+  "iterationId": "c8c58944",
+  "createdAt": "2026-08-10T11:05:25.687Z",
+  "config": {
+    "target": "astryx",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-12",
+      "category": "feature-with-constraint",
+      "prompt": "Build an image thumbnail grid. When a user clicks a thumbnail, open a fullscreen lightbox showing the image with a caption and a close button.",
+      "expectedComponents": [
+        "Lightbox"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-5",
+      "category": "workflow-description",
+      "prompt": "Build a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.",
+      "expectedComponents": [
+        "Dialog",
+        "TextInput",
+        "TextArea",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-7",
+      "category": "data-display",
+      "prompt": "Display a list of services with their current status. Each service should show a status dot (green for healthy, yellow for degraded, red for down) next to the service name and last checked time.",
+      "expectedComponents": [
+        "StatusDot",
+        "Text",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-2",
+      "category": "responsive-context",
+      "prompt": "A sidebar that becomes a bottom sheet on mobile",
+      "expectedComponents": [
+        "Card",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-4",
+      "category": "page-setup",
+      "prompt": "Create a product detail page with breadcrumb navigation showing Home > Category > Subcategory > Product Name. The page should have a header, product info section, and a back button.",
+      "expectedComponents": [
+        "Breadcrumbs",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-5",
+      "category": "typography",
+      "prompt": "Build a landing page hero with a large display heading that says 'Build faster with Astryx', a subheading paragraph, and a CTA button",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    }
+  ]
+}
