@@ -15,7 +15,8 @@ Every vibe test we run today hands an agent an **empty project** and asks it to 
 Even `astryx-tailwind` — the target that sounds like it covers this — is a blank scaffold with both
 systems available.
 
-Nobody arrives that way. The realistic first contact with Astryx is:
+Some consumers really do start from an empty project — a new app, a prototype, a template — and
+that path is well covered. The one that isn't:
 
 > An app already exists. It has a styling system, a folder of its own components, house
 > conventions, and a year of precedent. Someone adds `@astryxdesign/core` to `package.json`.
@@ -62,7 +63,7 @@ Everything else is downstream of that call and only scored once it's made:
 | **Host-app parity**                   | token classes / radius / border / surface vs the sibling component it sits next to                             | A component that looks foreign gets reverted                                         |
 | **Escape-hatch cost**                 | overrides needed to reach parity — arbitrary values, negative margins, `!important`, raw hex, z-index literals | The honest price of adopting; a high count is a **product finding**, not agent error |
 | **Semantic fidelity**                 | domain→variant mappings vs the app's own ground truth                                                          | Semantic names don't automatically survive a port between systems                    |
-| **A11y delta**                        | keyboard path, roles/labels, focus visibility — vs the code it replaced                                        | Adoption should _raise_ this or the pitch is empty                                   |
+| **A11y delta**                        | keyboard path, roles/labels, focus visibility — vs the code it replaced                                        | One of the stated reasons to adopt; worth measuring rather than assuming             |
 | **Blast radius**                      | files created/modified outside the feature; global CSS/layout touched                                          | Coexistence damage                                                                   |
 
 **Ad-hoc first.** Per the [Designing Vibe Tests](https://github.com/facebook/astryx/wiki/Designing-Vibe-Tests)
@@ -126,8 +127,8 @@ Five arms, floor to ceiling. Everything else — app, prompts, packages, model �
 | `a4-directed`  | `a3` + told outright to use Astryx where it fits                                                                                                                                                      | **Ceiling** (capability, not discovery) |
 
 `a4` is not a shipping recommendation — it measures what's achievable when the decision is removed,
-so a shortfall there is a **product** gap, not a guidance gap. That distinction is the most useful
-thing this test produces.
+so a shortfall there is a **product** gap, not a guidance gap. Keeping those two apart is why the
+ceiling arm is here at all.
 
 ## 7. Prompt battery (`prompts.json`)
 
