@@ -1,0 +1,13 @@
+{
+  "promptId": "fwc-5",
+  "category": "feature-with-constraint",
+  "prompt": "Create a row actions menu for a table — each row should have a \"...\" button that opens a dropdown with Edit, Duplicate, and Delete options. Delete should be visually distinct.",
+  "expectedComponents": [
+    "DropdownMenu",
+    "Button"
+  ],
+  "target": "baseline",
+  "persona": "naive",
+  "taskPrompt": "You are generating React/TSX code using shadcn/ui components with Tailwind CSS.\nYour project is at /vercel/sandbox/repos/xds/internal/vibe-tests/results/ff615a08/projects/fwc-5. Explore it to find available components.\n\n## Task\n\nCreate a row actions menu for a table — each row should have a \"...\" button that opens a dropdown with Edit, Duplicate, and Delete options. Delete should be visually distinct.\n\n## Output\n\nWrite the TSX code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/ff615a08/projects/fwc-5/fwc-5.tsx\nWrite metadata to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/ff615a08/projects/fwc-5/fwc-5.json\n\nMetadata: {\"completedAt\": \"<ISO timestamp>\", \"docsRead\": [<docs you read>]}\nWrite ONLY valid TSX. No markdown fences, no explanation.",
+  "createdAt": "2026-08-12T11:06:02.399Z"
+}
