@@ -1,0 +1,645 @@
+{
+  "captured": [
+    "AppShell__elevated__rest__light",
+    "AppShell__wash__rest__light",
+    "AppShell__surface__rest__light",
+    "AppShell__section__rest__light",
+    "AppShell__elevated__rest__dark",
+    "AppShell__wash__rest__dark",
+    "AppShell__surface__rest__dark",
+    "AppShell__section__rest__dark",
+    "AppShell__default__skiplink-focus__light",
+    "AppShell__default__skiplink-focus__dark",
+    "AppShell__mobile__closed__light",
+    "AppShell__mobile__toggle-focus__light",
+    "AppShell__mobile__drawer-open__light",
+    "AppShell__mobile__after-escape__light",
+    "AppShell__mobile__closed__dark",
+    "AppShell__mobile__toggle-focus__dark",
+    "AppShell__mobile__drawer-open__dark",
+    "AppShell__mobile__after-escape__dark",
+    "AppShell__sidenav-only__mobile__light",
+    "AppShell__sidenav-only__mobile-drawer-open__light",
+    "AppShell__full-featured__320px__light",
+    "AppShell__auto__rest__light",
+    "AppShell__auto__scrolled__light",
+    "AppShell__default__rest__stone-light",
+    "AppShell__default__rest__rtl-light",
+    "AppShell__banner__rest__light",
+    "AppShell__mobile__drawer-open-reduced-motion__light"
+  ],
+  "measures": {
+    "inspect__desktop__light": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "banner",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Main navigation",
+          "depthInLandmarks": 1,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Side navigation",
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "a",
+          "name": "Home",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Products",
+          "w": 84,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Docs",
+          "w": 58,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Profile",
+          "w": 32,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Dashboard",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Analytics",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Projects12",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Team",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Settings",
+          "w": 244,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "navCount": 2,
+      "mainCount": 1,
+      "bannerCount": 1
+    },
+    "inspect__desktop__dark": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "banner",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Main navigation",
+          "depthInLandmarks": 1,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Side navigation",
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "a",
+          "name": "Home",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Products",
+          "w": 84,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Docs",
+          "w": 58,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Profile",
+          "w": 32,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Dashboard",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Analytics",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Projects12",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Team",
+          "w": 244,
+          "h": 32
+        },
+        {
+          "tag": "a",
+          "name": "Settings",
+          "w": 244,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "navCount": 2,
+      "mainCount": 1,
+      "bannerCount": 1
+    },
+    "skiplink__light": {
+      "tag": "a",
+      "text": "Skip to content",
+      "rect": {
+        "x": 8,
+        "y": 8,
+        "w": 134,
+        "h": 37
+      },
+      "color": "rgb(38, 38, 38)",
+      "background": "rgb(255, 255, 255)",
+      "behind": "rgb(241, 241, 241)",
+      "outline": "auto 1px rgb(0, 95, 204)",
+      "zIndex": "9999",
+      "position": "fixed"
+    },
+    "skiplink_activate__light": {
+      "activeId": "astryx-app-shell-main",
+      "activeTag": "div",
+      "activeRole": "main",
+      "outline": "none"
+    },
+    "skiplink__dark": {
+      "tag": "a",
+      "text": "Skip to content",
+      "rect": {
+        "x": 8,
+        "y": 8,
+        "w": 134,
+        "h": 37
+      },
+      "color": "rgb(235, 235, 235)",
+      "background": "rgb(38, 38, 38)",
+      "behind": "rgb(27, 27, 27)",
+      "outline": "auto 1px rgb(153, 200, 255)",
+      "zIndex": "9999",
+      "position": "fixed"
+    },
+    "skiplink_activate__dark": {
+      "activeId": "astryx-app-shell-main",
+      "activeTag": "div",
+      "activeRole": "main",
+      "outline": "none"
+    },
+    "inspect__mobile__light": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "banner",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Main navigation",
+          "depthInLandmarks": 1,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "button",
+          "name": "Profile",
+          "w": 32,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Open navigation",
+          "w": 32,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "navCount": 1,
+      "mainCount": 1,
+      "bannerCount": 1
+    },
+    "toggle__light": {
+      "x": 334,
+      "y": 24,
+      "width": 32,
+      "height": 32
+    },
+    "drawer__light": {
+      "dialogOpen": true,
+      "dialogId": "_r_1_",
+      "ariaControls": "_r_1_",
+      "ariaExpanded": "true",
+      "controlsMatchesDialog": true,
+      "activeElement": "div",
+      "activeName": "Acme AppHomeProductsDocsMainDa",
+      "activeInsideDialog": true,
+      "modal": true
+    },
+    "drawer_close__light": {
+      "dialogOpen": false,
+      "activeElement": "button",
+      "activeName": "Open navigation",
+      "activeIsBody": false,
+      "ariaExpanded": "false"
+    },
+    "inspect__mobile__dark": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "banner",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Main navigation",
+          "depthInLandmarks": 1,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "button",
+          "name": "Profile",
+          "w": 32,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Open navigation",
+          "w": 32,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "navCount": 1,
+      "mainCount": 1,
+      "bannerCount": 1
+    },
+    "toggle__dark": {
+      "x": 334,
+      "y": 24,
+      "width": 32,
+      "height": 32
+    },
+    "drawer__dark": {
+      "dialogOpen": true,
+      "dialogId": "_r_1_",
+      "ariaControls": "_r_1_",
+      "ariaExpanded": "true",
+      "controlsMatchesDialog": true,
+      "activeElement": "div",
+      "activeName": "Acme AppHomeProductsDocsMainDa",
+      "activeInsideDialog": true,
+      "modal": true
+    },
+    "drawer_close__dark": {
+      "dialogOpen": false,
+      "activeElement": "button",
+      "activeName": "Open navigation",
+      "activeIsBody": false,
+      "ariaExpanded": "false"
+    },
+    "inspect__sidenavonly_mobile": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "navigation",
+          "label": "Mobile navigation",
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "a",
+          "name": "Acme App",
+          "w": 130,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Open navigation",
+          "w": 32,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "navCount": 1,
+      "mainCount": 1,
+      "bannerCount": 0
+    },
+    "sidenavonly_drawer": {
+      "open": true,
+      "activeInside": true,
+      "active": "Acme AppMainDashboardAnalytics"
+    },
+    "reflow320": {
+      "landmarks": [
+        {
+          "tag": "div",
+          "role": "banner",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "nav",
+          "role": "navigation",
+          "label": "Main navigation",
+          "depthInLandmarks": 1,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "main",
+          "label": null,
+          "depthInLandmarks": 0,
+          "visible": true
+        },
+        {
+          "tag": "div",
+          "role": "region",
+          "label": "Notifications",
+          "depthInLandmarks": 0,
+          "visible": true
+        }
+      ],
+      "headings": [
+        {
+          "level": "1",
+          "text": "No Preview"
+        },
+        {
+          "level": "1",
+          "text": ""
+        }
+      ],
+      "focusables": [
+        {
+          "tag": "a",
+          "name": "Skip to content",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "tag": "button",
+          "name": "Dismiss",
+          "w": 28,
+          "h": 28
+        },
+        {
+          "tag": "button",
+          "name": "Profile",
+          "w": 32,
+          "h": 32
+        },
+        {
+          "tag": "button",
+          "name": "Open navigation",
+          "w": 32,
+          "h": 32
+        }
+      ],
+      "horizontalScroll": false,
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "navCount": 1,
+      "mainCount": 1,
+      "bannerCount": 1
+    },
+    "auto": {
+      "headerVar": "48px",
+      "inlineStyle": "--appshell-header-height: 48px;",
+      "hasShell": true
+    },
+    "rtl": {
+      "navLeft": 16,
+      "mainLeft": 16,
+      "dir": "rtl"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "elevated__light": {
+    "rootBg": "rgb(241, 241, 241)",
+    "headerBg": "rgb(241, 241, 241)",
+    "sidenavBg": "rgb(241, 241, 241)",
+    "mainBg": "rgba(0, 0, 0, 0)",
+    "headerBorderBlockEnd": "0px rgb(23, 23, 23)",
+    "sidenavBorderInlineEnd": "0px rgb(23, 23, 23)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": {
+      "count": 1,
+      "radius": "28px",
+      "bg": "rgb(255, 255, 255)"
+    }
+  },
+  "wash__light": {
+    "rootBg": "rgb(241, 241, 241)",
+    "headerBg": "rgb(241, 241, 241)",
+    "sidenavBg": "rgb(241, 241, 241)",
+    "mainBg": "rgb(241, 241, 241)",
+    "headerBorderBlockEnd": "0px rgb(23, 23, 23)",
+    "sidenavBorderInlineEnd": "0px rgb(23, 23, 23)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  },
+  "surface__light": {
+    "rootBg": "rgb(255, 255, 255)",
+    "headerBg": "rgb(255, 255, 255)",
+    "sidenavBg": "rgb(255, 255, 255)",
+    "mainBg": "rgb(255, 255, 255)",
+    "headerBorderBlockEnd": "0px rgb(23, 23, 23)",
+    "sidenavBorderInlineEnd": "0px rgb(23, 23, 23)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  },
+  "section__light": {
+    "rootBg": "rgb(255, 255, 255)",
+    "headerBg": "rgba(0, 0, 0, 0)",
+    "sidenavBg": "rgba(0, 0, 0, 0)",
+    "mainBg": "rgba(0, 0, 0, 0)",
+    "headerBorderBlockEnd": "0px rgb(23, 23, 23)",
+    "sidenavBorderInlineEnd": "1px rgba(0, 0, 0, 0.08)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  },
+  "elevated__dark": {
+    "rootBg": "rgb(27, 27, 27)",
+    "headerBg": "rgb(27, 27, 27)",
+    "sidenavBg": "rgb(27, 27, 27)",
+    "mainBg": "rgba(0, 0, 0, 0)",
+    "headerBorderBlockEnd": "0px rgb(250, 250, 250)",
+    "sidenavBorderInlineEnd": "0px rgb(250, 250, 250)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": {
+      "count": 1,
+      "radius": "28px",
+      "bg": "rgb(38, 38, 38)"
+    }
+  },
+  "wash__dark": {
+    "rootBg": "rgb(27, 27, 27)",
+    "headerBg": "rgb(27, 27, 27)",
+    "sidenavBg": "rgb(27, 27, 27)",
+    "mainBg": "rgb(27, 27, 27)",
+    "headerBorderBlockEnd": "0px rgb(250, 250, 250)",
+    "sidenavBorderInlineEnd": "0px rgb(250, 250, 250)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  },
+  "surface__dark": {
+    "rootBg": "rgb(38, 38, 38)",
+    "headerBg": "rgb(38, 38, 38)",
+    "sidenavBg": "rgb(38, 38, 38)",
+    "mainBg": "rgb(38, 38, 38)",
+    "headerBorderBlockEnd": "0px rgb(250, 250, 250)",
+    "sidenavBorderInlineEnd": "0px rgb(250, 250, 250)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  },
+  "section__dark": {
+    "rootBg": "rgb(38, 38, 38)",
+    "headerBg": "rgba(0, 0, 0, 0)",
+    "sidenavBg": "rgba(0, 0, 0, 0)",
+    "mainBg": "rgba(0, 0, 0, 0)",
+    "headerBorderBlockEnd": "0px rgb(250, 250, 250)",
+    "sidenavBorderInlineEnd": "1px rgba(255, 255, 255, 0.1)",
+    "mainRadius": "0px",
+    "elevatedBackdrop": null
+  }
+}
