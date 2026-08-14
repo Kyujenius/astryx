@@ -1,0 +1,181 @@
+{
+  "cs-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 41,
+        "message": "Type '{ label: string; value: string; onChange: (ripeness: string) => void; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & RadioListProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 45,
+        "message": "Type '{ value: string; onChange: Dispatch<SetStateAction<string>>; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 51,
+        "message": "Type '{ children: string; color: string; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 60,
+        "message": "Type '{ children: string; color: string; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 79,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"primary\" | \"secondary\"; width: string; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "dd-6": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 26,
+        "message": "Type '{ children: Element; key: string; trigger: Element; }' is not assignable to type 'IntrinsicAttributes & HoverCardProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 42,
+        "message": "Property 'label' is missing in type '{ children: string; size: \"sm\"; variant: \"secondary\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 10,
+        "message": "Type '{ children: string; variant: \"destructive\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 18,
+        "message": "Type '{ isOpen: boolean; onOpenChange: Dispatch<SetStateAction<boolean>>; title: string; description: string; confirmLabel: string; cancelLabel: string; variant: string; onConfirm: () => void; }' is not assignable to type 'IntrinsicAttributes & AlertDialogProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "io-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 54,
+        "message": "Type '{ children: string; type: \"error\" | \"success\"; title: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 70,
+        "message": "Type '{ children: string; onPress: () => Promise<void>; isLoading: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 10,
+        "message": "Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 27,
+        "message": "Type '{ title: string; }' is not assignable to type 'IntrinsicAttributes & SideNavHeadingProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 36,
+        "message": "Type '{ key: string; label: string; isSelected: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & SideNavItemProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "rc-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 25,
+        "message": "Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 64,
+        "message": "Type '{ children: string; type: string; title: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 67,
+        "message": "Type '{ children: string; variant: \"secondary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ty-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 31,
+        "message": "Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 38,
+        "message": "Type '{ children: string; type: string; title: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 41,
+        "message": "Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 63,
+        "message": "Type '{ children: string; variant: \"secondary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 66,
+        "message": "Type '{ children: string; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 5,
+    "buildSuccess": false
+  }
+}

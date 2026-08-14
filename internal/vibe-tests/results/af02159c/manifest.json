@@ -1,0 +1,120 @@
+{
+  "iterationId": "af02159c",
+  "createdAt": "2026-08-14T11:07:12.066Z",
+  "config": {
+    "target": "html",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "cs-1",
+      "category": "complex-selector",
+      "prompt": "Build a fruit picker where users choose both a fruit and a ripeness level in one control. The closed control should show the current choice. When opened, it should be easy to move across ripeness levels and move down to the same ripeness for the next fruit using the keyboard.",
+      "expectedComponents": [
+        "ComplexSelector"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-4",
+      "category": "feature-with-constraint",
+      "prompt": "I need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.",
+      "expectedComponents": [
+        "Dialog",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-5",
+      "category": "workflow-description",
+      "prompt": "Build a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.",
+      "expectedComponents": [
+        "Dialog",
+        "TextInput",
+        "TextArea",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-6",
+      "category": "data-display",
+      "prompt": "Create a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.",
+      "expectedComponents": [
+        "HoverCard",
+        "Avatar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-1",
+      "category": "typography",
+      "prompt": "Show a page title with a short description underneath",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
