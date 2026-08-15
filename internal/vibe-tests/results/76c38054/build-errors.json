@@ -1,0 +1,74 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 52,
+        "message": "Property 'Item' does not exist on type 'typeof MobileNav'.",
+        "code": "TS2339"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-7": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 88,
+        "message": "Type '({ key: \"id\"; header: string; width: number; renderCell?: undefined; } | { key: \"title\"; header: string; width?: undefined; renderCell?: undefined; } | { key: \"status\"; header: string; renderCell: (row: Todo) => Element; width?: undefined; } | { ...; } | { ...; })[]' is not assignable to type 'TableColumn<Todo>[]'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  }
+}
