@@ -1,0 +1,13 @@
+{
+  "promptId": "sd-6",
+  "category": "state-driven",
+  "prompt": "Show a project list page that displays an empty state when there are no projects. The empty state should have an icon, a message saying \"No projects yet\", and a \"Create Project\" button.",
+  "expectedComponents": [
+    "EmptyState",
+    "Button"
+  ],
+  "target": "astryx",
+  "persona": "naive",
+  "taskPrompt": "You are generating React/TSX code using the Astryx design system.\nYour project is at /vercel/sandbox/repos/xds/internal/vibe-tests/results/7d966a4d/projects/sd-6. Explore it to find available components.\n\n## Task\n\nShow a project list page that displays an empty state when there are no projects. The empty state should have an icon, a message saying \"No projects yet\", and a \"Create Project\" button.\n\n## Output\n\nWrite the TSX code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/7d966a4d/projects/sd-6/sd-6.tsx\nWrite metadata to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/7d966a4d/projects/sd-6/sd-6.json\n\nMetadata: {\"completedAt\": \"<ISO timestamp>\", \"docsRead\": [<component names you looked up>]}\nWrite ONLY valid TSX. No markdown fences, no explanation.",
+  "createdAt": "2026-08-16T11:06:25.382Z"
+}
