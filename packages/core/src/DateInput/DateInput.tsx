@@ -17,6 +17,7 @@
  */
 
 import {
+  use,
   useId,
   useState,
   useCallback,
@@ -160,7 +161,7 @@ import type {SizeValue} from '../utils/types';
 import {themeProps} from '../utils/themeProps';
 import {focusOutlineStyles} from '../utils/focusOutline.stylex';
 import {stableClassName} from '../naming';
-import {useTranslator} from '../i18n';
+import {useTranslator, InternationalizationContext} from '../i18n';
 
 export interface DateInputProps extends Omit<
   BaseProps,
@@ -399,6 +400,7 @@ export function DateInput({
   ...rest
 }: DateInputProps) {
   const t = useTranslator();
+  const {locale} = use(InternationalizationContext);
   const placeholder =
     placeholderFromProps ?? t('@astryx.dateInput.placeholder');
   const size = useSize(sizeProp, 'md');
@@ -481,8 +483,8 @@ export function DateInput({
     (iso: ISODateString): string =>
       typeof format === 'function'
         ? format(iso)
-        : formatSharedDate(plainDateFromISO(iso), format),
-    [format],
+        : formatSharedDate(plainDateFromISO(iso), format, locale),
+    [format, locale],
   );
 
   // Display value: pending input if typing, otherwise formatted value
@@ -497,7 +499,7 @@ export function DateInput({
   const isInputValid =
     pendingInput === null || !pendingInput.trim()
       ? true
-      : parseDateInput(pendingInput) !== null;
+      : parseDateInput(pendingInput, locale) !== null;
 
   const popover = usePopover({
     dialogLabel: t('@astryx.dateInput.dialogLabel'),
@@ -579,7 +581,7 @@ export function DateInput({
       setPendingInput(newValue);
 
       // If the input is valid and passes constraints, update immediately
-      const parsed = parseDateInput(newValue);
+      const parsed = parseDateInput(newValue, locale);
       if (
         parsed &&
         plainDateToISO(parsed) !== value &&
@@ -592,7 +594,7 @@ export function DateInput({
         calendarRef.current?.navigateTo(parsedISO);
       }
     },
-    [value, fireChange, isDateDisabled, isEffectivelyDisabled],
+    [value, fireChange, isDateDisabled, isEffectivelyDisabled, locale],
   );
 
   // Commit pending input (shared by blur and Enter key)
@@ -609,7 +611,7 @@ export function DateInput({
       return;
     }
 
-    const parsed = parseDateInput(pendingInput);
+    const parsed = parseDateInput(pendingInput, locale);
     if (parsed && !isDateDisabled(parsed)) {
       const parsedISO = plainDateToISO(parsed);
       if (parsedISO !== value) {
@@ -617,7 +619,7 @@ export function DateInput({
       }
     }
     setPendingInput(null);
-  }, [pendingInput, value, fireChange, isDateDisabled]);
+  }, [pendingInput, value, fireChange, isDateDisabled, locale]);
 
   // Handle blur - validate, check constraints, and clear pending input
   const handleBlur = useCallback(() => {
