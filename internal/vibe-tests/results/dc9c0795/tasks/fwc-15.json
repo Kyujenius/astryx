@@ -1,0 +1,12 @@
+{
+  "promptId": "fwc-15",
+  "category": "feature-with-constraint",
+  "prompt": "Build a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.",
+  "expectedComponents": [
+    "XDSMultiSelector"
+  ],
+  "target": "baseline",
+  "persona": "naive",
+  "taskPrompt": "You are generating React/TSX code using shadcn/ui components with Tailwind CSS.\nYour project is at /vercel/sandbox/repos/xds/internal/vibe-tests/results/dc9c0795/projects/fwc-15. Explore it to find available components.\n\n## Task\n\nBuild a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.\n\n## Output\n\nWrite the TSX code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/dc9c0795/projects/fwc-15/fwc-15.tsx\nWrite metadata to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/dc9c0795/projects/fwc-15/fwc-15.json\n\nMetadata: {\"completedAt\": \"<ISO timestamp>\", \"docsRead\": [<docs you read>]}\nWrite ONLY valid TSX. No markdown fences, no explanation.",
+  "createdAt": "2026-08-17T11:06:23.515Z"
+}

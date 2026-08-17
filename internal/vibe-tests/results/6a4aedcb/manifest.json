@@ -1,0 +1,119 @@
+{
+  "iterationId": "6a4aedcb",
+  "createdAt": "2026-08-17T11:06:23.508Z",
+  "config": {
+    "target": "astryx-tailwind",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-15",
+      "category": "feature-with-constraint",
+      "prompt": "Build a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.",
+      "expectedComponents": [
+        "XDSMultiSelector"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-3",
+      "category": "workflow-description",
+      "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-2",
+      "category": "state-driven",
+      "prompt": "A button that shows loading spinner while submitting, then success checkmark",
+      "expectedComponents": [
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-5",
+      "category": "data-display",
+      "prompt": "Build an email inbox view with a table showing sender, subject, date, and a preview snippet. Add row selection with checkboxes and a bulk actions bar that appears when items are selected.",
+      "expectedComponents": [
+        "Table",
+        "CheckboxInput",
+        "DropdownMenu",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-2",
+      "category": "integration-oriented",
+      "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+      "expectedComponents": [
+        "TextInput",
+        "Card",
+        "Typeahead"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-1",
+      "category": "typography",
+      "prompt": "Show a page title with a short description underneath",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}

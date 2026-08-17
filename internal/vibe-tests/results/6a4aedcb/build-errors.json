@@ -1,0 +1,169 @@
+{
+  "cs-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 41,
+        "message": "Property 'label' is missing in type '{ children: string; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 34,
+        "message": "Type '\"success\"' is not assignable to type 'keyof TextColorMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 50,
+        "message": "Type '\"filled\" | \"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-5": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 40,
+        "message": "Property 'label' is missing in type '{ children: string; size: \"sm\"; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 41,
+        "message": "Property 'label' is missing in type '{ children: string; size: \"sm\"; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 42,
+        "message": "Property 'label' is missing in type '{ children: string; size: \"sm\"; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 57,
+        "message": "Type '{ label: string; isLabelHidden: true; isSelected: boolean; onChange: () => void; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "fwc-15": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 15,
+        "message": "Type '{ children: string; level: 1; size: string; }' is not assignable to type 'IntrinsicAttributes & HeadingProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 17,
+        "message": "Type '{ children: string; level: 2; size: string; }' is not assignable to type 'IntrinsicAttributes & HeadingProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 18,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavSectionProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 23,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavSectionProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 15,
+        "message": "Type '{ children: string; level: 1; size: string; }' is not assignable to type 'IntrinsicAttributes & HeadingProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-2": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 18,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ty-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 26,
+        "message": "Property 'label' is missing in type '{ children: string; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 35,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 36,
+        "message": "Property 'label' is missing in type '{ children: string; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 43,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 44,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 46,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 47,
+        "message": "Property 'label' is missing in type '{ children: string; onClick: () => void; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 7,
+    "buildSuccess": false
+  }
+}
