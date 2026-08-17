@@ -1,0 +1,218 @@
+{
+  "contentinfoNodes": 0,
+  "axWindow": [
+    {
+      "role": "none",
+      "ignored": true
+    },
+    {
+      "role": "blockquote",
+      "name": "",
+      "ignored": false
+    },
+    {
+      "role": "region",
+      "name": "Notifications",
+      "ignored": false
+    },
+    {
+      "role": "StaticText",
+      "name": "Design is not just what it looks like and feels like. Design is how it works.",
+      "ignored": false
+    },
+    {
+      "role": "generic",
+      "name": "",
+      "ignored": false
+    },
+    {
+      "role": "InlineTextBox",
+      "name": "Design is not just what it looks like and feels like. Design is how it works.",
+      "ignored": false
+    },
+    {
+      "role": "StaticText",
+      "name": "Steve Jobs",
+      "ignored": false
+    },
+    {
+      "role": "InlineTextBox",
+      "name": "Steve Jobs",
+      "ignored": false
+    }
+  ],
+  "dom": {
+    "innerHTML": "Design is not just what it looks like and feels like. Design is how it works.<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\">Steve Jobs</cite>",
+    "hasFooter": false
+  },
+  "rootStyle_light": {
+    "color": "rgb(82, 82, 82)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(212, 212, 212)",
+    "border-left-width": "2px",
+    "border-right-width": "0px",
+    "padding-inline-start": "16px",
+    "padding-left": "16px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "overflow-wrap": "break-word",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "citeStyle_light": {
+    "font-size": "12px",
+    "line-height": "20.0004px",
+    "font-style": "normal",
+    "display": "block",
+    "margin-block-start": "8px",
+    "color": "rgb(82, 82, 82)",
+    "__rect": {
+      "x": 58,
+      "y": 72,
+      "w": 802,
+      "h": 20
+    }
+  },
+  "axeMultiQuote": {
+    "total": 3,
+    "ids": [
+      "landmark-one-main x1",
+      "page-has-heading-one x1",
+      "region x1"
+    ],
+    "landmark": [
+      "landmark-one-main"
+    ]
+  },
+  "edgeCases": {
+    "citeFalsy": {
+      "rect": {
+        "w": 820,
+        "h": 24
+      },
+      "hasFooter": false,
+      "citeHTML": null,
+      "innerHTML": "A quote."
+    },
+    "citeEmptyString": {
+      "rect": {
+        "w": 820,
+        "h": 24
+      },
+      "hasFooter": false,
+      "citeHTML": null,
+      "innerHTML": "A quote."
+    },
+    "citeLong": {
+      "rect": {
+        "w": 820,
+        "h": 52
+      },
+      "hasFooter": false,
+      "citeHTML": "<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx",
+      "innerHTML": "A quote.<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\">A very long attribution line "
+    },
+    "emptyChildren": {
+      "rect": {
+        "w": 820,
+        "h": 0
+      },
+      "hasFooter": false,
+      "citeHTML": null,
+      "innerHTML": ""
+    },
+    "veryLong": {
+      "rect": {
+        "w": 820,
+        "h": 144
+      },
+      "hasFooter": false,
+      "citeHTML": null,
+      "innerHTML": "Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is no"
+    }
+  },
+  "longWordAt320": {
+    "clientWidth": 238,
+    "scrollWidth": 238,
+    "overflowsSelf": false,
+    "overflowWrap": "break-word",
+    "docHorizontalScroll": false
+  },
+  "longUrlAt320": {
+    "clientWidth": 238,
+    "scrollWidth": 238,
+    "overflowsSelf": false,
+    "overflowWrap": "break-word",
+    "docHorizontalScroll": false
+  },
+  "rootStyle_dark": {
+    "color": "rgb(163, 163, 163)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(82, 82, 82)",
+    "border-left-width": "2px",
+    "border-right-width": "0px",
+    "padding-inline-start": "16px",
+    "padding-left": "16px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "overflow-wrap": "break-word",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "rootStyle_rtl": {
+    "color": "rgb(82, 82, 82)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(212, 212, 212)",
+    "border-left-width": "0px",
+    "border-right-width": "2px",
+    "padding-inline-start": "16px",
+    "padding-left": "0px",
+    "padding-right": "16px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "overflow-wrap": "break-word",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "rootStyle_y2k": {
+    "color": "rgb(103, 93, 82)",
+    "border-inline-start-width": "3px",
+    "border-inline-start-color": "rgb(47, 41, 46)",
+    "border-left-width": "3px",
+    "border-right-width": "0px",
+    "padding-inline-start": "24px",
+    "padding-left": "24px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "overflow-wrap": "break-word",
+    "display": "block",
+    "__rect": {
+      "x": 52,
+      "y": 52,
+      "w": 796,
+      "h": 54.453125
+    }
+  }
+}

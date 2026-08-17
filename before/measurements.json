@@ -1,0 +1,330 @@
+{
+  "axTree_withCitation": {
+    "blockquoteFound": true,
+    "window": [
+      {
+        "role": "none",
+        "ignored": true,
+        "props": []
+      },
+      {
+        "role": "none",
+        "ignored": true,
+        "props": []
+      },
+      {
+        "role": "blockquote",
+        "name": "",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "region",
+        "name": "Notifications",
+        "ignored": false,
+        "props": [
+          "focusable=true"
+        ]
+      },
+      {
+        "role": "StaticText",
+        "name": "Design is not just what it looks like and feels like. Design is how it works.",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "contentinfo",
+        "name": "",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "InlineTextBox",
+        "name": "Design is not just what it looks like and feels like. Design is how it works.",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "generic",
+        "name": "",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "StaticText",
+        "name": "Steve Jobs",
+        "ignored": false,
+        "props": []
+      },
+      {
+        "role": "InlineTextBox",
+        "name": "Steve Jobs",
+        "ignored": false,
+        "props": []
+      }
+    ]
+  },
+  "axRolesPresent": [
+    "RootWebArea",
+    "none",
+    "generic",
+    "blockquote",
+    "region",
+    "StaticText",
+    "contentinfo",
+    "InlineTextBox"
+  ],
+  "blockquoteTextContent": {
+    "textContent": "Design is not just what it looks like and feels like. Design is how it works.Steve Jobs",
+    "innerHTML": "Design is not just what it looks like and feels like. Design is how it works.<footer><cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\">Steve Jobs</cite></footer>",
+    "citeAttr": null,
+    "hasFooter": true,
+    "footerInsideQuote": true
+  },
+  "rootStyle_light": {
+    "color": "rgb(82, 82, 82)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(212, 212, 212)",
+    "border-inline-start-style": "solid",
+    "border-left-width": "2px",
+    "border-right-width": "0px",
+    "padding-inline-start": "16px",
+    "padding-left": "16px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "citeStyle_light": {
+    "font-size": "12px",
+    "line-height": "20.0004px",
+    "font-style": "normal",
+    "display": "block",
+    "margin-block-start": "8px",
+    "color": "rgb(82, 82, 82)",
+    "__rect": {
+      "x": 58,
+      "y": 72,
+      "w": 802,
+      "h": 20
+    }
+  },
+  "surroundingBg": "rgb(255, 255, 255)",
+  "themeAttr": "neutral",
+  "themeReach_layered": {
+    "color": "rgb(82, 82, 82)",
+    "border-inline-start-color": "rgb(212, 212, 212)",
+    "padding-inline-start": "16px",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "themeReach_unlayered": {
+    "color": "rgb(1, 2, 3)",
+    "border-inline-start-color": "rgb(4, 5, 6)",
+    "padding-inline-start": "48px",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "themeReach_cite_descendant": {
+    "font-size": "33px",
+    "__rect": {
+      "x": 58,
+      "y": 72,
+      "w": 802,
+      "h": 55
+    }
+  },
+  "layerStatements": [
+    "@layer reset, astryx-base, astryx-theme, product;",
+    "@layer priority1;"
+  ],
+  "rootStyle_dark": {
+    "color": "rgb(163, 163, 163)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(82, 82, 82)",
+    "border-inline-start-style": "solid",
+    "border-left-width": "2px",
+    "border-right-width": "0px",
+    "padding-inline-start": "16px",
+    "padding-left": "16px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "citeStyle_dark": {
+    "font-size": "12px",
+    "line-height": "20.0004px",
+    "font-style": "normal",
+    "display": "block",
+    "margin-block-start": "8px",
+    "color": "rgb(163, 163, 163)",
+    "__rect": {
+      "x": 58,
+      "y": 72,
+      "w": 802,
+      "h": 20
+    }
+  },
+  "surroundingBg_dark": "rgb(27, 27, 27)",
+  "rootStyle_rtl": {
+    "color": "rgb(82, 82, 82)",
+    "border-inline-start-width": "2px",
+    "border-inline-start-color": "rgb(212, 212, 212)",
+    "border-inline-start-style": "solid",
+    "border-left-width": "0px",
+    "border-right-width": "2px",
+    "padding-inline-start": "16px",
+    "padding-left": "0px",
+    "padding-right": "16px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "display": "block",
+    "__rect": {
+      "x": 40,
+      "y": 40,
+      "w": 820,
+      "h": 52
+    }
+  },
+  "rtl_dirResolved": {
+    "dir": "rtl",
+    "borderLeft": "0px",
+    "borderRight": "2px",
+    "paddingLeft": "0px",
+    "paddingRight": "16px"
+  },
+  "rootStyle_y2k": {
+    "color": "rgb(103, 93, 82)",
+    "border-inline-start-width": "3px",
+    "border-inline-start-color": "rgb(47, 41, 46)",
+    "border-inline-start-style": "solid",
+    "border-left-width": "3px",
+    "border-right-width": "0px",
+    "padding-inline-start": "24px",
+    "padding-left": "24px",
+    "padding-right": "0px",
+    "margin-block-start": "0px",
+    "font-size": "16px",
+    "line-height": "24px",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "display": "block",
+    "__rect": {
+      "x": 52,
+      "y": 52,
+      "w": 796,
+      "h": 54.453125
+    }
+  },
+  "edgeCases": {
+    "emptyChildren": {
+      "text": "",
+      "rect": {
+        "w": 820,
+        "h": 0
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": false,
+      "citeHTML": null,
+      "footerRectH": null
+    },
+    "longWord": {
+      "text": "Supercalifragilisticexpialidociousantidisestablishmentarianismpneumonoultramicroscopicsilicovolcanoconiosis",
+      "rect": {
+        "w": 820,
+        "h": 24
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": false,
+      "citeHTML": null,
+      "footerRectH": null
+    },
+    "veryLong": {
+      "text": "Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. Design is not just what it looks like and feels like. ",
+      "rect": {
+        "w": 820,
+        "h": 144
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": false,
+      "citeHTML": null,
+      "footerRectH": null
+    },
+    "citeOnlyFalsy": {
+      "text": "A quote.",
+      "rect": {
+        "w": 820,
+        "h": 24
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": true,
+      "citeHTML": "<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\"></cite>",
+      "footerRectH": 0
+    },
+    "citeEmptyString": {
+      "text": "A quote.",
+      "rect": {
+        "w": 820,
+        "h": 24
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": true,
+      "citeHTML": "<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\"></cite>",
+      "footerRectH": 0
+    },
+    "citeLong": {
+      "text": "A quote.A very long attribution line that goes on and on and should wrap somewhere sensible instead of overflowing",
+      "rect": {
+        "w": 820,
+        "h": 52
+      },
+      "overflowsParent": false,
+      "scrollWidthOverflow": false,
+      "docHorizontalScroll": false,
+      "hasFooter": true,
+      "citeHTML": "<cite class=\"astryx1lliihq astryxtbrsbv astryx141an7d astryx1ltkj2j astryx1j61x8r\">A very long attribution line that goes on and on and should wrap somewhere sensible instead of overflowing</cite>",
+      "footerRectH": 20
+    }
+  },
+  "narrow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320,
+    "clientWidth": 320
+  }
+}
