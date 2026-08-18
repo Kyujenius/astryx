@@ -566,4 +566,10 @@ describe('formatSharedDate', () => {
       '25 de enero de 2026',
     );
   });
+
+  it('keeps Gregorian PlainDate fields under a non-Gregorian default locale', () => {
+    expect(formatSharedDate(pd, 'date_long', 'fa-IR-u-nu-latn')).toContain(
+      '2026',
+    );
+  });
 });

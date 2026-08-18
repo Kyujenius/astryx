@@ -24,9 +24,9 @@ export {
  * US and a few others use month-first (MM/DD/YYYY).
  */
 export function isLocaleDayFirst(locale?: Locale): boolean {
-  const parts = new Intl.DateTimeFormat(locale).formatToParts(
-    new Date(2000, 0, 15),
-  );
+  const parts = new Intl.DateTimeFormat(locale, {
+    calendar: 'gregory',
+  }).formatToParts(new Date(2000, 0, 15));
   const dayIndex = parts.findIndex(p => p.type === 'day');
   const monthIndex = parts.findIndex(p => p.type === 'month');
   return dayIndex < monthIndex;

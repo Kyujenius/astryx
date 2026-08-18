@@ -284,7 +284,10 @@ export function plainDateFormat(
   options: Intl.DateTimeFormatOptions,
   locale?: Locale,
 ): string {
-  return new Intl.DateTimeFormat(locale, options).format(plainDateToDate(pd));
+  return new Intl.DateTimeFormat(locale, {
+    calendar: 'gregory',
+    ...options,
+  }).format(plainDateToDate(pd));
 }
 
 // =============================================================================

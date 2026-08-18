@@ -917,17 +917,21 @@ describe('DateInput', () => {
       expect(screen.getByDisplayValue('Jan 25, 2026')).toBeInTheDocument();
     });
 
-    it('follows the InternationalizationProvider locale (#5074)', () => {
-      render(
-        <InternationalizationProvider locale="es-ES">
+    it('follows provider locale changes (#5074)', () => {
+      const view = (locale: string) => (
+        <InternationalizationProvider locale={locale}>
           <DateInput
             label="Date"
             value="2026-01-25"
             onChange={() => {}}
             format="date_long"
           />
-        </InternationalizationProvider>,
+        </InternationalizationProvider>
       );
+      const {rerender} = render(view('en-US'));
+      expect(screen.getByDisplayValue('January 25, 2026')).toBeInTheDocument();
+
+      rerender(view('es-ES'));
       expect(
         screen.getByDisplayValue('25 de enero de 2026'),
       ).toBeInTheDocument();

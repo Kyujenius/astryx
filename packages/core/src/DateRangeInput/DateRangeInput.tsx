@@ -16,14 +16,7 @@
  * - /packages/cli/assets/templates/blocks/components/DateRangeInput/ (showcase blocks)
  */
 
-import {
-  use,
-  useId,
-  useCallback,
-  useMemo,
-  useOptimistic,
-  useTransition,
-} from 'react';
+import {useId, useCallback, useMemo, useOptimistic, useTransition} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import {
   plainDateFromISO,
@@ -70,7 +63,7 @@ import {useInputStatusIcon} from '../hooks/useInputStatusIcon';
 import {themeProps} from '../utils/themeProps';
 import {focusOutlineStyles} from '../utils/focusOutline.stylex';
 import {stableClassName} from '../naming';
-import {useTranslator, InternationalizationContext} from '../i18n';
+import {useLocale, useTranslator} from '../i18n';
 import type {Locale} from '../i18n/types';
 
 export type {DateRange} from '../Calendar';
@@ -421,7 +414,7 @@ export function DateRangeInput({
   ...rest
 }: DateRangeInputProps) {
   const t = useTranslator();
-  const {locale} = use(InternationalizationContext);
+  const locale = useLocale();
   const placeholder =
     placeholderFromProps ?? t('@astryx.dateRangeInput.placeholder');
   const size = useSize(sizeProp, 'md');
