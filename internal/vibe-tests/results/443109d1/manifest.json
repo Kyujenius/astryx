@@ -1,0 +1,117 @@
+{
+  "iterationId": "443109d1",
+  "createdAt": "2026-08-18T11:05:53.756Z",
+  "config": {
+    "target": "astryx-tailwind",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-1",
+      "category": "complex-selector",
+      "prompt": "Build a fruit picker where users choose both a fruit and a ripeness level in one control. The closed control should show the current choice. When opened, it should be easy to move across ripeness levels and move down to the same ripeness for the next fruit using the keyboard.",
+      "expectedComponents": [
+        "ComplexSelector"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-11",
+      "category": "feature-with-constraint",
+      "prompt": "Build a toolbar with icon buttons for Bold, Italic, Underline, and Link. Each button should show a tooltip with the action name and keyboard shortcut on hover.",
+      "expectedComponents": [
+        "Tooltip",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-4",
+      "category": "workflow-description",
+      "prompt": "Create a new internal tool called TodoTracker. UI Requirements: Display todos in a paginated table (default 25 per page). Columns: Title, Status, Created, Updated. Sortable by: Updated date (default desc), Created date, Title. Add a filter bar that filters by title (substring match) and status. Inline editing for todo title (with save/cancel). Status toggle button (Open <-> Closed). 'Create Todo' button that opens a modal with title input. Delete button with confirmation dialog. UI should update optimistically after any modification. Optimistic updates should be marked as 'pending' until the modification is complete.",
+      "expectedComponents": [
+        "Table",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-3",
+      "category": "state-driven",
+      "prompt": "Form that disables submit until all required fields are valid",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-2",
+      "category": "data-display",
+      "prompt": "Display a list of transactions with amount, date, and status indicator",
+      "expectedComponents": [
+        "Card",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-5",
+      "category": "integration-oriented",
+      "prompt": "Build a support ticket form with a subject line input, a description text area with character count, and a priority selector. Submit should post to /api/tickets.",
+      "expectedComponents": [
+        "TextInput",
+        "TextArea",
+        "Selector",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-10",
+      "category": "typography",
+      "prompt": "Create an article page with a full editorial-style header (large title, subtitle, author info) and a body section that renders rich text content with proper heading hierarchy, paragraphs, code blocks, and lists",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
