@@ -360,6 +360,25 @@ export function registerTheme(program) {
         text(
           `This is your copy of the ${displayName} theme — edit ${entry} to make it your own.`,
         ),
+        // Without this, editing the theme and never rebuilding is silent: a
+        // stale built artifact still reports __built, so the runtime skips
+        // injection and the app renders the previous theme with no warning.
+        // Recommend script wiring rather than a manual command — remembering
+        // to rebuild by hand is exactly the step that gets skipped.
+        text(
+          `Edits do not apply until the theme is rebuilt. Wire it into your scripts so it cannot be forgotten:`,
+        ),
+        code(
+          `"scripts": {\n` +
+            `  "build:theme": "astryx theme build ${path.join(outputDir, entry)}",\n` +
+            `  "predev": "pnpm build:theme",\n` +
+            `  "prebuild": "pnpm build:theme"\n` +
+            `}`,
+        ),
+        text(
+          `Or run it directly: \`${getCliInvocation(process.cwd())} theme build ${path.join(outputDir, entry)}\` ` +
+            `(-w rebuilds on save, -c fails when the committed output is stale).`,
+        ),
       );
     },
   });
