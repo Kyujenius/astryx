@@ -196,6 +196,19 @@ describe('findBuiltThemes', () => {
     expect(findBuiltThemes(dir)[0].out).toBeNull();
   });
 
+  it('captures the CLI and core versions the artifact was built with', () => {
+    // These drive the staleness pre-filter: the versions are embedded in the
+    // output, so a dependency bump alone makes an artifact stale even though
+    // it is still the newer file on disk. mtime cannot see that.
+    const dir = mkProject({
+      'package.json': '{}',
+      'src/themes/app.css': banner('src/themes/appTheme.ts', 'src/themes/app.css'),
+    });
+    const [found] = findBuiltThemes(dir);
+    expect(found.cli).toBe('0.3.0');
+    expect(found.core).toBe('0.3.0');
+  });
+
   it('ignores hand-written CSS', () => {
     const dir = mkProject({
       'package.json': '{}',
@@ -300,5 +313,32 @@ describe('checkThemeBuilt', () => {
     });
     const c = await checkThemeBuilt(ctx(dir));
     expect(['pass', 'warn', 'fail', 'info']).toContain(c.status);
+  }, SLOW);
+
+  it('does not evaluate the theme when nothing points at drift', async () => {
+    // The pre-filter must clear an artifact that is newer than its source and
+    // built by the running versions, WITHOUT importing the theme. If it
+    // compiled here, this unresolvable import would surface as `warn`.
+    const dir = mkProject({
+      'package.json': '{}',
+      'src/themes/appTheme.ts': "import 'totally-missing-package';",
+    });
+    const cliVersion = JSON.parse(
+      fs.readFileSync(path.join(REPO, 'packages/cli/package.json'), 'utf-8'),
+    ).version;
+    const css = path.join(dir, 'src/themes/app.css');
+    fs.writeFileSync(
+      css,
+      banner('src/themes/appTheme.ts', 'src/themes/app.css')
+        .replace(/CLI: @astryxdesign\/cli@\S+/, `CLI: @astryxdesign/cli@${cliVersion}`)
+        .replace(/Core: @astryxdesign\/core@\S+/, 'Core: @astryxdesign/core@0.0.0'),
+    );
+    // Make the artifact newer than the source.
+    const later = new Date(Date.now() + 10_000);
+    fs.utimesSync(css, later, later);
+    // coreDir null => the core version comparison is skipped, leaving mtime
+    // as the only signal, and mtime says fresh.
+    const c = await checkThemeBuilt({...ctx(dir), coreDir: null});
+    expect(c.status).toBe('pass');
   }, SLOW);
 });

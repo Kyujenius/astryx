@@ -8,10 +8,16 @@
  * self-contained function that returns a {@link DoctorCheck} record, so
  * adding a new diagnostic is just appending a function to {@link CHECKS}.
  *
- * The engine is intentionally side-effect-free: it only *reads* the
- * filesystem, environment, and package metadata. It never installs, writes,
- * or mutates anything. That makes it safe to run in CI as a gate (exit 1 on
- * any FAIL) and safe for AI agents to invoke with `--json`.
+ * The engine never installs, writes, or mutates anything, which makes it safe
+ * to run in CI as a gate (exit 1 on any FAIL) and safe for AI agents to invoke
+ * with `--json`.
+ *
+ * Two checks do *evaluate* project code, and both are deliberately narrow:
+ * `checkConfig` imports the single opt-in `astryx.config.*` at the project
+ * root, and `checkThemeBuilt` recompiles a theme — but only one that already
+ * has built output on disk (so the user has run `theme build` on it before)
+ * and only after a read-only pre-filter finds evidence of drift. Everything
+ * else reads the filesystem, environment, and package metadata and nothing more.
  *
  * Status semantics:
  *   - 'pass' — everything is healthy.
@@ -535,13 +541,15 @@ function readHead(file) {
  * files, and it found 18 "themes" at the monorepo root.)
  *
  * @param {string} startDir
- * @returns {Array<{css: string, dir: string, source: string, out: string|null}>}
+ * @returns {Array<{css: string, dir: string, source: string, out: string|null,
+ *   cli: string|null, core: string|null}>}
  */
 export function findBuiltThemes(startDir) {
   const SKIP = new Set([
     'node_modules', '.git', 'dist', 'build', 'out', '.next', 'coverage',
   ]);
-  /** @type {Array<{css: string, dir: string, source: string, out: string|null}>} */
+  /** @type {Array<{css: string, dir: string, source: string, out: string|null,
+   *   cli: string|null, core: string|null}>} */
   const found = [];
   const stack = [startDir];
   while (stack.length > 0 && found.length < 10) {
@@ -568,10 +576,51 @@ export function findBuiltThemes(startDir) {
       const command = /^\s*\*\s*Command:\s*(.+)$/m.exec(head)?.[1] ?? '';
       const out = /(?:--out|-o)\s+(\S+)/.exec(command)?.[1] ?? null;
       // Banner paths are relative to the package the build ran in.
-      found.push({css: fp, dir: packageDirFor(fp, startDir), source, out});
+      found.push({
+        css: fp,
+        dir: packageDirFor(fp, startDir),
+        source,
+        out,
+        cli: /^\s*\*\s*CLI:\s*\S+@(\S+)/m.exec(head)?.[1] ?? null,
+        core: /^\s*\*\s*Core:\s*\S+@(\S+)/m.exec(head)?.[1] ?? null,
+      });
     }
   }
   return found.sort((a, b) => a.css.localeCompare(b.css));
+}
+
+/**
+ * Read-only test for whether a built theme *might* have drifted.
+ *
+ * Returns false only when the artifact is provably current-looking, so the
+ * caller can skip recompiling it. Two independent signals, both cheap:
+ *
+ *   1. The source is newer than the artifact.
+ *   2. The banner's CLI/core versions differ from what is installed — the
+ *      versions are embedded in the output, so a bump alone makes it stale.
+ *      (mtime misses this entirely: after a dependency change the artifact is
+ *      still the newer file.)
+ *
+ * Deliberately biased toward "maybe": a false positive costs one recompile,
+ * a false negative silently reports a stale theme as fresh.
+ *
+ * @param {{css: string, dir: string, source: string, cli: string|null, core: string|null}} entry
+ * @param {DoctorContext} ctx
+ * @returns {boolean}
+ */
+function mayBeStale(entry, ctx) {
+  const cliVersion = readPkg(path.join(CLI_ROOT, 'package.json'))?.version ?? null;
+  if (entry.cli && cliVersion && entry.cli !== cliVersion) return true;
+  const coreVersion = pkgVersion(ctx.coreDir);
+  if (entry.core && coreVersion && entry.core !== coreVersion) return true;
+  try {
+    const srcStat = fs.statSync(path.resolve(entry.dir, entry.source));
+    const outStat = fs.statSync(entry.css);
+    return srcStat.mtimeMs > outStat.mtimeMs;
+  } catch {
+    // Source missing or unreadable: let the real check report it.
+    return true;
+  }
 }
 
 /**
@@ -655,14 +704,25 @@ export async function checkThemeBuilt(ctx) {
     };
   }
 
-  const {themeBuild} = await import('../theme/build/build.mjs');
   /** @type {Array<{rel: string, count: number, entry: typeof built[number]}>} */
   const stale = [];
   /** @type {string[]} */
   const unchecked = [];
+  /** @type {{themeBuild?: Function}} */
+  let buildModule = {};
   for (const entry of built) {
     const rel = path.relative(ctx.cwd, entry.css) || entry.css;
+    // Cheap, read-only pre-filter. Confirming freshness truly requires
+    // recompiling, and compiling means jiti evaluating the theme module and
+    // its whole import graph — real code execution, which the rest of this
+    // engine deliberately avoids. So only pay that cost (and take that
+    // liberty) once something already points at drift.
+    if (!mayBeStale(entry, ctx)) continue;
     try {
+      if (!buildModule.themeBuild) {
+        buildModule = await import('../theme/build/build.mjs');
+      }
+      const themeBuild = /** @type {Function} */ (buildModule.themeBuild);
       const res = await themeBuild(
         entry.source,
         {check: true, ...(entry.out ? {out: entry.out} : {})},
