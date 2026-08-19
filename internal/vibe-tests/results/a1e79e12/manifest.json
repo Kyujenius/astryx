@@ -1,0 +1,119 @@
+{
+  "iterationId": "a1e79e12",
+  "createdAt": "2026-08-19T11:05:58.487Z",
+  "config": {
+    "target": "baseline",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "cs-3",
+      "category": "complex-selector",
+      "prompt": "Build a deadline picker field for a task form. Opening the field should let users choose a preset like Today or Next week, or choose a custom date and time before applying the selection.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "DateInput",
+        "TimeInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-2",
+      "category": "feature-with-constraint",
+      "prompt": "Build a notification that shows unread count, but hides when count is zero",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-6",
+      "category": "data-display",
+      "prompt": "Create a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.",
+      "expectedComponents": [
+        "HoverCard",
+        "Avatar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-4",
+      "category": "typography",
+      "prompt": "Create a settings page with 3 sections. Each section needs a heading, a brief description, and some form controls. Use different heading levels for the page title vs section titles.",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "TextInput"
+      ],
+      "status": "pending"
+    }
+  ]
+}

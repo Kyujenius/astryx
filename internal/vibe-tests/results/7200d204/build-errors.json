@@ -1,0 +1,166 @@
+{
+  "cs-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-6": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-2": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 15,
+        "message": "Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 21,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 26,
+        "message": "Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 28,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "io-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 41,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 43,
+        "message": "Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 57,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Property 'Header' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 22,
+        "message": "Property 'Header' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 23,
+        "message": "Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 26,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 32,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 35,
+        "message": "Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 36,
+        "message": "Property 'Main' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 37,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 43,
+        "message": "Property 'Main' does not exist on type 'typeof AppShell'.",
+        "code": "TS2339"
+      }
+    ],
+    "errorCount": 9,
+    "buildSuccess": false
+  },
+  "rc-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 17,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 19,
+        "message": "Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 19,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 22,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "sd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

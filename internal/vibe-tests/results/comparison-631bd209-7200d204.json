@@ -1,0 +1,3887 @@
+{
+  "astryx": {
+    "averages": {
+      "correctness": 29,
+      "accessibility": 100,
+      "codeQuality": 99,
+      "efficiency": 85,
+      "maintainability": 95
+    },
+    "overall": 82,
+    "byPrompt": {
+      "cs-3": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 43
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 56
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string | undefined' is not assignable to type 'ISODateTimeString | undefined'.",
+              "line": 51
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 55
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 56
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 62
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 95,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.11290322580645161,
+            "decisionsPerElement": 0.7,
+            "elementCount": 12,
+            "stylingDecisionCount": 8,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 8,
+            "avgStateSpread": 31
+          }
+        }
+      },
+      "cwm-1": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ value: string; onChange: Dispatch<SetStateAction<string>>; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+              "line": 30
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"baseline\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"stretch\" | undefined'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 53
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\" | \"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 58
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 64,
+            "stylingLines": 0,
+            "boilerplateLines": 10,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15625,
+            "decisionsPerElement": 0.8,
+            "elementCount": 19,
+            "stylingDecisionCount": 16,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "dd-6": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 18
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 20
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 25
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 28
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 39
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 86,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{name: \"_\", role: \"_\", email: \"_\", avatar: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 49,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 39,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15217391304347827,
+            "decisionsPerElement": 0.9,
+            "elementCount": 16,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 13,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "fwc-2": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 15
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 15
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 21
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+              "line": 28
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 28,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 24,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.14285714285714285,
+            "decisionsPerElement": 1.3,
+            "elementCount": 4,
+            "stylingDecisionCount": 5,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 5,
+            "avgStateSpread": 21
+          }
+        }
+      },
+      "io-1": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 58
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 90,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "setStatus({type: \"_\", message: \"_\"});"
+            }
+          ],
+          "metrics": {
+            "totalLines": 66,
+            "codeLines": 61,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.09836065573770492,
+            "decisionsPerElement": 1.5,
+            "elementCount": 4,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 3,
+            "avgStateSpread": 46
+          }
+        }
+      },
+      "ps-1": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 29
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 97,
+          "findings": [
+            {
+              "rule": "index-key",
+              "severity": "minor",
+              "detail": "Array index as key",
+              "line": 27
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 87,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{id: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 47,
+            "codeLines": 43,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 37,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13953488372093023,
+            "decisionsPerElement": 0.4,
+            "elementCount": 7,
+            "stylingDecisionCount": 3,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 1,
+            "avgStateSpread": 24
+          }
+        }
+      },
+      "rc-3": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 17
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2353: Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 6 times",
+              "count": 6,
+              "example": "{title: \"_\", description: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 29,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 25,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13793103448275862,
+            "decisionsPerElement": 0.9,
+            "elementCount": 7,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.21
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 4,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "sd-1": {
+        "correctness": {
+          "score": 10,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 28
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 31
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 43
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [],
+          "metrics": {
+            "totalLines": 52,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 20,
+            "logicLines": 26,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.43478260869565216,
+            "decisionsPerElement": 1,
+            "elementCount": 13,
+            "stylingDecisionCount": 13,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "ty-4": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 33
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 34
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 53
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 54
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 59
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 88,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "{value: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 65,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 8,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.12903225806451613,
+            "decisionsPerElement": 0.6,
+            "elementCount": 25,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 33
+          }
+        }
+      },
+      "wd-1": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 49
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 63
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 76
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 25
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ value: Step; onChange: (v: string) => void; tabs: { value: Step; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & TabListProps'.",
+              "line": 30
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 34
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 36
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 40
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 45
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 49
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 55
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 59
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 60
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 61
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 63
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 69
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 71
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 72
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 73
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 74
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 76
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 82
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 83
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 92,
+          "findings": [
+            {
+              "rule": "missing-key",
+              "severity": "moderate",
+              "detail": "Array .map() without key prop",
+              "line": 30
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 47,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{value: \"_\", label: \"_\"},"
+            },
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{currentStep === \"_\" && ("
+            }
+          ],
+          "metrics": {
+            "totalLines": 92,
+            "codeLines": 87,
+            "stylingLines": 0,
+            "boilerplateLines": 87,
+            "logicLines": 0,
+            "stylingRatio": 0,
+            "boilerplateRatio": 1,
+            "decisionsPerElement": 0.5,
+            "elementCount": 40,
+            "stylingDecisionCount": 19,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 89,
+          "findings": [
+            {
+              "rule": "moderate-state-spread",
+              "severity": "minor",
+              "detail": "Average state variable spread: 58 lines"
+            }
+          ],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 58
+          }
+        }
+      }
+    },
+    "byCategory": {
+      "complex-selector": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 95,
+        "maintainability": 92
+      },
+      "clone-with-modification": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 94,
+        "maintainability": 92
+      },
+      "data-display": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 86,
+        "maintainability": 100
+      },
+      "feature-with-constraint": {
+        "correctness": 40,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 94,
+        "maintainability": 100
+      },
+      "integration-oriented": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 90,
+        "maintainability": 92
+      },
+      "page-setup": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 97,
+        "efficiency": 87,
+        "maintainability": 100
+      },
+      "responsive-context": {
+        "correctness": 40,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 83,
+        "maintainability": 100
+      },
+      "state-driven": {
+        "correctness": 10,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 83,
+        "maintainability": 92
+      },
+      "typography": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 88,
+        "maintainability": 92
+      },
+      "workflow-description": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 92,
+        "efficiency": 47,
+        "maintainability": 89
+      }
+    },
+    "darkModeRate": 0,
+    "cost": {
+      "totalDurationMs": 2415214,
+      "avgDurationMs": 241521,
+      "avgOutputChars": 1922,
+      "avgOutputLines": 57,
+      "avgDocsRead": 6.6,
+      "estimatedInputTokens": 45000,
+      "estimatedOutputTokens": 4806,
+      "byPrompt": {
+        "cs-3": {
+          "durationMs": 241523,
+          "outputChars": 2178,
+          "outputLines": 68,
+          "docsRead": [
+            "DateTimeInput",
+            "Popover",
+            "Button",
+            "Stack",
+            "HStack",
+            "Text"
+          ],
+          "estimatedInputTokens": 4125,
+          "estimatedOutputTokens": 545
+        },
+        "cwm-1": {
+          "durationMs": 241522,
+          "outputChars": 2603,
+          "outputLines": 68,
+          "docsRead": [
+            "Card",
+            "Text",
+            "Heading",
+            "Button",
+            "SegmentedControl",
+            "Stack",
+            "Grid",
+            "Badge",
+            "Divider"
+          ],
+          "estimatedInputTokens": 6000,
+          "estimatedOutputTokens": 651
+        },
+        "dd-6": {
+          "durationMs": 241521,
+          "outputChars": 1959,
+          "outputLines": 49,
+          "docsRead": [
+            "HoverCard",
+            "Avatar",
+            "Text",
+            "Button",
+            "Stack",
+            "HStack",
+            "Divider"
+          ],
+          "estimatedInputTokens": 4750,
+          "estimatedOutputTokens": 490
+        },
+        "fwc-2": {
+          "durationMs": 241523,
+          "outputChars": 741,
+          "outputLines": 32,
+          "docsRead": [
+            "Badge",
+            "IconButton",
+            "HStack"
+          ],
+          "estimatedInputTokens": 2250,
+          "estimatedOutputTokens": 185
+        },
+        "io-1": {
+          "durationMs": 241521,
+          "outputChars": 1992,
+          "outputLines": 66,
+          "docsRead": [
+            "TextInput",
+            "Button",
+            "Stack",
+            "Text",
+            "Banner"
+          ],
+          "estimatedInputTokens": 3500,
+          "estimatedOutputTokens": 498
+        },
+        "ps-1": {
+          "durationMs": 241520,
+          "outputChars": 1393,
+          "outputLines": 47,
+          "docsRead": [
+            "AppShell",
+            "SideNav",
+            "Text",
+            "Heading",
+            "Stack",
+            "Card"
+          ],
+          "estimatedInputTokens": 4125,
+          "estimatedOutputTokens": 348
+        },
+        "rc-3": {
+          "durationMs": 241521,
+          "outputChars": 1160,
+          "outputLines": 32,
+          "docsRead": [
+            "Card",
+            "Grid",
+            "Text",
+            "Heading",
+            "Stack"
+          ],
+          "estimatedInputTokens": 3500,
+          "estimatedOutputTokens": 290
+        },
+        "sd-1": {
+          "durationMs": 241522,
+          "outputChars": 1556,
+          "outputLines": 52,
+          "docsRead": [
+            "Card",
+            "Spinner",
+            "Banner",
+            "Text",
+            "Heading",
+            "Stack",
+            "Button"
+          ],
+          "estimatedInputTokens": 4750,
+          "estimatedOutputTokens": 389
+        },
+        "ty-4": {
+          "durationMs": 241519,
+          "outputChars": 2338,
+          "outputLines": 65,
+          "docsRead": [
+            "Heading",
+            "Text",
+            "Stack",
+            "TextInput",
+            "Switch",
+            "Selector",
+            "Divider",
+            "Card"
+          ],
+          "estimatedInputTokens": 5375,
+          "estimatedOutputTokens": 585
+        },
+        "wd-1": {
+          "durationMs": 241522,
+          "outputChars": 3300,
+          "outputLines": 92,
+          "docsRead": [
+            "Button",
+            "Card",
+            "Text",
+            "Heading",
+            "TextInput",
+            "Stack",
+            "HStack",
+            "Divider",
+            "TabList",
+            "Banner"
+          ],
+          "estimatedInputTokens": 6625,
+          "estimatedOutputTokens": 825
+        }
+      }
+    }
+  },
+  "baseline": {
+    "averages": {
+      "correctness": 74,
+      "accessibility": 100,
+      "codeQuality": 99,
+      "efficiency": 85,
+      "maintainability": 95
+    },
+    "overall": 91,
+    "byPrompt": {
+      "cs-3": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 43
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 56
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 57
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 95,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.11290322580645161,
+            "decisionsPerElement": 0.7,
+            "elementCount": 12,
+            "stylingDecisionCount": 8,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 8,
+            "avgStateSpread": 31
+          }
+        }
+      },
+      "cwm-1": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 64,
+            "stylingLines": 0,
+            "boilerplateLines": 10,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15625,
+            "decisionsPerElement": 0.8,
+            "elementCount": 19,
+            "stylingDecisionCount": 16,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "dd-6": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 86,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{name: \"_\", role: \"_\", email: \"_\", avatar: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 49,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 39,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15217391304347827,
+            "decisionsPerElement": 0.9,
+            "elementCount": 16,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 13,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "fwc-2": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 15
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 15
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 21
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+              "line": 28
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 28,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 24,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.14285714285714285,
+            "decisionsPerElement": 1.3,
+            "elementCount": 4,
+            "stylingDecisionCount": 5,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 5,
+            "avgStateSpread": 21
+          }
+        }
+      },
+      "io-1": {
+        "correctness": {
+          "score": 55,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 57
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 90,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "setStatus({type: \"_\", message: \"_\"});"
+            }
+          ],
+          "metrics": {
+            "totalLines": 66,
+            "codeLines": 61,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.09836065573770492,
+            "decisionsPerElement": 1.5,
+            "elementCount": 4,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 3,
+            "avgStateSpread": 46
+          }
+        }
+      },
+      "ps-1": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 29
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Header' does not exist on type 'typeof AppShell'.",
+              "line": 20
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Header' does not exist on type 'typeof AppShell'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+              "line": 32
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Main' does not exist on type 'typeof AppShell'.",
+              "line": 36
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Main' does not exist on type 'typeof AppShell'.",
+              "line": 43
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 97,
+          "findings": [
+            {
+              "rule": "index-key",
+              "severity": "minor",
+              "detail": "Array index as key",
+              "line": 27
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 87,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{id: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 47,
+            "codeLines": 43,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 37,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13953488372093023,
+            "decisionsPerElement": 0.4,
+            "elementCount": 7,
+            "stylingDecisionCount": 3,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 1,
+            "avgStateSpread": 24
+          }
+        }
+      },
+      "rc-3": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 17
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2353: Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 6 times",
+              "count": 6,
+              "example": "{title: \"_\", description: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 29,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 25,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13793103448275862,
+            "decisionsPerElement": 0.9,
+            "elementCount": 7,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.21
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 4,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "sd-1": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 39
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [],
+          "metrics": {
+            "totalLines": 52,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 20,
+            "logicLines": 26,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.43478260869565216,
+            "decisionsPerElement": 1,
+            "elementCount": 13,
+            "stylingDecisionCount": 13,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "ty-4": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 88,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "{value: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 65,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 8,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.12903225806451613,
+            "decisionsPerElement": 0.6,
+            "elementCount": 25,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 33
+          }
+        }
+      },
+      "wd-1": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 49
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 63
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 76
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 92,
+          "findings": [
+            {
+              "rule": "missing-key",
+              "severity": "moderate",
+              "detail": "Array .map() without key prop",
+              "line": 30
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 47,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{value: \"_\", label: \"_\"},"
+            },
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{currentStep === \"_\" && ("
+            }
+          ],
+          "metrics": {
+            "totalLines": 92,
+            "codeLines": 87,
+            "stylingLines": 0,
+            "boilerplateLines": 87,
+            "logicLines": 0,
+            "stylingRatio": 0,
+            "boilerplateRatio": 1,
+            "decisionsPerElement": 0.5,
+            "elementCount": 40,
+            "stylingDecisionCount": 19,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 89,
+          "findings": [
+            {
+              "rule": "moderate-state-spread",
+              "severity": "minor",
+              "detail": "Average state variable spread: 58 lines"
+            }
+          ],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 58
+          }
+        }
+      }
+    },
+    "byCategory": {
+      "complex-selector": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 95,
+        "maintainability": 92
+      },
+      "clone-with-modification": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 94,
+        "maintainability": 92
+      },
+      "data-display": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 86,
+        "maintainability": 100
+      },
+      "feature-with-constraint": {
+        "correctness": 40,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 94,
+        "maintainability": 100
+      },
+      "integration-oriented": {
+        "correctness": 55,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 90,
+        "maintainability": 92
+      },
+      "page-setup": {
+        "correctness": 0,
+        "accessibility": 100,
+        "codeQuality": 97,
+        "efficiency": 87,
+        "maintainability": 100
+      },
+      "responsive-context": {
+        "correctness": 40,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 83,
+        "maintainability": 100
+      },
+      "state-driven": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 83,
+        "maintainability": 92
+      },
+      "typography": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 100,
+        "efficiency": 88,
+        "maintainability": 92
+      },
+      "workflow-description": {
+        "correctness": 100,
+        "accessibility": 100,
+        "codeQuality": 92,
+        "efficiency": 47,
+        "maintainability": 89
+      }
+    },
+    "darkModeRate": 0,
+    "cost": {
+      "totalDurationMs": 2415154,
+      "avgDurationMs": 241515,
+      "avgOutputChars": 1922,
+      "avgOutputLines": 57,
+      "avgDocsRead": 6.6,
+      "estimatedInputTokens": 45000,
+      "estimatedOutputTokens": 4806,
+      "byPrompt": {
+        "cs-3": {
+          "durationMs": 241518,
+          "outputChars": 2178,
+          "outputLines": 68,
+          "docsRead": [
+            "DateTimeInput",
+            "Popover",
+            "Button",
+            "Stack",
+            "HStack",
+            "Text"
+          ],
+          "estimatedInputTokens": 4125,
+          "estimatedOutputTokens": 545
+        },
+        "cwm-1": {
+          "durationMs": 241516,
+          "outputChars": 2603,
+          "outputLines": 68,
+          "docsRead": [
+            "Card",
+            "Text",
+            "Heading",
+            "Button",
+            "SegmentedControl",
+            "Stack",
+            "Grid",
+            "Badge",
+            "Divider"
+          ],
+          "estimatedInputTokens": 6000,
+          "estimatedOutputTokens": 651
+        },
+        "dd-6": {
+          "durationMs": 241515,
+          "outputChars": 1959,
+          "outputLines": 49,
+          "docsRead": [
+            "HoverCard",
+            "Avatar",
+            "Text",
+            "Button",
+            "Stack",
+            "HStack",
+            "Divider"
+          ],
+          "estimatedInputTokens": 4750,
+          "estimatedOutputTokens": 490
+        },
+        "fwc-2": {
+          "durationMs": 241517,
+          "outputChars": 741,
+          "outputLines": 32,
+          "docsRead": [
+            "Badge",
+            "IconButton",
+            "HStack"
+          ],
+          "estimatedInputTokens": 2250,
+          "estimatedOutputTokens": 185
+        },
+        "io-1": {
+          "durationMs": 241514,
+          "outputChars": 1992,
+          "outputLines": 66,
+          "docsRead": [
+            "TextInput",
+            "Button",
+            "Stack",
+            "Text",
+            "Banner"
+          ],
+          "estimatedInputTokens": 3500,
+          "estimatedOutputTokens": 498
+        },
+        "ps-1": {
+          "durationMs": 241514,
+          "outputChars": 1393,
+          "outputLines": 47,
+          "docsRead": [
+            "AppShell",
+            "SideNav",
+            "Text",
+            "Heading",
+            "Stack",
+            "Card"
+          ],
+          "estimatedInputTokens": 4125,
+          "estimatedOutputTokens": 348
+        },
+        "rc-3": {
+          "durationMs": 241515,
+          "outputChars": 1160,
+          "outputLines": 32,
+          "docsRead": [
+            "Card",
+            "Grid",
+            "Text",
+            "Heading",
+            "Stack"
+          ],
+          "estimatedInputTokens": 3500,
+          "estimatedOutputTokens": 290
+        },
+        "sd-1": {
+          "durationMs": 241516,
+          "outputChars": 1556,
+          "outputLines": 52,
+          "docsRead": [
+            "Card",
+            "Spinner",
+            "Banner",
+            "Text",
+            "Heading",
+            "Stack",
+            "Button"
+          ],
+          "estimatedInputTokens": 4750,
+          "estimatedOutputTokens": 389
+        },
+        "ty-4": {
+          "durationMs": 241513,
+          "outputChars": 2338,
+          "outputLines": 65,
+          "docsRead": [
+            "Heading",
+            "Text",
+            "Stack",
+            "TextInput",
+            "Switch",
+            "Selector",
+            "Divider",
+            "Card"
+          ],
+          "estimatedInputTokens": 5375,
+          "estimatedOutputTokens": 585
+        },
+        "wd-1": {
+          "durationMs": 241516,
+          "outputChars": 3300,
+          "outputLines": 92,
+          "docsRead": [
+            "Button",
+            "Card",
+            "Text",
+            "Heading",
+            "TextInput",
+            "Stack",
+            "HStack",
+            "Divider",
+            "TabList",
+            "Banner"
+          ],
+          "estimatedInputTokens": 6625,
+          "estimatedOutputTokens": 825
+        }
+      }
+    }
+  },
+  "winners": {
+    "correctness": "baseline",
+    "accessibility": "tie",
+    "codeQuality": "tie",
+    "efficiency": "tie",
+    "maintainability": "tie"
+  },
+  "byPrompt": {
+    "cs-3": {
+      "astryx": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 43
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 56
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string | undefined' is not assignable to type 'ISODateTimeString | undefined'.",
+              "line": 51
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 55
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 56
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 62
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 95,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.11290322580645161,
+            "decisionsPerElement": 0.7,
+            "elementCount": 12,
+            "stylingDecisionCount": 8,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 8,
+            "avgStateSpread": 31
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 43
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 56
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 57
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 95,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.11290322580645161,
+            "decisionsPerElement": 0.7,
+            "elementCount": 12,
+            "stylingDecisionCount": 8,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 8,
+            "avgStateSpread": 31
+          }
+        }
+      },
+      "winner": "baseline"
+    },
+    "cwm-1": {
+      "astryx": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ value: string; onChange: Dispatch<SetStateAction<string>>; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+              "line": 30
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"baseline\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"stretch\" | undefined'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 53
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\" | \"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 58
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 64,
+            "stylingLines": 0,
+            "boilerplateLines": 10,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15625,
+            "decisionsPerElement": 0.8,
+            "elementCount": 19,
+            "stylingDecisionCount": 16,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 68,
+            "codeLines": 64,
+            "stylingLines": 0,
+            "boilerplateLines": 10,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15625,
+            "decisionsPerElement": 0.8,
+            "elementCount": 19,
+            "stylingDecisionCount": 16,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "winner": "baseline"
+    },
+    "dd-6": {
+      "astryx": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 18
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 20
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 25
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 28
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 39
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 86,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{name: \"_\", role: \"_\", email: \"_\", avatar: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 49,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 39,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15217391304347827,
+            "decisionsPerElement": 0.9,
+            "elementCount": 16,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 13,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 86,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{name: \"_\", role: \"_\", email: \"_\", avatar: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 49,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 7,
+            "logicLines": 39,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.15217391304347827,
+            "decisionsPerElement": 0.9,
+            "elementCount": 16,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 13,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "winner": "baseline"
+    },
+    "fwc-2": {
+      "astryx": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 15
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 15
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 21
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+              "line": 28
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 28,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 24,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.14285714285714285,
+            "decisionsPerElement": 1.3,
+            "elementCount": 4,
+            "stylingDecisionCount": 5,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 5,
+            "avgStateSpread": 21
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 15
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 15
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 21
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+              "line": 28
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 94,
+          "findings": [],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 28,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 24,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.14285714285714285,
+            "decisionsPerElement": 1.3,
+            "elementCount": 4,
+            "stylingDecisionCount": 5,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 5,
+            "avgStateSpread": 21
+          }
+        }
+      },
+      "winner": "tie"
+    },
+    "io-1": {
+      "astryx": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 58
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 90,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "setStatus({type: \"_\", message: \"_\"});"
+            }
+          ],
+          "metrics": {
+            "totalLines": 66,
+            "codeLines": 61,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.09836065573770492,
+            "decisionsPerElement": 1.5,
+            "elementCount": 4,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 3,
+            "avgStateSpread": 46
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 55,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 41
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 43
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 57
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 90,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "setStatus({type: \"_\", message: \"_\"});"
+            }
+          ],
+          "metrics": {
+            "totalLines": 66,
+            "codeLines": 61,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 55,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.09836065573770492,
+            "decisionsPerElement": 1.5,
+            "elementCount": 4,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 3,
+            "avgStateSpread": 46
+          }
+        }
+      },
+      "winner": "astryx"
+    },
+    "ps-1": {
+      "astryx": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 29
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 97,
+          "findings": [
+            {
+              "rule": "index-key",
+              "severity": "minor",
+              "detail": "Array index as key",
+              "line": 27
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 87,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{id: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 47,
+            "codeLines": 43,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 37,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13953488372093023,
+            "decisionsPerElement": 0.4,
+            "elementCount": 7,
+            "stylingDecisionCount": 3,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 1,
+            "avgStateSpread": 24
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 29
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Header' does not exist on type 'typeof AppShell'.",
+              "line": 20
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Header' does not exist on type 'typeof AppShell'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+              "line": 26
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+              "line": 32
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Sidebar' does not exist on type 'typeof AppShell'.",
+              "line": 35
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Main' does not exist on type 'typeof AppShell'.",
+              "line": 36
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2339: Property 'Main' does not exist on type 'typeof AppShell'.",
+              "line": 43
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 97,
+          "findings": [
+            {
+              "rule": "index-key",
+              "severity": "minor",
+              "detail": "Array index as key",
+              "line": 27
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 87,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{id: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 47,
+            "codeLines": 43,
+            "stylingLines": 0,
+            "boilerplateLines": 6,
+            "logicLines": 37,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13953488372093023,
+            "decisionsPerElement": 0.4,
+            "elementCount": 7,
+            "stylingDecisionCount": 3,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 1,
+            "avgStateSpread": 24
+          }
+        }
+      },
+      "winner": "astryx"
+    },
+    "rc-3": {
+      "astryx": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 17
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2353: Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 6 times",
+              "count": 6,
+              "example": "{title: \"_\", description: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 29,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 25,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13793103448275862,
+            "decisionsPerElement": 0.9,
+            "elementCount": 7,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.21
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 4,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 40,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 17
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2353: Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 6 times",
+              "count": 6,
+              "example": "{title: \"_\", description: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 32,
+            "codeLines": 29,
+            "stylingLines": 0,
+            "boilerplateLines": 4,
+            "logicLines": 25,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.13793103448275862,
+            "decisionsPerElement": 0.9,
+            "elementCount": 7,
+            "stylingDecisionCount": 6,
+            "duplicateRatio": 0.21
+          }
+        },
+        "maintainability": {
+          "score": 100,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 4,
+            "avgStateSpread": 0
+          }
+        }
+      },
+      "winner": "tie"
+    },
+    "sd-1": {
+      "astryx": {
+        "correctness": {
+          "score": 10,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 28
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 31
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 37
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 39
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 43
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [],
+          "metrics": {
+            "totalLines": 52,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 20,
+            "logicLines": 26,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.43478260869565216,
+            "decisionsPerElement": 1,
+            "elementCount": 13,
+            "stylingDecisionCount": 13,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 39
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 83,
+          "findings": [],
+          "metrics": {
+            "totalLines": 52,
+            "codeLines": 46,
+            "stylingLines": 0,
+            "boilerplateLines": 20,
+            "logicLines": 26,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.43478260869565216,
+            "decisionsPerElement": 1,
+            "elementCount": 13,
+            "stylingDecisionCount": 13,
+            "duplicateRatio": 0
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 30
+          }
+        }
+      },
+      "winner": "baseline"
+    },
+    "ty-4": {
+      "astryx": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 19
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 22
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 23
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 33
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 34
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 38
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 53
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 54
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+              "line": 59
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 88,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "{value: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 65,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 8,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.12903225806451613,
+            "decisionsPerElement": 0.6,
+            "elementCount": 25,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 33
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": []
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 100,
+          "findings": []
+        },
+        "efficiency": {
+          "score": 88,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 3 times",
+              "count": 3,
+              "example": "{value: \"_\", label: \"_\"},"
+            }
+          ],
+          "metrics": {
+            "totalLines": 65,
+            "codeLines": 62,
+            "stylingLines": 0,
+            "boilerplateLines": 8,
+            "logicLines": 54,
+            "stylingRatio": 0,
+            "boilerplateRatio": 0.12903225806451613,
+            "decisionsPerElement": 0.6,
+            "elementCount": 25,
+            "stylingDecisionCount": 15,
+            "duplicateRatio": 0.05
+          }
+        },
+        "maintainability": {
+          "score": 92,
+          "findings": [],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 11,
+            "avgStateSpread": 33
+          }
+        }
+      },
+      "winner": "baseline"
+    },
+    "wd-1": {
+      "astryx": {
+        "correctness": {
+          "score": 0,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 49
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 63
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 76
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 25
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ value: Step; onChange: (v: string) => void; tabs: { value: Step; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & TabListProps'.",
+              "line": 30
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 34
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 36
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 40
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+              "line": 45
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 49
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 55
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 57
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 58
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 59
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 60
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'TextInputProps'.",
+              "line": 61
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 63
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 69
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 71
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 72
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 73
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2741: Property 'value' is missing in type '{ label: string; placeholder: string; }' but required in type 'TextInputProps'.",
+              "line": 74
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+              "line": 76
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+              "line": 82
+            },
+            {
+              "rule": "type-error",
+              "severity": "critical",
+              "detail": "TS2322: Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+              "line": 83
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 92,
+          "findings": [
+            {
+              "rule": "missing-key",
+              "severity": "moderate",
+              "detail": "Array .map() without key prop",
+              "line": 30
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 47,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{value: \"_\", label: \"_\"},"
+            },
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{currentStep === \"_\" && ("
+            }
+          ],
+          "metrics": {
+            "totalLines": 92,
+            "codeLines": 87,
+            "stylingLines": 0,
+            "boilerplateLines": 87,
+            "logicLines": 0,
+            "stylingRatio": 0,
+            "boilerplateRatio": 1,
+            "decisionsPerElement": 0.5,
+            "elementCount": 40,
+            "stylingDecisionCount": 19,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 89,
+          "findings": [
+            {
+              "rule": "moderate-state-spread",
+              "severity": "minor",
+              "detail": "Average state variable spread: 58 lines"
+            }
+          ],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 58
+          }
+        }
+      },
+      "baseline": {
+        "correctness": {
+          "score": 100,
+          "findings": [
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 49
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 63
+            },
+            {
+              "rule": "phantom-prop",
+              "severity": "critical",
+              "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+              "line": 76
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 100,
+          "findings": []
+        },
+        "codeQuality": {
+          "score": 92,
+          "findings": [
+            {
+              "rule": "missing-key",
+              "severity": "moderate",
+              "detail": "Array .map() without key prop",
+              "line": 30
+            }
+          ]
+        },
+        "efficiency": {
+          "score": 47,
+          "findings": [
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{value: \"_\", label: \"_\"},"
+            },
+            {
+              "rule": "duplicate-lines",
+              "severity": "moderate",
+              "detail": "Line repeated 4 times",
+              "count": 4,
+              "example": "{currentStep === \"_\" && ("
+            }
+          ],
+          "metrics": {
+            "totalLines": 92,
+            "codeLines": 87,
+            "stylingLines": 0,
+            "boilerplateLines": 87,
+            "logicLines": 0,
+            "stylingRatio": 0,
+            "boilerplateRatio": 1,
+            "decisionsPerElement": 0.5,
+            "elementCount": 40,
+            "stylingDecisionCount": 19,
+            "duplicateRatio": 0.09
+          }
+        },
+        "maintainability": {
+          "score": 89,
+          "findings": [
+            {
+              "rule": "moderate-state-spread",
+              "severity": "minor",
+              "detail": "Average state variable spread: 58 lines"
+            }
+          ],
+          "metrics": {
+            "semanticRatio": 1,
+            "magicValueCount": 0,
+            "semanticValueCount": 12,
+            "avgStateSpread": 58
+          }
+        }
+      },
+      "winner": "baseline"
+    }
+  }
+}
