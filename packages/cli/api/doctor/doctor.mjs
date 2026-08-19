@@ -494,90 +494,103 @@ export function checkPeerDeps(ctx) {
   };
 }
 
+/** Bytes of a CSS file to read when looking for the @generated banner. */
+const BANNER_BYTES = 512;
+
 /**
- * Locate theme sources: a file that both imports `defineTheme` and exports the
- * result of calling it. Matching a bare `defineTheme(` mention also picks up
- * generated registries and vendored bundles, which are never the app's theme.
- *
- * @param {string} startDir
- * @returns {string[]}
+ * Read the first {@link BANNER_BYTES} of a file without slurping it whole.
+ * @param {string} file
+ * @returns {string}
  */
-export function findThemeSources(startDir) {
-  const SKIP = new Set([
-    'node_modules', '.git', 'dist', 'build', 'out', '.next', 'coverage',
-    'generated', 'public',
-  ]);
-  const found = [];
-  const roots = [path.join(startDir, 'src'), path.join(startDir, 'app'), startDir];
-  const seen = new Set();
-  for (const root of roots) {
-    if (!fs.existsSync(root)) continue;
-    const stack = [root];
-    while (stack.length > 0 && found.length < 20) {
-      const dir = stack.pop();
-      if (!dir || seen.has(dir)) continue;
-      seen.add(dir);
-      let entries;
+function readHead(file) {
+  let fd;
+  try {
+    fd = fs.openSync(file, 'r');
+    const buf = Buffer.alloc(BANNER_BYTES);
+    const read = fs.readSync(fd, buf, 0, BANNER_BYTES, 0);
+    return buf.subarray(0, read).toString('utf-8');
+  } catch {
+    return '';
+  } finally {
+    if (fd !== undefined) {
       try {
-        entries = fs.readdirSync(dir, {withFileTypes: true});
+        fs.closeSync(fd);
       } catch {
-        continue;
-      }
-      for (const entry of entries) {
-        if (entry.isSymbolicLink()) continue;
-        const fp = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          if (!SKIP.has(entry.name)) stack.push(fp);
-          continue;
-        }
-        if (!/\.(ts|mjs|js)$/.test(entry.name)) continue;
-        if (/\.d\.ts$/.test(entry.name) || /\.min\.js$/.test(entry.name)) continue;
-        let src;
-        try {
-          if (fs.statSync(fp).size > 512 * 1024) continue;
-          src = fs.readFileSync(fp, 'utf-8');
-        } catch {
-          continue;
-        }
-        if (/@generated\b/.test(src.slice(0, 300))) continue;
-        const imports =
-          /import\s*\{[^}]*\bdefineTheme\b[^}]*\}\s*from\s*['"]@astryxdesign\/[^'"]+['"]/.test(src);
-        if (!imports) continue;
-        if (/export\s+(?:default\s+)?(?:const|let|var)?\s*\w*\s*=?\s*defineTheme\s*\(/.test(src)) {
-          found.push(fp);
-        }
+        /* already closed */
       }
     }
   }
-  return found.sort();
 }
 
 /**
- * Recover how the project builds a theme, so `--check` compares against the
- * real output path. Guessing the directory reports every artifact "missing".
+ * Locate built theme CSS by its `@generated` banner, and recover the exact
+ * invocation that produced it.
  *
- * @param {string} themePath
- * @param {string} cwd
- * @returns {{cwd: string, source: string, out: string|null}|null}
+ * Looking for built *output* rather than `defineTheme()` *sources* is both
+ * faster and more accurate. Only built output can be stale, so a project
+ * without any is trivially fine; and the banner records the real `Source:` and
+ * `--out`, which beats reverse-engineering them from package.json scripts.
+ * (Scanning sources instead meant reading every .ts/.js in the tree — 2196
+ * files and ~900ms at this repo's root — to answer a question about 25 CSS
+ * files, and it found 18 "themes" at the monorepo root.)
+ *
+ * @param {string} startDir
+ * @returns {Array<{css: string, dir: string, source: string, out: string|null}>}
  */
-export function findThemeBuildScript(themePath, cwd) {
-  let dir = path.dirname(path.resolve(cwd, themePath));
-  for (let i = 0; i < 6; i++) {
-    const pkgPath = path.join(dir, 'package.json');
-    const pkg = readPkg(pkgPath);
-    const scripts = pkg?.scripts ?? {};
-    for (const cmd of Object.values(scripts)) {
-      if (typeof cmd !== 'string' || !cmd.includes('theme build')) continue;
-      const m = /theme\s+build\s+(\S+)([\s\S]*?)(?:&&|$)/.exec(cmd);
-      if (!m) continue;
-      const out = /(?:--out|-o)\s+(\S+)/.exec(m[2]);
-      return {cwd: dir, source: m[1], out: out?.[1] ?? null};
+export function findBuiltThemes(startDir) {
+  const SKIP = new Set([
+    'node_modules', '.git', 'dist', 'build', 'out', '.next', 'coverage',
+  ]);
+  /** @type {Array<{css: string, dir: string, source: string, out: string|null}>} */
+  const found = [];
+  const stack = [startDir];
+  while (stack.length > 0 && found.length < 10) {
+    const dir = stack.pop();
+    if (!dir) continue;
+    let entries;
+    try {
+      entries = fs.readdirSync(dir, {withFileTypes: true});
+    } catch {
+      continue;
     }
+    for (const entry of entries) {
+      if (entry.isSymbolicLink()) continue;
+      const fp = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (!SKIP.has(entry.name)) stack.push(fp);
+        continue;
+      }
+      if (!entry.name.endsWith('.css')) continue;
+      const head = readHead(fp);
+      if (!/@generated by `astryx theme build`/.test(head)) continue;
+      const source = /^\s*\*\s*Source:\s*(\S+)/m.exec(head)?.[1];
+      if (!source) continue;
+      const command = /^\s*\*\s*Command:\s*(.+)$/m.exec(head)?.[1] ?? '';
+      const out = /(?:--out|-o)\s+(\S+)/.exec(command)?.[1] ?? null;
+      // Banner paths are relative to the package the build ran in.
+      found.push({css: fp, dir: packageDirFor(fp, startDir), source, out});
+    }
+  }
+  return found.sort((a, b) => a.css.localeCompare(b.css));
+}
+
+/**
+ * Nearest ancestor directory holding a package.json — the cwd `theme build`
+ * ran in, and therefore the base for the banner's relative paths.
+ *
+ * @param {string} file
+ * @param {string} fallback
+ * @returns {string}
+ */
+function packageDirFor(file, fallback) {
+  let dir = path.dirname(file);
+  for (let i = 0; i < 8; i++) {
+    if (fs.existsSync(path.join(dir, 'package.json'))) return dir;
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
-  return null;
+  return fallback;
 }
 
 /**
@@ -630,70 +643,68 @@ export function isThemeBuildWired(pkgDir) {
  * @returns {Promise<DoctorCheck>}
  */
 export async function checkThemeBuilt(ctx) {
-  const sources = findThemeSources(ctx.cwd);
-  if (sources.length === 0) {
+  const built = findBuiltThemes(ctx.cwd);
+  if (built.length === 0) {
     return {
       id: 'theme-built',
       label: 'Built theme freshness',
       status: 'info',
-      message: 'Skipped — no defineTheme() source found in this project.',
+      message:
+        'Skipped — no built theme output found. Importing a defineTheme() source ' +
+        'directly (runtime injection) cannot go stale.',
     };
   }
 
-  /** @type {string[]} */
+  const {themeBuild} = await import('../theme/build/build.mjs');
+  /** @type {Array<{rel: string, count: number, entry: typeof built[number]}>} */
   const stale = [];
   /** @type {string[]} */
   const unchecked = [];
-  for (const source of sources) {
-    const script = findThemeBuildScript(source, ctx.cwd);
-    const runCwd = script?.cwd ?? ctx.cwd;
-    const rel = script?.source ?? (path.relative(runCwd, source) || source);
+  for (const entry of built) {
+    const rel = path.relative(ctx.cwd, entry.css) || entry.css;
     try {
-      const {themeBuild} = await import('../theme/build/build.mjs');
       const res = await themeBuild(
-        rel,
-        {check: true, ...(script?.out ? {out: script.out} : {})},
-        {cwd: runCwd},
+        entry.source,
+        {check: true, ...(entry.out ? {out: entry.out} : {})},
+        {cwd: entry.dir},
       );
       const data = /** @type {any} */ (res)?.data;
       if (!data) continue;
-      // `missing` == runtime-injection path, which is valid. Only drift counts.
+      // `missing` means the app imports the source directly, which is valid.
+      // Only real drift counts.
       const outdated = (data.stale ?? []).filter(
         (/** @type {{reason: string}} */ s) => s.reason === 'outdated',
       );
-      if (outdated.length > 0) {
-        stale.push(`${path.relative(ctx.cwd, source) || source} (${outdated.length} artifact(s))`);
-      }
+      if (outdated.length > 0) stale.push({rel, count: outdated.length, entry});
     } catch {
-      // A theme that will not load is checkConfig/theme-scope territory; do
-      // not fail freshness on it, but do not silently claim it is fresh.
-      unchecked.push(path.relative(ctx.cwd, source) || source);
+      // A theme that will not load is checkConfig territory. Do not fail
+      // freshness on it, but do not silently claim it is fresh either.
+      unchecked.push(rel);
     }
   }
 
   if (stale.length > 0) {
-    const first = findThemeBuildScript(sources[0], ctx.cwd);
-    const wired = isThemeBuildWired(first?.cwd ?? ctx.cwd);
-    const rebuildTarget =
-      first?.source ?? (path.relative(ctx.cwd, sources[0]) || sources[0]);
+    const first = stale[0].entry;
+    const wired = isThemeBuildWired(first.dir);
+    const summary = stale.map(s => `${s.rel} (${s.count} artifact(s))`).join(', ');
     const rebuild =
-      `\`${getCliInvocation(ctx.cwd)} theme build ${rebuildTarget}` +
-      `${first?.out ? ` --out ${first.out}` : ''}\``;
+      `\`${getCliInvocation(ctx.cwd)} theme build ${first.source}` +
+      `${first.out ? ` --out ${first.out}` : ''}\``;
     return wired
       ? {
           id: 'theme-built',
           label: 'Built theme freshness',
           status: 'info',
           message:
-            `Built theme output is stale on disk (${stale.join(', ')}), but dev/build ` +
-            'regenerate it first, so nothing will render the old theme.',
+            `Built theme output is stale on disk (${summary}), but dev/build regenerate ` +
+            'it first, so nothing will render the old theme.',
         }
       : {
           id: 'theme-built',
           label: 'Built theme freshness',
           status: 'fail',
           message:
-            `Built theme output is out of date (${stale.join(', ')}) and nothing rebuilds it. ` +
+            `Built theme output is out of date (${summary}) and nothing rebuilds it. ` +
             'The app renders an older theme than the source describes, with no runtime warning.',
           fix:
             `Rebuild with ${rebuild}, then wire it into a predev/prebuild script so it ` +
@@ -703,7 +714,7 @@ export async function checkThemeBuilt(ctx) {
 
   if (unchecked.length > 0) {
     // A project without @astryxdesign/core installed already fails
-    // checkCoreInstalled; repeating it here as a warning is just noise.
+    // checkCoreInstalled; repeating it as a warning here is just noise.
     const severity = ctx.coreDir ? 'warn' : 'info';
     return {
       id: 'theme-built',
@@ -720,7 +731,7 @@ export async function checkThemeBuilt(ctx) {
     id: 'theme-built',
     label: 'Built theme freshness',
     status: 'pass',
-    message: `Theme output is in step with source (${sources.length} theme(s) checked).`,
+    message: `Built theme output is in step with source (${built.length} theme(s) checked).`,
   };
 }
 
