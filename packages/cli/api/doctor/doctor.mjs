@@ -6,7 +6,7 @@
  * Runs a series of diagnostic checks against the user's project and
  * environment, returning a structured report. Each check is a small,
  * self-contained function that returns a {@link DoctorCheck} record, so
- * adding a new diagnostic is just appending a function to {@link SYNC_CHECKS}.
+ * adding a new diagnostic is just appending a function to {@link CHECKS}.
  *
  * The engine is intentionally side-effect-free: it only *reads* the
  * filesystem, environment, and package metadata. It never installs, writes,
@@ -495,7 +495,237 @@ export function checkPeerDeps(ctx) {
 }
 
 /**
- * Check 8 — report the detected package manager (informational).
+ * Locate theme sources: a file that both imports `defineTheme` and exports the
+ * result of calling it. Matching a bare `defineTheme(` mention also picks up
+ * generated registries and vendored bundles, which are never the app's theme.
+ *
+ * @param {string} startDir
+ * @returns {string[]}
+ */
+export function findThemeSources(startDir) {
+  const SKIP = new Set([
+    'node_modules', '.git', 'dist', 'build', 'out', '.next', 'coverage',
+    'generated', 'public',
+  ]);
+  const found = [];
+  const roots = [path.join(startDir, 'src'), path.join(startDir, 'app'), startDir];
+  const seen = new Set();
+  for (const root of roots) {
+    if (!fs.existsSync(root)) continue;
+    const stack = [root];
+    while (stack.length > 0 && found.length < 20) {
+      const dir = stack.pop();
+      if (!dir || seen.has(dir)) continue;
+      seen.add(dir);
+      let entries;
+      try {
+        entries = fs.readdirSync(dir, {withFileTypes: true});
+      } catch {
+        continue;
+      }
+      for (const entry of entries) {
+        if (entry.isSymbolicLink()) continue;
+        const fp = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          if (!SKIP.has(entry.name)) stack.push(fp);
+          continue;
+        }
+        if (!/\.(ts|mjs|js)$/.test(entry.name)) continue;
+        if (/\.d\.ts$/.test(entry.name) || /\.min\.js$/.test(entry.name)) continue;
+        let src;
+        try {
+          if (fs.statSync(fp).size > 512 * 1024) continue;
+          src = fs.readFileSync(fp, 'utf-8');
+        } catch {
+          continue;
+        }
+        if (/@generated\b/.test(src.slice(0, 300))) continue;
+        const imports =
+          /import\s*\{[^}]*\bdefineTheme\b[^}]*\}\s*from\s*['"]@astryxdesign\/[^'"]+['"]/.test(src);
+        if (!imports) continue;
+        if (/export\s+(?:default\s+)?(?:const|let|var)?\s*\w*\s*=?\s*defineTheme\s*\(/.test(src)) {
+          found.push(fp);
+        }
+      }
+    }
+  }
+  return found.sort();
+}
+
+/**
+ * Recover how the project builds a theme, so `--check` compares against the
+ * real output path. Guessing the directory reports every artifact "missing".
+ *
+ * @param {string} themePath
+ * @param {string} cwd
+ * @returns {{cwd: string, source: string, out: string|null}|null}
+ */
+export function findThemeBuildScript(themePath, cwd) {
+  let dir = path.dirname(path.resolve(cwd, themePath));
+  for (let i = 0; i < 6; i++) {
+    const pkgPath = path.join(dir, 'package.json');
+    const pkg = readPkg(pkgPath);
+    const scripts = pkg?.scripts ?? {};
+    for (const cmd of Object.values(scripts)) {
+      if (typeof cmd !== 'string' || !cmd.includes('theme build')) continue;
+      const m = /theme\s+build\s+(\S+)([\s\S]*?)(?:&&|$)/.exec(cmd);
+      if (!m) continue;
+      const out = /(?:--out|-o)\s+(\S+)/.exec(m[2]);
+      return {cwd: dir, source: m[1], out: out?.[1] ?? null};
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+
+/**
+ * Is the theme build wired into the scripts that `dev`/`build` run?
+ *
+ * If it is, stale artifacts on disk are harmless — they are regenerated before
+ * anything consumes them, and reporting a hard failure for a self-healing
+ * condition just teaches people to ignore the doctor. If it is not, the
+ * staleness is real and silent.
+ *
+ * @param {string} pkgDir
+ * @returns {boolean}
+ */
+export function isThemeBuildWired(pkgDir) {
+  const pkg = readPkg(path.join(pkgDir, 'package.json'));
+  const scripts = pkg?.scripts ?? {};
+  const names = Object.keys(scripts);
+  /** @type {(name: string, depth: number) => boolean} */
+  const runsThemeBuild = (name, depth) => {
+    if (depth > 4) return false;
+    const body = scripts[name];
+    if (typeof body !== 'string') return false;
+    if (body.includes('theme build')) return true;
+    // follow references to sibling scripts (`pnpm generate`, `npm run x`)
+    return names.some(
+      other =>
+        other !== name &&
+        new RegExp(`(?:run\\s+|pnpm\\s+|yarn\\s+|npm\\s+run\\s+)${other}\\b`).test(body) &&
+        runsThemeBuild(other, depth + 1),
+    );
+  };
+  return ['dev', 'build', 'predev', 'prebuild', 'start', 'prestart'].some(
+    entry => entry in scripts && runsThemeBuild(entry, 0),
+  );
+}
+
+/**
+ * Check 9 — built theme artifacts are in step with their source.
+ *
+ * This is the only silent failure in the theming pipeline: a stale built theme
+ * still carries `__built: true`, so the runtime skips style injection and the
+ * app renders the *previous* theme with no error, no warning, and no visual
+ * hint that anything is wrong.
+ *
+ * Only `outdated` artifacts are a failure. `missing` ones simply mean the
+ * project imports the theme source directly (runtime injection), which is a
+ * supported path and correct by construction.
+ *
+ * @param {DoctorContext} ctx
+ * @returns {Promise<DoctorCheck>}
+ */
+export async function checkThemeBuilt(ctx) {
+  const sources = findThemeSources(ctx.cwd);
+  if (sources.length === 0) {
+    return {
+      id: 'theme-built',
+      label: 'Built theme freshness',
+      status: 'info',
+      message: 'Skipped — no defineTheme() source found in this project.',
+    };
+  }
+
+  /** @type {string[]} */
+  const stale = [];
+  /** @type {string[]} */
+  const unchecked = [];
+  for (const source of sources) {
+    const script = findThemeBuildScript(source, ctx.cwd);
+    const runCwd = script?.cwd ?? ctx.cwd;
+    const rel = script?.source ?? (path.relative(runCwd, source) || source);
+    try {
+      const {themeBuild} = await import('../theme/build/build.mjs');
+      const res = await themeBuild(
+        rel,
+        {check: true, ...(script?.out ? {out: script.out} : {})},
+        {cwd: runCwd},
+      );
+      const data = /** @type {any} */ (res)?.data;
+      if (!data) continue;
+      // `missing` == runtime-injection path, which is valid. Only drift counts.
+      const outdated = (data.stale ?? []).filter(
+        (/** @type {{reason: string}} */ s) => s.reason === 'outdated',
+      );
+      if (outdated.length > 0) {
+        stale.push(`${path.relative(ctx.cwd, source) || source} (${outdated.length} artifact(s))`);
+      }
+    } catch {
+      // A theme that will not load is checkConfig/theme-scope territory; do
+      // not fail freshness on it, but do not silently claim it is fresh.
+      unchecked.push(path.relative(ctx.cwd, source) || source);
+    }
+  }
+
+  if (stale.length > 0) {
+    const first = findThemeBuildScript(sources[0], ctx.cwd);
+    const wired = isThemeBuildWired(first?.cwd ?? ctx.cwd);
+    const rebuildTarget =
+      first?.source ?? (path.relative(ctx.cwd, sources[0]) || sources[0]);
+    const rebuild =
+      `\`${getCliInvocation(ctx.cwd)} theme build ${rebuildTarget}` +
+      `${first?.out ? ` --out ${first.out}` : ''}\``;
+    return wired
+      ? {
+          id: 'theme-built',
+          label: 'Built theme freshness',
+          status: 'info',
+          message:
+            `Built theme output is stale on disk (${stale.join(', ')}), but dev/build ` +
+            'regenerate it first, so nothing will render the old theme.',
+        }
+      : {
+          id: 'theme-built',
+          label: 'Built theme freshness',
+          status: 'fail',
+          message:
+            `Built theme output is out of date (${stale.join(', ')}) and nothing rebuilds it. ` +
+            'The app renders an older theme than the source describes, with no runtime warning.',
+          fix:
+            `Rebuild with ${rebuild}, then wire it into a predev/prebuild script so it ` +
+            'cannot drift again.',
+        };
+  }
+
+  if (unchecked.length > 0) {
+    // A project without @astryxdesign/core installed already fails
+    // checkCoreInstalled; repeating it here as a warning is just noise.
+    const severity = ctx.coreDir ? 'warn' : 'info';
+    return {
+      id: 'theme-built',
+      label: 'Built theme freshness',
+      status: severity,
+      message: `Could not verify ${unchecked.join(', ')} — the theme did not load.`,
+      ...(severity === 'warn'
+        ? {fix: 'Make every import in the theme file resolvable, then re-run.'}
+        : {}),
+    };
+  }
+
+  return {
+    id: 'theme-built',
+    label: 'Built theme freshness',
+    status: 'pass',
+    message: `Theme output is in step with source (${sources.length} theme(s) checked).`,
+  };
+}
+
+/**
+ * Check 10 — report the detected package manager (informational).
  * @param {DoctorContext} ctx
  * @returns {DoctorCheck}
  */
@@ -513,15 +743,23 @@ export function checkPackageManager(ctx) {
 }
 
 /**
- * Ordered list of synchronous check functions. Append here to add a check.
- * (checkConfig is async and is awaited separately by {@link runChecks}.)
- * @type {Array<(ctx: DoctorContext) => DoctorCheck>}
+ * Ordered list of checks. Append here to add a diagnostic; a check may be sync
+ * or async and runs in its declared position either way.
+ *
+ * This used to be a sync-only array with `checkConfig` spliced in by comparing
+ * each function against `checkThemes` by identity. That only ever supported one
+ * async check, and it put the ordering of `config` somewhere other than this
+ * list, where nobody would look for it.
+ *
+ * @type {Array<(ctx: DoctorContext) => DoctorCheck | Promise<DoctorCheck>>}
  */
-export const SYNC_CHECKS = [
+export const CHECKS = [
   checkNodeVersion,
   checkCoreInstalled,
   checkVersionAlignment,
   checkThemes,
+  checkThemeBuilt,
+  checkConfig,
   checkAgentDocs,
   checkPeerDeps,
   checkPackageManager,
@@ -570,12 +808,10 @@ export async function runChecks(options = {}) {
 
   /** @type {DoctorCheck[]} */
   const checks = [];
-  // checkConfig is async; run it in its declared slot (after themes).
-  for (const fn of SYNC_CHECKS) {
-    checks.push(fn(ctx));
-    if (fn === checkThemes) {
-      checks.push(await checkConfig(ctx));
-    }
+  // Sequential on purpose: checks are ordered for readability of the report,
+  // and awaiting a sync return value is free.
+  for (const fn of CHECKS) {
+    checks.push(await fn(ctx));
   }
 
   const summary = {pass: 0, warn: 0, fail: 0, info: 0};
