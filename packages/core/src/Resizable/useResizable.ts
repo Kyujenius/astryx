@@ -8,6 +8,13 @@
  *   collapse configuration (collapsible, defaultIsCollapsed, isCollapsed)
  * @output Hook return: size, isCollapsed, collapse/expand/resize methods, props for handle
  * @position Public hook; consumed by layout components via `resizable` prop
+ *
+ * SYNC: When modified, update these files to stay in sync:
+ * - /packages/core/src/Resizable/useResizable.doc.mjs
+ * - /packages/core/src/Resizable/useResizable.test.tsx
+ * - /packages/core/src/Resizable/Resizable.doc.mjs
+ * - /packages/core/src/Resizable/index.ts
+ * - /apps/storybook/stories/useResizable.stories.tsx
  */
 
 import {useCallback, useEffect, useRef, useState} from 'react';
@@ -47,7 +54,7 @@ export interface ResizableConfig {
   maxWidth?: number;
   /** localStorage key for persisting width and collapse state. */
   autoSaveId?: string;
-  /** Called when the width changes (on drag end). */
+  /** Called whenever the width changes, including when a narrowing maximum forces it down. */
   onWidthChange?: (width: number) => void;
   /** Start collapsed (uncontrolled). A persisted entry wins over this. */
   defaultIsCollapsed?: boolean;
@@ -72,7 +79,7 @@ export interface UseResizableSingleConfig extends ResizableRegionConfig {
    * through `onCollapseChange` instead of changing state here.
    */
   isCollapsed?: boolean;
-  /** Called when size changes during drag. */
+  /** Called whenever the size changes, including when a narrowing band forces it. */
   onSizeChange?: (size: number) => void;
   /** Called when collapse state changes (via drag or programmatic). */
   onCollapseChange?: (isCollapsed: boolean) => void;
@@ -303,6 +310,42 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
     [isControlled],
   );
 
+  // The band can move under a size the viewer already chose. Correct only a
+  // size that became illegal; widening the band again must not restore it.
+  // Render-time correction prevents an out-of-band size from being committed.
+  const [lastBounds, setLastBounds] = useState(() => ({
+    min: minSizePx,
+    max: maxSizePx,
+    clampedTo: null as number | null,
+  }));
+  if (lastBounds.min !== minSizePx || lastBounds.max !== maxSizePx) {
+    const legal = isCollapsed
+      ? size
+      : clampSize(size, minSizePx, maxSizePx, snaps);
+    const hasMoved = legal !== size;
+    setLastBounds({
+      min: minSizePx,
+      max: maxSizePx,
+      clampedTo: hasMoved ? legal : null,
+    });
+    if (hasMoved) {
+      setSize(legal);
+    }
+  }
+
+  // Notify after commit so consumers mirroring the size stay in sync without
+  // running their callback during render.
+  const notifiedBoundsRef = useRef(lastBounds);
+  useEffect(() => {
+    if (notifiedBoundsRef.current === lastBounds) {
+      return;
+    }
+    notifiedBoundsRef.current = lastBounds;
+    if (lastBounds.clampedTo != null) {
+      onSizeChange?.(lastBounds.clampedTo);
+    }
+  }, [lastBounds, onSizeChange]);
+
   useEffect(() => {
     if (autoSaveId) {
       persistState(autoSaveId, {size, isCollapsed});
@@ -323,11 +366,23 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
   const expand = useCallback(() => {
     const wasCollapsed = isCollapsedRef.current;
     setCollapsed(false);
+    const expandedSize = clampSize(size, minSizePx, maxSizePx, snaps);
+    if (expandedSize !== size) {
+      setSize(expandedSize);
+    }
     if (wasCollapsed) {
       onCollapseChange?.(false);
     }
-    onSizeChange?.(size);
-  }, [setCollapsed, size, onCollapseChange, onSizeChange]);
+    onSizeChange?.(expandedSize);
+  }, [
+    setCollapsed,
+    size,
+    minSizePx,
+    maxSizePx,
+    snaps,
+    onCollapseChange,
+    onSizeChange,
+  ]);
 
   const resize = useCallback(
     (newSize: number) => {
