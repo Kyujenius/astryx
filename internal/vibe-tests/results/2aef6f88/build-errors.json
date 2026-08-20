@@ -1,0 +1,248 @@
+{
+  "cs-3": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-3": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-5": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-2": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-2": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-1": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-7": {
+    "target": "baseline",
+    "errors": [
+      {
+        "line": 10,
+        "message": "',' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 10,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 10,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 10,
+        "message": "Variable declaration expected.",
+        "code": "TS1134"
+      },
+      {
+        "line": 11,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 11,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 11,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 12,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 12,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 12,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 17,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 17,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 17,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 18,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 18,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 18,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 22,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 22,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 22,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 22,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 22,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 22,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 23,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 23,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 23,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 23,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 23,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 23,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 29,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 29,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 29,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 30,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 30,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 30,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 35,
+        "message": "';' expected.",
+        "code": "TS1005"
+      },
+      {
+        "line": 35,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      },
+      {
+        "line": 35,
+        "message": "Invalid character.",
+        "code": "TS1127"
+      }
+    ],
+    "errorCount": 37,
+    "buildSuccess": false
+  },
+  "wd-5": {
+    "target": "baseline",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

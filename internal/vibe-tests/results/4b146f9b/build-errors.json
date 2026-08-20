@@ -1,0 +1,117 @@
+{
+  "cs-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 67,
+        "message": "Type 'string | undefined' is not assignable to type '`${number}${number}${number}${number}-${number}${number}-${number}${number}` | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 72,
+        "message": "Type 'string | undefined' is not assignable to type 'ISOTimeString | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "cwm-3": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 23,
+        "message": "Type 'User' does not satisfy the constraint 'Record<string, unknown>'.",
+        "code": "TS2344"
+      },
+      {
+        "line": 60,
+        "message": "Type 'User[]' is not assignable to type 'Record<string, unknown>[]'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 61,
+        "message": "Type 'TableColumn<User>[]' is not assignable to type 'TableColumn<Record<string, unknown>>[]'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "fwc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-5": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 52,
+        "message": "Type '\"error\" | undefined' is not assignable to type 'keyof TextColorMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 9,
+        "message": "Cannot find module '@astryxdesign/core/AstryxProvider' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 10,
+        "message": "Cannot find module '@astryxdesign/theme-neutral' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 25,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavSectionProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "rc-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 69,
+        "message": "Type '{ children: Element; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavSectionProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-7": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
