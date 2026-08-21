@@ -1,0 +1,25 @@
+{
+  "default": {
+    "buttons": [
+      "Expand"
+    ],
+    "listItems": 0,
+    "ariaExpanded": [
+      "false"
+    ]
+  },
+  "open": {
+    "buttons": [
+      "Collapse"
+    ],
+    "listItems": 3,
+    "ariaExpanded": [
+      "true"
+    ]
+  },
+  "optout": {
+    "buttons": [],
+    "listItems": 3,
+    "ariaExpanded": []
+  }
+}
