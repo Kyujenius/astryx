@@ -1,0 +1,96 @@
+{
+  "cs-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 36,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 37,
+        "message": "Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlItemProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 48,
+        "message": "Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "dd-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-7": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 19,
+        "message": "Parameter 'value' implicitly has an 'any' type.",
+        "code": "TS7006"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "io-5": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 18,
+        "message": "Type '{ children: Element[]; columns: { minWidth: number; max: number; }; gap: 4; padding: number; }' is not assignable to type 'IntrinsicAttributes & GridProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-5": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 3,
+        "message": "Cannot find module '@astryxdesign/core/DialogHeader' or its corresponding type declarations.",
+        "code": "TS2307"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  }
+}
