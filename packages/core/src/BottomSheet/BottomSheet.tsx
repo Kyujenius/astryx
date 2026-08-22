@@ -94,21 +94,17 @@ const styles = stylex.create({
         '@starting-style': 0,
       },
       transitionProperty: 'opacity, display',
-      transitionDuration: durationVars['--duration-medium'],
+      // Overridable per sheet, because a scrim driven by a finger must not
+      // smooth: `--_sheet-scrim-duration` is set to 0s for the duration of a
+      // drag-to-open gesture, and unset the rest of the time. Written as a
+      // custom property rather than a second class because ::backdrop cannot
+      // take an inline style — the same reason the opacity above is one.
+      transitionDuration: `var(--_sheet-scrim-duration, ${durationVars['--duration-medium']})`,
       transitionTimingFunction: easeVars['--ease-standard'],
       transitionBehavior: 'allow-discrete',
       '@media (prefers-reduced-motion: reduce)': {
         transitionDuration: '0.01s',
       },
-    },
-  },
-  // EXPLORATION: while a finger is pulling the sheet on, the scrim tracks the
-  // pull frame by frame. The entry transition would smear every one of those
-  // updates over its own duration, so the scrim would trail the sheet by a
-  // couple hundred milliseconds and still be catching up after the release.
-  scrimGestureDriven: {
-    '::backdrop': {
-      transitionDuration: '0s',
     },
   },
   positioner: {
@@ -301,7 +297,9 @@ function StandaloneBottomSheet({
     if (gesturePhaseRef.current === 'opening') {
       // The pull was abandoned. The sheet was never open, so there is no
       // controlled state to correct — it just plays the ordinary exit back
-      // off the screen, and the host is none the wiser.
+      // off the screen, and the host is none the wiser. That exit is a real
+      // animation, so the scrim's transition has to come back for it.
+      dialogRef.current?.style.removeProperty('--_sheet-scrim-duration');
       setGesturePhase('retracting');
       return;
     }
@@ -312,6 +310,8 @@ function StandaloneBottomSheet({
     if (gesturePhaseRef.current !== 'opening') {
       return;
     }
+    // The finger is off; hand the scrim back to its normal timing.
+    dialogRef.current?.style.removeProperty('--_sheet-scrim-duration');
     needsGestureFocusRef.current = true;
     setGesturePhase('idle');
     onOpenChange(true);
@@ -341,8 +341,11 @@ function StandaloneBottomSheet({
     if (dialog == null || gesturePhase !== 'opening' || dialog.open) {
       return;
     }
-    // Seeded dark-free: the scrim is the pull's progress bar from here on.
+    // Seeded dark-free: the scrim is the pull's progress bar from here on, and
+    // it tracks the finger frame by frame — a transition would smear every one
+    // of those updates and leave the scrim still catching up after the release.
     dialog.style.setProperty('--_sheet-scrim-opacity', '0');
+    dialog.style.setProperty('--_sheet-scrim-duration', '0s');
     if (hasScrim) {
       triggerRef.current = document.activeElement as HTMLElement | null;
       dialog.showModal();
@@ -439,7 +442,6 @@ function StandaloneBottomSheet({
         styles.dialog,
         shouldPresent && styles.dialogOpen,
         hasScrim && styles.scrim,
-        hasScrim && gesturePhase === 'opening' && styles.scrimGestureDriven,
         !hasScrim && styles.dialogNonModal,
       )}
       ref={dialogRef}

@@ -19,7 +19,7 @@
 
 import {describe, it, expect, vi, beforeEach, afterEach} from 'vitest';
 import {act, render} from '@testing-library/react';
-import type {SheetDragEvent} from '@astryxdesign/core';
+import type {SheetDragEvent} from '@astryxdesign/core/BottomSheet';
 import {useSheetOpenGesture} from './useSheetOpenGesture';
 
 // jsdom has no constructible TouchEvent, and a bare Event carries no

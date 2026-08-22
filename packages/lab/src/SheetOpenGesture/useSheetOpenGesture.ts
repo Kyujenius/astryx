@@ -61,7 +61,15 @@
  */
 
 import {useEffect, useMemo, useRef} from 'react';
-import {createSheetDragSource, type SheetDragSource} from '@astryxdesign/core';
+// Subpath, not the '@astryxdesign/core' barrel: a bare root import from lab is
+// a runtime edge into core's ENTIRE public surface, and inside a consuming app
+// it can resolve to core's source rather than its build — dragging every core
+// component through that app's compiler. Every other value import in lab is a
+// subpath for this reason; only erased `import type`s use the root.
+import {
+  createSheetDragSource,
+  type SheetDragSource,
+} from '@astryxdesign/core/BottomSheet';
 
 /** Where an upward pull is allowed to become a sheet-open gesture. */
 export type SheetOpenGestureOrigin = 'page-end' | 'element';
