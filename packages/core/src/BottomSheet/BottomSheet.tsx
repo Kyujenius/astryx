@@ -4,7 +4,7 @@
 
 /**
  * @file BottomSheet.tsx
- * @input Uses React, StyleX, core hooks/utils, BottomSheetPanel, BottomSheetSwitcherContext
+ * @input Uses React, StyleX, core hooks/utils, BottomSheetPanel, BottomSheetSwitcherContext, sheetDragSource
  * @output Exports BottomSheet component and BottomSheetProps
  * @position Public BottomSheet router plus private standalone/switcher hosts
  *
@@ -14,7 +14,15 @@
  * which owns sheet presentation, gestures, mobile-keyboard accommodation, and
  * motion completion.
  *
+ * EXPLORATION (drag-to-open): a standalone sheet can also be presented by a
+ * gesture recognized outside it — see `dragSource` and sheetDragSource.ts.
+ * Such a sheet is on screen before it is open: the host is only told it opened
+ * if the pull actually lands it on a detent, and an abandoned pull retracts
+ * without ever touching the controlled state.
+ *
  * SYNC: When modified, update these files to stay in sync:
+ * - /packages/core/src/BottomSheet/sheetDragSource.ts
+ * - /packages/core/src/BottomSheet/sheetDragSource.test.tsx
  * - /packages/core/src/BottomSheet/BottomSheetPanel.tsx
  * - /packages/core/src/BottomSheet/BottomSheet.doc.mjs
  * - /packages/core/src/BottomSheet/BottomSheet.test.tsx
@@ -43,6 +51,7 @@ import {
   type BottomSheetPanelMotion,
   type BottomSheetPanelState,
 } from './BottomSheetPanel';
+import type {SheetDragSource} from './sheetDragSource';
 import {
   BottomSheetSwitcherContext,
   type BottomSheetSwitcherContextValue,
@@ -91,6 +100,15 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': {
         transitionDuration: '0.01s',
       },
+    },
+  },
+  // EXPLORATION: while a finger is pulling the sheet on, the scrim tracks the
+  // pull frame by frame. The entry transition would smear every one of those
+  // updates over its own duration, so the scrim would trail the sheet by a
+  // couple hundred milliseconds and still be catching up after the release.
+  scrimGestureDriven: {
+    '::backdrop': {
+      transitionDuration: '0s',
     },
   },
   positioner: {
@@ -146,6 +164,18 @@ interface StandaloneBottomSheetProps extends BottomSheetSharedProps {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
   hasScrim?: boolean;
+  /**
+   * EXPLORATION — not a settled API.
+   *
+   * A drag recognized somewhere else on the page, which presents this sheet
+   * and pulls it up on the same finger. Build one with `useSheetOpenGesture`
+   * (or any recognizer that publishes to a `createSheetDragSource`).
+   *
+   * The gesture is an ACCELERATOR, never the only way in: a drag-only reveal
+   * is invisible to a screen reader, undiscoverable by sight, and fails WCAG
+   * 2.5.7 Dragging Movements. Keep a button, or leave the sheet peeking.
+   */
+  dragSource?: SheetDragSource;
   sheetId?: never;
 }
 
@@ -154,6 +184,8 @@ interface SwitcherBottomSheetProps extends BottomSheetSharedProps {
   isOpen?: never;
   onOpenChange?: never;
   hasScrim?: never;
+  /** A switcher owns its items' presentation; a gesture cannot present one. */
+  dragSource?: never;
 }
 
 export type BottomSheetProps =
@@ -206,6 +238,7 @@ function StandaloneBottomSheet({
   snapPoints,
   hasScrim = true,
   purpose = 'info',
+  dragSource,
   xstyle,
   ...props
 }: StandaloneBottomSheetProps) {
@@ -213,12 +246,23 @@ function StandaloneBottomSheet({
   const panelRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const [isPresented, setIsPresented] = useState(isOpen);
-  const shouldPresent = isOpen || isPresented;
+  // EXPLORATION: where a drag-to-open gesture has got to. `opening` is a sheet
+  // on screen because a finger is pulling it, before it has been opened in the
+  // controlled sense; `retracting` is that pull abandoned, playing the ordinary
+  // exit on its way back off. Neither is `isOpen` — the host is never told the
+  // sheet opened unless the gesture actually lands it on a detent.
+  const [gesturePhase, setGesturePhase] = useState<
+    'idle' | 'opening' | 'retracting'
+  >('idle');
+  const isGestureDriven = gesturePhase !== 'idle';
+  const shouldPresent = isOpen || isPresented || isGestureDriven;
   const panelState: BottomSheetPanelState = isOpen
     ? {kind: 'open', entering: false}
-    : isPresented
-      ? {kind: 'exiting'}
-      : {kind: 'hidden'};
+    : gesturePhase === 'opening'
+      ? {kind: 'opening'}
+      : isPresented || gesturePhase === 'retracting'
+        ? {kind: 'exiting'}
+        : {kind: 'hidden'};
 
   const dismissOnEscape = useCallback(() => {
     if (purpose !== 'required') {
@@ -243,6 +287,70 @@ function StandaloneBottomSheet({
     );
   }, []);
 
+  // EXPLORATION: drag-to-open.
+  const isOpenRef = useRef(isOpen);
+  isOpenRef.current = isOpen;
+  const gesturePhaseRef = useRef(gesturePhase);
+  gesturePhaseRef.current = gesturePhase;
+  // A sheet the user arrived at by gesture still owes them focus, but the
+  // controlled-open effect below only moves it when it is the thing that
+  // opened the dialog — and by then the gesture already did.
+  const needsGestureFocusRef = useRef(false);
+
+  const handleDismiss = useCallback(() => {
+    if (gesturePhaseRef.current === 'opening') {
+      // The pull was abandoned. The sheet was never open, so there is no
+      // controlled state to correct — it just plays the ordinary exit back
+      // off the screen, and the host is none the wiser.
+      setGesturePhase('retracting');
+      return;
+    }
+    dismissOnLightInteraction();
+  }, [dismissOnLightInteraction]);
+
+  const handleGestureOpened = useCallback(() => {
+    if (gesturePhaseRef.current !== 'opening') {
+      return;
+    }
+    needsGestureFocusRef.current = true;
+    setGesturePhase('idle');
+    onOpenChange(true);
+  }, [onOpenChange]);
+
+  // Present on the FIRST published move, not on a later state change: the
+  // recognizer has already claimed the gesture from the browser by the time it
+  // publishes, and it only gets to claim it once (a touchmove that is allowed
+  // through stops being cancelable for the rest of the gesture).
+  useEffect(() => {
+    if (dragSource == null) {
+      return;
+    }
+    return dragSource.subscribe(event => {
+      if (event.type !== 'start' || isOpenRef.current) {
+        return;
+      }
+      setGesturePhase('opening');
+    });
+  }, [dragSource]);
+
+  // Before paint, in step with the panel's own gesture layout effect: the
+  // finger is mid-pull, so the sheet's first frame has to be the one the
+  // gesture asks for rather than an entrance animating past it.
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog == null || gesturePhase !== 'opening' || dialog.open) {
+      return;
+    }
+    // Seeded dark-free: the scrim is the pull's progress bar from here on.
+    dialog.style.setProperty('--_sheet-scrim-opacity', '0');
+    if (hasScrim) {
+      triggerRef.current = document.activeElement as HTMLElement | null;
+      dialog.showModal();
+    } else {
+      dialog.show();
+    }
+  }, [gesturePhase, hasScrim]);
+
   useEffect(() => {
     const dialog = dialogRef.current;
     if (dialog == null || !isOpen) {
@@ -263,14 +371,17 @@ function StandaloneBottomSheet({
         dialog.show();
       }
       focusPanel(panelRef.current, hasScrim);
+    } else if (needsGestureFocusRef.current) {
+      needsGestureFocusRef.current = false;
+      focusPanel(panelRef.current, hasScrim);
     }
   }, [hasScrim, isOpen]);
 
   useEffect(() => {
-    if (!isOpen && isPresented && hasScrim) {
+    if (!isOpen && hasScrim && (isPresented || gesturePhase === 'retracting')) {
       handleScrimOpacity(0);
     }
-  }, [handleScrimOpacity, hasScrim, isOpen, isPresented]);
+  }, [gesturePhase, handleScrimOpacity, hasScrim, isOpen, isPresented]);
 
   const handleMotionComplete = useCallback(
     (motion: BottomSheetPanelMotion) => {
@@ -282,6 +393,7 @@ function StandaloneBottomSheet({
         dialog.close();
       }
       setIsPresented(false);
+      setGesturePhase('idle');
       triggerRef.current?.focus();
       triggerRef.current = null;
     },
@@ -327,6 +439,7 @@ function StandaloneBottomSheet({
         styles.dialog,
         shouldPresent && styles.dialogOpen,
         hasScrim && styles.scrim,
+        hasScrim && gesturePhase === 'opening' && styles.scrimGestureDriven,
         !hasScrim && styles.dialogNonModal,
       )}
       ref={dialogRef}
@@ -347,8 +460,10 @@ function StandaloneBottomSheet({
           snapPoints={snapPoints}
           isSwipeDismissAllowed={purpose === 'info'}
           isPageScrollLocked={shouldPresent && hasScrim}
+          dragSource={isOpen ? undefined : dragSource}
           xstyle={xstyle}
-          onDismiss={dismissOnLightInteraction}
+          onDismiss={handleDismiss}
+          onGestureOpened={handleGestureOpened}
           onScrimOpacity={handleScrimOpacity}
           onElementChange={handlePanelElementChange}
           onMotionComplete={handleMotionComplete}>
