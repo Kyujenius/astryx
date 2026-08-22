@@ -1,0 +1,98 @@
+{
+  "default__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "supporting__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "withIcons__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "deep__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "customSeparator__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "autoCurrent__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "currentMiddle__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "menuCrumb__light": {
+    "colorScheme": "light",
+    "background": "rgb(255, 255, 255)",
+    "textColor": "rgb(82, 82, 82)",
+    "direction": "ltr"
+  },
+  "default__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "supporting__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "withIcons__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "deep__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "customSeparator__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "autoCurrent__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "currentMiddle__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  },
+  "menuCrumb__dark": {
+    "colorScheme": "dark",
+    "background": "rgb(38, 38, 38)",
+    "textColor": "rgb(163, 163, 163)",
+    "direction": "ltr"
+  }
+}
