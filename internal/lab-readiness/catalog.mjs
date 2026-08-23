@@ -295,7 +295,7 @@ const CHECKS = [
     'humanReview',
     'responsiveInteractionReadiness',
     'Responsive and Interaction Readiness',
-    'The reusable Responsive and Interaction Readiness rubric records Pass, Fail, or N/A with evidence for viewport, input, gesture, mobile viewport, and WCAG 2.2 AA contracts.',
+    'The reusable Responsive and Interaction Readiness rubric records Pass, Fail, or N/A with evidence for adaptive presentation choice, viewport, input, gesture, mobile viewport, and WCAG 2.2 AA contracts.',
   ],
   [
     'hardenReview',

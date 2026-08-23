@@ -21,6 +21,10 @@ export const docs = {
           type: 'prose',
           text: 'Keep size, pointer, hover, and gesture capability separate. A narrow viewport does not prove touch input, and a coarse pointer does not prove a narrow viewport. Layout should follow available space and content fit; input behavior should follow the input capability it actually depends on.',
         },
+        {
+          type: 'prose',
+          text: 'First decide from task semantics and product intent whether the interaction stays on the same surface or intentionally changes presentation. Responsive pressure alone normally means reflowing or resizing the component, not silently substituting another component.',
+        },
       ],
     },
     {
@@ -58,7 +62,7 @@ export const docs = {
         },
         {
           type: 'prose',
-          text: 'If a scenario is irrelevant, mark it N/A with the reason. Example: a purely static text component has no pointer-activation evidence to provide, but it still owes content-fit evidence at the supported widths where it renders.',
+          text: 'If a scenario is irrelevant, mark it N/A with the reason. Example: a purely static text component has no pointer-activation evidence to provide, but it still owes content-fit evidence at the supported widths where it renders. Adaptive recipes that switch presentation owe all four scenario outcomes plus an explicit override or test path for the adaptive choice.',
         },
       ],
     },
@@ -71,15 +75,54 @@ export const docs = {
         },
         {type: 'heading', level: 3, text: 'Responsive layout'},
         {
+          type: 'prose',
+          text: 'Adaptive presentation decision gate: choose the intended experience before choosing implementation signals. When the task keeps the same semantics, reflow or resize the same component. When product intent calls for another presentation, make it an explicit opt-in recipe and document any placement, motion, dismissal, focus, scrolling, gesture, or announcement contract differences. Across presentations, preserve shared controlled state, accessible name/semantics, action availability, and equivalent non-gesture paths; document intentional differences.',
+        },
+        {
+          type: 'table',
+          headers: ['Task or intent', 'Typical outcome', 'Evidence to record'],
+          rows: [
+            [
+              'Same task/semantics under tighter space',
+              'Responsive component: reflow, wrap, resize, or scroll intentionally.',
+              'Show supported widths and content fit; do not swap components just because the viewport is narrow.',
+            ],
+            [
+              'Complex compact flow that needs more room or sequence',
+              'Explicit fullscreen or page presentation.',
+              'Document route/placement, focus, scrolling, dismissal, and state continuity.',
+            ],
+            [
+              'Lightweight contextual actions or pickers tied to a trigger',
+              'Explicit sheet, tray, popover, or anchored option.',
+              'Document opt-in API, trigger relationship, dismissal, focus return, and non-gesture paths.',
+            ],
+            [
+              'Critical alert or confirmation',
+              'Retain alert/dialog semantics unless product intent explicitly differs.',
+              'Preserve accessible name, action availability, controlled state, and announcement/dismissal contracts; document intentional differences.',
+            ],
+          ],
+        },
+        {
           type: 'table',
           headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
+            [
+              'Adaptive presentation decision',
+              'Decide from task semantics and product intent whether the interaction stays on the same surface or uses another presentation. Responsive pressure alone normally means reflow/resize, not substitution. After that decision, use available space and input capabilities as independent signals; never use width alone as a device detector or touch alone as a presentation mandate.',
+              'N/A only when no component substitution or adaptive recipe is involved; still record that the same component presentation is retained.',
+            ],
             [
               'Available space and content fit',
               'Use shared breakpoint names and values: none 0, sm 640px, md 768px, lg 1024px. Reflow from viewport or container space and actual content fit; long labels and localized copy wrap instead of clipping or causing horizontal overflow.',
               'Rarely N/A. Even non-interactive components need evidence that their content fits or intentionally scrolls within their supported containers.',
             ],
           ],
+        },
+        {
+          type: 'prose',
+          text: 'Anti-patterns: silent component swapping at a breakpoint, breakpoint-as-device detection, and treating touch capability as a mandate to change presentation.',
         },
         {type: 'heading', level: 3, text: 'Touch, pointer, and hover'},
         {
@@ -181,6 +224,7 @@ export const docs = {
 | --- | --- | --- |
 | Scenario: wide viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
 | Scenario: narrow viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
+| Requirement: presentation choice | Pass/Fail/N/A | Same-surface decision, explicit adaptive option, contract differences, or N/A reason when no substitution is involved |
 | Requirement: available space/content fit/wrapping/overflow | Pass/Fail/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
 
 ### Touch, pointer, and hover

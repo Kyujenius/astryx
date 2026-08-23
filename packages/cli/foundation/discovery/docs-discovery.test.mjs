@@ -100,6 +100,16 @@ describe('discoverBuiltinTopics', () => {
       expect(serialized).toContain(scenario);
     }
     expect(serialized).toContain('Requirement: WCAG 2.2 AA target size');
+    expect(serialized).toContain('Requirement: presentation choice');
+    expect(serialized).toContain('Adaptive presentation decision');
+    expect(serialized).toContain('Same task/semantics');
+    expect(serialized).toContain('explicit opt-in recipe');
+    expect(serialized).toContain('shared controlled state');
+    expect(serialized).toContain('silent component swapping');
+    expect(serialized).toContain('breakpoint-as-device detection');
+    expect(serialized).toContain(
+      'all four scenario outcomes plus an explicit override or test path',
+    );
     expect(serialized).toContain(
       '2.5.8: at least 24x24 CSS px or a permitted exception',
     );
