@@ -76,144 +76,106 @@ describe('discoverBuiltinTopics', () => {
     }
   });
 
-  it('keeps the responsive-interaction-readiness PR reporting template discoverable and scoped to WCAG AA', () => {
+  it('keeps the responsive-interaction-readiness PR reporting template discoverable and scoped', () => {
     const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
     expect(problemsInTopic(responsiveInteractionReadinessDocs)).toEqual([]);
     expect(serialized).toContain('Reporting in component PRs');
-    expect(serialized).toContain('Check / Result / Evidence report');
-    expect(serialized).toContain('| Check | Result | Evidence |');
-    expect(serialized).toContain('Use Pass when the row has concrete evidence');
+    expect(serialized).toContain('Status semantics: Pass = evidenced');
     expect(serialized).toContain('Pass/Fail/Blocked/N/A');
-    for (const category of [
-      'Responsive layout',
-      'Touch, pointer, and hover',
-      'Accessibility and interaction contracts',
-      'Mobile viewport constraints',
-    ]) {
-      expect(serialized).toContain(category);
-    }
+    expect(serialized).toContain('| Check | Result | Evidence |');
+    expect(serialized).toContain('Applicable core checks');
+    expect(serialized).toContain('Animated overflow/clipping');
+    expect(serialized).toContain('Stack reflow/intermediate-frame evidence');
+    expect(serialized).not.toContain('Not verified');
+  });
+
+  it('keeps the four scenario evidence patterns without device stereotypes', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
     for (const scenario of [
-      'wide viewport + fine pointer + hover',
-      'narrow viewport + fine pointer + hover',
-      'narrow viewport + coarse pointer + no hover',
-      'wide viewport + coarse pointer + no hover',
+      'Wide viewport + fine pointer + hover',
+      'Narrow viewport + fine pointer + hover',
+      'Narrow viewport + coarse pointer + no hover',
+      'Wide viewport + coarse pointer + no hover',
     ]) {
       expect(serialized).toContain(scenario);
     }
-    expect(serialized).toContain('Requirement: WCAG 2.2 AA target size');
-    expect(serialized).toContain('Requirement: presentation choice');
-    expect(serialized).toContain('Adaptive presentation decision');
-    expect(serialized).toContain('Same task/semantics');
-    expect(serialized).toContain('explicit opt-in recipe');
-    expect(serialized).toContain('shared controlled state');
-    expect(serialized).toContain('silent component swapping');
-    expect(serialized).toContain('breakpoint-as-device detection');
+    expect(serialized).toContain('not mandatory boilerplate');
     expect(serialized).toContain(
-      'Requirement: viewport obstruction and placement',
-    );
-    expect(serialized).toContain('top, bottom, or edge placement');
-    expect(serialized).toContain('actual obstructions and content priority');
-    expect(serialized).toContain('browser chrome');
-    expect(serialized).toContain('bottom navigation/toolbars');
-    expect(serialized).toContain('Safe-area support does not prove');
-    expect(serialized).toContain('both edge placements');
-    expect(serialized).toContain('touch device');
-    for (const transientCheck of [
-      'Transient and queued UI',
-      'stack, queue, replace, or deduplicate',
-      'start timeouts only once an item is visible',
-      'long localized text, actions, and dismiss controls',
-      'Gestures are optional accelerators',
-      'below-threshold, wrong-direction, and pointercancel',
-      'pause timers during active pointer interaction',
-      'SC 2.2.1 applies to timed content',
-      'five seconds is inherently compliant',
-      'untimed equivalent',
-      'Separate interactive visual content from live-region announcements',
-      'appearance does not move focus',
-      'do not place controls inside status or alert live regions',
-      'gesture-only dismissal',
-      'unbounded narrow stack',
-    ]) {
-      expect(serialized).toContain(transientCheck);
-    }
-    expect(serialized).toContain(
-      'all four scenario outcomes plus an explicit override or test path',
+      'A narrow viewport does not prove touch input',
     );
     expect(serialized).toContain(
-      '2.5.8: at least 24x24 CSS px or a permitted exception',
+      'coarse pointer does not prove a narrow viewport',
     );
-    expect(serialized).toContain('Platform and browser evidence layer');
-    expect(serialized).toContain('Diagnostic notes');
-    expect(serialized).not.toContain(['Small', 'narrow screen'].join('/'));
+    expect(serialized).not.toContain('same narrow layout as mobile');
+    expect(serialized).not.toContain('mobile/touch contract');
     expect(serialized.toLowerCase()).not.toContain(
       ['desktop', 'with', 'small screen'].join(' '),
     );
-    expect(serialized).not.toMatch(/(?:4[48])(?:x| by )(?:4[48])/);
-    expect(serialized).not.toContain(
-      String.fromCharCode(71, 111, 111, 103, 108, 101),
-    );
   });
 
-  it('documents tooling limits before iOS platform behavior can pass', () => {
+  it('keeps platform evidence limits in one policy layer', () => {
     const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
-    expect(serialized).toContain(
-      'Storybook and Playwright are useful evidence layers',
-    );
-    expect(serialized).toContain('cannot establish iOS Safari');
-    expect(serialized).toContain('Playwright WebKit runs macOS WebKit');
-    expect(serialized).toContain('does not reproduce the iOS shell');
-    expect(serialized).toContain('Do not claim Pass');
-  });
-
-  it('requires real iOS evidence and separates blocked from inapplicable', () => {
-    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('Platform evidence policy');
     for (const requiredPhrase of [
-      'iOS Simulator or physical iOS device',
+      'Storybook',
+      'Desktop Playwright engines',
+      'iOS Simulator or physical iOS evidence',
       'touch dispatch',
-      'native top-layer dialog/popover',
-      'focus/dismissal propagation',
-      'visual viewport/software keyboard',
+      'native top-layer dialog or popover behavior',
+      'visual viewport/software keyboard behavior',
       'safe-area/platform chrome',
+      'Physical-device checks',
     ]) {
       expect(serialized).toContain(requiredPhrase);
     }
-    expect(serialized).toContain('mark Blocked or Not verified instead of N/A');
-    expect(serialized).toContain(
-      'reserve N/A for behavior that is genuinely inapplicable',
-    );
-    expect(serialized).toContain('iOS/WebKit platform verification');
-  });
-
-  it('keeps platform evidence as a layer over the four scenarios', () => {
-    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
-    expect(serialized).toContain('Preserve these four cross-axis scenarios');
-    expect(serialized).toContain(
-      'rather than creating a fifth device stereotype',
-    );
-    for (const source of [
-      'Storybook',
-      'Playwright browser engines',
-      'iOS Simulator or device',
-      'Physical-device checks',
-    ]) {
-      expect(serialized).toContain(source);
-    }
+    expect(serialized).toContain('Playwright WebKit is macOS WebKit');
     expect(serialized).toContain('Cannot prove');
   });
 
-  it('keeps diagnostics optional and development-only', () => {
+  it('keeps WCAG AA claims and motion guidance narrow', () => {
     const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('WCAG 2.2 Level AA SC 2.5.8');
+    expect(serialized).toContain('at least 24x24 CSS px');
+    expect(serialized).toContain('WCAG 2.2 AA SC 2.2.1');
+    expect(serialized).toContain(
+      'Reduced motion for interaction-affecting motion',
+    );
+    expect(serialized).toContain('Astryx product-quality guidance');
+    expect(serialized).toContain(
+      'cite WCAG 2.2 AA only where timed, moving, or flashing content criteria actually apply',
+    );
+    expect(serialized).not.toMatch(/(?:4[48])(?:x| by )(?:4[48])/);
+    expect(serialized).not.toContain('generic Reduced motion');
+  });
+
+  it('keeps conditional appendices and excludes broader hardening topics', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('Adaptive presentation appendix');
+    expect(serialized).toContain('Transient and queued UI appendix');
+    expect(serialized).toContain('Use this appendix only');
+    expect(serialized).toContain('Explicit opt-in');
+    expect(serialized).toContain('queue, replace, or deduplicate');
+    expect(serialized).toContain('Start timeouts only once an item is visible');
+    expect(serialized).toContain('Gesture alternatives and stack lifecycle');
+    for (const excluded of [
+      'Spacing semantics',
+      'universal list-gap',
+      'inter-item spacing',
+      'single-line and multiline',
+      'React instrumentation caveat',
+      'do not mutate a props object to wrap handlers',
+    ]) {
+      expect(serialized).not.toContain(excluded);
+    }
+  });
+
+  it('keeps diagnostics optional and non-normative', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('Diagnostics appendix');
+    expect(serialized).toContain('Non-normative aid');
     expect(serialized).toContain('query-flagged, on-page forensics overlay');
     expect(serialized).toContain('development-only');
     expect(serialized).toContain('pointer-events: none');
-    expect(serialized).toContain('remote console is unavailable');
-    expect(serialized).toContain('React may freeze props in development');
-    expect(serialized).toContain(
-      'do not mutate a props object to wrap handlers',
-    );
-    expect(serialized).toContain('return a wrapped copy');
-    expect(serialized).toContain('not a normative component requirement');
   });
 });
 

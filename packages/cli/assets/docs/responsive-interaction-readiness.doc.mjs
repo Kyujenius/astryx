@@ -7,7 +7,7 @@ export const docs = {
   title: 'Responsive and Interaction Readiness',
   category: 'guide',
   description:
-    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, transient and queued UI, mobile viewport constraints, platform/browser evidence, and WCAG 2.2 AA accessibility.',
+    'A scoped rubric for reviewing responsive layout, input modality, interaction-affecting motion, mobile viewport constraints, platform evidence, and the accessibility effects of those behaviors.',
 
   sections: [
     {
@@ -15,67 +15,59 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'Use this rubric whenever a new or changed component could behave differently across viewport sizes, input modes, or browser/platform shells. It extends the component hardening checklist: record each applicable row as Pass, Fail, Blocked/Not verified, or N/A, and attach evidence in the issue, PR description, or lab-readiness manifest link that reviewers can open.',
+          text: 'Use this rubric when a new or changed component can behave differently across available space, input modality, browser/platform shell, or owned motion that affects interaction. It is not a general visual-polish or component-hardening checklist: include alignment, spacing, semantics, focus, or accessibility rows here only when responsive layout, adaptive presentation, pointer/gesture behavior, motion lifecycle, or mobile viewport geometry can change the outcome.',
         },
         {
           type: 'prose',
-          text: 'Keep size, pointer, hover, and gesture capability separate. A narrow viewport does not prove touch input, and a coarse pointer does not prove a narrow viewport. Layout should follow available space and content fit; input behavior should follow the input capability it actually depends on.',
+          text: 'Record each applicable row as Pass, Fail, Blocked, or N/A. Pass requires concrete evidence that can prove the claim. Fail means applicable work or obtainable evidence is missing. Blocked means required external or platform evidence is unavailable. N/A means the behavior genuinely does not apply; include the reason.',
         },
         {
           type: 'prose',
-          text: 'First decide from task semantics and product intent whether the interaction stays on the same surface or intentionally changes presentation. Responsive pressure alone normally means reflowing or resizing the component, not silently substituting another component.',
-        },
-        {
-          type: 'prose',
-          text: 'Storybook and Playwright are useful evidence layers, but they cannot establish iOS Safari or platform-shell behavior. Playwright WebKit runs macOS WebKit; it does not reproduce the iOS shell or every native top-layer `<dialog>` and popover behavior. Do not claim Pass for iOS touch-interaction behavior from Storybook or Playwright WebKit alone.',
+          text: 'Keep viewport size, pointer precision, hover capability, gesture support, and platform shell behavior separate. A narrow viewport does not prove touch input, and a coarse pointer does not prove a narrow viewport. Layout should follow available space and content fit; input behavior should follow the input capability it depends on.',
         },
       ],
     },
     {
-      title: 'Required scenarios',
+      title: 'Scenario evidence patterns',
       content: [
         {
           type: 'prose',
-          text: 'Scenario coverage proves viewport-width independence and input-capability independence. Preserve these four cross-axis scenarios; add platform and browser evidence to the relevant scenario rather than creating a fifth device stereotype. A scenario can pass while a requirement still fails, and a requirement can need evidence from more than one scenario.',
+          text: 'Use these four cross-axis scenarios as evidence patterns when the component can vary by width, pointer precision, or hover capability. They are not mandatory boilerplate for components that cannot vary on that axis. Add platform evidence to the scenario it supports instead of creating another device category.',
         },
         {
           type: 'table',
-          headers: ['Scenario', 'What it proves', 'Minimum evidence'],
+          headers: ['Scenario', 'What it proves', 'Appropriate evidence'],
           rows: [
             [
               'Wide viewport + fine pointer + hover',
-              'The default wide desktop contract remains intact.',
-              'Storybook or desktop-browser screenshot plus focused test when layout/order/interaction can regress.',
+              'The wide layout and hover-capable pointer path remain intact.',
+              'Storybook, desktop-browser screenshot, or focused test when layout/order/interaction can regress.',
             ],
             [
               'Narrow viewport + fine pointer + hover',
               'Width-driven reflow does not depend on touch or no-hover media queries.',
-              'Storybook or browser viewport test demonstrating the same narrow layout as mobile when applicable.',
+              'Storybook or browser viewport evidence for the constrained layout and any pointer affordances still present.',
             ],
             [
               'Narrow viewport + coarse pointer + no hover',
-              'The mobile/touch contract works when width and touch constraints appear together.',
-              'Browser/emulator/device capture plus activation evidence; use iOS Simulator or physical iOS evidence when the claim supports iOS platform behavior.',
+              'Touch/coarse-pointer behavior works under constrained space without relying on hover.',
+              'Browser, emulator, simulator, or device capture plus activation evidence when coarse-pointer behavior is in scope.',
             ],
             [
               'Wide viewport + coarse pointer + no hover',
-              'Input capability does not accidentally force narrow/mobile geometry.',
-              'Storybook, browser/device capture, or media-query test when pointer branches exist; add platform evidence when shell behavior is part of the claim.',
+              'Input capability does not accidentally force narrow geometry or hide required affordances.',
+              'Browser/device capture or media-query test when pointer or hover branches exist; platform evidence when shell behavior is part of the claim.',
             ],
           ],
-        },
-        {
-          type: 'prose',
-          text: 'If a scenario is irrelevant, mark it N/A with the reason. Example: a purely static text component has no pointer-activation evidence to provide, but it still owes content-fit evidence at the supported widths where it renders. Adaptive recipes that switch presentation owe all four scenario outcomes plus an explicit override or test path for the adaptive choice.',
         },
       ],
     },
     {
-      title: 'Platform and browser evidence layer',
+      title: 'Platform evidence policy',
       content: [
         {
           type: 'prose',
-          text: 'Choose the lightest evidence that can actually prove the claim. If behavior supports iOS and depends on touch dispatch, native top-layer dialog or popover behavior, focus or dismissal propagation, visual viewport/software keyboard behavior, safe-area/platform chrome, or other WebKit-on-iOS behavior, require real iOS evidence from an iOS Simulator or physical iOS device. If that evidence is unavailable, mark the outcome Blocked or Not verified; reserve N/A for behavior that is genuinely inapplicable.',
+          text: 'Choose the lightest evidence that can prove the claim. Storybook and desktop Playwright engines are useful for repeatable layout, keyboard, pointer, and focus regression evidence, but they do not establish iOS Safari or native platform-shell behavior. If supported behavior depends on touch dispatch, native top-layer dialog or popover behavior, focus or dismissal propagation, visual viewport/software keyboard behavior, safe-area/platform chrome, or other WebKit-on-iOS behavior, require iOS Simulator or physical iOS evidence. Escalate to a physical device only when hardware shape, OS/browser version, input accessory, performance, notch/chrome configuration, or sensor behavior can affect the experience.',
         },
         {
           type: 'table',
@@ -83,18 +75,18 @@ export const docs = {
           rows: [
             [
               'Storybook',
-              'Component states, examples, visual review, responsive width checks, and reviewer screenshots in a controlled desktop browser.',
+              'Component states, examples, responsive width checks, and reviewer screenshots in a controlled desktop browser.',
               'Real touch dispatch, native iOS Safari/platform shell, iOS visual viewport/software keyboard, platform chrome, or every native top-layer `<dialog>`/popover behavior.',
             ],
             [
-              'Playwright browser engines',
+              'Desktop Playwright engines',
               'Repeatable keyboard, pointer, layout, focus, and browser-regression tests across supported desktop engines.',
               'iOS Safari/platform-shell behavior. Playwright WebKit is macOS WebKit and does not reproduce the iOS shell or every native top-layer `<dialog>`/popover behavior.',
             ],
             [
               'iOS Simulator or device',
               'iOS Safari/WebKit evidence for touch dispatch, top-layer dialog/popover propagation, focus/dismissal propagation, visual viewport, software keyboard, safe area, and platform chrome behavior.',
-              'Physical-device-only constraints such as actual hardware ergonomics, camera/notch variation not represented by the simulator profile, real network/performance pressure, or accessory/input quirks.',
+              'Physical-device-only constraints such as actual hardware ergonomics, camera/notch variation outside the simulator profile, real network/performance pressure, or accessory/input quirks.',
             ],
             [
               'Physical-device checks',
@@ -106,67 +98,33 @@ export const docs = {
       ],
     },
     {
-      title: 'Review categories',
+      title: 'Core review categories',
       content: [
         {
           type: 'prose',
-          text: 'Use these four categories to organize the review outcome after the scenarios are covered. The Transient and queued UI checks are conditional: apply them to toasts, snackbars, notifications, transient banners, and similar queued or auto-dismissing surfaces; unrelated components should mark them N/A with the reason.',
+          text: 'Use these four categories for applicable responsive and interaction behavior. Adaptive presentation and transient/queued UI have conditional appendices below; do not expand every review with those details when they are not involved.',
         },
         {type: 'heading', level: 3, text: 'Responsive layout'},
-        {
-          type: 'prose',
-          text: 'Adaptive presentation decision gate: choose the intended experience before choosing implementation signals. When the task keeps the same semantics, reflow or resize the same component. When product intent calls for another presentation, make it an explicit opt-in recipe and document any placement, motion, dismissal, focus, scrolling, gesture, or announcement contract differences. Across presentations, preserve shared controlled state, accessible name/semantics, action availability, and equivalent non-gesture paths; document intentional differences.',
-        },
-        {
-          type: 'table',
-          headers: ['Task or intent', 'Typical outcome', 'Evidence to record'],
-          rows: [
-            [
-              'Same task/semantics under tighter space',
-              'Responsive component: reflow, wrap, resize, or scroll intentionally.',
-              'Show supported widths and content fit; do not swap components just because the viewport is narrow.',
-            ],
-            [
-              'Complex compact flow that needs more room or sequence',
-              'Explicit fullscreen or page presentation.',
-              'Document route/placement, focus, scrolling, dismissal, and state continuity.',
-            ],
-            [
-              'Lightweight contextual actions or pickers tied to a trigger',
-              'Explicit sheet, tray, popover, or anchored option.',
-              'Document opt-in API, trigger relationship, dismissal, focus return, and non-gesture paths.',
-            ],
-            [
-              'Critical alert or confirmation',
-              'Retain alert/dialog semantics unless product intent explicitly differs.',
-              'Preserve accessible name, action availability, controlled state, and announcement/dismissal contracts; document intentional differences.',
-            ],
-          ],
-        },
         {
           type: 'table',
           headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
             [
-              'Adaptive presentation decision',
-              'Decide from task semantics and product intent whether the interaction stays on the same surface or uses another presentation. Responsive pressure alone normally means reflow/resize, not substitution. After that decision, use available space and input capabilities as independent signals; never use width alone as a device detector or touch alone as a presentation mandate.',
-              'N/A only when no component substitution or adaptive recipe is involved; still record that the same component presentation is retained.',
+              'Presentation choice gate',
+              'Before implementation, decide whether the task keeps the same surface or intentionally opts into another presentation. Responsive pressure alone normally means reflowing, wrapping, resizing, or scrolling the same component rather than silently swapping components.',
+              'N/A only when no adaptive presentation or substitution decision is involved; otherwise record the same-surface decision or link the adaptive appendix evidence.',
             ],
             [
-              'Available space and content fit',
-              'Use shared breakpoint names and values: none 0, sm 640px, md 768px, lg 1024px. Reflow from viewport or container space and actual content fit; long labels and localized copy wrap instead of clipping or causing horizontal overflow.',
-              'Rarely N/A. Even non-interactive components need evidence that their content fits or intentionally scrolls within their supported containers.',
+              'Available space, content fit, and overflow',
+              'Reflow from viewport or container space and actual content fit. Long labels and localized copy wrap, resize, or intentionally scroll instead of clipping or causing horizontal overflow. When wrappers and animated surfaces are nested, verify the outer wrapper, inner wrapper, and animated surface share the same available-width constraint for contained previews and viewport overlays.',
+              'Rarely N/A. Even static components need evidence that their content fits or intentionally scrolls in supported containers.',
             ],
             [
-              'Transient and queued UI: queue/stack policy and content fit',
-              'For toasts, snackbars, notifications, transient banners, and similar surfaces, define whether concurrent items stack, queue, replace, or deduplicate. Limit visible items from available space rather than touch capability, start timeouts only once an item is visible, and verify long localized text, actions, and dismiss controls do not overflow.',
-              'N/A when the component does not queue, auto-dismiss, or show transient feedback surfaces; record the reason.',
+              'Viewport/input independence',
+              'Width, pointer precision, hover capability, and gesture support remain independent signals. Do not infer device type, placement, or presentation from one signal alone.',
+              'N/A only when the component has no responsive or input-dependent branches; record that it uses inherited primitives unchanged.',
             ],
           ],
-        },
-        {
-          type: 'prose',
-          text: 'Anti-patterns: silent component swapping at a breakpoint, breakpoint-as-device detection, treating touch capability as a mandate to change presentation, and choosing top or bottom placement because “touch device” without obstruction evidence.',
         },
         {type: 'heading', level: 3, text: 'Touch, pointer, and hover'},
         {
@@ -174,29 +132,19 @@ export const docs = {
           headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
             [
-              'Pointer precision',
-              'Review fine and coarse pointer behavior independently from width. Hit areas, drag handles, resize affordances, and hover targets must remain usable for the pointer precision they support.',
-              'N/A only when the component has no pointer interaction beyond native text selection or links/buttons inherited unchanged from existing primitives.',
-            ],
-            [
               'Hover independence',
-              'Essential information and required actions must not require hover. Hover may reveal convenience affordances only when the same action or information is available through focus, visible UI, or another non-hover path.',
-              'N/A for components with no hover-specific behavior; record that no required state depends on hover.',
+              'Required information and actions do not require hover. Hover may reveal convenience affordances only when the same action or information is reachable through focus, visible UI, or another non-hover path.',
+              'N/A when the component has no hover-specific behavior; record that no required state depends on hover.',
             ],
             [
               'Pointer and gesture behavior',
-              'Custom pointer handling uses Pointer Events where possible, handles mouse/touch/pen consistently, and does not block click, focus, text selection, or native scrolling. Path-based, multipointer, dragging, or other custom gestures need non-gesture alternatives where applicable, and pointer cancellation semantics must avoid accidental activation.',
+              'Custom pointer handling uses the supported event model consistently across mouse, touch, and pen; preserves click, focus, text selection, and native scrolling; and provides non-gesture alternatives where applicable. Gesture progress, wrong-direction movement, below-threshold release, pointercancel, and lost capture reset or settle smoothly without accidental activation.',
               'N/A when the component has no custom pointer handling, gesture semantics, drag interactions, or pointer-capture flows.',
             ],
             [
-              'iOS/WebKit platform behavior',
-              'For touch-interaction claims that support iOS, require evidence from an iOS Simulator or physical iOS device when behavior depends on touch dispatch, native top-layer dialog/popover, focus/dismissal propagation, visual viewport/software keyboard, safe-area/platform chrome, or other WebKit-on-iOS behavior. Storybook and Playwright WebKit alone cannot establish Pass for these claims.',
-              'N/A only when the component does not support iOS or the behavior is genuinely independent of iOS touch/WebKit/platform-shell behavior. If real iOS evidence is unavailable, mark Blocked or Not verified instead of N/A.',
-            ],
-            [
-              'Transient and queued UI: gesture alternatives',
-              'Gestures are optional accelerators. Provide button and keyboard alternatives, preserve native scrolling, require directional intent, test below-threshold, wrong-direction, and pointercancel paths, and pause timers during active pointer interaction.',
-              'N/A when the component has no transient gesture, swipe, pointer-drag, or timer behavior; record the reason.',
+              'Animated layout, stack, and overflow changes',
+              'When responsive pressure, queued UI, add/remove/reorder, or gesture snap changes geometry, verify animated overflow and clipping are intentional; content does not clip; animated surfaces can remain visible until the true viewport or container boundary; and clipping, opacity, transforms, wrapper sizing/collapse, focus, scroll position, blocked input, and unmount lifecycle compose without jumps or conflicts. Capture intermediate frames, a recording, or a frame-by-frame geometry/log trace when before/after screenshots cannot prove continuity.',
+              'N/A for static components and for motion that does not affect responsive layout, stack/collection geometry, gestures, scrolling, focus, dismissal, or transient UI.',
             ],
           ],
         },
@@ -210,34 +158,19 @@ export const docs = {
           headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
             [
-              'WCAG 2.2 AA target size',
-              'Evaluate WCAG 2.2 Level AA requirements. For target size, use 2.5.8: at least 24x24 CSS px or a permitted exception.',
-              'Never N/A for interactive components. Non-interactive components still owe applicable contrast, semantics, and reading-order checks.',
+              'Target size under constrained or input-specific layouts',
+              'Where responsive layout or input mode changes interactive controls, evaluate WCAG 2.2 Level AA SC 2.5.8: at least 24x24 CSS px or a permitted exception, including required separation when targets are crowded by constrained reflow.',
+              'N/A only for non-interactive components or unchanged inherited controls; record the reason.',
             ],
             [
-              'Semantics',
-              'State whether roles, names, descriptions, reading order, and landmark/list/table semantics are preserved or intentionally changed.',
-              'N/A only for semantic sub-items the component genuinely does not own; record that conclusion.',
+              'Semantic, keyboard, focus, and dismissal changes',
+              'When responsive layout, adaptive presentation, custom input handling, gestures, or viewport-owned UI changes semantics, keyboard paths, focus order/return, focus visibility, or dismissal contracts, preserve the existing interaction contract or document the intentional difference with evidence.',
+              'N/A when those contracts are unchanged and delegated to existing primitives; broader semantic or accessibility review belongs in the component-hardening checklist.',
             ],
             [
-              'Keyboard, focus, and dismissal',
-              'Keyboard operation, focus order and return, focus visibility, and dismissal contracts remain available or intentionally change with evidence.',
-              'N/A only for sub-items the component genuinely does not own; record that conclusion.',
-            ],
-            [
-              'Reduced motion',
-              'Motion and animation respect reduced-motion behavior and preserve the component contract when motion is reduced.',
-              'N/A only when the component has no motion or animation behavior.',
-            ],
-            [
-              'Transient and queued UI: timing',
-              'WCAG 2.2 AA SC 2.2.1 applies to timed content; do not claim that five seconds is inherently compliant. Actionable or non-redundant feedback persists or has an untimed equivalent, and critical or blocking information escalates to persistent in-context UI or a dialog.',
-              'N/A when the component has no timed, auto-dismissing, queued, or transient feedback behavior; record the reason.',
-            ],
-            [
-              'Transient and queued UI: announcement semantics',
-              'Separate interactive visual content from live-region announcements. Choose polite or assertive announcement based on urgency, do not place controls inside status or alert live regions, appearance does not move focus, and document keyboard entry/restore when provided.',
-              'N/A when the component has no live-region or transient feedback semantics; record the reason.',
+              'Reduced motion for interaction-affecting motion',
+              'When component-owned motion affects opening, closing, responsive reflow, gestures, scrolling, timers, transient UI, focus, or dismissal, reduced-motion behavior preserves the same interaction contract and end state without visible travel. Treat this as Astryx product-quality guidance; cite WCAG 2.2 AA only where timed, moving, or flashing content criteria actually apply.',
+              'N/A when the component owns no interaction-affecting motion. General duration, easing, purpose, polish, and performance guidance belong in `astryx docs motion` until lifecycle guidance is expanded there.',
             ],
           ],
         },
@@ -247,30 +180,78 @@ export const docs = {
           headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
             [
+              'Viewport geometry and obstruction',
+              'When a component owns fixed, edge-anchored, full-viewport, or constrained-height geometry, evaluate software keyboard overlap, safe-area insets, browser/app chrome, bottom navigation/toolbars, sheets, focused controls, important top navigation/status, dynamic viewport units, body locking, nested scroll, and scroll position. Placement follows actual obstructions and content priority, not touch or coarse pointer alone.',
+              'N/A when the component is inline, delegates geometry to a parent shell, and cannot obstruct or be obstructed by viewport-edge UI.',
+            ],
+            [
               'Software keyboard',
-              'Check resize, occlusion, focus movement, and scroll position where the component owns inputs or viewport geometry. For iOS-supported behavior, use an iOS Simulator or physical device rather than Storybook or Playwright WebKit alone.',
-              'N/A when the component has no text input and does not own viewport geometry around focused controls; unavailable iOS evidence is Blocked/Not verified, not N/A.',
+              'When the component owns inputs or geometry around focused controls, verify resize, occlusion, focus movement, and scroll position under the software keyboard using platform evidence when the claim depends on platform behavior.',
+              'N/A when the component has no text input and does not own viewport geometry around focused controls; unavailable required platform evidence is Blocked.',
+            ],
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Adaptive presentation appendix',
+      content: [
+        {
+          type: 'prose',
+          text: 'Use this appendix only when a component offers or changes between presentations, such as inline to sheet, tray, popover, page, or fullscreen. Otherwise, record the presentation choice gate in the core checks and skip this appendix.',
+        },
+        {
+          type: 'table',
+          headers: ['Check', 'Evidence to record'],
+          rows: [
+            [
+              'Explicit opt-in',
+              'The alternate presentation is chosen by task semantics or product intent, not inferred silently from width, pointer, or hover alone.',
             ],
             [
-              'Viewport obstruction and placement',
-              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose top, bottom, or edge placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test relevant placements, narrow stack pressure, and both edge placements when the component exposes them; use iOS Simulator/device evidence when iOS platform chrome or visual viewport behavior is part of the claim; maintain consistency within a flow and record evidence.',
-              'N/A when the component is not fixed or viewport-anchored, exposes no placement choice, and cannot obstruct or be obstructed by viewport-edge UI; unavailable platform evidence is Blocked/Not verified, not N/A.',
+              'State continuity',
+              'Shared controlled state, selection, validation, and pending input survive presentation changes unless a difference is intentional.',
             ],
             [
-              'Safe-area insets',
-              'Edge-anchored or full-viewport UI accounts for safe-area insets without hiding actions or content.',
-              'N/A when the component never reaches viewport edges or delegates safe-area handling to a parent shell.',
+              'Contract differences',
+              'Placement, motion, dismissal, focus, scrolling, gesture, announcement, and non-gesture paths that differ between presentations are documented and evidenced.',
+            ],
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Transient and queued UI appendix',
+      content: [
+        {
+          type: 'prose',
+          text: 'Use this appendix only for toasts, snackbars, notifications, transient banners, and similar queued, stacked, or auto-dismissing feedback. Static components and unrelated overlays should mark these rows N/A with the reason.',
+        },
+        {
+          type: 'table',
+          headers: ['Check', 'Review requirement'],
+          rows: [
+            [
+              'Queue and stack policy',
+              'Define whether concurrent items stack, queue, replace, or deduplicate. Visible item limits come from available space and obstruction, not input capability alone. Start timeouts only once an item is visible.',
             ],
             [
-              'Dynamic viewport and scroll behavior',
-              'Dynamic viewport units, body locking, nested scroll, and constrained-height behavior remain intentional and testable where the component owns them.',
-              'N/A for inline components or overlays whose position and size never interact with viewport edges, keyboard, or scroll locking.',
+              'Content fit and obstruction',
+              'Long localized text, actions, and dismiss controls fit, wrap, or intentionally scroll within the available viewport/container. Placement accounts for keyboard, safe area, app chrome, navigation, sheets, focused controls, and important content.',
+            ],
+            [
+              'Timing and announcement semantics',
+              'For timed content, evaluate WCAG 2.2 AA SC 2.2.1 instead of assuming a duration is compliant. Actionable or non-redundant feedback persists or has an untimed equivalent. Separate interactive visual content from live-region announcements, choose urgency intentionally, and do not place controls inside status or alert live regions.',
+            ],
+            [
+              'Gesture alternatives and stack lifecycle',
+              'Swipe or drag gestures are optional accelerators with button and keyboard alternatives, directional intent, below-threshold and cancellation handling, and native scrolling preserved. Removing an item from a stack animates the departing item and remaining-item reflow continuously; it does not wait for unmount and then jump.',
             ],
           ],
         },
         {
           type: 'prose',
-          text: 'Transient UI anti-patterns: auto-hide actionable feedback without an untimed equivalent, controls inside alert/status live regions, an unbounded narrow stack, touch=>placement assumptions, and gesture-only dismissal.',
+          text: 'Transient UI anti-patterns: auto-hide actionable feedback without an untimed equivalent, controls inside alert/status live regions, unbounded narrow stacks, touch-to-placement assumptions, gesture-only dismissal, overflow hidden cutting motion, child exit plus parent unmount/reflow fighting, and final-state-only screenshots for motion behavior.',
         },
       ],
     },
@@ -279,11 +260,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste Responsive and Interaction Readiness outcomes as a Check / Result / Evidence report into the PR description or link them from the lab-readiness manifest.',
-        },
-        {
-          type: 'prose',
-          text: 'Use Pass when the row has concrete evidence that can prove the claim: a story, test, screenshot, device capture, or documented reasoning, with iOS Simulator/device evidence for iOS platform behavior. Use Fail when applicable work remains. Use Blocked or Not verified when the behavior applies but the required platform evidence is unavailable. Use N/A only when the area does not apply, and include the reason.',
+          text: 'Paste only the rows that apply, plus evidence links for claims made. Keep the scenario matrix compact, use the adaptive and transient appendices only when those behaviors exist, and mark static or delegated behavior N/A with a reason.',
         },
         {
           type: 'code',
@@ -291,73 +268,58 @@ export const docs = {
           label: 'Responsive and Interaction Readiness outcomes',
           code: `## Responsive and Interaction Readiness outcomes
 
-### Responsive layout
+Status semantics: Pass = evidenced; Fail = applicable work or obtainable evidence missing; Blocked = required external/platform evidence unavailable; N/A = behavior does not apply.
+
+### Scenario evidence
+
+| Scenario | Result | Evidence |
+| --- | --- | --- |
+| Wide viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Link or N/A reason |
+| Narrow viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Link or N/A reason |
+| Narrow viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Link or N/A reason |
+| Wide viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Link or N/A reason |
+
+### Applicable core checks
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Scenario: wide viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Story/test/screenshot link |
-| Scenario: narrow viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Story/test/screenshot link |
-| Requirement: presentation choice | Pass/Fail/Blocked/N/A | Same-surface decision, explicit adaptive option, contract differences, or N/A reason when no substitution is involved |
-| Requirement: available space/content fit/wrapping/overflow | Pass/Fail/Blocked/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
-| Requirement: queue/stack policy (transient/queued UI) | Pass/Fail/Blocked/N/A | Stack/queue/replace/deduplicate policy, visible limit, visible-only timeout start, long text/actions/dismiss fit, or N/A reason |
+| Presentation choice gate | Pass/Fail/Blocked/N/A | Same-surface decision, adaptive appendix link, or N/A reason |
+| Available space/content fit/wrapping/overflow/scrolling | Pass/Fail/Blocked/N/A | Width/container evidence, nested/overlay wrapper constraints, clipping/scrolling behavior, or N/A reason |
+| Input, hover, pointer, and gesture behavior | Pass/Fail/Blocked/N/A | Non-hover path, pointer/gesture/cancel evidence, platform evidence, or N/A reason |
+| Interaction/accessibility effects | Pass/Fail/Blocked/N/A | Target size, semantic/focus/keyboard/dismissal changes, reduced-motion behavior, or N/A reason |
+| Viewport geometry/obstruction | Pass/Fail/Blocked/N/A | Keyboard, safe-area, chrome, obstruction, scroll, dynamic viewport evidence, or N/A reason |
+| Animated overflow/clipping | Pass/Fail/Blocked/N/A | Recording/intermediate frames/trace showing no clipping, overlap, focus loss, scroll jump, blocked input, or lifecycle conflict; N/A for static components |
+| Stack reflow/intermediate-frame evidence | Pass/Fail/Blocked/N/A | Recording/intermediate frames/geometry trace for add/remove/reorder or queued UI reflow; N/A when no stack/collection motion exists |
 
-### Touch, pointer, and hover
-
-| Check | Result | Evidence |
-| --- | --- | --- |
-| Scenario: narrow viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Story/test/device capture link |
-| Scenario: wide viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Story/test/device capture link |
-| iOS/WebKit platform verification | Pass/Blocked/Not verified/N/A | OS/device or Simulator version, browser, input method, and evidence link/screenshot; use Blocked/Not verified if unavailable, not Pass from Storybook/Playwright WebKit alone |
-| Requirement: hover independence | Pass/Fail/Blocked/N/A | Non-hover path or documented N/A reason |
-| Requirement: pointer/custom gesture behavior | Pass/Fail/Blocked/N/A | Pointer, activation, cancellation, or custom-handler evidence |
-| Requirement: gesture alternatives (transient/queued UI) | Pass/Fail/Blocked/N/A | Button/keyboard alternative, native scroll preservation, directional intent, below-threshold/wrong-direction/pointercancel tests, timer pause, or N/A reason |
-| Requirement: non-gesture alternatives where applicable | Pass/Fail/Blocked/N/A | Alternative path or documented N/A reason |
-
-### Accessibility and interaction contracts
+### Adaptive presentation appendix, if applicable
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Requirement: WCAG 2.2 AA target size | Pass/Fail/Blocked/N/A | 2.5.8 24x24 CSS px or permitted exception evidence |
-| Requirement: semantics | Pass/Fail/Blocked/N/A | Role, name, description, reading-order, or semantic-structure evidence |
-| Requirement: keyboard/focus/dismissal | Pass/Fail/Blocked/N/A | Keyboard, focus order/return, focus visibility, or dismissal evidence |
-| Requirement: timing (transient/queued UI) | Pass/Fail/Blocked/N/A | SC 2.2.1 timeout/equivalent/persistence evidence, visible-only timer start, or N/A reason |
-| Requirement: announcement semantics (transient/queued UI) | Pass/Fail/Blocked/N/A | Live-region urgency, separate interactive content, no controls inside status/alert, focus behavior, escalation path, or N/A reason |
-| Requirement: reduced motion | Pass/Fail/Blocked/N/A | Reduced-motion behavior or documented N/A reason |
+| Explicit opt-in and state continuity | Pass/Fail/Blocked/N/A | Task/product rationale, state continuity, contract differences, or N/A reason |
 
-### Mobile viewport constraints
+### Transient and queued UI appendix, if applicable
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Requirement: software keyboard | Pass/Fail/Blocked/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
-| Requirement: viewport obstruction and placement | Pass/Fail/Blocked/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, relevant placements, narrow stack pressure, consistency, or documented N/A evidence |
-| Requirement: safe-area insets | Pass/Fail/Blocked/N/A | Edge/safe-area evidence or documented N/A reason |
-| Requirement: dynamic viewport/scroll behavior | Pass/Fail/Blocked/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
+| Queue/stack/timing/announcement/gesture alternatives | Pass/Fail/Blocked/N/A | Policy, obstruction/content fit, timing/announcement evidence, gesture alternatives, stack lifecycle evidence, or N/A reason |`,
         },
       ],
     },
     {
-      title: 'Diagnostic notes',
+      title: 'Diagnostics appendix',
       content: [
         {
           type: 'prose',
-          text: 'When a remote console is unavailable, a query-flagged, on-page forensics overlay can make iOS evidence reviewable in one screenshot. Keep it development-only, disable or remove it in production, set pointer-events: none so it cannot change the interaction under test, and record only the event, pointer, dispatch, focus, dismissal, and top-layer details needed for diagnosis.',
-        },
-        {
-          type: 'prose',
-          text: 'React instrumentation caveat: React may freeze props in development, so do not mutate a props object to wrap handlers. Instrument at a component or wrapper boundary, or, if dynamically intercepting props, return a wrapped copy so the instrumentation survives commits. This is a diagnostic note, not a normative component requirement.',
+          text: 'Non-normative aid: when a remote console is unavailable, a query-flagged, on-page forensics overlay can make iOS evidence reviewable in one screenshot. Keep it development-only, disable or remove it in production, set pointer-events: none so it cannot change the interaction under test, and record only the event, pointer, dispatch, focus, dismissal, viewport, and top-layer details needed for diagnosis.',
         },
       ],
     },
     {
-      title: 'Worked example',
+      title: 'Scope example',
       content: [
         {
           type: 'prose',
-          text: 'AlertDialog demonstrates the intended separation. The layout evidence covers a wide-viewport fine-pointer story, a narrow-viewport fine-pointer story, and a narrow-viewport touch story. Width determines the geometry: above 640px the dialog keeps the 400px centered surface and horizontal Cancel/destructive row; at 640px and below it uses token gutters, stacks destructive above Cancel, and wraps labels. Pointer and hover capability are independently testable but do not choose the layout.',
-        },
-        {
-          type: 'prose',
-          text: 'For that component, custom gestures, software-keyboard behavior, and safe-area behavior are N/A unless the implementation changes to own them. Existing focus, role, keyboard, reduced-motion, and dismissal contracts remain explicit review items and should be named in the evidence instead of inferred from the responsive layout work.',
+          text: 'AlertDialog illustrates the boundary: constrained-width evidence should show content fit, wrapping, target size, focus/dismissal continuity, and platform evidence if the dialog relies on platform-specific top-layer behavior. General copy alignment, visual polish, or unchanged roles belong in broader component-hardening review unless the responsive or adaptive behavior changes them.',
         },
       ],
     },
@@ -368,9 +330,9 @@ export const docs = {
           type: 'list',
           style: 'unordered',
           items: [
-            '`astryx docs layout` for frame, region, spacing, and breakpoint contracts',
+            '`astryx docs layout` for frame, region, spacing, and breakpoint contracts outside this scoped review',
             '`astryx docs browser-support` for platform feature support and feature detection',
-            '`astryx docs motion` for reduced-motion expectations and motion token use',
+            '`astryx docs motion` for general motion tokens, duration, easing, purpose, polish, and performance guidance outside this lifecycle-focused rubric',
           ],
         },
       ],

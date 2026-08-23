@@ -301,9 +301,9 @@ describe('manifest reconciliation', () => {
         'https://github.com/facebook/astryx/wiki/Component-Hardening-Protocol',
       humanReview: true,
     });
-    expect(readinessCheck.description).toContain('Blocked/Not verified');
+    expect(readinessCheck.description).toContain('Blocked');
     expect(readinessCheck.description).toContain(
-      'iOS/WebKit platform behavior',
+      'mobile viewport/platform constraints',
     );
 
     scaffold();
@@ -312,7 +312,7 @@ describe('manifest reconciliation', () => {
       declared: {
         responsiveInteractionReadiness: {
           state: 'passed',
-          note: 'Checklist completed with Pass, Blocked/Not verified, and N/A rows.',
+          note: 'Checklist completed with Pass, Blocked, and N/A rows.',
         },
       },
     });

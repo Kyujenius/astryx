@@ -295,7 +295,7 @@ const CHECKS = [
     'humanReview',
     'responsiveInteractionReadiness',
     'Responsive and Interaction Readiness',
-    'The reusable Responsive and Interaction Readiness rubric records Pass, Fail, Blocked/Not verified, or N/A with evidence for adaptive presentation choice, transient and queued UI, viewport obstruction and placement, input, gesture, iOS/WebKit platform behavior, mobile viewport, and WCAG 2.2 AA contracts.',
+    'The Responsive and Interaction Readiness rubric records Pass, Fail, Blocked, or N/A outcomes with evidence for responsive layout, input modality, interaction-affecting motion, mobile viewport/platform constraints, and accessibility effects of those behaviors.',
   ],
   [
     'hardenReview',
