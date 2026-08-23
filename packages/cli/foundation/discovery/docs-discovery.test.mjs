@@ -83,6 +83,7 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).toContain('Check / Result / Evidence report');
     expect(serialized).toContain('| Check | Result | Evidence |');
     expect(serialized).toContain('Use Pass when the row has concrete evidence');
+    expect(serialized).toContain('Pass/Fail/Blocked/N/A');
     for (const category of [
       'Responsive layout',
       'Touch, pointer, and hover',
@@ -142,6 +143,8 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).toContain(
       '2.5.8: at least 24x24 CSS px or a permitted exception',
     );
+    expect(serialized).toContain('Platform and browser evidence layer');
+    expect(serialized).toContain('Diagnostic notes');
     expect(serialized).not.toContain(['Small', 'narrow screen'].join('/'));
     expect(serialized.toLowerCase()).not.toContain(
       ['desktop', 'with', 'small screen'].join(' '),
@@ -150,6 +153,67 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).not.toContain(
       String.fromCharCode(71, 111, 111, 103, 108, 101),
     );
+  });
+
+  it('documents tooling limits before iOS platform behavior can pass', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain(
+      'Storybook and Playwright are useful evidence layers',
+    );
+    expect(serialized).toContain('cannot establish iOS Safari');
+    expect(serialized).toContain('Playwright WebKit runs macOS WebKit');
+    expect(serialized).toContain('does not reproduce the iOS shell');
+    expect(serialized).toContain('Do not claim Pass');
+  });
+
+  it('requires real iOS evidence and separates blocked from inapplicable', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    for (const requiredPhrase of [
+      'iOS Simulator or physical iOS device',
+      'touch dispatch',
+      'native top-layer dialog/popover',
+      'focus/dismissal propagation',
+      'visual viewport/software keyboard',
+      'safe-area/platform chrome',
+    ]) {
+      expect(serialized).toContain(requiredPhrase);
+    }
+    expect(serialized).toContain('mark Blocked or Not verified instead of N/A');
+    expect(serialized).toContain(
+      'reserve N/A for behavior that is genuinely inapplicable',
+    );
+    expect(serialized).toContain('iOS/WebKit platform verification');
+  });
+
+  it('keeps platform evidence as a layer over the four scenarios', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('Preserve these four cross-axis scenarios');
+    expect(serialized).toContain(
+      'rather than creating a fifth device stereotype',
+    );
+    for (const source of [
+      'Storybook',
+      'Playwright browser engines',
+      'iOS Simulator or device',
+      'Physical-device checks',
+    ]) {
+      expect(serialized).toContain(source);
+    }
+    expect(serialized).toContain('Cannot prove');
+  });
+
+  it('keeps diagnostics optional and development-only', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(serialized).toContain('query-flagged, on-page forensics overlay');
+    expect(serialized).toContain('development-only');
+    expect(serialized).toContain('pointer-events: none');
+    expect(serialized).toContain('remote console is unavailable');
+    expect(serialized).toContain('React may freeze props in development');
+    expect(serialized).toContain(
+      'do not mutate a props object to wrap handlers',
+    );
+    expect(serialized).toContain('return a wrapped copy');
+    expect(serialized).toContain('not a normative component requirement');
   });
 });
 

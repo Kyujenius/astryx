@@ -293,13 +293,18 @@ describe('manifest reconciliation', () => {
 
   it('treats responsive and interaction readiness as an evidenced human-review check', () => {
     expect(HUMAN_REVIEW_KEYS).toContain('responsiveInteractionReadiness');
-    expect(getCheck('responsiveInteractionReadiness')).toMatchObject({
+    const readinessCheck = getCheck('responsiveInteractionReadiness');
+    expect(readinessCheck).toMatchObject({
       stageKey: 'hardenReview',
       sectionKey: 'humanReview',
       protocolUrl:
         'https://github.com/facebook/astryx/wiki/Component-Hardening-Protocol',
       humanReview: true,
     });
+    expect(readinessCheck.description).toContain('Blocked/Not verified');
+    expect(readinessCheck.description).toContain(
+      'iOS/WebKit platform behavior',
+    );
 
     scaffold();
     const result = auditCandidate(root, {
@@ -307,7 +312,7 @@ describe('manifest reconciliation', () => {
       declared: {
         responsiveInteractionReadiness: {
           state: 'passed',
-          note: 'Checklist completed with Pass and N/A rows.',
+          note: 'Checklist completed with Pass, Blocked/Not verified, and N/A rows.',
         },
       },
     });

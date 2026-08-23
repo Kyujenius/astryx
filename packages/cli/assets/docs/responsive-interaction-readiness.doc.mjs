@@ -7,7 +7,7 @@ export const docs = {
   title: 'Responsive and Interaction Readiness',
   category: 'guide',
   description:
-    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, transient and queued UI, mobile viewport constraints, and WCAG 2.2 AA accessibility.',
+    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, transient and queued UI, mobile viewport constraints, platform/browser evidence, and WCAG 2.2 AA accessibility.',
 
   sections: [
     {
@@ -15,7 +15,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'Use this rubric whenever a new or changed component could behave differently across viewport sizes or input modes. It extends the component hardening checklist: record each applicable row as Pass, Fail, or N/A, and attach evidence in the issue, PR description, or lab-readiness manifest link that reviewers can open.',
+          text: 'Use this rubric whenever a new or changed component could behave differently across viewport sizes, input modes, or browser/platform shells. It extends the component hardening checklist: record each applicable row as Pass, Fail, Blocked/Not verified, or N/A, and attach evidence in the issue, PR description, or lab-readiness manifest link that reviewers can open.',
         },
         {
           type: 'prose',
@@ -25,6 +25,10 @@ export const docs = {
           type: 'prose',
           text: 'First decide from task semantics and product intent whether the interaction stays on the same surface or intentionally changes presentation. Responsive pressure alone normally means reflowing or resizing the component, not silently substituting another component.',
         },
+        {
+          type: 'prose',
+          text: 'Storybook and Playwright are useful evidence layers, but they cannot establish iOS Safari or platform-shell behavior. Playwright WebKit runs macOS WebKit; it does not reproduce the iOS shell or every native top-layer `<dialog>` and popover behavior. Do not claim Pass for iOS touch-interaction behavior from Storybook or Playwright WebKit alone.',
+        },
       ],
     },
     {
@@ -32,7 +36,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'Scenario coverage proves viewport-width independence and input-capability independence. Keep these separate from the requirement categories below: a scenario can pass while a requirement still fails, and a requirement can need evidence from more than one scenario.',
+          text: 'Scenario coverage proves viewport-width independence and input-capability independence. Preserve these four cross-axis scenarios; add platform and browser evidence to the relevant scenario rather than creating a fifth device stereotype. A scenario can pass while a requirement still fails, and a requirement can need evidence from more than one scenario.',
         },
         {
           type: 'table',
@@ -41,28 +45,63 @@ export const docs = {
             [
               'Wide viewport + fine pointer + hover',
               'The default wide desktop contract remains intact.',
-              'Story or screenshot plus focused test when layout/order/interaction can regress.',
+              'Storybook or desktop-browser screenshot plus focused test when layout/order/interaction can regress.',
             ],
             [
               'Narrow viewport + fine pointer + hover',
               'Width-driven reflow does not depend on touch or no-hover media queries.',
-              'Story or viewport test demonstrating the same narrow layout as mobile when applicable.',
+              'Storybook or browser viewport test demonstrating the same narrow layout as mobile when applicable.',
             ],
             [
               'Narrow viewport + coarse pointer + no hover',
               'The mobile/touch contract works when width and touch constraints appear together.',
-              'Story or emulator/device capture plus activation evidence.',
+              'Browser/emulator/device capture plus activation evidence; use iOS Simulator or physical iOS evidence when the claim supports iOS platform behavior.',
             ],
             [
               'Wide viewport + coarse pointer + no hover',
               'Input capability does not accidentally force narrow/mobile geometry.',
-              'Story, browser/device capture, or media-query test when pointer branches exist.',
+              'Storybook, browser/device capture, or media-query test when pointer branches exist; add platform evidence when shell behavior is part of the claim.',
             ],
           ],
         },
         {
           type: 'prose',
           text: 'If a scenario is irrelevant, mark it N/A with the reason. Example: a purely static text component has no pointer-activation evidence to provide, but it still owes content-fit evidence at the supported widths where it renders. Adaptive recipes that switch presentation owe all four scenario outcomes plus an explicit override or test path for the adaptive choice.',
+        },
+      ],
+    },
+    {
+      title: 'Platform and browser evidence layer',
+      content: [
+        {
+          type: 'prose',
+          text: 'Choose the lightest evidence that can actually prove the claim. If behavior supports iOS and depends on touch dispatch, native top-layer dialog or popover behavior, focus or dismissal propagation, visual viewport/software keyboard behavior, safe-area/platform chrome, or other WebKit-on-iOS behavior, require real iOS evidence from an iOS Simulator or physical iOS device. If that evidence is unavailable, mark the outcome Blocked or Not verified; reserve N/A for behavior that is genuinely inapplicable.',
+        },
+        {
+          type: 'table',
+          headers: ['Evidence source', 'Appropriate for', 'Cannot prove'],
+          rows: [
+            [
+              'Storybook',
+              'Component states, examples, visual review, responsive width checks, and reviewer screenshots in a controlled desktop browser.',
+              'Real touch dispatch, native iOS Safari/platform shell, iOS visual viewport/software keyboard, platform chrome, or every native top-layer `<dialog>`/popover behavior.',
+            ],
+            [
+              'Playwright browser engines',
+              'Repeatable keyboard, pointer, layout, focus, and browser-regression tests across supported desktop engines.',
+              'iOS Safari/platform-shell behavior. Playwright WebKit is macOS WebKit and does not reproduce the iOS shell or every native top-layer `<dialog>`/popover behavior.',
+            ],
+            [
+              'iOS Simulator or device',
+              'iOS Safari/WebKit evidence for touch dispatch, top-layer dialog/popover propagation, focus/dismissal propagation, visual viewport, software keyboard, safe area, and platform chrome behavior.',
+              'Physical-device-only constraints such as actual hardware ergonomics, camera/notch variation not represented by the simulator profile, real network/performance pressure, or accessory/input quirks.',
+            ],
+            [
+              'Physical-device checks',
+              'Final verification when real hardware shape, OS/browser version, input method, sensor/notch/chrome configuration, or performance can affect the experience.',
+              'A complete automated regression suite by itself; keep focused tests and Storybook evidence for repeatable coverage.',
+            ],
+          ],
         },
       ],
     },
@@ -150,6 +189,11 @@ export const docs = {
               'N/A when the component has no custom pointer handling, gesture semantics, drag interactions, or pointer-capture flows.',
             ],
             [
+              'iOS/WebKit platform behavior',
+              'For touch-interaction claims that support iOS, require evidence from an iOS Simulator or physical iOS device when behavior depends on touch dispatch, native top-layer dialog/popover, focus/dismissal propagation, visual viewport/software keyboard, safe-area/platform chrome, or other WebKit-on-iOS behavior. Storybook and Playwright WebKit alone cannot establish Pass for these claims.',
+              'N/A only when the component does not support iOS or the behavior is genuinely independent of iOS touch/WebKit/platform-shell behavior. If real iOS evidence is unavailable, mark Blocked or Not verified instead of N/A.',
+            ],
+            [
               'Transient and queued UI: gesture alternatives',
               'Gestures are optional accelerators. Provide button and keyboard alternatives, preserve native scrolling, require directional intent, test below-threshold, wrong-direction, and pointercancel paths, and pause timers during active pointer interaction.',
               'N/A when the component has no transient gesture, swipe, pointer-drag, or timer behavior; record the reason.',
@@ -204,13 +248,13 @@ export const docs = {
           rows: [
             [
               'Software keyboard',
-              'Check resize, occlusion, focus movement, and scroll position where the component owns inputs or viewport geometry.',
-              'N/A when the component has no text input and does not own viewport geometry around focused controls.',
+              'Check resize, occlusion, focus movement, and scroll position where the component owns inputs or viewport geometry. For iOS-supported behavior, use an iOS Simulator or physical device rather than Storybook or Playwright WebKit alone.',
+              'N/A when the component has no text input and does not own viewport geometry around focused controls; unavailable iOS evidence is Blocked/Not verified, not N/A.',
             ],
             [
               'Viewport obstruction and placement',
-              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose top, bottom, or edge placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test relevant placements, narrow stack pressure, and both edge placements when the component exposes them; maintain consistency within a flow and record evidence.',
-              'N/A when the component is not fixed or viewport-anchored, exposes no placement choice, and cannot obstruct or be obstructed by viewport-edge UI; record the reason.',
+              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose top, bottom, or edge placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test relevant placements, narrow stack pressure, and both edge placements when the component exposes them; use iOS Simulator/device evidence when iOS platform chrome or visual viewport behavior is part of the claim; maintain consistency within a flow and record evidence.',
+              'N/A when the component is not fixed or viewport-anchored, exposes no placement choice, and cannot obstruct or be obstructed by viewport-edge UI; unavailable platform evidence is Blocked/Not verified, not N/A.',
             ],
             [
               'Safe-area insets',
@@ -239,7 +283,7 @@ export const docs = {
         },
         {
           type: 'prose',
-          text: 'Use Pass when the row has concrete evidence such as a story, test, screenshot, device capture, or documented reasoning. Use Fail when applicable work remains. Use N/A only when the area does not apply, and include the reason.',
+          text: 'Use Pass when the row has concrete evidence that can prove the claim: a story, test, screenshot, device capture, or documented reasoning, with iOS Simulator/device evidence for iOS platform behavior. Use Fail when applicable work remains. Use Blocked or Not verified when the behavior applies but the required platform evidence is unavailable. Use N/A only when the area does not apply, and include the reason.',
         },
         {
           type: 'code',
@@ -251,42 +295,56 @@ export const docs = {
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Scenario: wide viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
-| Scenario: narrow viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
-| Requirement: presentation choice | Pass/Fail/N/A | Same-surface decision, explicit adaptive option, contract differences, or N/A reason when no substitution is involved |
-| Requirement: available space/content fit/wrapping/overflow | Pass/Fail/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
-| Requirement: queue/stack policy (transient/queued UI) | Pass/Fail/N/A | Stack/queue/replace/deduplicate policy, visible limit, visible-only timeout start, long text/actions/dismiss fit, or N/A reason |
+| Scenario: wide viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Story/test/screenshot link |
+| Scenario: narrow viewport + fine pointer + hover | Pass/Fail/Blocked/N/A | Story/test/screenshot link |
+| Requirement: presentation choice | Pass/Fail/Blocked/N/A | Same-surface decision, explicit adaptive option, contract differences, or N/A reason when no substitution is involved |
+| Requirement: available space/content fit/wrapping/overflow | Pass/Fail/Blocked/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
+| Requirement: queue/stack policy (transient/queued UI) | Pass/Fail/Blocked/N/A | Stack/queue/replace/deduplicate policy, visible limit, visible-only timeout start, long text/actions/dismiss fit, or N/A reason |
 
 ### Touch, pointer, and hover
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Scenario: narrow viewport + coarse pointer + no hover | Pass/Fail/N/A | Story/test/device capture link |
-| Scenario: wide viewport + coarse pointer + no hover | Pass/Fail/N/A | Story/test/device capture link |
-| Requirement: hover independence | Pass/Fail/N/A | Non-hover path or documented N/A reason |
-| Requirement: pointer/custom gesture behavior | Pass/Fail/N/A | Pointer, activation, cancellation, or custom-handler evidence |
-| Requirement: gesture alternatives (transient/queued UI) | Pass/Fail/N/A | Button/keyboard alternative, native scroll preservation, directional intent, below-threshold/wrong-direction/pointercancel tests, timer pause, or N/A reason |
-| Requirement: non-gesture alternatives where applicable | Pass/Fail/N/A | Alternative path or documented N/A reason |
+| Scenario: narrow viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Story/test/device capture link |
+| Scenario: wide viewport + coarse pointer + no hover | Pass/Fail/Blocked/N/A | Story/test/device capture link |
+| iOS/WebKit platform verification | Pass/Blocked/Not verified/N/A | OS/device or Simulator version, browser, input method, and evidence link/screenshot; use Blocked/Not verified if unavailable, not Pass from Storybook/Playwright WebKit alone |
+| Requirement: hover independence | Pass/Fail/Blocked/N/A | Non-hover path or documented N/A reason |
+| Requirement: pointer/custom gesture behavior | Pass/Fail/Blocked/N/A | Pointer, activation, cancellation, or custom-handler evidence |
+| Requirement: gesture alternatives (transient/queued UI) | Pass/Fail/Blocked/N/A | Button/keyboard alternative, native scroll preservation, directional intent, below-threshold/wrong-direction/pointercancel tests, timer pause, or N/A reason |
+| Requirement: non-gesture alternatives where applicable | Pass/Fail/Blocked/N/A | Alternative path or documented N/A reason |
 
 ### Accessibility and interaction contracts
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Requirement: WCAG 2.2 AA target size | Pass/Fail/N/A | 2.5.8 24x24 CSS px or permitted exception evidence |
-| Requirement: semantics | Pass/Fail/N/A | Role, name, description, reading-order, or semantic-structure evidence |
-| Requirement: keyboard/focus/dismissal | Pass/Fail/N/A | Keyboard, focus order/return, focus visibility, or dismissal evidence |
-| Requirement: timing (transient/queued UI) | Pass/Fail/N/A | SC 2.2.1 timeout/equivalent/persistence evidence, visible-only timer start, or N/A reason |
-| Requirement: announcement semantics (transient/queued UI) | Pass/Fail/N/A | Live-region urgency, separate interactive content, no controls inside status/alert, focus behavior, escalation path, or N/A reason |
-| Requirement: reduced motion | Pass/Fail/N/A | Reduced-motion behavior or documented N/A reason |
+| Requirement: WCAG 2.2 AA target size | Pass/Fail/Blocked/N/A | 2.5.8 24x24 CSS px or permitted exception evidence |
+| Requirement: semantics | Pass/Fail/Blocked/N/A | Role, name, description, reading-order, or semantic-structure evidence |
+| Requirement: keyboard/focus/dismissal | Pass/Fail/Blocked/N/A | Keyboard, focus order/return, focus visibility, or dismissal evidence |
+| Requirement: timing (transient/queued UI) | Pass/Fail/Blocked/N/A | SC 2.2.1 timeout/equivalent/persistence evidence, visible-only timer start, or N/A reason |
+| Requirement: announcement semantics (transient/queued UI) | Pass/Fail/Blocked/N/A | Live-region urgency, separate interactive content, no controls inside status/alert, focus behavior, escalation path, or N/A reason |
+| Requirement: reduced motion | Pass/Fail/Blocked/N/A | Reduced-motion behavior or documented N/A reason |
 
 ### Mobile viewport constraints
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Requirement: software keyboard | Pass/Fail/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
-| Requirement: viewport obstruction and placement | Pass/Fail/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, relevant placements, narrow stack pressure, consistency, or documented N/A evidence |
-| Requirement: safe-area insets | Pass/Fail/N/A | Edge/safe-area evidence or documented N/A reason |
-| Requirement: dynamic viewport/scroll behavior | Pass/Fail/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
+| Requirement: software keyboard | Pass/Fail/Blocked/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
+| Requirement: viewport obstruction and placement | Pass/Fail/Blocked/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, relevant placements, narrow stack pressure, consistency, or documented N/A evidence |
+| Requirement: safe-area insets | Pass/Fail/Blocked/N/A | Edge/safe-area evidence or documented N/A reason |
+| Requirement: dynamic viewport/scroll behavior | Pass/Fail/Blocked/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
+        },
+      ],
+    },
+    {
+      title: 'Diagnostic notes',
+      content: [
+        {
+          type: 'prose',
+          text: 'When a remote console is unavailable, a query-flagged, on-page forensics overlay can make iOS evidence reviewable in one screenshot. Keep it development-only, disable or remove it in production, set pointer-events: none so it cannot change the interaction under test, and record only the event, pointer, dispatch, focus, dismissal, and top-layer details needed for diagnosis.',
+        },
+        {
+          type: 'prose',
+          text: 'React instrumentation caveat: React may freeze props in development, so do not mutate a props object to wrap handlers. Instrument at a component or wrapper boundary, or, if dynamically intercepting props, return a wrapped copy so the instrumentation survives commits. This is a diagnostic note, not a normative component requirement.',
         },
       ],
     },
