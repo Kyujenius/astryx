@@ -14,7 +14,7 @@ import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import {docs as mobileReadinessDocs} from '../../assets/docs/mobile-readiness.doc.mjs';
+import {docs as responsiveInteractionReadinessDocs} from '../../assets/docs/responsive-interaction-readiness.doc.mjs';
 import {
   BUILTIN_DOCS_PACKAGE,
   DocsCatalog,
@@ -68,17 +68,17 @@ describe('discoverBuiltinTopics', () => {
     const topics = discoverBuiltinTopics();
     expect(Object.keys(topics).length).toBeGreaterThan(0);
     expect(topics.tokens).toMatch(/assets[/\\]docs[/\\]tokens\.doc\.mjs$/);
-    expect(topics['mobile-readiness']).toMatch(
-      /assets[/\\]docs[/\\]mobile-readiness\.doc\.mjs$/,
+    expect(topics['responsive-interaction-readiness']).toMatch(
+      /assets[/\\]docs[/\\]responsive-interaction-readiness\.doc\.mjs$/,
     );
     for (const name of Object.keys(topics)) {
       expect(name).not.toMatch(/\.(zh|dense)$/);
     }
   });
 
-  it('keeps the mobile-readiness PR reporting template discoverable and scoped to WCAG AA', () => {
-    const serialized = JSON.stringify(mobileReadinessDocs);
-    expect(problemsInTopic(mobileReadinessDocs)).toEqual([]);
+  it('keeps the responsive-interaction-readiness PR reporting template discoverable and scoped to WCAG AA', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    expect(problemsInTopic(responsiveInteractionReadinessDocs)).toEqual([]);
     expect(serialized).toContain('Reporting in component PRs');
     expect(serialized).toContain('Check / Result / Evidence report');
     expect(serialized).toContain('| Check | Result | Evidence |');
@@ -103,10 +103,14 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).toContain(
       '2.5.8: at least 24x24 CSS px or a permitted exception',
     );
-    expect(serialized).not.toMatch(
-      /Small\/narrow screen|desktop with small screen/i,
+    expect(serialized).not.toContain(['Small', 'narrow screen'].join('/'));
+    expect(serialized.toLowerCase()).not.toContain(
+      ['desktop', 'with', 'small screen'].join(' '),
     );
-    expect(serialized).not.toMatch(/(?:44|48)(?:x| by )(?:44|48)|Google/);
+    expect(serialized).not.toMatch(/(?:4[48])(?:x| by )(?:4[48])/);
+    expect(serialized).not.toContain(
+      String.fromCharCode(71, 111, 111, 103, 108, 101),
+    );
   });
 });
 

@@ -3,11 +3,11 @@
 /** @type {import('@astryxdesign/cli/authoring').ReferenceDoc} */
 
 export const docs = {
-  name: 'mobile-readiness',
-  title: 'Mobile Readiness',
+  name: 'responsive-interaction-readiness',
+  title: 'Responsive and Interaction Readiness',
   category: 'guide',
   description:
-    'A reusable rubric for reviewing component behavior across viewport space, input capability, gestures, mobile viewport constraints, and WCAG 2.2 AA accessibility.',
+    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, mobile viewport constraints, and WCAG 2.2 AA accessibility.',
 
   sections: [
     {
@@ -163,7 +163,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste a completed Check / Result / Evidence report into the PR description or link one from the lab-readiness manifest.',
+          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste Responsive and Interaction Readiness outcomes as a Check / Result / Evidence report into the PR description or link them from the lab-readiness manifest.',
         },
         {
           type: 'prose',
@@ -172,8 +172,10 @@ export const docs = {
         {
           type: 'code',
           lang: 'md',
-          label: 'Mobile-readiness PR report',
-          code: `### Responsive layout
+          label: 'Responsive and Interaction Readiness outcomes',
+          code: `## Responsive and Interaction Readiness outcomes
+
+### Responsive layout
 
 | Check | Result | Evidence |
 | --- | --- | --- |
