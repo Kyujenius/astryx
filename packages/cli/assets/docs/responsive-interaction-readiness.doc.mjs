@@ -122,7 +122,7 @@ export const docs = {
         },
         {
           type: 'prose',
-          text: 'Anti-patterns: silent component swapping at a breakpoint, breakpoint-as-device detection, and treating touch capability as a mandate to change presentation.',
+          text: 'Anti-patterns: silent component swapping at a breakpoint, breakpoint-as-device detection, treating touch capability as a mandate to change presentation, and choosing top or bottom placement because “touch device” without obstruction evidence.',
         },
         {type: 'heading', level: 3, text: 'Touch, pointer, and hover'},
         {
@@ -188,6 +188,11 @@ export const docs = {
               'N/A when the component has no text input and does not own viewport geometry around focused controls.',
             ],
             [
+              'Viewport obstruction and placement',
+              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test both relevant edge placements when the component exposes them, maintain consistency within a flow, and record evidence.',
+              'N/A when the component is not fixed or viewport-anchored, exposes no placement choice, and cannot obstruct or be obstructed by viewport-edge UI; record the reason.',
+            ],
+            [
               'Safe-area insets',
               'Edge-anchored or full-viewport UI accounts for safe-area insets without hiding actions or content.',
               'N/A when the component never reaches viewport edges or delegates safe-area handling to a parent shell.',
@@ -251,6 +256,7 @@ export const docs = {
 | Check | Result | Evidence |
 | --- | --- | --- |
 | Requirement: software keyboard | Pass/Fail/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
+| Requirement: viewport obstruction and placement | Pass/Fail/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, both-edge-placement, consistency, or documented N/A evidence |
 | Requirement: safe-area insets | Pass/Fail/N/A | Edge/safe-area evidence or documented N/A reason |
 | Requirement: dynamic viewport/scroll behavior | Pass/Fail/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
         },

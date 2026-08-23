@@ -108,6 +108,15 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).toContain('silent component swapping');
     expect(serialized).toContain('breakpoint-as-device detection');
     expect(serialized).toContain(
+      'Requirement: viewport obstruction and placement',
+    );
+    expect(serialized).toContain('actual obstructions and content priority');
+    expect(serialized).toContain('browser chrome');
+    expect(serialized).toContain('bottom navigation/toolbars');
+    expect(serialized).toContain('Safe-area support does not prove');
+    expect(serialized).toContain('both relevant edge placements');
+    expect(serialized).toContain('touch device');
+    expect(serialized).toContain(
       'all four scenario outcomes plus an explicit override or test path',
     );
     expect(serialized).toContain(
