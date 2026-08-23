@@ -7,7 +7,7 @@ export const docs = {
   title: 'Responsive and Interaction Readiness',
   category: 'guide',
   description:
-    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, mobile viewport constraints, and WCAG 2.2 AA accessibility.',
+    'A reusable rubric for reviewing responsive layout, touch/pointer/hover behavior, gestures, transient and queued UI, mobile viewport constraints, and WCAG 2.2 AA accessibility.',
 
   sections: [
     {
@@ -71,7 +71,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'Use these four categories to organize the review outcome after the scenarios are covered.',
+          text: 'Use these four categories to organize the review outcome after the scenarios are covered. The Transient and queued UI checks are conditional: apply them to toasts, snackbars, notifications, transient banners, and similar queued or auto-dismissing surfaces; unrelated components should mark them N/A with the reason.',
         },
         {type: 'heading', level: 3, text: 'Responsive layout'},
         {
@@ -118,6 +118,11 @@ export const docs = {
               'Use shared breakpoint names and values: none 0, sm 640px, md 768px, lg 1024px. Reflow from viewport or container space and actual content fit; long labels and localized copy wrap instead of clipping or causing horizontal overflow.',
               'Rarely N/A. Even non-interactive components need evidence that their content fits or intentionally scrolls within their supported containers.',
             ],
+            [
+              'Transient and queued UI: queue/stack policy and content fit',
+              'For toasts, snackbars, notifications, transient banners, and similar surfaces, define whether concurrent items stack, queue, replace, or deduplicate. Limit visible items from available space rather than touch capability, start timeouts only once an item is visible, and verify long localized text, actions, and dismiss controls do not overflow.',
+              'N/A when the component does not queue, auto-dismiss, or show transient feedback surfaces; record the reason.',
+            ],
           ],
         },
         {
@@ -143,6 +148,11 @@ export const docs = {
               'Pointer and gesture behavior',
               'Custom pointer handling uses Pointer Events where possible, handles mouse/touch/pen consistently, and does not block click, focus, text selection, or native scrolling. Path-based, multipointer, dragging, or other custom gestures need non-gesture alternatives where applicable, and pointer cancellation semantics must avoid accidental activation.',
               'N/A when the component has no custom pointer handling, gesture semantics, drag interactions, or pointer-capture flows.',
+            ],
+            [
+              'Transient and queued UI: gesture alternatives',
+              'Gestures are optional accelerators. Provide button and keyboard alternatives, preserve native scrolling, require directional intent, test below-threshold, wrong-direction, and pointercancel paths, and pause timers during active pointer interaction.',
+              'N/A when the component has no transient gesture, swipe, pointer-drag, or timer behavior; record the reason.',
             ],
           ],
         },
@@ -175,6 +185,16 @@ export const docs = {
               'Motion and animation respect reduced-motion behavior and preserve the component contract when motion is reduced.',
               'N/A only when the component has no motion or animation behavior.',
             ],
+            [
+              'Transient and queued UI: timing',
+              'WCAG 2.2 AA SC 2.2.1 applies to timed content; do not claim that five seconds is inherently compliant. Actionable or non-redundant feedback persists or has an untimed equivalent, and critical or blocking information escalates to persistent in-context UI or a dialog.',
+              'N/A when the component has no timed, auto-dismissing, queued, or transient feedback behavior; record the reason.',
+            ],
+            [
+              'Transient and queued UI: announcement semantics',
+              'Separate interactive visual content from live-region announcements. Choose polite or assertive announcement based on urgency, do not place controls inside status or alert live regions, appearance does not move focus, and document keyboard entry/restore when provided.',
+              'N/A when the component has no live-region or transient feedback semantics; record the reason.',
+            ],
           ],
         },
         {type: 'heading', level: 3, text: 'Mobile viewport constraints'},
@@ -189,7 +209,7 @@ export const docs = {
             ],
             [
               'Viewport obstruction and placement',
-              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test both relevant edge placements when the component exposes them, maintain consistency within a flow, and record evidence.',
+              'For fixed overlays, transient feedback, floating actions, and other viewport-anchored surfaces, choose top, bottom, or edge placement from actual obstructions and content priority, not from touch or coarse pointer alone. Evaluate software keyboard, safe-area insets, browser chrome, bottom navigation/toolbars, sheets, focused controls, and important top navigation/status. Safe-area support does not prove keyboard or app-chrome avoidance. Test relevant placements, narrow stack pressure, and both edge placements when the component exposes them; maintain consistency within a flow and record evidence.',
               'N/A when the component is not fixed or viewport-anchored, exposes no placement choice, and cannot obstruct or be obstructed by viewport-edge UI; record the reason.',
             ],
             [
@@ -203,6 +223,10 @@ export const docs = {
               'N/A for inline components or overlays whose position and size never interact with viewport edges, keyboard, or scroll locking.',
             ],
           ],
+        },
+        {
+          type: 'prose',
+          text: 'Transient UI anti-patterns: auto-hide actionable feedback without an untimed equivalent, controls inside alert/status live regions, an unbounded narrow stack, touch=>placement assumptions, and gesture-only dismissal.',
         },
       ],
     },
@@ -231,6 +255,7 @@ export const docs = {
 | Scenario: narrow viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
 | Requirement: presentation choice | Pass/Fail/N/A | Same-surface decision, explicit adaptive option, contract differences, or N/A reason when no substitution is involved |
 | Requirement: available space/content fit/wrapping/overflow | Pass/Fail/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
+| Requirement: queue/stack policy (transient/queued UI) | Pass/Fail/N/A | Stack/queue/replace/deduplicate policy, visible limit, visible-only timeout start, long text/actions/dismiss fit, or N/A reason |
 
 ### Touch, pointer, and hover
 
@@ -240,6 +265,7 @@ export const docs = {
 | Scenario: wide viewport + coarse pointer + no hover | Pass/Fail/N/A | Story/test/device capture link |
 | Requirement: hover independence | Pass/Fail/N/A | Non-hover path or documented N/A reason |
 | Requirement: pointer/custom gesture behavior | Pass/Fail/N/A | Pointer, activation, cancellation, or custom-handler evidence |
+| Requirement: gesture alternatives (transient/queued UI) | Pass/Fail/N/A | Button/keyboard alternative, native scroll preservation, directional intent, below-threshold/wrong-direction/pointercancel tests, timer pause, or N/A reason |
 | Requirement: non-gesture alternatives where applicable | Pass/Fail/N/A | Alternative path or documented N/A reason |
 
 ### Accessibility and interaction contracts
@@ -249,6 +275,8 @@ export const docs = {
 | Requirement: WCAG 2.2 AA target size | Pass/Fail/N/A | 2.5.8 24x24 CSS px or permitted exception evidence |
 | Requirement: semantics | Pass/Fail/N/A | Role, name, description, reading-order, or semantic-structure evidence |
 | Requirement: keyboard/focus/dismissal | Pass/Fail/N/A | Keyboard, focus order/return, focus visibility, or dismissal evidence |
+| Requirement: timing (transient/queued UI) | Pass/Fail/N/A | SC 2.2.1 timeout/equivalent/persistence evidence, visible-only timer start, or N/A reason |
+| Requirement: announcement semantics (transient/queued UI) | Pass/Fail/N/A | Live-region urgency, separate interactive content, no controls inside status/alert, focus behavior, escalation path, or N/A reason |
 | Requirement: reduced motion | Pass/Fail/N/A | Reduced-motion behavior or documented N/A reason |
 
 ### Mobile viewport constraints
@@ -256,7 +284,7 @@ export const docs = {
 | Check | Result | Evidence |
 | --- | --- | --- |
 | Requirement: software keyboard | Pass/Fail/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
-| Requirement: viewport obstruction and placement | Pass/Fail/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, both-edge-placement, consistency, or documented N/A evidence |
+| Requirement: viewport obstruction and placement | Pass/Fail/N/A | Keyboard, safe-area, browser/app chrome, nav/toolbars, sheet, focused-control, content-priority, relevant placements, narrow stack pressure, consistency, or documented N/A evidence |
 | Requirement: safe-area insets | Pass/Fail/N/A | Edge/safe-area evidence or documented N/A reason |
 | Requirement: dynamic viewport/scroll behavior | Pass/Fail/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
         },

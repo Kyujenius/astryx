@@ -110,12 +110,32 @@ describe('discoverBuiltinTopics', () => {
     expect(serialized).toContain(
       'Requirement: viewport obstruction and placement',
     );
+    expect(serialized).toContain('top, bottom, or edge placement');
     expect(serialized).toContain('actual obstructions and content priority');
     expect(serialized).toContain('browser chrome');
     expect(serialized).toContain('bottom navigation/toolbars');
     expect(serialized).toContain('Safe-area support does not prove');
-    expect(serialized).toContain('both relevant edge placements');
+    expect(serialized).toContain('both edge placements');
     expect(serialized).toContain('touch device');
+    for (const transientCheck of [
+      'Transient and queued UI',
+      'stack, queue, replace, or deduplicate',
+      'start timeouts only once an item is visible',
+      'long localized text, actions, and dismiss controls',
+      'Gestures are optional accelerators',
+      'below-threshold, wrong-direction, and pointercancel',
+      'pause timers during active pointer interaction',
+      'SC 2.2.1 applies to timed content',
+      'five seconds is inherently compliant',
+      'untimed equivalent',
+      'Separate interactive visual content from live-region announcements',
+      'appearance does not move focus',
+      'do not place controls inside status or alert live regions',
+      'gesture-only dismissal',
+      'unbounded narrow stack',
+    ]) {
+      expect(serialized).toContain(transientCheck);
+    }
     expect(serialized).toContain(
       'all four scenario outcomes plus an explicit override or test path',
     );
