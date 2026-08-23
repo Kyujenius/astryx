@@ -57,6 +57,210 @@ function configureGitIdentity(cwd) {
   git(cwd, 'config', 'user.email', BOT_EMAIL);
 }
 
+function githubRequest({
+  repository,
+  token,
+  method = 'GET',
+  endpoint,
+  body,
+  paginate = false,
+}) {
+  const args = ['api'];
+  if (method !== 'GET') args.push('-X', method);
+  if (paginate) args.push('--paginate', '--slurp');
+  if (body !== undefined) args.push('--input', '-');
+  args.push(`/repos/${repository}/${endpoint}`);
+  const output = run('gh', args, {
+    env: {...process.env, GH_TOKEN: token},
+    input: body === undefined ? undefined : `${JSON.stringify(body)}\n`,
+  });
+  if (output === '') return paginate ? [] : null;
+  let parsed;
+  try {
+    parsed = JSON.parse(output);
+  } catch {
+    refuse(`GitHub API returned invalid JSON for ${endpoint}`);
+  }
+  return paginate && Array.isArray(parsed) ? parsed.flat() : parsed;
+}
+
+function validateRepository(repository) {
+  if (typeof repository !== 'string' || !/^[^/]+\/[^/]+$/.test(repository)) {
+    refuse('repository identity is invalid');
+  }
+}
+
+function validatePrNumber(pr) {
+  const prNumber = Number(pr);
+  if (!Number.isSafeInteger(prNumber) || prNumber <= 0) {
+    refuse('PR number is invalid');
+  }
+  return prNumber;
+}
+
+function validatePreviewIdentity(repository, pr, head) {
+  validateRepository(repository);
+  const prNumber = validatePrNumber(pr);
+  if (typeof head !== 'string' || !/^[0-9a-f]{40}$/i.test(head)) {
+    refuse('PR head is invalid');
+  }
+  return prNumber;
+}
+
+function previewDescription(prNumber) {
+  return `Preview for PR #${prNumber}`;
+}
+
+export function recordPrPreviewDeployments({
+  repository,
+  token,
+  runId,
+  pr,
+  head,
+  state,
+  request = githubRequest,
+  serverURL = process.env.GITHUB_SERVER_URL ?? 'https://github.com',
+}) {
+  const prNumber = validatePreviewIdentity(repository, pr, head);
+  if (!Number.isSafeInteger(runId) || runId <= 0) {
+    refuse('current run id is invalid');
+  }
+  if (state !== 'success' && state !== 'failure') {
+    refuse('preview deployment state is invalid');
+  }
+  const [owner, repo] = repository.split('/');
+  const pagesOrigin = `https://${owner}.github.io/${repo}`;
+  const logURL = `${serverURL}/${repository}/actions/runs/${runId}`;
+  const recorded = [];
+  for (const [environment, environmentURL] of [
+    ['Storybook', `${pagesOrigin}/pr/${prNumber}/`],
+    ['Sandbox', `${pagesOrigin}/pr/${prNumber}/sandbox/`],
+  ]) {
+    const deployment = request({
+      repository,
+      token,
+      method: 'POST',
+      endpoint: 'deployments',
+      body: {
+        ref: head,
+        environment,
+        description: previewDescription(prNumber),
+        auto_merge: false,
+        // GitHub otherwise rejects creation while any PR check is pending.
+        required_contexts: [],
+        transient_environment: true,
+      },
+    });
+    if (deployment?.id === undefined || deployment?.id === null) {
+      refuse(`GitHub did not return a deployment id for ${environment}`);
+    }
+    request({
+      repository,
+      token,
+      method: 'POST',
+      endpoint: `deployments/${deployment.id}/statuses`,
+      body: {
+        state,
+        environment_url: environmentURL,
+        log_url: logURL,
+        // Other PRs share the environment name and remain live.
+        auto_inactive: false,
+      },
+    });
+    recorded.push({environment, id: deployment.id, state, environmentURL});
+    process.stdout.write(
+      `${environment} deployment ${deployment.id}: ${state} -> ${environmentURL}\n`,
+    );
+  }
+  return recorded;
+}
+
+export async function publishPrPreviewWithDeployments({
+  repository,
+  token,
+  runId,
+  pr,
+  head,
+  publish,
+  record = recordPrPreviewDeployments,
+}) {
+  validatePreviewIdentity(repository, pr, head);
+  if (!Number.isSafeInteger(runId) || runId <= 0) {
+    refuse('current run id is invalid');
+  }
+  if (typeof publish !== 'function') refuse('preview publisher is missing');
+  let publishError;
+  try {
+    await publish();
+  } catch (error) {
+    publishError = error;
+  }
+  try {
+    record({
+      repository,
+      token,
+      runId,
+      pr,
+      head,
+      state: publishError ? 'failure' : 'success',
+    });
+  } catch (deploymentError) {
+    if (!publishError) throw deploymentError;
+    console.error(
+      `Could not record preview failure: ${deploymentError.message}`,
+    );
+  }
+  if (publishError) throw publishError;
+}
+
+export function retirePrPreviewDeployments({
+  repository,
+  token,
+  prs,
+  request = githubRequest,
+}) {
+  validateRepository(repository);
+  if (!prs || typeof prs[Symbol.iterator] !== 'function') {
+    refuse('preview deployment PRs are invalid');
+  }
+  const prNumbers = new Set([...prs].map(validatePrNumber));
+  const descriptions = new Set(
+    [...prNumbers].map(prNumber => previewDescription(prNumber)),
+  );
+  let retired = 0;
+  // A PR can have one deployment per pushed commit. Match the stable description
+  // so cleanup retires every historical record, not only the last head SHA.
+  for (const environment of ['Storybook', 'Sandbox']) {
+    const deployments = request({
+      repository,
+      token,
+      endpoint: `deployments?environment=${encodeURIComponent(environment)}&per_page=100`,
+      paginate: true,
+    });
+    if (!Array.isArray(deployments)) {
+      refuse(`GitHub did not return deployments for ${environment}`);
+    }
+    for (const deployment of deployments) {
+      if (!descriptions.has(deployment?.description)) continue;
+      if (deployment.id === undefined || deployment.id === null) {
+        refuse(`GitHub returned an invalid ${environment} deployment`);
+      }
+      request({
+        repository,
+        token,
+        method: 'POST',
+        endpoint: `deployments/${deployment.id}/statuses`,
+        body: {state: 'inactive'},
+      });
+      process.stdout.write(
+        `${environment} deployment ${deployment.id}: inactive\n`,
+      );
+      retired += 1;
+    }
+  }
+  return retired;
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -1807,7 +2011,7 @@ export async function cleanupPreviews({
     openPRs instanceof Set ? openPRs : listOpenPRsFromGitHub(repository);
   if (open.size === 0) {
     process.stdout.write('No confirmed open PR list; skipping cleanup.\n');
-    return {deleted: 0, skipped: true};
+    return {deleted: 0, deletedPrs: [], skipped: true};
   }
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     const checkout = checkoutPages({
@@ -1820,6 +2024,7 @@ export async function cleanupPreviews({
     });
     try {
       const deleted = [];
+      const deletedPrs = [];
       for (const entry of fs.readdirSync(checkout, {withFileTypes: true})) {
         if (entry.isDirectory() && isSevenHex(entry.name))
           deleted.push(entry.name);
@@ -1828,8 +2033,12 @@ export async function cleanupPreviews({
       if (fs.existsSync(prRoot)) {
         for (const entry of fs.readdirSync(prRoot, {withFileTypes: true})) {
           if (!entry.isDirectory()) continue;
-          if (!open.has(entry.name))
+          if (!open.has(entry.name)) {
             deleted.push(path.posix.join('pr', entry.name));
+            if (/^[1-9][0-9]*$/.test(entry.name)) {
+              deletedPrs.push(Number(entry.name));
+            }
+          }
           const templateAssets = path.join(
             prRoot,
             entry.name,
@@ -1862,7 +2071,13 @@ export async function cleanupPreviews({
       deleted.push(...expiredScreenshots);
       const uniqueDeleted = [...new Set(deleted)].sort();
       for (const rel of uniqueDeleted) process.stdout.write(`DELETE ${rel}\n`);
-      if (dryRun) return {deleted: uniqueDeleted.length, dryRun: true};
+      if (dryRun) {
+        return {
+          deleted: uniqueDeleted.length,
+          deletedPrs,
+          dryRun: true,
+        };
+      }
       for (const rel of uniqueDeleted) {
         fs.rmSync(path.join(checkout, rel), {recursive: true, force: true});
       }
@@ -1870,14 +2085,14 @@ export async function cleanupPreviews({
       pruneEmptyScreenshotDirs(checkout);
       if (uniqueDeleted.length === 0) {
         process.stdout.write('Nothing to clean up.\n');
-        return {deleted: 0};
+        return {deleted: 0, deletedPrs};
       }
       const commit = commitIfNeeded(
         checkout,
         `chore: cleanup ${uniqueDeleted.length} stale deployments`,
         ['-A'],
       );
-      if (commit === null) return {deleted: 0};
+      if (commit === null) return {deleted: 0, deletedPrs};
       await beforePush?.({attempt, checkout, commit});
       const pushed = tryRun('git', [
         '-C',
@@ -1886,7 +2101,9 @@ export async function cleanupPreviews({
         'origin',
         PAGES_BRANCH,
       ]);
-      if (pushOrRetry(pushed)) return {deleted: uniqueDeleted.length, commit};
+      if (pushOrRetry(pushed)) {
+        return {deleted: uniqueDeleted.length, deletedPrs, commit};
+      }
     } finally {
       fs.rmSync(checkout, {recursive: true, force: true});
     }
@@ -2507,26 +2724,39 @@ export async function main(argv = process.argv.slice(2)) {
     });
   } else if (command === 'pr-preview') {
     const pr = flag(argv, '--pr');
+    const head = flag(argv, '--head');
     await withPublicationTurn({
       ...context,
       scope: `pr-preview/${pr}`,
       publish: () =>
-        publishPrPreview({
+        publishPrPreviewWithDeployments({
           ...context,
           pr,
-          storybook: flag(argv, '--storybook'),
-          sandbox: flag(argv, '--sandbox'),
+          head,
+          publish: () =>
+            publishPrPreview({
+              ...context,
+              pr,
+              storybook: flag(argv, '--storybook'),
+              sandbox: flag(argv, '--sandbox'),
+            }),
         }),
     });
   } else if (command === 'cleanup-previews') {
+    const dryRun = flag(argv, '--dry-run', 'false') === 'true';
     await withPublicationTurn({
       ...context,
       scope: 'cleanup/previews',
-      publish: () =>
-        cleanupPreviews({
-          ...context,
-          dryRun: flag(argv, '--dry-run', 'false') === 'true',
-        }),
+      publish: async () => {
+        const result = await cleanupPreviews({...context, dryRun});
+        if (!dryRun && result.deletedPrs.length > 0) {
+          retirePrPreviewDeployments({
+            ...context,
+            prs: result.deletedPrs,
+          });
+        }
+        return result;
+      },
     });
   } else if (command === 'vibe-report') {
     const reportId = flag(argv, '--report-id');

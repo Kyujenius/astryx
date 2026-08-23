@@ -40,6 +40,7 @@ jobs:
     permissions:
       actions: read
       contents: write
+      deployments: write
       pull-requests: read
     steps:
       - name: Checkout publisher
@@ -209,9 +210,11 @@ jobs:
         if: steps.final-preview.outputs.ready == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ steps.preview.outputs.head_sha }}
           PR_NUMBER: ${{ steps.preview.outputs.pr_number }}
         run: >
           node .github/scripts/gh-pages-publisher.mjs pr-preview
           --pr "$PR_NUMBER"
+          --head "$HEAD_SHA"
           --storybook storybook-dist
           --sandbox sandbox-dist
