@@ -27,26 +27,30 @@ export const docs = {
       title: 'Required scenarios',
       content: [
         {
+          type: 'prose',
+          text: 'Scenario coverage proves viewport-width independence and input-capability independence. Keep these separate from the requirement categories below: a scenario can pass while a requirement still fails, and a requirement can need evidence from more than one scenario.',
+        },
+        {
           type: 'table',
           headers: ['Scenario', 'What it proves', 'Minimum evidence'],
           rows: [
             [
-              'Desktop + fine pointer + hover',
+              'Wide viewport + fine pointer + hover',
               'The default wide desktop contract remains intact.',
               'Story or screenshot plus focused test when layout/order/interaction can regress.',
             ],
             [
-              'Small screen + touch/coarse pointer/no hover',
-              'The mobile/touch contract works when width and touch constraints appear together.',
-              'Story or emulator/device capture plus activation evidence.',
-            ],
-            [
-              'Small/narrow screen + fine pointer/hover',
+              'Narrow viewport + fine pointer + hover',
               'Width-driven reflow does not depend on touch or no-hover media queries.',
               'Story or viewport test demonstrating the same narrow layout as mobile when applicable.',
             ],
             [
-              'Large screen + touch/coarse pointer/no hover',
+              'Narrow viewport + coarse pointer + no hover',
+              'The mobile/touch contract works when width and touch constraints appear together.',
+              'Story or emulator/device capture plus activation evidence.',
+            ],
+            [
+              'Wide viewport + coarse pointer + no hover',
               'Input capability does not accidentally force narrow/mobile geometry.',
               'Story, browser/device capture, or media-query test when pointer branches exist.',
             ],
@@ -59,51 +63,96 @@ export const docs = {
       ],
     },
     {
-      title: 'Axes',
+      title: 'Review categories',
       content: [
         {
+          type: 'prose',
+          text: 'Use these four categories to organize the review outcome after the scenarios are covered.',
+        },
+        {type: 'heading', level: 3, text: 'Responsive layout'},
+        {
           type: 'table',
-          headers: ['Axis', 'Review requirement', 'N/A guidance'],
+          headers: ['Check', 'Review requirement', 'N/A guidance'],
           rows: [
             [
               'Available space and content fit',
               'Use shared breakpoint names and values: none 0, sm 640px, md 768px, lg 1024px. Reflow from viewport or container space and actual content fit; long labels and localized copy wrap instead of clipping or causing horizontal overflow.',
               'Rarely N/A. Even non-interactive components need evidence that their content fits or intentionally scrolls within their supported containers.',
             ],
+          ],
+        },
+        {type: 'heading', level: 3, text: 'Touch, pointer, and hover'},
+        {
+          type: 'table',
+          headers: ['Check', 'Review requirement', 'N/A guidance'],
+          rows: [
             [
               'Pointer precision',
               'Review fine and coarse pointer behavior independently from width. Hit areas, drag handles, resize affordances, and hover targets must remain usable for the pointer precision they support.',
               'N/A only when the component has no pointer interaction beyond native text selection or links/buttons inherited unchanged from existing primitives.',
             ],
             [
-              'Hover availability',
+              'Hover independence',
               'Essential information and required actions must not require hover. Hover may reveal convenience affordances only when the same action or information is available through focus, visible UI, or another non-hover path.',
               'N/A for components with no hover-specific behavior; record that no required state depends on hover.',
             ],
             [
-              'Active pointer/touch input',
-              'Custom gestures use Pointer Events where possible, handle mouse/touch/pen consistently, and do not block click, focus, text selection, or native scrolling. Touch activation must be intentional and reversible where destructive.',
-              'N/A when the component has no custom pointer handling or gesture semantics.',
+              'Pointer and gesture behavior',
+              'Custom pointer handling uses Pointer Events where possible, handles mouse/touch/pen consistently, and does not block click, focus, text selection, or native scrolling. Path-based, multipointer, dragging, or other custom gestures need non-gesture alternatives where applicable, and pointer cancellation semantics must avoid accidental activation.',
+              'N/A when the component has no custom pointer handling, gesture semantics, drag interactions, or pointer-capture flows.',
             ],
+          ],
+        },
+        {
+          type: 'heading',
+          level: 3,
+          text: 'Accessibility and interaction contracts',
+        },
+        {
+          type: 'table',
+          headers: ['Check', 'Review requirement', 'N/A guidance'],
+          rows: [
             [
-              'Mobile viewport constraints',
-              'Check software keyboard resize/occlusion, safe-area insets for edge-anchored UI, dynamic viewport units, body locking, and nested scroll behavior where the component owns viewport geometry.',
-              'N/A for inline components or overlays whose position/size never interacts with viewport edges, keyboard, or scroll locking.',
-            ],
-            [
-              'WCAG 2.2 Level AA',
+              'WCAG 2.2 AA target size',
               'Evaluate WCAG 2.2 Level AA requirements. For target size, use 2.5.8: at least 24x24 CSS px or a permitted exception.',
               'Never N/A for interactive components. Non-interactive components still owe applicable contrast, semantics, and reading-order checks.',
             ],
             [
-              'Gestures',
-              'Gestures enhance rather than unlock functionality. Preserve native scroll/browser/OS gestures. Path-based, multipointer, or dragging interactions need non-gesture alternatives where WCAG AA requires them, and pointer cancellation semantics must avoid accidental activation.',
-              'N/A when there are no custom gestures, drag interactions, or pointer-capture flows.',
+              'Semantics',
+              'State whether roles, names, descriptions, reading order, and landmark/list/table semantics are preserved or intentionally changed.',
+              'N/A only for semantic sub-items the component genuinely does not own; record that conclusion.',
             ],
             [
-              'Existing contracts',
-              'State whether semantic roles/names, focus order and return, keyboard operation, reduced-motion behavior, and dismissal contracts are preserved or intentionally changed.',
-              'N/A only for the sub-items the component genuinely does not own; the review still records that conclusion.',
+              'Keyboard, focus, and dismissal',
+              'Keyboard operation, focus order and return, focus visibility, and dismissal contracts remain available or intentionally change with evidence.',
+              'N/A only for sub-items the component genuinely does not own; record that conclusion.',
+            ],
+            [
+              'Reduced motion',
+              'Motion and animation respect reduced-motion behavior and preserve the component contract when motion is reduced.',
+              'N/A only when the component has no motion or animation behavior.',
+            ],
+          ],
+        },
+        {type: 'heading', level: 3, text: 'Mobile viewport constraints'},
+        {
+          type: 'table',
+          headers: ['Check', 'Review requirement', 'N/A guidance'],
+          rows: [
+            [
+              'Software keyboard',
+              'Check resize, occlusion, focus movement, and scroll position where the component owns inputs or viewport geometry.',
+              'N/A when the component has no text input and does not own viewport geometry around focused controls.',
+            ],
+            [
+              'Safe-area insets',
+              'Edge-anchored or full-viewport UI accounts for safe-area insets without hiding actions or content.',
+              'N/A when the component never reaches viewport edges or delegates safe-area handling to a parent shell.',
+            ],
+            [
+              'Dynamic viewport and scroll behavior',
+              'Dynamic viewport units, body locking, nested scroll, and constrained-height behavior remain intentional and testable where the component owns them.',
+              'N/A for inline components or overlays whose position and size never interact with viewport edges, keyboard, or scroll locking.',
             ],
           ],
         },
@@ -114,7 +163,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste a completed Area / Result / Evidence table into the PR description or link one from the lab-readiness manifest.',
+          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste a completed Check / Result / Evidence report into the PR description or link one from the lab-readiness manifest.',
         },
         {
           type: 'prose',
@@ -123,21 +172,41 @@ export const docs = {
         {
           type: 'code',
           lang: 'md',
-          label: 'Mobile-readiness checklist',
-          code: `| Area | Result | Evidence |
+          label: 'Mobile-readiness PR report',
+          code: `### Responsive layout
+
+| Check | Result | Evidence |
 | --- | --- | --- |
-| Desktop + fine pointer + hover | Pass/Fail/N/A | Story/test/device link |
-| Small screen + touch/coarse pointer/no hover | Pass/Fail/N/A | Story/test/device link |
-| Small/narrow screen + fine pointer/hover | Pass/Fail/N/A | Story/test/device link |
-| Large screen + touch/coarse pointer/no hover | Pass/Fail/N/A | Story/test/device link |
-| Available space and content fit | Pass/Fail/N/A | Breakpoints, wrapping/overflow notes |
-| Pointer precision | Pass/Fail/N/A | Fine/coarse behavior notes |
-| Hover availability | Pass/Fail/N/A | Non-hover path notes |
-| Active pointer/touch input | Pass/Fail/N/A | Pointer Events/custom-handler notes |
-| Mobile viewport constraints | Pass/Fail/N/A | Keyboard/safe-area/dvh/scroll notes |
-| WCAG 2.2 AA | Pass/Fail/N/A | Criteria and evidence; target size = 2.5.8 24x24 CSS px or exception |
-| Gestures | Pass/Fail/N/A | Alternative path and cancellation notes |
-| Existing contracts | Pass/Fail/N/A | Semantics, focus, keyboard, reduced motion, dismissal |`,
+| Scenario: wide viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
+| Scenario: narrow viewport + fine pointer + hover | Pass/Fail/N/A | Story/test/screenshot link |
+| Requirement: available space/content fit/wrapping/overflow | Pass/Fail/N/A | Breakpoints, wrapping, overflow, or documented N/A reason |
+
+### Touch, pointer, and hover
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Scenario: narrow viewport + coarse pointer + no hover | Pass/Fail/N/A | Story/test/device capture link |
+| Scenario: wide viewport + coarse pointer + no hover | Pass/Fail/N/A | Story/test/device capture link |
+| Requirement: hover independence | Pass/Fail/N/A | Non-hover path or documented N/A reason |
+| Requirement: pointer/custom gesture behavior | Pass/Fail/N/A | Pointer, activation, cancellation, or custom-handler evidence |
+| Requirement: non-gesture alternatives where applicable | Pass/Fail/N/A | Alternative path or documented N/A reason |
+
+### Accessibility and interaction contracts
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Requirement: WCAG 2.2 AA target size | Pass/Fail/N/A | 2.5.8 24x24 CSS px or permitted exception evidence |
+| Requirement: semantics | Pass/Fail/N/A | Role, name, description, reading-order, or semantic-structure evidence |
+| Requirement: keyboard/focus/dismissal | Pass/Fail/N/A | Keyboard, focus order/return, focus visibility, or dismissal evidence |
+| Requirement: reduced motion | Pass/Fail/N/A | Reduced-motion behavior or documented N/A reason |
+
+### Mobile viewport constraints
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Requirement: software keyboard | Pass/Fail/N/A | Resize, occlusion, focus, scroll, or documented N/A reason |
+| Requirement: safe-area insets | Pass/Fail/N/A | Edge/safe-area evidence or documented N/A reason |
+| Requirement: dynamic viewport/scroll behavior | Pass/Fail/N/A | Dynamic viewport, body locking, nested scroll, constrained-height, or documented N/A reason |`,
         },
       ],
     },
@@ -146,7 +215,7 @@ export const docs = {
       content: [
         {
           type: 'prose',
-          text: 'AlertDialog demonstrates the intended separation. The layout evidence covers a desktop fine-pointer story, a narrow fine-pointer story, and a mobile touch story. Width determines the geometry: above 640px the dialog keeps the 400px centered surface and horizontal Cancel/destructive row; at 640px and below it uses token gutters, stacks destructive above Cancel, and wraps labels. Pointer and hover capability are independently testable but do not choose the layout.',
+          text: 'AlertDialog demonstrates the intended separation. The layout evidence covers a wide-viewport fine-pointer story, a narrow-viewport fine-pointer story, and a narrow-viewport touch story. Width determines the geometry: above 640px the dialog keeps the 400px centered surface and horizontal Cancel/destructive row; at 640px and below it uses token gutters, stacks destructive above Cancel, and wraps labels. Pointer and hover capability are independently testable but do not choose the layout.',
         },
         {
           type: 'prose',

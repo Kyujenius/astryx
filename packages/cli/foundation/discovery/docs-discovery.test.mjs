@@ -80,10 +80,31 @@ describe('discoverBuiltinTopics', () => {
     const serialized = JSON.stringify(mobileReadinessDocs);
     expect(problemsInTopic(mobileReadinessDocs)).toEqual([]);
     expect(serialized).toContain('Reporting in component PRs');
-    expect(serialized).toContain('| Area | Result | Evidence |');
+    expect(serialized).toContain('Check / Result / Evidence report');
+    expect(serialized).toContain('| Check | Result | Evidence |');
     expect(serialized).toContain('Use Pass when the row has concrete evidence');
+    for (const category of [
+      'Responsive layout',
+      'Touch, pointer, and hover',
+      'Accessibility and interaction contracts',
+      'Mobile viewport constraints',
+    ]) {
+      expect(serialized).toContain(category);
+    }
+    for (const scenario of [
+      'wide viewport + fine pointer + hover',
+      'narrow viewport + fine pointer + hover',
+      'narrow viewport + coarse pointer + no hover',
+      'wide viewport + coarse pointer + no hover',
+    ]) {
+      expect(serialized).toContain(scenario);
+    }
+    expect(serialized).toContain('Requirement: WCAG 2.2 AA target size');
     expect(serialized).toContain(
       '2.5.8: at least 24x24 CSS px or a permitted exception',
+    );
+    expect(serialized).not.toMatch(
+      /Small\/narrow screen|desktop with small screen/i,
     );
     expect(serialized).not.toMatch(/(?:44|48)(?:x| by )(?:44|48)|Google/);
   });
