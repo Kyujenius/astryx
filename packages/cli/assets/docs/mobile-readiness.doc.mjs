@@ -92,7 +92,7 @@ export const docs = {
             ],
             [
               'WCAG 2.2 Level AA',
-              'Evaluate only Level AA requirements. Target size is 2.5.8: at least 24 by 24 CSS px or a permitted exception. Do not require 44 by 44 AAA targets or external 48 by 48 mobile guidance as Astryx requirements.',
+              'Evaluate WCAG 2.2 Level AA requirements. For target size, use 2.5.8: at least 24x24 CSS px or a permitted exception.',
               'Never N/A for interactive components. Non-interactive components still owe applicable contrast, semantics, and reading-order checks.',
             ],
             [
@@ -110,11 +110,15 @@ export const docs = {
       ],
     },
     {
-      title: 'Evidence template',
+      title: 'Reporting in component PRs',
       content: [
         {
           type: 'prose',
-          text: 'Paste this checklist into the PR, RFC, or linked evidence. Every row must be Pass, Fail, or N/A. N/A needs a reason, not a blank cell. A lab-readiness manifest can link to that filled checklist as the evidence for the Mobile readiness hardening check.',
+          text: 'When a new or changed component affects responsive layout, input behavior, gestures, mobile viewport constraints, or accessibility, paste a completed Area / Result / Evidence table into the PR description or link one from the lab-readiness manifest.',
+        },
+        {
+          type: 'prose',
+          text: 'Use Pass when the row has concrete evidence such as a story, test, screenshot, device capture, or documented reasoning. Use Fail when applicable work remains. Use N/A only when the area does not apply, and include the reason.',
         },
         {
           type: 'code',
