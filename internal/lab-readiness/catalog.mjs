@@ -2,7 +2,7 @@
 
 /**
  * @file catalog.mjs
- * @description The lab graduation rubric: the five lifecycle stages and the 30
+ * @description The lab graduation rubric: the five lifecycle stages and the 31
  *   checks a lab component must pass before it can be promoted into
  *   `@astryxdesign/core`. This is the schema the Storybook readiness panel and
  *   `apps/storybook/.lab-readiness/latest.json` are built against.
@@ -22,7 +22,7 @@
  * Storybook readiness panel that reads the emitted report.
  */
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export const REPORT_KIND = 'astryx-lab-readiness-report';
 
 const SPEC_PROTOCOL =
@@ -147,6 +147,8 @@ const CHECKS = [
     'Real compositions confirm the API works beyond isolated demos.'],
   ['hardenReview', 'humanReview', 'scopeBoundary', 'Scope boundary',
     'The component\u2019s responsibilities and non-goals remain coherent.'],
+  ['hardenReview', 'humanReview', 'mobileReadiness', 'Mobile readiness',
+    'The reusable mobile-readiness rubric records Pass, Fail, or N/A with evidence for viewport, input, gesture, mobile viewport, and WCAG 2.2 AA contracts.'],
   ['hardenReview', 'humanReview', 'archivedReview', 'Archived review',
     'The final checklist, decision, and follow-ups are linked.'],
 ];

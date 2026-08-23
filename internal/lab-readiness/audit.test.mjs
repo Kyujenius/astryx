@@ -15,7 +15,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {describe, it, expect, beforeAll, afterAll} from 'vitest';
 
-import {CHECK_KEYS, HUMAN_REVIEW_KEYS} from './catalog.mjs';
+import {CHECK_KEYS, HUMAN_REVIEW_KEYS, getCheck} from './catalog.mjs';
 import {deriveChecks, _internal} from './automated.mjs';
 import {auditCandidate, buildRegistry, buildReport} from './audit.mjs';
 
@@ -283,6 +283,30 @@ describe('manifest reconciliation', () => {
     for (const key of HUMAN_REVIEW_KEYS) {
       expect(derived[key]).toBeUndefined();
     }
+  });
+
+  it('treats mobile readiness as an evidenced human-review check', () => {
+    expect(HUMAN_REVIEW_KEYS).toContain('mobileReadiness');
+    expect(getCheck('mobileReadiness')).toMatchObject({
+      stageKey: 'hardenReview',
+      sectionKey: 'humanReview',
+      protocolUrl: 'https://github.com/facebook/astryx/wiki/Component-Hardening-Protocol',
+      humanReview: true,
+    });
+
+    scaffold();
+    const result = auditCandidate(root, {
+      ...candidate,
+      declared: {
+        mobileReadiness: {
+          state: 'passed',
+          note: 'Checklist completed with Pass and N/A rows.',
+        },
+      },
+    });
+    const check = result.checks.find(c => c.key === 'mobileReadiness');
+    expect(check.state).toBe('in_progress');
+    expect(check.note).toMatch(/requires linked evidence/);
   });
 });
 

@@ -64,6 +64,9 @@ describe('discoverBuiltinTopics', () => {
     const topics = discoverBuiltinTopics();
     expect(Object.keys(topics).length).toBeGreaterThan(0);
     expect(topics.tokens).toMatch(/assets[/\\]docs[/\\]tokens\.doc\.mjs$/);
+    expect(topics['mobile-readiness']).toMatch(
+      /assets[/\\]docs[/\\]mobile-readiness\.doc\.mjs$/,
+    );
     for (const name of Object.keys(topics)) {
       expect(name).not.toMatch(/\.(zh|dense)$/);
     }
