@@ -13,9 +13,22 @@
 @stylex;
 
 /* Disable overscroll bounce so the home hero's position:fixed layers can't
-   show through past the top/bottom of the page. */
-html {
-  overscroll-behavior-y: none;
+   show through past the top/bottom of the page (#3032).
+
+   Desktop only. This is an app-global rule, so below 1024px it was costing
+   pull-to-refresh on every route of the site — nothing to do with the home
+   hero (#5392). Below 1024px the hero's only fixed layer that can reach the
+   overscroll gap is the aurora glow, and that is now bounded to the hero
+   scope instead (HeroThemeReel's backdropGlow), so there is nothing left for
+   this rule to protect there.
+
+   ≥1024px the hero really is pinned — heroContent, the floating-cards stage
+   and the glow are all fixed — so the rule stays until those layers are
+   contained too (#5392 step 2). */
+@media (min-width: 1024px) {
+  html {
+    overscroll-behavior-y: none;
+  }
 }
 
 /* Marketing-only custom properties for the docsite home page. These are

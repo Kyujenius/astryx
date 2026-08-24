@@ -168,12 +168,31 @@ const styles = stylex.create({
     transition: 'background-color 600ms ease',
     zIndex: 0,
   },
-  // Blurred aurora glow — fixed, in the same 1200px box as the cards so blobs
-  // and cards stay aligned. Capped to 100vw to avoid horizontal scroll. Blob
+  // Blurred aurora glow — in the same 1200px box as the cards so blobs and
+  // cards stay aligned. Capped to 100vw to avoid horizontal scroll. Blob
   // centers sit under the card clusters; colors come from --aurora-* per slide.
+  //
+  // Desktop: fixed, part of the hero's pin-and-cover. Narrow: absolute inside
+  // heroScope — the same switch heroContent makes in page.tsx. Below 1024px
+  // this is the only fixed layer that survives (heroContent goes relative, the
+  // floating-cards stage is display:none, the nav backdrop is a 48px strip at
+  // the very top), and being fixed it spanned the viewport for the whole page
+  // scroll and bled into the bottom overscroll gap under the footer. Bounding
+  // it to the hero is what lets globals.css stop suppressing overscroll below
+  // 1024px, which restores pull-to-refresh (#5392).
+  //
+  // `top` drops to 0 in the absolute case: heroScope already starts below the
+  // header, so keeping the header offset would push the glow down by that
+  // height a second time.
   backdropGlow: {
-    position: 'fixed',
-    top: 'var(--appshell-header-height, 0px)',
+    position: {
+      default: 'absolute',
+      '@media (min-width: 1024px)': 'fixed',
+    },
+    top: {
+      default: 0,
+      '@media (min-width: 1024px)': 'var(--appshell-header-height, 0px)',
+    },
     left: '50%',
     transform: 'translateX(-50%)',
     width: 'min(1200px, 100vw)',
