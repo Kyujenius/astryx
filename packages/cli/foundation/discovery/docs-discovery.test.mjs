@@ -113,6 +113,26 @@ describe('discoverBuiltinTopics', () => {
     );
   });
 
+  it('requires real responsive evidence and both overflow outcomes', () => {
+    const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
+    for (const requiredPhrase of [
+      'every sizing path',
+      'explicit size',
+      'trigger-derived size',
+      'intrinsic content',
+      'consumer overrides',
+      'both inline and block axes',
+      'oversized content scrolls',
+      'content that fits remains unclipped',
+      'actual Storybook viewport or containing layout',
+      'decorative device frame',
+      'normal interaction contract active',
+      'open it through the story interaction',
+    ]) {
+      expect(serialized).toContain(requiredPhrase);
+    }
+  });
+
   it('keeps platform evidence limits in one policy layer', () => {
     const serialized = JSON.stringify(responsiveInteractionReadinessDocs);
     expect(serialized).toContain('Platform evidence policy');

@@ -70,6 +70,10 @@ export const docs = {
           text: 'Choose the lightest evidence that can prove the claim. Storybook and desktop Playwright engines are useful for repeatable layout, keyboard, pointer, and focus regression evidence, but they do not establish iOS Safari or native platform-shell behavior. If supported behavior depends on touch dispatch, native top-layer dialog or popover behavior, focus or dismissal propagation, visual viewport/software keyboard behavior, safe-area/platform chrome, or other WebKit-on-iOS behavior, require iOS Simulator or physical iOS evidence. Escalate to a physical device only when hardware shape, OS/browser version, input accessory, performance, notch/chrome configuration, or sensor behavior can affect the experience.',
         },
         {
+          type: 'prose',
+          text: 'For responsive evidence, use the actual Storybook viewport or containing layout rather than placing the component inside a decorative device frame. Keep the normal interaction contract active: trigger toggle, outside dismissal, keyboard dismissal, and focus behavior. When a story should start open for inspection, open it through the story interaction instead of permanently controlling it open. Use a simulator or device separately when the claim depends on platform behavior.',
+        },
+        {
           type: 'table',
           headers: ['Evidence source', 'Appropriate for', 'Cannot prove'],
           rows: [
@@ -116,7 +120,7 @@ export const docs = {
             ],
             [
               'Available space, content fit, and overflow',
-              'Reflow from viewport or container space and actual content fit. Long labels and localized copy wrap, resize, or intentionally scroll instead of clipping or causing horizontal overflow. When wrappers and animated surfaces are nested, verify the outer wrapper, inner wrapper, and animated surface share the same available-width constraint for contained previews and viewport overlays.',
+              'Reflow from viewport or container space and actual content fit. Long labels and localized copy wrap, resize, or intentionally scroll instead of clipping or causing horizontal overflow. For anchored or layered surfaces, test every sizing path—explicit size, trigger-derived size, intrinsic content, and consumer overrides—on both inline and block axes. Verify the outer layer, intermediate wrappers, and actual content surface share the constraint. Prove both outcomes: oversized content scrolls within the available space, while content that fits remains unclipped and does not become an unnecessary scroll container.',
               'Rarely N/A. Even static components need evidence that their content fits or intentionally scrolls in supported containers.',
             ],
             [
