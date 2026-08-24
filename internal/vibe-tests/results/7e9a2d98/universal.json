@@ -1,0 +1,980 @@
+{
+  "averages": {
+    "correctness": 51,
+    "accessibility": 99,
+    "codeQuality": 99,
+    "efficiency": 80,
+    "maintainability": 85
+  },
+  "overall": 83,
+  "byPrompt": {
+    "cs-1": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '({ type: \"divider\"; title?: undefined; items?: undefined; } | { type: \"section\"; title: string; items: { value: string; label: string; }[]; })[]' is not assignable to type 'SelectorOptionType[]'.",
+            "line": 24
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 63,
+        "findings": [],
+        "metrics": {
+          "totalLines": 34,
+          "codeLines": 28,
+          "stylingLines": 0,
+          "boilerplateLines": 26,
+          "logicLines": 2,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.9285714285714286,
+          "decisionsPerElement": 0,
+          "elementCount": 2,
+          "stylingDecisionCount": 0,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 0,
+          "avgStateSpread": 15
+        }
+      }
+    },
+    "cwm-2": {
+      "correctness": {
+        "score": 40,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 65
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 64
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+            "line": 65
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 71
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; isChecked: boolean; onChange: () => void; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+            "line": 83
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 78,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 7 times",
+            "count": 7,
+            "example": "{name: \"_\", color: \"_\", description: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 96,
+          "codeLines": 87,
+          "stylingLines": 17,
+          "boilerplateLines": 14,
+          "logicLines": 56,
+          "stylingRatio": 0.19540229885057472,
+          "boilerplateRatio": 0.16091954022988506,
+          "decisionsPerElement": 1.6,
+          "elementCount": 10,
+          "stylingDecisionCount": 16,
+          "duplicateRatio": 0.08
+        }
+      },
+      "maintainability": {
+        "score": 56,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "moderate",
+            "detail": "9 magic values (hardcoded colors, spacing, or typography)",
+            "count": 9
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.4,
+          "magicValueCount": 9,
+          "semanticValueCount": 6,
+          "avgStateSpread": 29
+        }
+      }
+    },
+    "dd-8": {
+      "correctness": {
+        "score": 40,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2353: Object literal may only specify known properties, and 'render' does not exist in type 'TableColumn<ContentItem>'.",
+            "line": 35
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS7006: Parameter 'row' implicitly has an 'any' type.",
+            "line": 35
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: any; size: string; color: any; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+            "line": 36
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly Article: \"info\"; readonly Video: \"positive\"; readonly Podcast: \"warning\"; readonly Infographic: \"accent\"; }'.",
+            "line": 36
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 73,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 6 times",
+            "count": 6,
+            "example": "{id: \"_\", title: \"_\", type: \"_\", author: \"_\", publishedAt: \"_\", views: N},"
+          },
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{key: \"_\", header: \"_\", sortable: true},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 46,
+          "codeLines": 41,
+          "stylingLines": 0,
+          "boilerplateLines": 10,
+          "logicLines": 31,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.24390243902439024,
+          "decisionsPerElement": 1,
+          "elementCount": 2,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0.24
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "fwc-14": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ items: { src: string; alt: string; type: \"video\" | \"image\"; }[]; startIndex: number; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & LightboxProps'.",
+            "line": 57
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 92,
+        "findings": [
+          {
+            "rule": "img-no-alt",
+            "severity": "moderate",
+            "detail": "Image without alt text",
+            "line": 46
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 47
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 76,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 6 times",
+            "count": 6,
+            "example": "{id: \"_\", type: \"_\", src: \"_\", thumbnail: \"_\", alt: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 69,
+          "codeLines": 63,
+          "stylingLines": 16,
+          "boilerplateLines": 10,
+          "logicLines": 37,
+          "stylingRatio": 0.25396825396825395,
+          "boilerplateRatio": 0.15873015873015872,
+          "decisionsPerElement": 3,
+          "elementCount": 4,
+          "stylingDecisionCount": 12,
+          "duplicateRatio": 0.1
+        }
+      },
+      "maintainability": {
+        "score": 37,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "2 magic values (hardcoded colors, spacing, or typography)",
+            "count": 2
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0,
+          "magicValueCount": 2,
+          "semanticValueCount": 0,
+          "avgStateSpread": 22
+        }
+      }
+    },
+    "io-5": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 62
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 29
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 36
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 62
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 88,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{value: \"_\", label: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 68,
+          "codeLines": 61,
+          "stylingLines": 0,
+          "boilerplateLines": 7,
+          "logicLines": 54,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.11475409836065574,
+          "decisionsPerElement": 0.3,
+          "elementCount": 7,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0.07
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 25
+        }
+      }
+    },
+    "ps-2": {
+      "correctness": {
+        "score": 10,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/core/Theme' or its corresponding type declarations.",
+            "line": 1
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2307: Cannot find module '@astryxdesign/theme-neutral' or its corresponding type declarations.",
+            "line": 4
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Header' does not exist on type 'typeof Layout'.",
+            "line": 10
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Header' does not exist on type 'typeof Layout'.",
+            "line": 12
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Content' does not exist on type 'typeof Layout'.",
+            "line": 13
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Content' does not exist on type 'typeof Layout'.",
+            "line": 15
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 91,
+        "findings": [],
+        "metrics": {
+          "totalLines": 20,
+          "codeLines": 18,
+          "stylingLines": 0,
+          "boilerplateLines": 4,
+          "logicLines": 14,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.2222222222222222,
+          "decisionsPerElement": 0.7,
+          "elementCount": 3,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "rc-1": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 55
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; size: \"sm\"; }' but required in type 'ButtonProps'.",
+            "line": 47
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ icon: string; label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & IconButtonProps'.",
+            "line": 55
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; size: \"sm\"; }' but required in type 'ButtonProps'.",
+            "line": 63
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 94,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 47
+          },
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 63
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 80,
+        "findings": [],
+        "metrics": {
+          "totalLines": 70,
+          "codeLines": 65,
+          "stylingLines": 26,
+          "boilerplateLines": 6,
+          "logicLines": 33,
+          "stylingRatio": 0.4,
+          "boilerplateRatio": 0.09230769230769231,
+          "decisionsPerElement": 2.5,
+          "elementCount": 10,
+          "stylingDecisionCount": 25,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 77,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "4 magic values (hardcoded colors, spacing, or typography)",
+            "count": 4
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.67,
+          "magicValueCount": 4,
+          "semanticValueCount": 8,
+          "avgStateSpread": 22
+        }
+      }
+    },
+    "sd-3": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 51
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 24
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 28
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 51
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 97,
+        "findings": [],
+        "metrics": {
+          "totalLines": 57,
+          "codeLines": 51,
+          "stylingLines": 0,
+          "boilerplateLines": 4,
+          "logicLines": 47,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.0784313725490196,
+          "decisionsPerElement": 0.4,
+          "elementCount": 7,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 28
+        }
+      }
+    },
+    "ty-6": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 21
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 80,
+        "findings": [],
+        "metrics": {
+          "totalLines": 33,
+          "codeLines": 30,
+          "stylingLines": 11,
+          "boilerplateLines": 4,
+          "logicLines": 15,
+          "stylingRatio": 0.36666666666666664,
+          "boilerplateRatio": 0.13333333333333333,
+          "decisionsPerElement": 1.8,
+          "elementCount": 6,
+          "stylingDecisionCount": 11,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 77,
+        "findings": [
+          {
+            "rule": "magic-values",
+            "severity": "minor",
+            "detail": "2 magic values (hardcoded colors, spacing, or typography)",
+            "count": 2
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 0.67,
+          "magicValueCount": 2,
+          "semanticValueCount": 4,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-4": {
+      "correctness": {
+        "score": 0,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 56
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 48
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 49
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 56
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2353: Object literal may only specify known properties, and 'render' does not exist in type 'TableColumn<Todo>'.",
+            "line": 63
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS7006: Parameter 'row' implicitly has an 'any' type.",
+            "line": 63
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: any; color: any; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+            "line": 64
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly pending: \"neutral\"; readonly 'in-progress': \"warning\"; readonly done: \"positive\"; }'.",
+            "line": 64
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 78,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 5 times",
+            "count": 5,
+            "example": "{id: \"_\", title: \"_\", status: \"_\", assignee: \"_\", createdAt: \"_\"},"
+          },
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 3 times",
+            "count": 3,
+            "example": "{key: \"_\", header: \"_\", sortable: true},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 75,
+          "codeLines": 67,
+          "stylingLines": 0,
+          "boilerplateLines": 14,
+          "logicLines": 53,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.208955223880597,
+          "decisionsPerElement": 0.5,
+          "elementCount": 6,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0.12
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 24
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "complex-selector": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 63,
+      "maintainability": 100
+    },
+    "clone-with-modification": {
+      "correctness": 40,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 78,
+      "maintainability": 56
+    },
+    "data-display": {
+      "correctness": 40,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 73,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 85,
+      "accessibility": 92,
+      "codeQuality": 97,
+      "efficiency": 76,
+      "maintainability": 37
+    },
+    "integration-oriented": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 88,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 10,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 91,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 94,
+      "efficiency": 80,
+      "maintainability": 77
+    },
+    "state-driven": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 97,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 80,
+      "maintainability": 77
+    },
+    "workflow-description": {
+      "correctness": 0,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 78,
+      "maintainability": 100
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 2781774,
+    "avgDurationMs": 278177,
+    "avgOutputChars": 1696,
+    "avgOutputLines": 57,
+    "avgDocsRead": 3.7,
+    "estimatedInputTokens": 26875,
+    "estimatedOutputTokens": 4241,
+    "byPrompt": {
+      "cs-1": {
+        "durationMs": 234095,
+        "outputChars": 1016,
+        "outputLines": 34,
+        "docsRead": [
+          "Selector"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 254
+      },
+      "cwm-2": {
+        "durationMs": 262960,
+        "outputChars": 2926,
+        "outputLines": 96,
+        "docsRead": [
+          "TextInput",
+          "Button",
+          "Card",
+          "CheckboxInput",
+          "VStack",
+          "HStack",
+          "Text"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 732
+      },
+      "dd-8": {
+        "durationMs": 288851,
+        "outputChars": 1671,
+        "outputLines": 46,
+        "docsRead": [
+          "Table",
+          "Badge"
+        ],
+        "estimatedInputTokens": 1625,
+        "estimatedOutputTokens": 418
+      },
+      "fwc-14": {
+        "durationMs": 234094,
+        "outputChars": 2063,
+        "outputLines": 69,
+        "docsRead": [
+          "Lightbox"
+        ],
+        "estimatedInputTokens": 1000,
+        "estimatedOutputTokens": 516
+      },
+      "io-5": {
+        "durationMs": 307038,
+        "outputChars": 1939,
+        "outputLines": 68,
+        "docsRead": [
+          "TextInput",
+          "TextArea",
+          "Selector",
+          "Button",
+          "VStack",
+          "Text"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 485
+      },
+      "ps-2": {
+        "durationMs": 307038,
+        "outputChars": 605,
+        "outputLines": 20,
+        "docsRead": [
+          "Theme",
+          "Layout",
+          "Text",
+          "neutralTheme"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 151
+      },
+      "rc-1": {
+        "durationMs": 288850,
+        "outputChars": 1846,
+        "outputLines": 70,
+        "docsRead": [
+          "Button",
+          "HStack",
+          "IconButton",
+          "Text"
+        ],
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 462
+      },
+      "sd-3": {
+        "durationMs": 288851,
+        "outputChars": 1677,
+        "outputLines": 57,
+        "docsRead": [
+          "TextInput",
+          "Button",
+          "VStack"
+        ],
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 419
+      },
+      "ty-6": {
+        "durationMs": 307038,
+        "outputChars": 871,
+        "outputLines": 33,
+        "docsRead": [
+          "Text",
+          "Code",
+          "VStack"
+        ],
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 218
+      },
+      "wd-4": {
+        "durationMs": 262959,
+        "outputChars": 2342,
+        "outputLines": 75,
+        "docsRead": [
+          "Table",
+          "Button",
+          "TextInput",
+          "Badge",
+          "VStack",
+          "HStack"
+        ],
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 586
+      }
+    }
+  }
+}
