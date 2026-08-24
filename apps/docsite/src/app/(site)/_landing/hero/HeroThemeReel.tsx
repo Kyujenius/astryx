@@ -123,9 +123,17 @@ const styles = stylex.create({
     },
     height: 'auto',
   },
-  // Sticky, zero-height layer hosting the overlap cards so they pin with the
-  // hero and don't intercept clicks.
-  cardsLayer: {
+  // The hero's pinned layer: the aurora glow and the overlap cards ride here
+  // so they pin with the hero and don't intercept clicks.
+  //
+  // Sticky, not fixed — sticky pins to the viewport exactly like fixed but is
+  // bounded by its container, so the layer stops existing on screen once the
+  // hero band has scrolled by and can never paint into the strip an overscroll
+  // opens past the end of the page (#5392). Zero height is what makes that
+  // work: a sticky box only stays pinned for the slack between its own height
+  // and its container's, so a zero-height layer gets the whole band to travel,
+  // and the visuals inside it are positioned absolutely against it.
+  pinLayer: {
     position: 'sticky',
     top: 'var(--appshell-header-height, 0px)',
     height: 0,
@@ -171,28 +179,10 @@ const styles = stylex.create({
   // Blurred aurora glow — in the same 1200px box as the cards so blobs and
   // cards stay aligned. Capped to 100vw to avoid horizontal scroll. Blob
   // centers sit under the card clusters; colors come from --aurora-* per slide.
-  //
-  // Desktop: fixed, part of the hero's pin-and-cover. Narrow: absolute inside
-  // heroScope — the same switch heroContent makes in page.tsx. Below 1024px
-  // this is the only fixed layer that survives (heroContent goes relative, the
-  // floating-cards stage is display:none, the nav backdrop is a 48px strip at
-  // the very top), and being fixed it spanned the viewport for the whole page
-  // scroll and bled into the bottom overscroll gap under the footer. Bounding
-  // it to the hero is what lets globals.css stop suppressing overscroll below
-  // 1024px, which restores pull-to-refresh (#5392).
-  //
-  // `top` drops to 0 in the absolute case: heroScope already starts below the
-  // header, so keeping the header offset would push the glow down by that
-  // height a second time.
+  // Absolute against pinLayer, which supplies the pin and the header offset.
   backdropGlow: {
-    position: {
-      default: 'absolute',
-      '@media (min-width: 1024px)': 'fixed',
-    },
-    top: {
-      default: 0,
-      '@media (min-width: 1024px)': 'var(--appshell-header-height, 0px)',
-    },
+    position: 'absolute',
+    top: 0,
     left: '50%',
     transform: 'translateX(-50%)',
     width: 'min(1200px, 100vw)',
@@ -451,19 +441,19 @@ export function HeroReelCards() {
     <Theme theme={active.theme} mode={effectiveMode(active, reel.userMode)}>
       <div {...stylex.props(styles.themeFill)} aria-hidden="true" />
       <div {...stylex.props(styles.navBackdrop)} aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        {...stylex.props(
-          styles.backdropGlow,
-          dynamic.aurora(
-            active.aurora.left,
-            active.aurora.center,
-            active.aurora.right,
-          ),
-        )}
-      />
-      {/* Floating cards layer */}
-      <div {...stylex.props(styles.cardsLayer)}>
+      {/* Pinned layer: aurora glow underneath, floating cards over it. */}
+      <div {...stylex.props(styles.pinLayer)}>
+        <div
+          aria-hidden="true"
+          {...stylex.props(
+            styles.backdropGlow,
+            dynamic.aurora(
+              active.aurora.left,
+              active.aurora.center,
+              active.aurora.right,
+            ),
+          )}
+        />
         <HeroFloatingCards content={active.content} mounted={shown} />
       </div>
     </Theme>
