@@ -50,6 +50,8 @@ import type {
 } from '../../types';
 import {proportional} from '../../columnUtils';
 import {useLocale, useTranslator} from '../../../i18n';
+import {mergeProps} from '../../../utils';
+import {themeProps} from '../../../utils/themeProps';
 import type {
   PowerSearchConfig,
   PowerSearchField,
@@ -1012,9 +1014,16 @@ function PopoverFilterTrigger({
         type="button"
         aria-label={t('@astryx.tableFiltering.filterByColumn', {header})}
         aria-haspopup="dialog"
-        {...stylex.props(
-          filterStyles.triggerButton,
-          hasValue ? filterStyles.triggerActive : filterStyles.triggerInactive,
+        {...mergeProps(
+          themeProps('table-filter-button', {
+            active: hasValue ? 'active' : null,
+          }),
+          stylex.props(
+            filterStyles.triggerButton,
+            hasValue
+              ? filterStyles.triggerActive
+              : filterStyles.triggerInactive,
+          ),
         )}>
         <Icon
           icon="funnel"

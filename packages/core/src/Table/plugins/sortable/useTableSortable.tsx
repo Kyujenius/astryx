@@ -17,6 +17,8 @@ import {useRef, useMemo, type ReactNode} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import {colorVars, spacingVars, radiusVars} from '../../../theme/tokens.stylex';
 import {focusOutlineProps} from '../../../utils/focusOutline.stylex';
+import {mergeProps} from '../../../utils';
+import {themeProps} from '../../../utils/themeProps';
 import {Icon} from '../../../Icon';
 import {resolveContextActions} from '../../tableContextMenu';
 import {useTranslator, type TranslatorFn} from '../../../i18n';
@@ -306,15 +308,21 @@ function SortHeaderButton<T extends Record<string, unknown>>({
   return (
     <button
       type="button"
-      {...focusOutlineProps.focusVisible(sortStyles.button)}
+      {...mergeProps(
+        themeProps('table-sort-button', {direction}),
+        focusOutlineProps.focusVisible(sortStyles.button),
+      )}
       aria-label={ariaLabel}
       onClick={handleClick}>
       <span>{children}</span>
       <span
-        {...stylex.props(
-          direction != null
-            ? sortStyles.iconWrapperActive
-            : sortStyles.iconWrapperUnsorted,
+        {...mergeProps(
+          themeProps('table-sort-indicator', {direction}),
+          stylex.props(
+            direction != null
+              ? sortStyles.iconWrapperActive
+              : sortStyles.iconWrapperUnsorted,
+          ),
         )}>
         <Icon
           icon={iconName}

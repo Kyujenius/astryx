@@ -26,7 +26,7 @@
 
 import {describe, it, expect} from 'vitest';
 import {readdirSync, readFileSync} from 'node:fs';
-import {join, relative} from 'node:path';
+import {basename, join, relative} from 'node:path';
 import ts from 'typescript';
 import {stableClassName} from '../naming';
 
@@ -350,13 +350,35 @@ function docFilesDocumenting(classNames: Set<string>): string[] {
   return matches;
 }
 
+/**
+ * Every directory under src, at any depth, relative to src.
+ *
+ * Not just the top level: a component's sources are not always its own direct
+ * children — Table's plugins render from `Table/plugins/<name>/`. Scanning only
+ * the top level exempted every one of those from this guard, which is the same
+ * silent-exemption shape #3741 was filed about.
+ */
+function sourceDirs(): string[] {
+  const out: string[] = [];
+  const walk = (rel: string): void => {
+    for (const entry of readdirSync(join(SRC_DIR, rel), {
+      withFileTypes: true,
+    })) {
+      if (entry.isDirectory()) {
+        const child = rel === '' ? entry.name : join(rel, entry.name);
+        out.push(child);
+        walk(child);
+      }
+    }
+  };
+  walk('');
+  return out;
+}
+
 function discoverComponents(): ComponentInfo[] {
   const results: ComponentInfo[] = [];
-  const dirs = readdirSync(SRC_DIR, {withFileTypes: true})
-    .filter(d => d.isDirectory())
-    .map(d => d.name);
 
-  for (const dir of dirs) {
+  for (const dir of sourceDirs()) {
     const dirPath = join(SRC_DIR, dir);
     const dirEntries = readdirSync(dirPath);
 
@@ -387,8 +409,9 @@ function discoverComponents(): ComponentInfo[] {
     // Both paths match the on-disk listing rather than existsSync: on
     // case-insensitive filesystems existsSync would match a differently-cased
     // doc file that CI never checks. (Same guard as derivedVarRegistry.test.ts.)
-    const docFiles = dirEntries.includes(`${dir}.doc.mjs`)
-      ? [join(dirPath, `${dir}.doc.mjs`)]
+    const ownDoc = `${basename(dir)}.doc.mjs`;
+    const docFiles = dirEntries.includes(ownDoc)
+      ? [join(dirPath, ownDoc)]
       : docFilesDocumenting(new Set(sites.map(s => s.className)));
     if (docFiles.length === 0) {
       continue;
