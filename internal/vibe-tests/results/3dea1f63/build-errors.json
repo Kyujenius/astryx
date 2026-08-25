@@ -1,0 +1,84 @@
+{
+  "cs-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-10": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 7,
+        "message": "'\"@astryxdesign/core/MobileNav\"' has no exported member named 'MobileNavItem'. Did you mean 'MobileNav'?",
+        "code": "TS2724"
+      },
+      {
+        "line": 32,
+        "message": "Type '{ children: Element[]; isOpen: boolean; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & MobileNavProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "sd-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-5": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 46,
+        "message": "Type '{ label: string; isChecked: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 47,
+        "message": "Type '{ label: string; isChecked: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & CheckboxInputProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  }
+}

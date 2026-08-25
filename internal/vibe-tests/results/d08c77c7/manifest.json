@@ -1,0 +1,118 @@
+{
+  "iterationId": "d08c77c7",
+  "createdAt": "2026-08-25T11:04:33.087Z",
+  "config": {
+    "target": "astryx",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-1",
+      "category": "complex-selector",
+      "prompt": "Build a fruit picker where users choose both a fruit and a ripeness level in one control. The closed control should show the current choice. When opened, it should be easy to move across ripeness levels and move down to the same ripeness for the next fruit using the keyboard.",
+      "expectedComponents": [
+        "ComplexSelector"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-10",
+      "category": "feature-with-constraint",
+      "prompt": "Build a user role assignment form. Show a list of team members with a dropdown selector next to each for their role: Viewer, Editor, Admin. Changes should save automatically.",
+      "expectedComponents": [
+        "Selector",
+        "Text",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-3",
+      "category": "workflow-description",
+      "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-3",
+      "category": "state-driven",
+      "prompt": "Form that disables submit until all required fields are valid",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-4",
+      "category": "data-display",
+      "prompt": "Create a user profile page with tabs for Overview, Activity, and Settings. Each tab should show different content. The Overview tab should be selected by default.",
+      "expectedComponents": [
+        "TabList",
+        "Tab",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-2",
+      "category": "integration-oriented",
+      "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+      "expectedComponents": [
+        "TextInput",
+        "Card",
+        "Typeahead"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-4",
+      "category": "page-setup",
+      "prompt": "Create a product detail page with breadcrumb navigation showing Home > Category > Subcategory > Product Name. The page should have a header, product info section, and a back button.",
+      "expectedComponents": [
+        "Breadcrumbs",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-5",
+      "category": "typography",
+      "prompt": "Build a landing page hero with a large display heading that says 'Build faster with Astryx', a subheading paragraph, and a CTA button",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    }
+  ]
+}
