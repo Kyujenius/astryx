@@ -132,21 +132,26 @@ const sortStyles = stylex.create({
       ':is(:disabled,[aria-disabled="true"])': 'default',
     },
     font: 'inherit',
-    color: 'inherit',
+    // The glyph reads this through `color="inherit"`, so a theme setting a
+    // colour on `astryx-table-sort-button` reaches the thing it is aiming at.
+    // The label carries the header's colour itself (see `label`) rather than
+    // inheriting it from here.
+    color: colorVars['--color-icon-secondary'],
     width: '100%',
     height: '100%',
     textAlign: 'inherit',
     borderRadius: radiusVars['--radius-inner'],
   },
-  iconWrapperUnsorted: {
-    display: 'inline-flex',
-    opacity: {
-      default: 0.35,
-      ':is(th:hover *)': 1,
-      ':focus-visible': 1,
-    },
+  buttonSorted: {
+    color: colorVars['--color-accent'],
   },
-  iconWrapperActive: {
+  // The header text belongs to the cell, not to the affordance. It is pinned
+  // to the token the `<th>` sets so the button's icon colour cannot bleed into
+  // it — without this, colouring the sort target repaints the header label too.
+  label: {
+    color: colorVars['--color-text-secondary'],
+  },
+  iconWrapper: {
     display: 'inline-flex',
   },
   rank: {
@@ -310,25 +315,16 @@ function SortHeaderButton<T extends Record<string, unknown>>({
       type="button"
       {...mergeProps(
         themeProps('table-sort-button', {direction}),
-        focusOutlineProps.focusVisible(sortStyles.button),
+        focusOutlineProps.focusVisible(
+          sortStyles.button,
+          direction != null && sortStyles.buttonSorted,
+        ),
       )}
       aria-label={ariaLabel}
       onClick={handleClick}>
-      <span>{children}</span>
-      <span
-        {...mergeProps(
-          themeProps('table-sort-indicator', {direction}),
-          stylex.props(
-            direction != null
-              ? sortStyles.iconWrapperActive
-              : sortStyles.iconWrapperUnsorted,
-          ),
-        )}>
-        <Icon
-          icon={iconName}
-          size="xsm"
-          color={direction != null ? 'accent' : 'secondary'}
-        />
+      <span {...stylex.props(sortStyles.label)}>{children}</span>
+      <span {...stylex.props(sortStyles.iconWrapper)}>
+        <Icon icon={iconName} size="xsm" color="inherit" />
       </span>
       {rank != null && (
         <span {...stylex.props(sortStyles.rank)} aria-hidden="true">

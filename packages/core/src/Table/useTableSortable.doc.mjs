@@ -10,7 +10,6 @@ export const docs = {
   theming: {
     targets: [
       {className: 'astryx-table-sort-button', visualProps: ['direction']},
-      {className: 'astryx-table-sort-indicator', visualProps: ['direction']},
     ],
   },
   usage: {
@@ -51,7 +50,6 @@ export const docsZh = {
   theming: {
     targets: [
       {className: 'astryx-table-sort-button', visualProps: ['direction']},
-      {className: 'astryx-table-sort-indicator', visualProps: ['direction']},
     ],
   },
   props: [

@@ -26,7 +26,7 @@ import {
   type ReactNode,
 } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import {spacingVars, radiusVars} from '../../../theme/tokens.stylex';
+import {spacingVars, radiusVars, colorVars} from '../../../theme/tokens.stylex';
 import {Icon} from '../../../Icon';
 import {Button} from '../../../Button';
 import {Popover} from '../../../Popover';
@@ -386,16 +386,13 @@ const filterStyles = stylex.create({
       minWidth: '44px',
       minHeight: '44px',
     },
-  },
-  triggerInactive: {
-    opacity: {
-      default: 0.35,
-      ':is(th:hover *)': 1,
-      ':focus-visible': 1,
-    },
+    // The funnel reads this through `color="inherit"`, so a theme setting a
+    // colour on `astryx-table-filter-button` reaches it. The button holds only
+    // the glyph, so there is nothing else here for the colour to reach.
+    color: colorVars['--color-icon-secondary'],
   },
   triggerActive: {
-    opacity: 1,
+    color: colorVars['--color-accent'],
   },
   popoverContent: {
     width: '240px',
@@ -1020,16 +1017,10 @@ function PopoverFilterTrigger({
           }),
           stylex.props(
             filterStyles.triggerButton,
-            hasValue
-              ? filterStyles.triggerActive
-              : filterStyles.triggerInactive,
+            hasValue && filterStyles.triggerActive,
           ),
         )}>
-        <Icon
-          icon="funnel"
-          size="xsm"
-          color={hasValue ? 'accent' : 'secondary'}
-        />
+        <Icon icon="funnel" size="xsm" color="inherit" />
       </button>
     </Popover>
   );
