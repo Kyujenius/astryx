@@ -18,3 +18,11 @@ Naming: `Calendar__<variant>__<state>__<theme>.png`, theme one of
 
 Everything else is pixel-equivalent: the radius and spacing changes swap literals
 for the tokens that already resolve to the same values.
+
+## y2k — the radius change, found by the review loop
+
+y2k sets `--radius-full: 0px` (brutalist, everything square). The old literal
+`50%` ignored that, so range endpoints rendered as circles poking out of a
+square band. `--radius-full` makes them square and flush.
+
+`before/Calendar__range__y2k__before.png` · `after/Calendar__range__y2k__after.png`
