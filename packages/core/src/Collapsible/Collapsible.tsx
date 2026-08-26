@@ -27,7 +27,15 @@
  * - /packages/cli/assets/templates/blocks/components/Collapsible/ (showcase blocks)
  */
 
-import {use, useId, type ReactNode} from 'react';
+import {
+  use,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import {
   borderVars,
@@ -65,6 +73,21 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
+    // WCAG 2.5.8 AA target-size floor. Undensified, this button is only as
+    // tall as its own line box — 17px at the default `large` type step, and
+    // shorter still if a caller gives the trigger a smaller type — which is
+    // under the 24x24 minimum. Width is never the problem (the button is
+    // full-bleed), so a min-height is the whole fix.
+    //
+    // Coarse pointers get the system's 44px comfortable-touch floor (the same
+    // one TouchDateField and Table filtering use). Fine pointers keep the 24px
+    // AA floor, preserving the point of compact/balanced/spacious density on
+    // desktop. A flat 44px minimum would make all three density settings look
+    // identical in the very data-heavy surfaces they exist for.
+    minHeight: {
+      default: '24px',
+      '@media (pointer: coarse)': spacingVars['--spacing-11'],
+    },
     cursor: {
       default: 'pointer',
       ':is(:disabled,[aria-disabled="true"])': 'default',
@@ -123,6 +146,13 @@ const styles = stylex.create({
   // behaviour this component had before — the degradation path is the status
   // quo, not a regression.
   //
+  // Nothing here hides the collapsed subtree from assistive tech or the tab
+  // order — a zero-height clipped box is still "rendered" as far as the a11y
+  // tree is concerned. That is the `inert` and `hidden="until-found"`
+  // attributes' job; see the layout effect in the component, which explains
+  // why the second one cannot be a style and has to be timed around the
+  // transition.
+  //
   // Duration and easing come from private custom properties rather than being
   // baked in, so a theme (or a preview harness) can retune the feel without
   // reaching into the component. Open and close read separate properties
@@ -132,22 +162,13 @@ const styles = stylex.create({
     interpolateSize: 'allow-keywords',
     height: 0,
     overflow: 'hidden',
-    // Keeps collapsed content out of the a11y tree and the tab order — the one
-    // thing `display: none` did for free. `visibility` is the right property
-    // rather than `content-visibility`: both hide the subtree, but visibility
-    // has a special interpolation rule — a transition INTO `hidden` keeps the
-    // subtree visible for the whole duration and only flips at the end — so
-    // the panel paints while it collapses instead of blanking on the first
-    // frame. (It is also the form assistive-tech and test tooling agree on.)
-    visibility: 'hidden',
-    transitionProperty: 'height, visibility',
+    transitionProperty: 'height',
     transitionDuration: `var(--_collapsible-close-duration, ${durationVars['--duration-medium']})`,
     transitionTimingFunction: `var(--_collapsible-close-ease, ${easeVars['--ease-standard']})`,
     '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
   },
   contentTrackOpen: {
     height: 'auto',
-    visibility: 'visible',
     transitionDuration: `var(--_collapsible-open-duration, ${durationVars['--duration-medium']})`,
     transitionTimingFunction: `var(--_collapsible-open-ease, ${easeVars['--ease-standard']})`,
     '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
@@ -173,34 +194,28 @@ const styles = stylex.create({
   // Height alone reads as a clip: the text is fully opaque from the first
   // frame and the panel edge wipes down over it. Fading the content as the box
   // grows is what makes it read as arriving. It has to be a separate element
-  // from the track — opacity on the track would fade the clip itself, and the
-  // two moves need different timings.
+  // from the track — opacity on the track would fade the clip itself.
   //
-  // Closing is not the reverse of opening, deliberately. The content leaves
-  // quickly and the box then finishes closing on its own, so text is never
-  // squashed against a shrinking edge. Opening waits for a beat of height
-  // first, so the text arrives into space that already exists.
+  // The fade runs in PARALLEL with the height, on the same duration and the
+  // same curve, so the two land together and read as one move. (An earlier
+  // pass staggered them — hold the content back, then fade it in behind the
+  // box. It measured well and looked like two events; the parallel ramp is
+  // what a reader perceives as the panel arriving, and it is what the
+  // reference implementations of this pattern do.) There is no separate
+  // opacity delay to tune as a result: the fade inherits whichever of the
+  // open/close duration properties is in play.
   contentFade: {
     opacity: 0,
-    translate: `0 calc(-1 * ${spacingVars['--spacing-1']})`,
-    transitionProperty: 'opacity, translate',
-    transitionDuration: `var(--_collapsible-fade-out-duration, ${durationVars['--duration-fast-min']})`,
-    transitionTimingFunction: easeVars['--ease-standard'],
-    transitionDelay: '0ms',
-    '@media (prefers-reduced-motion: reduce)': {
-      transitionDuration: '1ms',
-      transitionDelay: '0ms',
-    },
+    transitionProperty: 'opacity',
+    transitionDuration: `var(--_collapsible-close-duration, ${durationVars['--duration-medium']})`,
+    transitionTimingFunction: `var(--_collapsible-close-ease, ${easeVars['--ease-standard']})`,
+    '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
   },
   contentFadeOpen: {
     opacity: 1,
-    translate: '0 0',
-    transitionDuration: `var(--_collapsible-fade-in-duration, ${durationVars['--duration-fast']})`,
-    transitionDelay: `var(--_collapsible-fade-in-delay, ${durationVars['--duration-fast-min']})`,
-    '@media (prefers-reduced-motion: reduce)': {
-      transitionDuration: '1ms',
-      transitionDelay: '0ms',
-    },
+    transitionDuration: `var(--_collapsible-open-duration, ${durationVars['--duration-medium']})`,
+    transitionTimingFunction: `var(--_collapsible-open-ease, ${easeVars['--ease-standard']})`,
+    '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
   },
   // Group divider chrome — a hairline above every item except the first.
   // The group's wrapper (or 'all' mode) owns the outer edges.
@@ -225,6 +240,13 @@ const densityStyles = stylex.create({
   contentBalanced: {paddingBlockEnd: spacingVars['--spacing-2']},
   contentSpacious: {paddingBlockEnd: spacingVars['--spacing-3']},
 });
+
+// Upper bound for how long a close is given to animate before the a11y
+// attribute is applied regardless. Comfortably past the slowest motion token
+// (--duration-slow-max, 1.3s) so it never pre-empts a real transition, and
+// short enough that a browser which ran no transition at all is not left with
+// collapsed content in the a11y tree for meaningfully long.
+const FALLBACK_SETTLE_MS = 1500;
 
 const triggerDensity = {
   compact: densityStyles.triggerCompact,
@@ -371,6 +393,143 @@ export function Collapsible({
   // Links the trigger to the region it shows/hides so assistive tech can move
   // from the button to its controlled content (disclosure pattern).
   const contentId = useId();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const wasOpenRef = useRef(isOpen);
+  const [isExpanded, setIsExpanded] = useState(isOpen);
+  const canInterpolateSize =
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports === 'function' &&
+    CSS.supports('interpolate-size', 'allow-keywords');
+  // Browsers without the feature derive visual state directly and snap — the
+  // previous Collapsible behaviour. Supporting browsers use the deliberately
+  // frame-delayed state below so `hidden="until-found"` can come off and the
+  // content can lay itself out before `height: auto` is applied.
+  const visuallyOpen = canInterpolateSize ? isExpanded : isOpen;
+
+  // Find-in-page, and taking the collapsed subtree out of the a11y tree.
+  //
+  // Two attributes share this job, landing at different moments.
+  //
+  // `inert` (below, in the JSX) rides directly off `isOpen`, so it is in the
+  // server HTML and applies on the very render that closes the panel. It is
+  // what keeps collapsed content out of the tab order and the a11y tree,
+  // including during the close animation, when the panel is visually shutting
+  // but its content is still on screen.
+  //
+  // `hidden="until-found"` is the upgrade over the `display: none` this
+  // component used to use: it hides the subtree the same way, but the browser
+  // can still find text inside it with Ctrl+F (or a scroll-to-text link),
+  // reveals it on a match, and fires `beforematch` on the way. On an FAQ that
+  // is the difference between search working and silently missing the answer.
+  // It is applied imperatively because React types `hidden` as a boolean and
+  // coerces any truthy value to `hidden=""` — plain `display: none`, which
+  // would stop the panel opening at all.
+  //
+  // The attribute carries `content-visibility: hidden`, and that is what makes
+  // the timing fiddly at BOTH ends:
+  //
+  // - Opening takes two frames, and has to. While the attribute is set the
+  //   content is not laid out, so `height: auto` resolves to zero; flip the
+  //   attribute off and the height on together and the transition has no
+  //   distance to travel and the panel snaps. So frame one removes the
+  //   attribute only — the content lays out behind a track that is still
+  //   `height: 0` — and frame two applies the open height, which now resolves
+  //   against real content and animates. That is what `isExpanded` is for: the
+  //   STYLE state, one frame behind `isOpen`, which is the semantic state.
+  //   (A JS height animation would not need this; it sets explicit pixel
+  //   heights and never asks the browser to resolve `auto`. The frame is the
+  //   price of animating on the compositor instead.)
+  // - Closing applies the attribute only after the transition has finished,
+  //   or it blanks the content on the frame it lands and leaves an empty box
+  //   to shrink.
+  //
+  // transitionend is the accurate "finished" signal, but it never fires when
+  // no transition ran — a browser without `interpolate-size` snaps, and a
+  // panel inside a `display: none` ancestor never animates. The timer is the
+  // backstop, so collapsed content cannot be left in the a11y tree; whichever
+  // arrives first wins, and re-opening cancels both.
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track) {
+      return;
+    }
+
+    const wasOpen = wasOpenRef.current;
+    wasOpenRef.current = isOpen;
+
+    if (isOpen) {
+      track.removeAttribute('hidden');
+      if (!canInterpolateSize) {
+        // The visual state already derives directly from isOpen in this arm;
+        // there is no delayed state to maintain and no empty frame to pay.
+        return;
+      }
+      const frame = requestAnimationFrame(() => setIsExpanded(true));
+      return () => cancelAnimationFrame(frame);
+    }
+
+    // The initial collapsed render has no open panel to animate from. Hide it
+    // now rather than waiting 1.5s for a transition that cannot exist. A real
+    // close arrives with the previous semantic state still open, so it falls
+    // through and animates first.
+    if (!wasOpen) {
+      track.setAttribute('hidden', 'until-found');
+      return;
+    }
+
+    // Without interpolate-size there is no close transition either: the visual
+    // state already snapped to closed from isOpen, so put the find-in-page
+    // attribute on now. Supporting browsers schedule the style change for the
+    // next frame, after this effect has installed the transitionend listener.
+    if (!canInterpolateSize) {
+      track.setAttribute('hidden', 'until-found');
+      return;
+    }
+
+    const frame = requestAnimationFrame(() => setIsExpanded(false));
+
+    let settled = false;
+    const hide = () => {
+      if (!settled) {
+        settled = true;
+        track.setAttribute('hidden', 'until-found');
+      }
+    };
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.target === track && event.propertyName === 'height') {
+        hide();
+      }
+    };
+    track.addEventListener('transitionend', onTransitionEnd);
+    const fallback = window.setTimeout(hide, FALLBACK_SETTLE_MS);
+    return () => {
+      cancelAnimationFrame(frame);
+      track.removeEventListener('transitionend', onTransitionEnd);
+      window.clearTimeout(fallback);
+    };
+  }, [canInterpolateSize, isOpen]);
+
+  // The browser fires `beforematch` when find-in-page matches inside the
+  // collapsed panel, then reveals it by removing the attribute itself. React
+  // does not know that happened, so without this the DOM would be showing an
+  // open panel while state still said closed — and the next render would slam
+  // it shut under the user, having just shown them their match. Routing
+  // through the same toggle a click uses keeps a controlled parent and a
+  // CollapsibleGroup in step too.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) {
+      return;
+    }
+    const onBeforeMatch = () => {
+      if (!isOpen && !isDisabled) {
+        toggle();
+      }
+    };
+    track.addEventListener('beforematch', onBeforeMatch);
+    return () => track.removeEventListener('beforematch', onBeforeMatch);
+  }, [isOpen, isDisabled, toggle]);
 
   return (
     <div
@@ -423,17 +582,28 @@ export function Collapsible({
       </button>
       <div
         id={contentId}
+        ref={trackRef}
+        // `inert` is a real boolean attribute, so React renders it directly and
+        // it is present in the server HTML — which matters, because it is what
+        // keeps a collapsed panel out of the tab order and the a11y tree
+        // before hydration and during the close animation. (`hidden` lands
+        // later; see the effect above.) Without it there is a window where the
+        // panel is visually shut but tabbing still walks into it.
+        inert={!isOpen}
         {...mergeProps(
           themeProps('collapsible-content', {
             density: density ?? undefined,
           }),
-          stylex.props(styles.contentTrack, isOpen && styles.contentTrackOpen),
+          stylex.props(
+            styles.contentTrack,
+            visuallyOpen && styles.contentTrackOpen,
+          ),
         )}>
         <div
           {...stylex.props(
             styles.content,
             styles.contentFade,
-            isOpen && styles.contentFadeOpen,
+            visuallyOpen && styles.contentFadeOpen,
             density != null && contentDensity[density],
           )}>
           {presentation != null ? (

@@ -10,7 +10,7 @@
  */
 
 import {describe, it, expect, vi} from 'vitest';
-import {render, screen, within} from '@testing-library/react';
+import {act, render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Collapsible} from './Collapsible';
 import {CollapsibleGroup} from './CollapsibleGroup';
@@ -154,19 +154,59 @@ describe('Collapsible', () => {
       expect(button).toHaveAttribute('aria-expanded', 'true');
     });
 
-    it('hides the content region only when collapsed, on an animatable track', async () => {
+    it('hides collapsed content accessibly while keeping it findable', async () => {
       const user = userEvent.setup();
-      render(<Collapsible trigger="T">Body</Collapsible>);
+      render(
+        <Collapsible trigger="T">
+          <a href="#answer">Answer link</a>
+        </Collapsible>,
+      );
       const button = screen.getByRole('button');
       const content = contentFor(button);
 
-      // Open: laid out at its natural height and visible.
-      expect(content).toHaveStyle({height: 'auto', visibility: 'visible'});
+      // Open: laid out at its natural height, interactive, and not hidden.
+      expect(content).toHaveStyle({height: 'auto'});
+      expect(content).not.toHaveAttribute('inert');
+      expect(content).not.toHaveAttribute('hidden');
+
       await user.click(button);
-      // Collapsed: clipped to zero height and hidden from AT / the tab order.
-      // `visibility` rather than `display: none` so the collapse can animate —
-      // a `display` change is not interpolatable, a height change is.
-      expect(content).toHaveStyle({height: '0', visibility: 'hidden'});
+
+      // The non-layout test DOM has no `interpolate-size` support, so it takes
+      // the component's explicit fallback: snap closed and apply the findable
+      // hidden state immediately. Real browsers keep this attribute off until
+      // transitionend; that timing is covered by the browser motion test.
+      expect(content).toHaveStyle({height: '0'});
+      expect(content).toHaveAttribute('inert');
+      expect(content).toHaveAttribute('hidden', 'until-found');
+    });
+
+    it('opens when find-in-page matches inside a collapsed panel', () => {
+      const onOpenChange = vi.fn();
+      render(
+        <Collapsible
+          trigger="T"
+          defaultIsOpen={false}
+          onOpenChange={onOpenChange}>
+          Answer that Ctrl+F found
+        </Collapsible>,
+      );
+      const button = screen.getByRole('button');
+      const content = contentFor(button);
+
+      expect(content).toHaveAttribute('hidden', 'until-found');
+      act(() => {
+        content.dispatchEvent(new Event('beforematch'));
+      });
+
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      expect(content).not.toHaveAttribute('hidden');
+      expect(content).not.toHaveAttribute('inert');
+      expect(onOpenChange).toHaveBeenCalledWith(true);
+    });
+
+    it('floors the full-width trigger at the WCAG 2.5.8 target size', () => {
+      render(<Collapsible trigger="T">Body</Collapsible>);
+      expect(screen.getByRole('button')).toHaveStyle({minHeight: '24px'});
     });
 
     it('rotates the chevron indicator between open and closed states', async () => {
