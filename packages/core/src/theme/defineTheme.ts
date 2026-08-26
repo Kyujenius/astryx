@@ -66,9 +66,11 @@ import {resolveThemeValues, type ThemeValuesInput} from './resolveThemeValues';
 import {
   mergeThemeAxes,
   mergeTierInputs,
+  resolveEqualOverrides,
   resolveThemeTiers,
   WIDTH_TIERS,
   type ResolvedTierLayer,
+  type ThemeEqualOverrides,
   type ThemeGenerativeAxes,
   type ThemeTier,
   type ThemeTierInput,
@@ -486,6 +488,13 @@ export interface DefinedTheme {
    * @internal
    */
   __axes?: ThemeGenerativeAxes;
+  /**
+   * Sparse paths for explicit overrides equal to their generated values.
+   * Value-difference inference recovers every other override; these are the
+   * only ambiguous paths a tier has to carry separately.
+   * @internal
+   */
+  __equalOverrides?: ThemeEqualOverrides;
 }
 
 // =============================================================================
@@ -597,11 +606,10 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
       ownTierInput[tier] = declared;
     }
   }
-  // A base built before `__axes` existed carries neither its axis configs nor
-  // its declared overrides, so a tier of this theme could neither complete a
-  // partial scale from it nor keep its explicit overrides above a regenerated
-  // axis. Both fail silently and wrongly. Refuse instead — the same reasoning
-  // that makes `extends: undefined` a hard error.
+  // A base built before `__axes` existed cannot complete a partial scale or
+  // distinguish its pinned values from the values its axes generate. Both
+  // failures are silent and wrong inside a tier. Refuse instead — the same
+  // reasoning that makes `extends: undefined` a hard error.
   const willHaveTiers =
     Object.keys(ownTierInput).length > 0 || base?.__tierInput !== undefined;
   if (base && !base.__axes && willHaveTiers) {
@@ -612,12 +620,20 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
     );
   }
   const __axes = base?.__axes ? mergeThemeAxes(base.__axes, ownAxes) : ownAxes;
+  const __equalOverrides = resolveEqualOverrides(
+    base?.__equalOverrides,
+    {tokens: input.tokens, components: input.components},
+    ownAxes,
+    __axes,
+    {tokens, components},
+  );
   const __tierInput = mergeTierInputs(base?.__tierInput, ownTierInput);
   const __tiers = resolveThemeTiers(
     input.name,
     __tierInput,
     {tokens, components},
     __axes,
+    __equalOverrides,
   );
 
   // On-media token overrides (base's resolved surface, then
@@ -653,6 +669,7 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
     __tiers,
     __tierInput: __tiers ? __tierInput : undefined,
     __axes,
+    __equalOverrides,
   };
 
   registerTheme(theme);

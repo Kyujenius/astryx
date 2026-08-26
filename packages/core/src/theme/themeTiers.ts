@@ -453,10 +453,156 @@ export interface ThemeGenerativeAxes {
 }
 
 /**
- * A theme's own explicit overrides — the two axes that are not generated from
- * a config, and so travel into a tier as declarations rather than as resolved
- * values, to keep beating a generated axis there as they do everywhere else.
+ * Explicit override paths whose resolved value happens to equal the value its
+ * axis generates.
+ *
+ * Most overrides are recoverable by comparing the resolved theme with what its
+ * axes generate. This mask carries only the ambiguous equal-value paths. A
+ * theme with no such pin stores nothing; values never appear here, only keys.
+ * @internal
  */
+export interface ThemeEqualOverrides {
+  /** Explicit token names equal to their generated values. */
+  tokens?: string[];
+  /** Explicit component-style leaf paths equal to their generated values. */
+  components?: string[][];
+}
+
+/** A plain record rather than an array or a CSS leaf value. */
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+/** Read one leaf by path. */
+// eslint-disable-next-line @typescript-eslint/promise-function-async -- `unknown` may be a Promise to the rule; this only walks a plain data object.
+function valueAtPath(value: unknown, path: ReadonlyArray<string>): unknown {
+  let current = value;
+  for (const part of path) {
+    if (!isRecord(current) || !(part in current)) {
+      return undefined;
+    }
+    current = current[part];
+  }
+  return current;
+}
+
+/** Return a copy of `value` with one leaf set. */
+function withPath(
+  value: unknown,
+  path: ReadonlyArray<string>,
+  leaf: unknown,
+): Record<string, unknown> {
+  const [part, ...rest] = path;
+  if (part === undefined) {
+    return isRecord(leaf) ? leaf : {};
+  }
+  const record = isRecord(value) ? value : {};
+  return {
+    ...record,
+    [part]: rest.length === 0 ? leaf : withPath(record[part], rest, leaf),
+  };
+}
+
+/** Every explicit leaf whose resolved and generated values are equal. */
+function equalLeafPaths(
+  declared: unknown,
+  resolved: unknown,
+  generated: unknown,
+  prefix: ReadonlyArray<string> = [],
+): string[][] {
+  if (!isRecord(declared)) {
+    return [];
+  }
+
+  const paths: string[][] = [];
+  for (const [key, declaredValue] of Object.entries(declared)) {
+    if (declaredValue === undefined) {
+      continue;
+    }
+    const path = [...prefix, key];
+    if (isRecord(declaredValue)) {
+      paths.push(...equalLeafPaths(declaredValue, resolved, generated, path));
+      continue;
+    }
+    const resolvedValue = valueAtPath(resolved, path);
+    const generatedValue = valueAtPath(generated, path);
+    if (
+      generatedValue !== undefined &&
+      Object.is(resolvedValue, generatedValue)
+    ) {
+      paths.push(path);
+    }
+  }
+  return paths;
+}
+
+/** Stable union of paths, preserving first-seen order. */
+function uniquePaths(paths: ReadonlyArray<ReadonlyArray<string>>): string[][] {
+  const seen = new Set<string>();
+  const out: string[][] = [];
+  for (const path of paths) {
+    const key = JSON.stringify(path);
+    if (!seen.has(key)) {
+      seen.add(key);
+      out.push([...path]);
+    }
+  }
+  return out;
+}
+
+/**
+ * Resolve the sparse equal-value mask through a theme's `extends` chain.
+ *
+ * An axis this theme declares supersedes inherited pins at every path that axis
+ * generates. An explicit override in this theme adds the path back when its
+ * final value equals the merged axis output; a distinct value needs no marker
+ * because {@link overridesAgainst} can recover it from the value difference.
+ */
+export function resolveEqualOverrides(
+  inherited: ThemeEqualOverrides | undefined,
+  explicit: {
+    tokens?: Partial<Record<TokenName, TokenValue>>;
+    components?: ComponentStyleMap;
+  },
+  ownAxes: ThemeGenerativeAxes,
+  mergedAxes: ThemeGenerativeAxes,
+  resolved: ThemeValuesSeed,
+): ThemeEqualOverrides | undefined {
+  const generatedByOwnAxes = resolveThemeValues({...ownAxes});
+  const generatedByMergedAxes = resolveThemeValues({...mergedAxes});
+
+  const inheritedTokenPaths = (inherited?.tokens ?? [])
+    .map(name => [name])
+    .filter(path => valueAtPath(generatedByOwnAxes.tokens, path) === undefined);
+  const inheritedComponentPaths = (inherited?.components ?? []).filter(
+    path => valueAtPath(generatedByOwnAxes.components, path) === undefined,
+  );
+
+  const ownTokenPaths = equalLeafPaths(
+    explicit.tokens,
+    resolved.tokens,
+    generatedByMergedAxes.tokens,
+  );
+  const ownComponentPaths = equalLeafPaths(
+    explicit.components,
+    resolved.components,
+    generatedByMergedAxes.components,
+  );
+
+  const tokenPaths = uniquePaths([...inheritedTokenPaths, ...ownTokenPaths]);
+  const componentPaths = uniquePaths([
+    ...inheritedComponentPaths,
+    ...ownComponentPaths,
+  ]);
+  if (tokenPaths.length === 0 && componentPaths.length === 0) {
+    return undefined;
+  }
+  return {
+    ...(tokenPaths.length > 0 ? {tokens: tokenPaths.map(path => path[0])} : {}),
+    ...(componentPaths.length > 0 ? {components: componentPaths} : {}),
+  };
+}
+
 /**
  * The parts of `resolved` that differ from what the theme's own axes generate
  * — that is, everything an explicit override put there.
@@ -467,24 +613,7 @@ export interface ThemeGenerativeAxes {
  * whole of what "pin this token" means. Arriving only through the resolved
  * seed puts it at the bottom instead, where a regenerated axis beats it.
  *
- * Derived rather than tracked. The alternative — carrying the declarations
- * down the `extends` chain — has to be serialized into every built theme, and
- * measured at 10.5 KB on a 19 KB module. The axes are already there, so the
- * question "did an override put this here?" can be asked of the values
- * themselves: it did exactly when the value is not the one its axis computes.
- *
- * Two consequences worth stating. A token no axis generates (`--spacing-4`)
- * is always an override, which is correct — and harmless, since no tier can
- * regenerate it. And an override that happens to set exactly the value its
- * axis would have produced is indistinguishable from the generated one, which
- * is also harmless: the two values are equal.
- *
- * Reading the values from the RESOLVED side is what keeps a tier agreeing with
- * its theme about which override won. A base theme's pinned token is
- * legitimately beaten by an extending theme's generated axis (an `extends`
- * replaces a scale outright), and by then the resolved value simply is the
- * generated one — so it is not treated as pinned, and the tier regenerates it
- * exactly as the root did.
+ * The sparse equal-value mask handles the one case this comparison cannot see.
  */
 function overridesAgainst<T>(resolved: T | undefined, generated: unknown): T {
   if (!resolved || typeof resolved !== 'object') {
@@ -502,21 +631,33 @@ function overridesAgainst<T>(resolved: T | undefined, generated: unknown): T {
       out[key] = resolvedValue;
       continue;
     }
-    if (
-      resolvedValue !== null &&
-      typeof resolvedValue === 'object' &&
-      !Array.isArray(resolvedValue)
-    ) {
+    if (isRecord(resolvedValue)) {
       const nested = overridesAgainst(resolvedValue, generatedValue);
       if (nested && Object.keys(nested).length > 0) {
         out[key] = nested;
       }
-    } else if (resolvedValue !== generatedValue) {
+    } else if (!Object.is(resolvedValue, generatedValue)) {
       out[key] = resolvedValue;
     }
   }
 
   return out as T;
+}
+
+/** Re-apply the ambiguous equal-value pins from the resolved theme. */
+function addEqualOverrides<T>(
+  overrides: T | undefined,
+  resolved: T | undefined,
+  paths: ReadonlyArray<ReadonlyArray<string>>,
+): T | undefined {
+  let out: unknown = overrides;
+  for (const path of paths) {
+    const value = valueAtPath(resolved, path);
+    if (value !== undefined) {
+      out = withPath(out, path, value);
+    }
+  }
+  return out as T | undefined;
 }
 
 /**
@@ -753,9 +894,9 @@ function tierValuesToInput(
 /**
  * Resolve every declared tier into a layer with its query and its values.
  *
- * `own` is the theme's own explicit tokens and components, `seed` the values
- * the theme itself resolved to, and `axes` the generative configs it and
- * anything it extends were declared with.
+ * `seed` is the theme's resolved values, `axes` the generative configs it and
+ * anything it extends were declared with, and `equalOverrides` the sparse
+ * paths value comparison alone cannot recognize as explicit.
  *
  * Returns layers in emission order: each tier in width order, and each tier's
  * pointer refinements directly after it so they win inside that tier.
@@ -765,6 +906,7 @@ export function resolveThemeTiers(
   tierInput: ThemeTierInput,
   seed: ThemeValuesSeed,
   axes: ThemeGenerativeAxes,
+  equalOverrides?: ThemeEqualOverrides,
 ): ResolvedTierLayer[] | undefined {
   const declaredTiers = WIDTH_TIERS.filter(
     tier => tierInput[tier] !== undefined,
@@ -778,8 +920,16 @@ export function resolveThemeTiers(
   // tier re-applies over whatever it regenerates.
   const generated = resolveThemeValues({...axes});
   const own: ThemeValuesSeed = {
-    tokens: overridesAgainst(seed.tokens, generated.tokens),
-    components: overridesAgainst(seed.components, generated.components),
+    tokens: addEqualOverrides(
+      overridesAgainst(seed.tokens, generated.tokens),
+      seed.tokens,
+      (equalOverrides?.tokens ?? []).map(name => [name]),
+    ),
+    components: addEqualOverrides(
+      overridesAgainst(seed.components, generated.components),
+      seed.components,
+      equalOverrides?.components ?? [],
+    ),
   };
 
   const breakpoints = resolveBreakpoints(declaredTiers, tierInput, themeName);

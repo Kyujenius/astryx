@@ -886,7 +886,8 @@ function generateBuiltModule(themeDef, iconInfo, iconsSpecifier) {
     serializeField('__onLight', themeDef.__onLight) +
     serializeField('__tiers', themeDef.__tiers) +
     serializeField('__tierInput', themeDef.__tierInput) +
-    serializeField('__axes', themeDef.__axes);
+    serializeField('__axes', themeDef.__axes) +
+    serializeField('__equalOverrides', themeDef.__equalOverrides);
 
   return `${iconImport}/**
  * ${themeDef.name} theme — built by \`${getCliInvocation()} theme build\`

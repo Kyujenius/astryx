@@ -123,7 +123,10 @@ describe('theme build width tiers', () => {
     );
     expect(result.code).toBe(0);
 
-    const css = fs.readFileSync(path.join(themesDir, 'full-scale.css'), 'utf-8');
+    const css = fs.readFileSync(
+      path.join(themesDir, 'full-scale.css'),
+      'utf-8',
+    );
     const preludes = [...css.matchAll(/@media ([^{]+)\{/g)].map(m =>
       m[1].trim(),
     );
@@ -435,6 +438,60 @@ describe('theme build width tiers', () => {
       // And the declarations are NOT duplicated alongside them.
       expect(js).not.toContain('__inputComponents');
     });
+  });
+
+  it('serializes only the path of an ambiguous equal-value pin', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'equal-pin',
+      `{
+        name: 'equal-pin',
+        typography: {scale: {base: 14, ratio: 1.2}},
+        tokens: {'--font-size-base': '0.875rem'},
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    const js = fs.readFileSync(path.join(themesDir, 'equal-pin.js'), 'utf-8');
+    expect(js).toMatch(
+      /__equalOverrides[\s\S]*"tokens": \[\s*"--font-size-base"\s*\]/,
+    );
+    // Metadata records explicitness, not a second copy of the value.
+    const metadata = js.slice(js.indexOf('__equalOverrides'));
+    expect(metadata).not.toContain('0.875rem');
+  });
+
+  it('serializes no explicitness metadata for an ordinary distinct pin', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'distinct-pin',
+      `{
+        name: 'distinct-pin',
+        typography: {scale: {base: 14, ratio: 1.2}},
+        tokens: {'--font-size-base': '2rem'},
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    const js = fs.readFileSync(
+      path.join(themesDir, 'distinct-pin.js'),
+      'utf-8',
+    );
+    expect(js).not.toContain('__equalOverrides');
   });
 
   it('fails the build with a usable message when a tier is misdeclared', async () => {

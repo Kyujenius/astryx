@@ -1300,3 +1300,138 @@ describe('a tier of a theme extending a BUILT theme', () => {
     expect(child.__tiers?.[0].tokens['--font-size-lg']).toBe('1.25rem');
   });
 });
+
+// =============================================================================
+// Explicit pins equal to their generated values
+//
+// Value comparison recovers ordinary pins, but cannot tell an explicit value
+// from a generated one when the two happen to be equal. That is harmless until
+// a tier regenerates the axis to a DIFFERENT value — exactly what tiers do.
+// =============================================================================
+
+describe('an explicit pin equal to its generated value', () => {
+  function equalPinnedBase(name: string) {
+    return defineTheme({
+      name,
+      typography: {scale: {base: 14, ratio: 1.2}},
+      // This is exactly what the scale above generates today, but writing it
+      // explicitly means "hold this value" when a tier changes the scale.
+      tokens: {'--font-size-base': '0.875rem'},
+    });
+  }
+
+  it('stays pinned when a tier regenerates the axis', () => {
+    const theme = defineTheme({
+      name: 'equal-pin',
+      typography: {scale: {base: 14, ratio: 1.2}},
+      tokens: {'--font-size-base': '0.875rem'},
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(theme.tokens['--font-size-base']).toBe('0.875rem');
+    expect(theme.__tiers?.[0].tokens['--font-size-base']).toBe('0.875rem');
+    expect(theme.__equalOverrides).toEqual({tokens: ['--font-size-base']});
+  });
+
+  it('survives through an unchanged child theme', () => {
+    const child = defineTheme({
+      name: 'equal-pin-child',
+      extends: equalPinnedBase('equal-pin-base'),
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(child.__tiers?.[0].tokens['--font-size-base']).toBe('0.875rem');
+    expect(child.__equalOverrides).toEqual({tokens: ['--font-size-base']});
+  });
+
+  it('survives two levels of extends', () => {
+    const middle = defineTheme({
+      name: 'equal-pin-middle',
+      extends: equalPinnedBase('equal-pin-deep-base'),
+    });
+    const leaf = defineTheme({
+      name: 'equal-pin-leaf',
+      extends: middle,
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(leaf.__tiers?.[0].tokens['--font-size-base']).toBe('0.875rem');
+  });
+
+  it("does not resurrect it after the child's own axis supersedes it", () => {
+    const child = defineTheme({
+      name: 'equal-pin-superseded',
+      extends: equalPinnedBase('equal-pin-superseded-base'),
+      // An `extends` replaces the scale input: this legitimately beats the
+      // base's pin, so the inherited marker has to be removed too.
+      typography: {scale: {base: 15, ratio: 1.2}},
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(child.tokens['--font-size-base']).toBe('0.9375rem');
+    expect(child.__tiers?.[0].tokens['--font-size-base']).toBe('1rem');
+    expect(child.__equalOverrides).toBeUndefined();
+  });
+
+  it('lets an explicit tier value beat the pin', () => {
+    const child = defineTheme({
+      name: 'equal-pin-tier-wins',
+      extends: equalPinnedBase('equal-pin-tier-wins-base'),
+      mobile: {tokens: {'--font-size-base': '2rem'}},
+    });
+
+    expect(child.__tiers?.[0].tokens['--font-size-base']).toBe('2rem');
+  });
+
+  it('records an equal generated component path without storing its value', () => {
+    const theme = defineTheme({
+      name: 'equal-component-pin',
+      typography: {scale: {base: 14, ratio: 1.2}},
+      components: {
+        heading: {
+          'level:1': {fontSize: 'var(--text-heading-1-size)'},
+        },
+      },
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(theme.__equalOverrides).toEqual({
+      components: [['heading', 'level:1', 'fontSize']],
+    });
+    expect(theme.__tiers?.[0].components?.heading?.['level:1']?.fontSize).toBe(
+      'var(--text-heading-1-size)',
+    );
+  });
+
+  it('stores nothing for the ordinary distinct-value case', () => {
+    const theme = defineTheme({
+      name: 'distinct-pin',
+      typography: {scale: {base: 14, ratio: 1.2}},
+      tokens: {'--font-size-base': '2rem'},
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(theme.__tiers?.[0].tokens['--font-size-base']).toBe('2rem');
+    expect(theme.__equalOverrides).toBeUndefined();
+  });
+
+  it('round-trips through the shape of a built theme', () => {
+    const live = equalPinnedBase('equal-pin-built-source');
+    const built = {
+      name: 'equal-pin-built',
+      __built: true,
+      tokens: live.tokens,
+      components: live.components,
+      __axes: live.__axes,
+      __equalOverrides: live.__equalOverrides,
+    } as unknown as ReturnType<typeof defineTheme>;
+
+    const child = defineTheme({
+      name: 'equal-pin-on-built',
+      extends: built,
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(child.__tiers?.[0].tokens['--font-size-base']).toBe('0.875rem');
+  });
+});
