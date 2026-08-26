@@ -114,14 +114,52 @@ const styles = stylex.create({
   chevronClosed: {
     transform: 'rotate(0deg)',
   },
-  // Content area
-  contentHidden: {
-    display: 'none',
+  // Content area — an animatable height track.
+  //
+  // Was `display: none`, which cannot animate at all. `interpolate-size:
+  // allow-keywords` makes `height: 0 -> auto` a real transition, so the panel
+  // interpolates from nothing to exactly its content height without anyone
+  // measuring it in JS. Browsers without it simply snap open, which is the
+  // behaviour this component had before — the degradation path is the status
+  // quo, not a regression.
+  //
+  // Duration and easing come from private custom properties rather than being
+  // baked in, so a theme (or a preview harness) can retune the feel without
+  // reaching into the component. Open and close read separate properties
+  // because they belong on the state each move ends in: the closed style
+  // governs closing, the open style governs opening.
+  contentTrack: {
+    interpolateSize: 'allow-keywords',
+    height: 0,
+    overflow: 'hidden',
+    // Keeps collapsed content out of the a11y tree and the tab order — the one
+    // thing `display: none` did for free. `visibility` is the right property
+    // rather than `content-visibility`: both hide the subtree, but visibility
+    // has a special interpolation rule — a transition INTO `hidden` keeps the
+    // subtree visible for the whole duration and only flips at the end — so
+    // the panel paints while it collapses instead of blanking on the first
+    // frame. (It is also the form assistive-tech and test tooling agree on.)
+    visibility: 'hidden',
+    transitionProperty: 'height, visibility',
+    transitionDuration: `var(--_collapsible-close-duration, ${durationVars['--duration-medium']})`,
+    transitionTimingFunction: `var(--_collapsible-close-ease, ${easeVars['--ease-standard']})`,
+    '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
+  },
+  contentTrackOpen: {
+    height: 'auto',
+    visibility: 'visible',
+    transitionDuration: `var(--_collapsible-open-duration, ${durationVars['--duration-medium']})`,
+    transitionTimingFunction: `var(--_collapsible-open-ease, ${easeVars['--ease-standard']})`,
+    '@media (prefers-reduced-motion: reduce)': {transitionDuration: '1ms'},
   },
   // Anchors body typography so revealed text renders at the system's body
   // scale (family/size/weight/leading) instead of inheriting from wherever
   // the Collapsible is placed. External themes override via the
   // `astryx-collapsible-content` target, independently from the trigger.
+  //
+  // The padding lives here, inside the clipped track, rather than on the
+  // track itself: padding on a `height: 0` box still paints, so the collapsed
+  // panel would keep a few stubborn pixels of gap.
   content: {
     paddingBlockStart: spacingVars['--spacing-1'],
     fontFamily: typographyVars['--font-family-body'],
@@ -129,6 +167,40 @@ const styles = stylex.create({
     fontWeight: typeScaleVars['--text-body-weight'],
     lineHeight: typeScaleVars['--text-body-leading'],
     color: colorVars['--color-text-primary'],
+  },
+  // Content fade, on the inner box rather than the track.
+  //
+  // Height alone reads as a clip: the text is fully opaque from the first
+  // frame and the panel edge wipes down over it. Fading the content as the box
+  // grows is what makes it read as arriving. It has to be a separate element
+  // from the track — opacity on the track would fade the clip itself, and the
+  // two moves need different timings.
+  //
+  // Closing is not the reverse of opening, deliberately. The content leaves
+  // quickly and the box then finishes closing on its own, so text is never
+  // squashed against a shrinking edge. Opening waits for a beat of height
+  // first, so the text arrives into space that already exists.
+  contentFade: {
+    opacity: 0,
+    translate: `0 calc(-1 * ${spacingVars['--spacing-1']})`,
+    transitionProperty: 'opacity, translate',
+    transitionDuration: `var(--_collapsible-fade-out-duration, ${durationVars['--duration-fast-min']})`,
+    transitionTimingFunction: easeVars['--ease-standard'],
+    transitionDelay: '0ms',
+    '@media (prefers-reduced-motion: reduce)': {
+      transitionDuration: '1ms',
+      transitionDelay: '0ms',
+    },
+  },
+  contentFadeOpen: {
+    opacity: 1,
+    translate: '0 0',
+    transitionDuration: `var(--_collapsible-fade-in-duration, ${durationVars['--duration-fast']})`,
+    transitionDelay: `var(--_collapsible-fade-in-delay, ${durationVars['--duration-fast-min']})`,
+    '@media (prefers-reduced-motion: reduce)': {
+      transitionDuration: '1ms',
+      transitionDelay: '0ms',
+    },
   },
   // Group divider chrome — a hairline above every item except the first.
   // The group's wrapper (or 'all' mode) owns the outer edges.
@@ -355,19 +427,23 @@ export function Collapsible({
           themeProps('collapsible-content', {
             density: density ?? undefined,
           }),
-          stylex.props(
-            styles.content,
-            density != null && contentDensity[density],
-            !isOpen && styles.contentHidden,
-          ),
+          stylex.props(styles.contentTrack, isOpen && styles.contentTrackOpen),
         )}>
-        {presentation != null ? (
-          <CollapsibleGroupPresentationContext value={null}>
-            {children}
-          </CollapsibleGroupPresentationContext>
-        ) : (
-          children
-        )}
+        <div
+          {...stylex.props(
+            styles.content,
+            styles.contentFade,
+            isOpen && styles.contentFadeOpen,
+            density != null && contentDensity[density],
+          )}>
+          {presentation != null ? (
+            <CollapsibleGroupPresentationContext value={null}>
+              {children}
+            </CollapsibleGroupPresentationContext>
+          ) : (
+            children
+          )}
+        </div>
       </div>
     </div>
   );

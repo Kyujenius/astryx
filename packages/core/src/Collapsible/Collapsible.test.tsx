@@ -154,17 +154,19 @@ describe('Collapsible', () => {
       expect(button).toHaveAttribute('aria-expanded', 'true');
     });
 
-    it('hides the content region (display:none) only when collapsed', async () => {
+    it('hides the content region only when collapsed, on an animatable track', async () => {
       const user = userEvent.setup();
       render(<Collapsible trigger="T">Body</Collapsible>);
       const button = screen.getByRole('button');
       const content = contentFor(button);
 
-      // Open: not display:none.
-      expect(content).not.toHaveStyle({display: 'none'});
+      // Open: laid out at its natural height and visible.
+      expect(content).toHaveStyle({height: 'auto', visibility: 'visible'});
       await user.click(button);
-      // Collapsed: hidden via the contentHidden style.
-      expect(content).toHaveStyle({display: 'none'});
+      // Collapsed: clipped to zero height and hidden from AT / the tab order.
+      // `visibility` rather than `display: none` so the collapse can animate —
+      // a `display` change is not interpolatable, a height change is.
+      expect(content).toHaveStyle({height: '0', visibility: 'hidden'});
     });
 
     it('rotates the chevron indicator between open and closed states', async () => {
