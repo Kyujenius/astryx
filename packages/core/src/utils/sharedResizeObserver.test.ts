@@ -135,7 +135,7 @@ describe('sharedResizeObserver', () => {
     unobserveResize(el2);
   });
 
-  it('replaces callback when same element is observed twice', async () => {
+  it('fans out to every callback registered on the same element', async () => {
     const {observeResize, unobserveResize} =
       await import('./sharedResizeObserver');
 
@@ -153,12 +153,41 @@ describe('sharedResizeObserver', () => {
       {} as ResizeObserver,
     );
 
-    // Only the latest callback fires for subsequent resizes
-    expect(cb1).not.toHaveBeenCalled();
-    // cb2: initial fire (1) + observer fire (1) = but we only check the observer fire
-    // cb2 was called once on registration, then once from capturedCallback
+    // Two features can watch one node without knowing about each other — a
+    // card watching a child for content growth, a Text inside it watching
+    // itself for truncation — so the second registration must not evict the
+    // first.
+    expect(cb1).toHaveBeenCalledTimes(1);
+    // cb2: once on registration, once from the observer.
     expect(cb2).toHaveBeenCalledTimes(2);
 
     unobserveResize(el);
+  });
+
+  it('keeps the other callbacks when one unobserves by identity', async () => {
+    const {observeResize, unobserveResize} =
+      await import('./sharedResizeObserver');
+
+    const el = document.createElement('div');
+    const cb1 = vi.fn();
+    const cb2 = vi.fn();
+
+    observeResize(el, cb1);
+    observeResize(el, cb2);
+    unobserveResize(el, cb1);
+    cb1.mockClear();
+    cb2.mockClear();
+
+    capturedCallback(
+      [{target: el} as unknown as ResizeObserverEntry],
+      {} as ResizeObserver,
+    );
+
+    expect(cb1).not.toHaveBeenCalled();
+    expect(cb2).toHaveBeenCalledTimes(1);
+    expect(mockUnobserve).not.toHaveBeenCalled();
+
+    unobserveResize(el, cb2);
+    expect(mockUnobserve).toHaveBeenCalledWith(el);
   });
 });
