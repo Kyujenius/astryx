@@ -292,7 +292,11 @@ const brandTheme = defineTheme({
         },
         {
           type: 'prose',
-          text: "A tier's value is a partial theme: the same axes as the theme itself (`typography`, `color`, `radius`, `motion`, `tokens`, `components`), resolved through the same pipeline. State only what differs — a scale that sets `base` and not `ratio` inherits the theme's ratio. Setting a `maxWidth` moves both of that tier's boundaries, since a tier's lower bound is always the tier below it. Widths no declared tier covers use the theme's own values.",
+          text: "The bands above assume all four tiers are declared. **A tier you do not declare is not a boundary.** Declare `mobile` and `desktop` and there is one line, not three: desktop covers everything from the phone line up to 1440px. Declaring `wide` on its own is an error for the same reason — it would have no lower boundary and match every width. Above the widest declared tier, and below the narrowest, the theme's own values apply.",
+        },
+        {
+          type: 'prose',
+          text: "A tier's value is a partial theme: the same axes as the theme itself (`typography`, `color`, `radius`, `motion`, `tokens`, `components`), resolved through the same pipeline. State only what differs — a scale that sets `base` and not `ratio` inherits the theme's ratio. Setting a `maxWidth` moves both of that tier's boundaries, since a tier's lower bound is the bound of the nearest tier declared below it.",
         },
         {
           type: 'prose',
@@ -300,7 +304,7 @@ const brandTheme = defineTheme({
         },
         {
           type: 'prose',
-          text: '**Precedence.** Tiers partition, so no two tiers can both match and the question never arises. Within a tier, explicit `tokens` beat values generated from a scale — the same rule the theme itself follows — and a nested pointer refinement wins over the tier it sits in.',
+          text: '**Precedence.** Tiers partition, so no two tiers can both match and the question never arises. Within a tier, explicit `tokens` beat values generated from a scale — the same rule the theme itself follows — and a nested pointer refinement wins over the tier it sits in. Tier CSS is emitted last in each layer, after everything the theme emits without a media query, so a tier always wins where it matches.',
         },
         {
           type: 'prose',

@@ -30,9 +30,14 @@ defineTheme({
 - **Tiers partition the width axis** — exactly one matches at any width, so no
   two ever compete and there is no precedence question between them. Bounds
   default to 756 / 1024 / 1440; `wide` is the open top and takes no `maxWidth`.
+- **A tier you do not declare is not a boundary.** Declare `mobile` and
+  `desktop` and there is one line, not three: desktop covers everything from
+  the phone line up to 1440px, with no band falling back to the theme's own
+  values in between. (`wide` alone is refused — it would have no lower bound.)
 - **A tier is a partial theme**, resolved through the same pipeline as the
   theme itself, so state only what differs. A scale that sets `base` and not
-  `ratio` inherits the theme's ratio.
+  `ratio` inherits the theme's ratio, and an axis a tier never mentions is not
+  re-expanded at all — a tier changes what it names and nothing else.
 - **`extends` is value inheritance, not the cascade** — it defaults to the
   theme's own values, and naming another tier starts from that tier's resolved
   values. The extended tier still applies only in its own band.
@@ -42,6 +47,7 @@ defineTheme({
   fused into one condition.
 - Tiers are plain CSS media queries in the theme stylesheet: SSR-safe, no
   `useMediaQuery`, no hydration flash. Both distribution modes emit them from
-  the same generator.
+  the same generator, last in each layer so a tier beats everything without a
+  media query.
 
 @imdreamrunner

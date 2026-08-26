@@ -475,6 +475,54 @@ function componentHasAugmentableInterface(pascalName, interfaceName) {
 }
 
 /**
+ * Every `[component, rules]` pair a theme ships, its width tiers included.
+ *
+ * A tier's component overrides reach the stylesheet like any other, so the
+ * validators, the variant augmentation and the font notice all have to see
+ * them — and none of them would otherwise. A variant declared only in
+ * `mobile` was styled but untypeable; a private var declared only in `mobile`
+ * skipped a hard error; a typo'd component name in a tier warned about
+ * nothing. Each failed silently, which is the failure mode this whole file
+ * is written to avoid.
+ *
+ * Takes either a resolved theme (`__tiers`) or raw `defineTheme` input
+ * (`mobile` … with their pointer refinements): the validators run before
+ * resolution and the rest after.
+ *
+ * SYNC: packages/core/src/theme/themeTiers.ts (WIDTH_TIERS, TierConditionKey)
+ *
+ * @param {Record<string, any>} themeDef
+ * @returns {[string, Record<string, any>][]}
+ */
+function themedComponentEntries(themeDef) {
+  const maps = [themeDef.components];
+  if (themeDef.__tiers) {
+    for (const layer of themeDef.__tiers) {
+      maps.push(layer.components);
+    }
+  } else {
+    for (const tier of ['mobile', 'tablet', 'desktop', 'wide']) {
+      const declared = themeDef[tier];
+      if (!declared) continue;
+      maps.push(declared.components);
+      for (const condition of [
+        '@media (pointer: coarse)',
+        '@media (pointer: fine)',
+      ]) {
+        maps.push(declared[condition]?.components);
+      }
+    }
+  }
+
+  /** @type {[string, Record<string, any>][]} */
+  const entries = [];
+  for (const map of maps) {
+    if (map) entries.push(...Object.entries(map));
+  }
+  return entries;
+}
+
+/**
  * Generate TypeScript declaration content with module augmentation for custom
  * component prop values found in the theme's `components` keys. Reads known
  * values from doc files to filter out base prop values.
@@ -493,7 +541,8 @@ function componentHasAugmentableInterface(pascalName, interfaceName) {
  * @returns {Promise<string|null>} TypeScript declaration content, or null if no augmentations needed
  */
 async function generateVariantDeclarationsAsync(themeDef) {
-  if (!themeDef.components || Object.keys(themeDef.components).length === 0) {
+  const componentEntries = themedComponentEntries(themeDef);
+  if (componentEntries.length === 0) {
     return null;
   }
 
@@ -501,7 +550,7 @@ async function generateVariantDeclarationsAsync(themeDef) {
   /** @type {Record<string, Record<string, Set<string>>>} */
   const customValues = {};
 
-  for (const [component, rules] of Object.entries(themeDef.components)) {
+  for (const [component, rules] of componentEntries) {
     const knownForComponent = await getKnownValues(component);
 
     for (const key of Object.keys(rules)) {
@@ -837,7 +886,7 @@ function generateBuiltModule(themeDef, iconInfo, iconsSpecifier) {
     serializeField('__onLight', themeDef.__onLight) +
     serializeField('__tiers', themeDef.__tiers) +
     serializeField('__tierInput', themeDef.__tierInput) +
-    serializeField('__valuesInput', themeDef.__valuesInput);
+    serializeField('__axes', themeDef.__axes);
 
   return `${iconImport}/**
  * ${themeDef.name} theme — built by \`${getCliInvocation()} theme build\`
@@ -931,12 +980,13 @@ async function getKnownComponents() {
 async function validateComponentOverrides(themeDef) {
   /** @type {string[]} */
   const warnings = [];
-  if (!themeDef.components) return warnings;
+  const componentEntries = themedComponentEntries(themeDef);
+  if (componentEntries.length === 0) return warnings;
 
   const knownComponents = await getKnownComponents();
   if (knownComponents == null) return warnings;
 
-  for (const [component, rules] of Object.entries(themeDef.components)) {
+  for (const [component, rules] of componentEntries) {
     // Check component name
     if (!(component in knownComponents)) {
       const similar = Object.keys(knownComponents)
@@ -1003,9 +1053,8 @@ async function validateComponentOverrides(themeDef) {
 function validatePrivateVars(themeDef) {
   /** @type {string[]} */
   const errors = [];
-  if (!themeDef.components) return errors;
 
-  for (const [component, rules] of Object.entries(themeDef.components)) {
+  for (const [component, rules] of themedComponentEntries(themeDef)) {
     for (const [key, styles] of Object.entries(rules)) {
       for (const prop of Object.keys(styles)) {
         if (typeof prop === 'string' && prop.startsWith('--_')) {
@@ -1019,7 +1068,9 @@ function validatePrivateVars(themeDef) {
     }
   }
 
-  return errors;
+  // One entry per distinct message: a component declared in both the theme
+  // and a tier would otherwise report the same problem twice.
+  return [...new Set(errors)];
 }
 
 /**
@@ -1115,7 +1166,7 @@ export async function themeBuild(
   // `astryx theme build` and the `<Theme>` runtime MUST emit identical CSS, so
   // there is exactly one generation path: @astryxdesign/core/theme. If core could not
   // be imported, fail hard rather than silently producing divergent output.
-  if (!_defineTheme || !_generateThemeRulesSplit) {
+  if (!_defineTheme || !_generateThemeRulesSplit || !_generateTierCSS) {
     throw new AstryxError(
       'Could not load @astryxdesign/core/theme — `astryx theme build` requires a ' +
         'built, resolvable @astryxdesign/core so it emits the same CSS as the ' +
@@ -1180,36 +1231,34 @@ export async function themeBuild(
         `@layer reset {\n@scope (${scopeSelector}) to (${scopeTo}) {\n${proseInner}\n}\n}`,
       );
     }
-    // Width-tier layers — the same generator the runtime path uses.
-    const tierCss = _generateTierCSS
-      ? _generateTierCSS(resolvedTheme)
-      : {prose: '', component: ''};
-    if (tierCss.prose) {
-      cssParts.push(`@layer reset {\n${tierCss.prose}\n}`);
-    }
-    if (component.length > 0 || tierCss.component) {
-      const componentInner = component.join('\n\n');
-      const componentScope =
-        component.length > 0
-          ? `@scope (${scopeSelector}) to (${scopeTo}) {\n${componentInner}\n}`
-          : '';
-      // #3658: also emit attribute-specific rules so <Theme mode> can override color-scheme
-      // A `[light, dark]` tuple set only inside a tier still produces
-      // light-dark(), so the guard has to consider the tier CSS too — without
-      // it the built path ships light-dark() with nothing to resolve against,
-      // while the runtime path (which always sets color-scheme on its wrapper)
-      // renders correctly. The two must not disagree.
-      const needsColorScheme =
-        componentScope.includes('light-dark(') ||
-        tierCss.component.includes('light-dark(') ||
-        tierCss.prose.includes('light-dark(');
-      const colorSchemeDecl = needsColorScheme
-        ? '  :root { color-scheme: light dark; }\n  html[data-theme="light"] { color-scheme: light; }\n  html[data-theme="dark"] { color-scheme: dark; }\n\n'
+    // Width-tier layers — the same generator the runtime path uses. Held back
+    // and pushed last, after the on-media rules: a `@media` block adds no
+    // specificity, so being emitted last is the whole of why a tier wins where
+    // it matches. The runtime path orders these the same way, and the two must
+    // not disagree.
+    const tierCss = _generateTierCSS(resolvedTheme);
+    // #3658: also emit attribute-specific rules so <Theme mode> can override
+    // color-scheme. A `[light, dark]` tuple set only inside a tier still
+    // produces light-dark(), so the guard has to consider the tier CSS too —
+    // without it the built path ships light-dark() with nothing to resolve
+    // against, while the runtime path (which always sets color-scheme on its
+    // wrapper) renders correctly. The two must not disagree.
+    const componentInner = component.join('\n\n');
+    const componentScope =
+      component.length > 0
+        ? `@scope (${scopeSelector}) to (${scopeTo}) {\n${componentInner}\n}`
         : '';
-      const body = [componentScope, tierCss.component]
-        .filter(Boolean)
-        .join('\n\n');
-      cssParts.push(`@layer astryx-theme {\n${colorSchemeDecl}${body}\n}`);
+    const needsColorScheme =
+      componentScope.includes('light-dark(') ||
+      tierCss.component.includes('light-dark(') ||
+      tierCss.prose.includes('light-dark(');
+    const colorSchemeDecl = needsColorScheme
+      ? '  :root { color-scheme: light dark; }\n  html[data-theme="light"] { color-scheme: light; }\n  html[data-theme="dark"] { color-scheme: dark; }\n\n'
+      : '';
+    if (colorSchemeDecl || componentScope) {
+      cssParts.push(
+        `@layer astryx-theme {\n${colorSchemeDecl}${componentScope}\n}`,
+      );
     }
     // On-media rules (MediaTheme dark/light surface overrides)
     if (_generateOnMediaCSS) {
@@ -1217,6 +1266,13 @@ export async function themeBuild(
       if (onMediaCss) {
         cssParts.push(`@layer astryx-theme {\n${onMediaCss}\n}`);
       }
+    }
+    // Width tiers last in each layer — see the note where tierCss is built.
+    if (tierCss.prose) {
+      cssParts.push(`@layer reset {\n${tierCss.prose}\n}`);
+    }
+    if (tierCss.component) {
+      cssParts.push(`@layer astryx-theme {\n${tierCss.component}\n}`);
     }
     if (cssParts.length === 0) {
       logger.log('No overrides found — nothing to build.');
@@ -1428,7 +1484,17 @@ Or with a <link> tag:
   // theme with a webfont, including a perfect one, and as a warning it made
   // every such build read as defective (it also put the shipped template
   // permanently in violation of its own "compiles with no warnings" guard).
-  const unloadedFonts = collectUnloadedFonts(resolvedTheme);
+  // Tier layers are resolved themes in their own right, so a family named only
+  // inside `mobile` needs the same notice as one named at the top level.
+  const unloadedFonts = [
+    ...new Set([
+      ...collectUnloadedFonts(resolvedTheme),
+      ...(resolvedTheme?.__tiers ?? []).flatMap(
+        (/** @type {{tokens?: Record<string, string>, components?: object}} */ layer) =>
+          collectUnloadedFonts(layer),
+      ),
+    ]),
+  ];
   for (const family of unloadedFonts) {
     const msg = `Font "${family}" is named by this theme but not loaded — add a <link> or @font-face in your app (recipe: astryx docs typography)`;
     noticeMessages.push(msg);

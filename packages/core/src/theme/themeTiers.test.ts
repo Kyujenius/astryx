@@ -16,6 +16,7 @@ import {
   WIDTH_TIERS,
   DEFAULT_TIER_MAX_WIDTH,
 } from './index';
+import {durationDefaults, radiusDefaults} from './tokens.stylex';
 
 /** The queries of every resolved layer, in emission order. */
 function queries(theme: ReturnType<typeof defineTheme>): string[] {
@@ -97,16 +98,51 @@ describe('tier queries', () => {
     ]);
   });
 
-  it('uses the canonical bounds of undeclared tiers, so a tier means its own band', () => {
-    // Only mobile and wide are declared. `wide` must still mean "above the
-    // desktop line", not "above mobile" — a 1000px laptop is not wide.
+  it('gives an undeclared tier no boundary, so the tier above it reaches down', () => {
+    // No tablet declared, so the 1024px line does not exist and `desktop`
+    // covers everything from the phone line up to its own.
     const theme = defineTheme({
       name: 'gapped',
+      mobile: {tokens: {'--spacing-4': '1px'}},
+      desktop: {tokens: {'--spacing-4': '3px'}},
+    });
+
+    expect(queries(theme)).toEqual([
+      '(width <= 756px)',
+      '(756px < width <= 1440px)',
+    ]);
+  });
+
+  it('leaves no width uncovered between two declared tiers', () => {
+    // The open-topped tier reaching down as far as mobile is the same rule:
+    // with no tablet and no desktop declared there is one boundary, not three.
+    const theme = defineTheme({
+      name: 'two-band',
       mobile: {tokens: {'--spacing-4': '1px'}},
       wide: {tokens: {'--spacing-4': '4px'}},
     });
 
-    expect(queries(theme)).toEqual(['(width <= 756px)', '(width > 1440px)']);
+    expect(queries(theme)).toEqual(['(width <= 756px)', '(width > 756px)']);
+  });
+
+  it('gives a single mid-scale tier everything below its own bound', () => {
+    const theme = defineTheme({
+      name: 'lonely-desktop',
+      desktop: {tokens: {'--spacing-4': '3px'}},
+    });
+
+    expect(queries(theme)).toEqual(['(width <= 1440px)']);
+  });
+
+  it('honours a moved bound on the only declared tier, with no phantom neighbour', () => {
+    // Nothing else is declared, so 1200 conflicts with nothing — the default
+    // bound of a tier this theme never mentions is not a boundary.
+    const theme = defineTheme({
+      name: 'wide-mobile',
+      mobile: {maxWidth: 1200, tokens: {'--spacing-4': '1px'}},
+    });
+
+    expect(queries(theme)).toEqual(['(width <= 1200px)']);
   });
 
   it('moves both adjacent boundaries when a maxWidth is set', () => {
@@ -182,10 +218,12 @@ describe('pointer refinement', () => {
   it('carries a fine-pointer refinement too', () => {
     const theme = defineTheme({
       name: 'fine',
+      mobile: {tokens: {'--spacing-4': '12px'}},
       tablet: {'@media (pointer: fine)': {tokens: {'--spacing-4': '14px'}}},
     });
 
     expect(queries(theme)).toEqual([
+      '(width <= 756px)',
       '(756px < width <= 1024px)',
       '(756px < width <= 1024px) and (pointer: fine)',
     ]);
@@ -348,6 +386,12 @@ describe('validation', () => {
         tablet: {maxWidth: 800},
       }),
     ).toThrow(/tier bounds must increase/);
+  });
+
+  it('refuses the open-topped tier declared on its own', () => {
+    expect(() =>
+      defineTheme({name: 'only-wide', wide: {tokens: {'--spacing-4': '4px'}}}),
+    ).toThrow(/declaring it on its own/);
   });
 
   it('refuses a maxWidth that is not a positive number', () => {
@@ -566,6 +610,64 @@ describe('emitted CSS', () => {
     }
   });
 
+  it("emits a refinement that returns a value to the base theme's", () => {
+    // The refinement's competitor is the tier it sits in, not the base theme:
+    // on a coarse-pointer phone BOTH media queries match. A refinement value
+    // that happens to equal the base theme's still has to be emitted, or the
+    // tier underneath goes on applying.
+    const theme = defineTheme({
+      name: 'back-to-base',
+      tokens: {'--spacing-4': '16px', '--radius-container': '8px'},
+      mobile: {
+        tokens: {'--spacing-4': '12px', '--radius-container': '2px'},
+        '@media (pointer: coarse)': {
+          tokens: {
+            '--spacing-4': '16px', // back to the base theme's value
+            '--radius-container': '4px', // genuinely new
+          },
+        },
+      },
+    });
+
+    const {component} = generateTierCSS(theme);
+    const coarse = component.slice(component.indexOf('(pointer: coarse)'));
+
+    expect(coarse).toContain('--spacing-4: 16px');
+    expect(coarse).toContain('--radius-container: 4px');
+  });
+
+  it("emits a refinement component rule that returns to the base theme's", () => {
+    const theme = defineTheme({
+      name: 'back-to-base-component',
+      components: {card: {base: {borderWidth: '2px'}}},
+      mobile: {
+        components: {card: {base: {borderWidth: '1px'}}},
+        '@media (pointer: coarse)': {
+          components: {card: {base: {borderWidth: '2px'}}},
+        },
+      },
+    });
+
+    const {component} = generateTierCSS(theme);
+    const coarse = component.slice(component.indexOf('(pointer: coarse)'));
+
+    expect(coarse).toContain('border-width: 2px');
+  });
+
+  it('still drops a refinement that repeats the tier it sits in', () => {
+    const theme = defineTheme({
+      name: 'redundant-refinement',
+      tokens: {'--spacing-4': '16px'},
+      mobile: {
+        tokens: {'--spacing-4': '12px'},
+        '@media (pointer: coarse)': {tokens: {'--spacing-4': '12px'}},
+      },
+    });
+
+    const {component} = generateTierCSS(theme);
+    expect(component).not.toContain('(pointer: coarse)');
+  });
+
   it('emits nothing for a tier that changes nothing', () => {
     const theme = defineTheme({
       name: 'noop',
@@ -673,5 +775,350 @@ describe('a theme that extends a tiered theme', () => {
     });
 
     expect(queries(variant)).toEqual(['(width <= 640px)']);
+  });
+});
+
+// =============================================================================
+// Required behaviours
+//
+// Three rules the API is required to hold to. They are stated here as
+// requirements in their own right, and tested directly, rather than left to
+// fall out of the tests above — so that a change which breaks one fails a test
+// that says what was broken.
+// =============================================================================
+
+describe('required: no breakpoints means no responsive theme', () => {
+  it('emits no media query at all when a theme declares no tier', () => {
+    const theme = defineTheme({
+      name: 'req1-none',
+      typography: {scale: {base: 14, ratio: 1.2}},
+      color: {accent: '#3B82F6'},
+      tokens: {'--spacing-4': '16px'},
+      onDark: {tokens: {'--color-background-body': '#000000'}},
+    });
+
+    expect(theme.__tiers).toBeUndefined();
+
+    const {component, prose} = generateThemeCSS(theme);
+    expect(component).not.toContain('@media');
+    expect(prose).not.toContain('@media');
+    expect(generateTierCSS(theme)).toEqual({prose: '', component: ''});
+  });
+
+  it('produces exactly the CSS it produced before tiers existed', () => {
+    const input = {
+      name: 'req1-same',
+      typography: {scale: {base: 15, ratio: 1.3}},
+      tokens: {'--spacing-4': '16px'},
+      components: {card: {base: {borderWidth: '2px'}}},
+    };
+
+    // The same theme built twice, once with a tier declared and once without:
+    // only the tiered one may differ, and only by its media blocks.
+    const plain = defineTheme(input);
+    const tiered = defineTheme({
+      ...input,
+      name: 'req1-same-tiered',
+      mobile: {tokens: {'--spacing-4': '12px'}},
+    });
+
+    const plainCss = generateThemeCSS(plain).component;
+    const tieredCss = generateThemeCSS(tiered)
+      .component.replaceAll('req1-same-tiered', 'req1-same')
+      // strip the trailing tier block
+      .split('@media')[0]
+      .trimEnd();
+
+    expect(tieredCss).toBe(plainCss);
+  });
+});
+
+describe('required: an undeclared tier is not a breakpoint', () => {
+  it('hands the band of an undeclared tier to the tier above it', () => {
+    const theme = defineTheme({
+      name: 'req2-gap',
+      mobile: {tokens: {'--spacing-4': '1px'}},
+      desktop: {tokens: {'--spacing-4': '3px'}},
+    });
+
+    // 900px is nominally tablet. With no tablet declared it must be desktop,
+    // not the theme's own values.
+    expect(queries(theme)).toEqual([
+      '(width <= 756px)',
+      '(756px < width <= 1440px)',
+    ]);
+  });
+
+  it('leaves no gap anywhere below the widest declared tier', () => {
+    const theme = defineTheme({
+      name: 'req2-cover',
+      mobile: {maxWidth: 500, tokens: {'--spacing-4': '1px'}},
+      wide: {tokens: {'--spacing-4': '4px'}},
+    });
+
+    expect(queries(theme)).toEqual(['(width <= 500px)', '(width > 500px)']);
+  });
+
+  it('does not let an undeclared tier default conflict with a declared bound', () => {
+    // mobile past the tablet default is fine while no tablet is declared...
+    expect(() =>
+      defineTheme({
+        name: 'req2-ok',
+        mobile: {maxWidth: 1200, tokens: {'--spacing-4': '1px'}},
+      }),
+    ).not.toThrow();
+
+    // ...and an error the moment the theme actually declares that neighbour.
+    expect(() =>
+      defineTheme({
+        name: 'req2-clash',
+        mobile: {maxWidth: 1200, tokens: {'--spacing-4': '1px'}},
+        tablet: {tokens: {'--spacing-4': '2px'}},
+      }),
+    ).toThrow(/tier bounds must increase/);
+  });
+});
+
+describe('required: a tier @media block overrides what has no media query', () => {
+  /**
+   * The top-level blocks of a CSS string, in source order — enough to ask
+   * whether anything without a media query trails one that has it.
+   */
+  function topLevelBlocks(css: string): string[] {
+    const blocks: string[] = [];
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i < css.length; i++) {
+      if (css[i] === '{') {
+        depth++;
+      } else if (css[i] === '}') {
+        depth--;
+        if (depth === 0) {
+          blocks.push(css.slice(start, i + 1).trim());
+          start = i + 1;
+        }
+      }
+    }
+    return blocks.filter(Boolean);
+  }
+
+  /** Assert every media block in `css` follows every block without one. */
+  function expectMediaLast(css: string): void {
+    const blocks = topLevelBlocks(css);
+    const firstMedia = blocks.findIndex(block => block.startsWith('@media'));
+    expect(firstMedia).toBeGreaterThan(-1);
+    expect(
+      blocks.slice(firstMedia).filter(block => !block.startsWith('@media')),
+    ).toEqual([]);
+  }
+
+  it('emits every tier block after every rule without a media query', () => {
+    const theme = defineTheme({
+      name: 'req3-order',
+      tokens: {'--spacing-4': '16px'},
+      components: {card: {base: {borderWidth: '2px'}}},
+      // A surface override is the last thing emitted without a media query,
+      // so a tier block landing before it would lose where both apply.
+      onDark: {tokens: {'--color-background-body': '#000000'}},
+      onLight: {tokens: {'--color-background-body': '#ffffff'}},
+      mobile: {
+        tokens: {'--spacing-4': '12px', '--color-background-body': '#111111'},
+        components: {card: {base: {borderWidth: '1px'}}},
+      },
+    });
+
+    const {component} = generateThemeCSS(theme);
+
+    expect(component).toContain('[data-astryx-media="dark"]');
+    expect(component.indexOf('@media')).toBeGreaterThan(
+      component.lastIndexOf('[data-astryx-media="dark"]'),
+    );
+    expect(component.indexOf('@media')).toBeGreaterThan(
+      component.lastIndexOf('--spacing-4: 16px'),
+    );
+    expectMediaLast(component);
+  });
+
+  it('puts a pointer refinement after the tier it refines', () => {
+    const theme = defineTheme({
+      name: 'req3-pointer',
+      mobile: {
+        tokens: {'--spacing-4': '12px'},
+        '@media (pointer: coarse)': {tokens: {'--spacing-4': '14px'}},
+      },
+    });
+
+    const {component} = generateThemeCSS(theme);
+    expect(mediaPreludes(component)).toEqual([
+      '(width <= 756px)',
+      '(width <= 756px) and (pointer: coarse)',
+    ]);
+  });
+
+  it('keeps tier prose rules after the base prose rules too', () => {
+    const theme = defineTheme({
+      name: 'req3-prose',
+      typography: {scale: {base: 14, ratio: 1.2}},
+      mobile: {typography: {scale: {base: 18}}},
+    });
+
+    const {prose} = generateThemeCSS(theme);
+    expectMediaLast(prose);
+  });
+});
+
+// =============================================================================
+// A tier changes what it names, and nothing else
+//
+// The invariant that makes tiers safe to add to an existing theme. It is easy
+// to break in a way no single-token assertion catches: a tier that re-expands
+// an axis it never mentioned reverts whatever the theme resolved that axis
+// against, and the damage shows up as extra declarations nobody asked for.
+// =============================================================================
+
+describe('a tier changes only what it names', () => {
+  /** Tokens whose tier value differs from the theme's own. */
+  function movedTokens(
+    theme: ReturnType<typeof defineTheme>,
+    layer = 0,
+  ): string[] {
+    const tokens = theme.__tiers?.[layer].tokens ?? {};
+    return Object.keys(tokens)
+      .filter(name => theme.tokens[name] !== tokens[name])
+      .sort();
+  }
+
+  it('moves one token when the tier names one token', () => {
+    const theme = defineTheme({
+      name: 'named-only',
+      typography: {scale: {base: 14, ratio: 1.25}},
+      color: {accent: '#0064E0'},
+      radius: {base: 4, multiplier: 2},
+      tokens: {'--spacing-4': '16px'},
+      components: {card: {base: {borderWidth: '2px'}}},
+      mobile: {tokens: {'--spacing-4': '12px'}},
+    });
+
+    expect(movedTokens(theme)).toEqual(['--spacing-4']);
+  });
+
+  it('moves one token when the theme it extends declared every axis', () => {
+    // Every axis at once, plus explicit tokens that beat three of them — the
+    // shape a real shipped theme has, and the one that breaks if a tier
+    // re-expands an axis it never mentioned.
+    const base = defineTheme({
+      name: 'rich-base',
+      typography: {scale: {base: 14, ratio: 1.25}, body: {weight: 'medium'}},
+      color: {accent: '#0064E0'},
+      radius: {base: 4, multiplier: 2},
+      motion: {fast: 150, medium: 300, slow: 600, ratio: 0.8},
+      tokens: {
+        '--font-size-lg': '99px',
+        '--color-accent': '#FF0000',
+        '--radius-element': '99px',
+      },
+      components: {heading: {'level:1': {fontSize: '99px'}}},
+    });
+
+    const variant = defineTheme({
+      name: 'rich-variant',
+      extends: base,
+      mobile: {tokens: {'--spacing-4': '12px'}},
+    });
+
+    expect(movedTokens(variant)).toEqual(['--spacing-4']);
+    expect(generateTierCSS(variant).prose).toBe('');
+  });
+
+  it("keeps the base theme's explicit token above the extending theme's axis", () => {
+    // The base pins the accent; the child regenerates it from a scale. The
+    // child's root resolution has the child winning — and the tier has to
+    // agree with the root, or the accent flips inside the media query.
+    const base = defineTheme({
+      name: 'pinned-base',
+      tokens: {'--color-accent': '#FF0000'},
+    });
+    const variant = defineTheme({
+      name: 'regenerating-variant',
+      extends: base,
+      color: {accent: '#0064E0'},
+      mobile: {tokens: {'--spacing-4': '12px'}},
+    });
+
+    expect(variant.__tiers?.[0].tokens['--color-accent']).toBe(
+      variant.tokens['--color-accent'],
+    );
+    expect(movedTokens(variant)).toEqual(['--spacing-4']);
+  });
+
+  it('still re-expands an axis the tier does name', () => {
+    const theme = defineTheme({
+      name: 'named-axis',
+      typography: {scale: {base: 14, ratio: 1.25}},
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    const moved = movedTokens(theme);
+    expect(moved.length).toBeGreaterThan(1);
+    expect(moved).toContain('--font-size-base');
+    // One step up from a 16px base at the theme's own 1.25 ratio is 20px. At
+    // the shipped default ratio of 1.2 it would be 1.2rem, so this is the
+    // assertion that the tier inherited the ratio it did not name.
+    expect(theme.__tiers?.[0].tokens['--font-size-lg']).toBe('1.25rem');
+  });
+
+  it('leaves the theme itself untouched by its tiers', () => {
+    const plain = defineTheme({
+      name: 'untouched-plain',
+      tokens: {'--spacing-4': '16px'},
+    });
+    const tiered = defineTheme({
+      name: 'untouched-tiered',
+      tokens: {'--spacing-4': '16px'},
+      mobile: {tokens: {'--spacing-4': '12px'}},
+    });
+
+    expect(tiered.tokens).toEqual(plain.tokens);
+  });
+});
+
+describe('completing a scale the theme never declared', () => {
+  it('moves the whole axis, and exactly these tokens away from the defaults', () => {
+    // Completing a partial scale has to hand the expander a whole config, so
+    // the axis is recomputed end to end. The shipped duration table is
+    // hand-rounded and no single ratio reproduces it, so two of its nine
+    // tokens land 5ms off. Pinned here so the difference stays a known one:
+    // if the shipped table or DEFAULT_MOTION_SCALE moves, this fails.
+    const theme = defineTheme({
+      name: 'completed-motion',
+      mobile: {motion: {fast: 175}}, // the shipped `fast`, so only rounding moves
+    });
+
+    const tokens = theme.__tiers?.[0].tokens ?? {};
+    const drifted: Record<string, string> = {};
+    for (const [name, value] of Object.entries(durationDefaults)) {
+      if (tokens[name] !== undefined && tokens[name] !== value) {
+        drifted[name] = `${value} -> ${tokens[name]}`;
+      }
+    }
+
+    expect(drifted).toEqual({
+      '--duration-fast-max': '230ms -> 235ms',
+      '--duration-medium-max': '550ms -> 545ms',
+    });
+  });
+
+  it('reproduces the radius defaults exactly', () => {
+    const theme = defineTheme({
+      name: 'completed-radius',
+      mobile: {radius: {base: 4}},
+    });
+
+    const tokens = theme.__tiers?.[0].tokens ?? {};
+    for (const [name, value] of Object.entries(radiusDefaults)) {
+      if (tokens[name] !== undefined) {
+        expect([name, tokens[name]]).toEqual([name, value]);
+      }
+    }
   });
 });

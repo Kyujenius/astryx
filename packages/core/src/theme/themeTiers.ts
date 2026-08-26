@@ -16,8 +16,15 @@
  *
  * **Tiers partition the width axis.** Exactly one tier matches at any viewport
  * width, so there is never a question of which tier wins — the question does
- * not arise. Bands no declared tier covers fall through to the theme's own
- * values, which is what a theme with no tiers at all resolves to everywhere.
+ * not arise.
+ *
+ * Only *declared* tiers take part in that partition. A tier a theme does not
+ * declare is not a narrower band with nothing in it — it is not a boundary at
+ * all, and the tier above it reaches down to wherever the nearest declared
+ * tier below it ends. A theme declaring `mobile` and `desktop` has one
+ * boundary and two bands: phone, and everything else up to the desktop line.
+ * Above the widest declared tier, and below the narrowest, the theme's own
+ * values apply — which is what a theme with no tiers resolves to everywhere.
  *
  * **`extends` is value inheritance, not the cascade.** A tier that extends
  * another is resolved by merging their inputs and running the result through
@@ -87,6 +94,9 @@ export type WidthTier = (typeof WIDTH_TIERS)[number];
 /**
  * Default upper bound per tier, in px — the widest viewport still inside it.
  *
+ * These apply to a tier the theme *declares*. An undeclared tier contributes
+ * no boundary at all, so these are defaults, not fixed lines on the axis.
+ *
  * `wide` has no entry: it is open-topped by definition, everything above
  * `desktop`. 756 is the canonical phone line, 1024 is iPad landscape, and 1440
  * is the usual laptop-to-large-display boundary.
@@ -101,7 +111,8 @@ export const DEFAULT_TIER_MAX_WIDTH: Record<
 };
 
 /**
- * The radius and motion scales Astryx ships with.
+ * The scales a partial one in a tier is completed from when the theme has no
+ * scale of its own.
  *
  * A tier can restate part of a scale (`radius: {multiplier: 0}`), and the
  * expanders take complete configs — so a partial merged over a theme that
@@ -109,8 +120,16 @@ export const DEFAULT_TIER_MAX_WIDTH: Record<
  * than reaching an expander with an undefined field, which computes `NaN` and
  * emits it as a value no browser rejects and nothing renders from.
  *
+ * These APPROXIMATE the shipped token defaults rather than reproducing them.
+ * `radius` is exact. The duration table is hand-rounded and no single ratio
+ * reproduces it — 175×r = 130 and 175÷r = 230 want different ratios — so
+ * completing a partial `motion` recomputes the whole axis and two of its nine
+ * tokens land 5ms from the shipped value. `themeTiers.test.ts` pins exactly
+ * which, so the difference is a documented one rather than a surprise.
+ *
  * SYNC: /packages/core/src/theme/expandRadiusScale.ts,
- *       /packages/core/src/theme/expandMotionScale.ts
+ *       /packages/core/src/theme/expandMotionScale.ts,
+ *       /packages/core/src/theme/tokens.stylex.ts (durationDefaults)
  */
 export const DEFAULT_RADIUS_SCALE: RadiusScaleConfig = {base: 4, multiplier: 1};
 
@@ -218,8 +237,9 @@ export type ThemeTier = TierValues & {
    * The widest viewport still inside this tier, in px. Defaults to 756
    * (`mobile`), 1024 (`tablet`) and 1440 (`desktop`).
    *
-   * `wide` is open-topped and takes no `maxWidth`. A tier's lower bound is
-   * always the tier below it, so setting this moves both boundaries at once.
+   * `wide` is open-topped and takes no `maxWidth`. A tier's lower bound is the
+   * bound of the nearest tier the theme declares below it, so setting this
+   * moves both boundaries at once.
    */
   maxWidth?: number;
   /**
@@ -268,7 +288,22 @@ export interface ResolvedTierLayer {
 // =============================================================================
 
 /**
+ * The boundaries a theme puts on the width axis, keyed by the tier that owns
+ * each one — a tier's own upper bound.
+ *
+ * Only declared, bounded tiers appear. An absent tier is a boundary the theme
+ * does not have.
+ */
+export type TierBreakpoints = Readonly<Partial<Record<WidthTier, number>>>;
+
+/**
  * Build the width query for a tier.
+ *
+ * A tier's upper bound is its own entry in `breakpoints`; its lower bound is
+ * the nearest entry below it. Because only declared tiers have entries, an
+ * undeclared tier does not cut the axis — `{mobile, desktop}` gives desktop
+ * everything from the phone line to the desktop line, rather than leaving the
+ * tablet band to fall back to the theme's own values.
  *
  * Range syntax (`756px < width <= 1024px`) rather than paired min/max: the
  * bands are half-open and adjacent, and writing `min-width: 757px` to express
@@ -276,15 +311,23 @@ export interface ResolvedTierLayer {
  */
 export function tierWidthQuery(
   tier: WidthTier,
-  maxWidths: Record<string, number | undefined>,
+  breakpoints: TierBreakpoints,
 ): string {
   const index = WIDTH_TIERS.indexOf(tier);
-  const lower = index > 0 ? maxWidths[WIDTH_TIERS[index - 1]] : undefined;
-  const upper = maxWidths[tier];
+
+  let lower: number | undefined;
+  for (let below = index - 1; below >= 0; below--) {
+    const boundary = breakpoints[WIDTH_TIERS[below]];
+    if (boundary !== undefined) {
+      lower = boundary;
+      break;
+    }
+  }
+  const upper = breakpoints[tier];
 
   if (lower === undefined && upper === undefined) {
-    // Only reachable if every tier below `wide` were unbounded, which
-    // validation prevents. Treated as "always" rather than emitting nothing.
+    // No boundary on either side, so the tier covers every width. Only `wide`
+    // declared on its own reaches this, and validation refuses that.
     return 'all';
   }
   if (lower === undefined) {
@@ -383,35 +426,63 @@ function mergeTierTypography(
 }
 
 /**
- * Merge one layer of theme values over another, field by field, producing a
- * complete theme input that resolves through the ordinary pipeline.
+ * The axes a tier can restate one field of, and therefore the ones a tier has
+ * to be able to see whole.
  *
- * Used for a tier over what it extends, a pointer refinement over its tier,
- * and a theme's own input over the input of the theme it extends.
+ * A tier that raises `typography.scale.base` and says nothing about `ratio`
+ * needs the theme's ratio, or its ladder is computed from the wrong one. The
+ * same goes for a partial `color`, `radius` or `motion`. These four are
+ * carried down an `extends` chain for exactly that reason — as a COMPLETION
+ * SOURCE, never as something re-expanded on their own. An axis no tier
+ * restates never enters a tier's pipeline: the theme's resolved values already
+ * carry it, at the precedence the theme gave it.
+ *
+ * Deliberately not here: `syntax`, which no tier can set, and the theme's
+ * explicit `tokens` and `components`, which are not generated from a config
+ * and so have nothing to complete.
  */
-export function mergeThemeValues(
-  base: ThemeValuesInput,
-  over: TierValues | ThemeValuesInput,
-): ThemeValuesInput {
+export interface ThemeGenerativeAxes {
+  /** Typography — fonts, scale, and weights. */
+  typography?: TypographyConfig;
+  /** Color scale configuration. */
+  color?: ColorScaleConfig;
+  /** Radius scale configuration. */
+  radius?: RadiusScaleConfig;
+  /** Motion scale configuration. */
+  motion?: MotionScaleConfig;
+}
+
+/**
+ * A theme's own explicit overrides — the two axes that are not generated from
+ * a config, and so travel into a tier as declarations rather than as resolved
+ * values, to keep beating a generated axis there as they do everywhere else.
+ */
+export interface ThemeOwnOverrides {
+  /** Explicit token overrides, as declared. */
+  tokens?: Partial<Record<TokenName, TokenValue>>;
+  /** Component style overrides, as declared. */
+  components?: ComponentStyleMap;
+}
+
+/**
+ * Merge the generative axes of a theme being extended with those of the theme
+ * extending it, field by field.
+ */
+export function mergeThemeAxes(
+  base: ThemeGenerativeAxes,
+  over: ThemeGenerativeAxes,
+): ThemeGenerativeAxes {
   return {
-    ...base,
     typography: mergeTypography(base.typography, over.typography),
     color: over.color ? {...base.color, ...over.color} : base.color,
-    radius: over.radius
-      ? {...DEFAULT_RADIUS_SCALE, ...base.radius, ...over.radius}
-      : base.radius,
-    motion: over.motion
-      ? {...DEFAULT_MOTION_SCALE, ...base.motion, ...over.motion}
-      : base.motion,
-    syntax: (over as ThemeValuesInput).syntax ?? base.syntax,
-    tokens: over.tokens ? {...base.tokens, ...over.tokens} : base.tokens,
-    components: deepMergeComponents(base.components, over.components),
+    radius: over.radius ? {...base.radius, ...over.radius} : base.radius,
+    motion: over.motion ? {...base.motion, ...over.motion} : base.motion,
   };
 }
 
 /**
  * Merge two tier declarations, keeping every axis as partial as it was
- * declared. Unlike {@link mergeThemeValues} this resolves nothing — it only
+ * declared. Unlike {@link tierValuesToInput} this completes nothing — it only
  * combines two sets of overrides that will be resolved later.
  */
 function mergeTierValues(base: TierValues, over: TierValues): TierValues {
@@ -477,50 +548,68 @@ export function mergeTierInputs(
 // Validation
 // =============================================================================
 
-/** Resolve each tier's effective upper bound, explicit or default. */
-function resolveMaxWidths(
+/**
+ * Resolve the boundary each declared tier puts on the width axis.
+ *
+ * Only declared tiers get one. A tier the theme never mentions is not a band
+ * with nothing in it — it is not a boundary, so the tier above it reaches down
+ * past it. `wide` never gets one either: it is the open top.
+ */
+function resolveBreakpoints(
+  declared: ReadonlyArray<WidthTier>,
   input: ThemeTierInput,
   themeName: string,
-): Record<string, number | undefined> {
-  const maxWidths: Record<string, number | undefined> = {};
+): TierBreakpoints {
+  if (input.wide?.maxWidth !== undefined) {
+    throw new Error(
+      `defineTheme("${themeName}"): \`wide\` takes no \`maxWidth\` — it is the open top of the scale, ` +
+        `everything above \`desktop\`. Move the bound to \`desktop.maxWidth\` instead.`,
+    );
+  }
 
-  for (const tier of WIDTH_TIERS) {
+  // `wide` alone has no boundary below it and none of its own, so it would
+  // match every width — never what "wide" is meant to say.
+  if (declared.length === 1 && declared[0] === 'wide') {
+    throw new Error(
+      `defineTheme("${themeName}"): \`wide\` is the open top of the scale, so declaring it on its own ` +
+        `leaves it no lower boundary and it would match every width. Declare \`desktop\` to give it one, ` +
+        `or move these values to the theme itself.`,
+    );
+  }
+
+  const breakpoints: Partial<Record<WidthTier, number>> = {};
+  for (const tier of declared) {
     if (tier === 'wide') {
-      if (input.wide?.maxWidth !== undefined) {
-        throw new Error(
-          `defineTheme("${themeName}"): \`wide\` takes no \`maxWidth\` — it is the open top of the scale, ` +
-            `everything above \`desktop\`. Move the bound to \`desktop.maxWidth\` instead.`,
-        );
-      }
-      maxWidths[tier] = undefined;
       continue;
     }
-
-    const declared = input[tier]?.maxWidth;
-    if (declared !== undefined) {
-      if (!Number.isFinite(declared) || declared <= 0) {
-        throw new Error(
-          `defineTheme("${themeName}"): \`${tier}.maxWidth\` must be a positive number of px, got ${String(declared)}.`,
-        );
-      }
-    }
-    maxWidths[tier] = declared ?? DEFAULT_TIER_MAX_WIDTH[tier];
-  }
-
-  // Bands must ascend, or a tier would describe an empty or inverted range.
-  const bounded = WIDTH_TIERS.filter(t => t !== 'wide');
-  for (let i = 1; i < bounded.length; i++) {
-    const prev = maxWidths[bounded[i - 1]] as number;
-    const curr = maxWidths[bounded[i]] as number;
-    if (curr <= prev) {
+    const stated = input[tier]?.maxWidth;
+    if (stated !== undefined && (!Number.isFinite(stated) || stated <= 0)) {
       throw new Error(
-        `defineTheme("${themeName}"): tier bounds must increase — \`${bounded[i]}.maxWidth\` (${curr}) ` +
-          `is not above \`${bounded[i - 1]}.maxWidth\` (${prev}), which leaves \`${bounded[i]}\` with no widths to match.`,
+        `defineTheme("${themeName}"): \`${tier}.maxWidth\` must be a positive number of px, got ${String(stated)}.`,
       );
     }
+    breakpoints[tier] = stated ?? DEFAULT_TIER_MAX_WIDTH[tier];
   }
 
-  return maxWidths;
+  // Boundaries must ascend, or a tier would describe an empty or inverted
+  // range. Only declared tiers are compared — an undeclared tier's default is
+  // not a boundary and cannot conflict with one.
+  let below: {tier: WidthTier; bound: number} | undefined;
+  for (const tier of declared) {
+    const bound = breakpoints[tier];
+    if (bound === undefined) {
+      continue;
+    }
+    if (below !== undefined && bound <= below.bound) {
+      throw new Error(
+        `defineTheme("${themeName}"): tier bounds must increase — \`${tier}.maxWidth\` (${bound}) ` +
+          `is not above \`${below.tier}.maxWidth\` (${below.bound}), which leaves \`${tier}\` with no widths to match.`,
+      );
+    }
+    below = {tier, bound};
+  }
+
+  return breakpoints;
 }
 
 /**
@@ -566,11 +655,52 @@ function resolveExtendsChain(
 // =============================================================================
 
 /**
+ * Turn a tier's declarations into a theme input the ordinary pipeline can
+ * resolve.
+ *
+ * The rule that matters here is which axes are LEFT OUT. An axis the tier says
+ * nothing about does not appear at all — not inherited, not re-expanded. The
+ * layer resolves on top of the theme's own resolved values, so an axis nobody
+ * restates is already carried there at exactly the precedence the theme gave
+ * it. Re-expanding it would recompute it from the declarations and so beat the
+ * explicit tokens the theme resolved it against, quietly reverting them inside
+ * every tier.
+ *
+ * An axis the tier states only part of is completed, because an expander takes
+ * a whole config and a partial one computes `NaN` — a value CSS accepts and
+ * nothing renders from. Completion comes from the theme's own config where
+ * there is one and from the shipped scale where there is not.
+ *
+ * The theme's own explicit `tokens` and `components` ride along so they keep
+ * beating a generated axis inside a tier, exactly as they do outside one.
+ */
+function tierValuesToInput(
+  declared: TierValues,
+  own: ThemeOwnOverrides,
+  axes: ThemeGenerativeAxes,
+): ThemeValuesInput {
+  return {
+    typography: declared.typography
+      ? mergeTypography(axes.typography, declared.typography)
+      : undefined,
+    color: declared.color ? {...axes.color, ...declared.color} : undefined,
+    radius: declared.radius
+      ? {...DEFAULT_RADIUS_SCALE, ...axes.radius, ...declared.radius}
+      : undefined,
+    motion: declared.motion
+      ? {...DEFAULT_MOTION_SCALE, ...axes.motion, ...declared.motion}
+      : undefined,
+    tokens: {...own.tokens, ...declared.tokens},
+    components: deepMergeComponents(own.components, declared.components),
+  };
+}
+
+/**
  * Resolve every declared tier into a layer with its query and its values.
  *
- * `rootValues` is the theme's own input, and `seed` the resolved base theme an
- * `extends` supplied — the same two the root theme resolved from, so a tier is
- * a peer of the root rather than a patch applied after it.
+ * `own` is the theme's own explicit tokens and components, `seed` the values
+ * the theme itself resolved to, and `axes` the generative configs it and
+ * anything it extends were declared with.
  *
  * Returns layers in emission order: each tier in width order, and each tier's
  * pointer refinements directly after it so they win inside that tier.
@@ -578,28 +708,34 @@ function resolveExtendsChain(
 export function resolveThemeTiers(
   themeName: string,
   tierInput: ThemeTierInput,
-  rootValues: ThemeValuesInput,
-  seed?: ThemeValuesSeed,
+  own: ThemeOwnOverrides,
+  seed: ThemeValuesSeed,
+  axes: ThemeGenerativeAxes,
 ): ResolvedTierLayer[] | undefined {
-  const declared = WIDTH_TIERS.filter(tier => tierInput[tier] !== undefined);
-  if (declared.length === 0) {
+  const declaredTiers = WIDTH_TIERS.filter(
+    tier => tierInput[tier] !== undefined,
+  );
+  if (declaredTiers.length === 0) {
     return undefined;
   }
 
-  const maxWidths = resolveMaxWidths(tierInput, themeName);
+  const breakpoints = resolveBreakpoints(declaredTiers, tierInput, themeName);
   const layers: ResolvedTierLayer[] = [];
 
-  for (const tier of declared) {
+  for (const tier of declaredTiers) {
     // The tiers whose values apply here, furthest ancestor first.
     const chain = resolveExtendsChain(tier, tierInput, themeName);
 
-    let merged = rootValues;
+    let declared: TierValues = {};
     for (const link of chain) {
-      merged = mergeThemeValues(merged, tierInput[link] as TierValues);
+      declared = mergeTierValues(declared, tierInput[link] as TierValues);
     }
 
-    const widthQuery = tierWidthQuery(tier, maxWidths);
-    const resolved: ResolvedThemeValues = resolveThemeValues(merged, seed);
+    const widthQuery = tierWidthQuery(tier, breakpoints);
+    const resolved: ResolvedThemeValues = resolveThemeValues(
+      tierValuesToInput(declared, own, axes),
+      seed,
+    );
 
     layers.push({
       tier,
@@ -631,7 +767,7 @@ export function resolveThemeTiers(
         continue;
       }
       const refinedValues = resolveThemeValues(
-        mergeThemeValues(merged, refinement),
+        tierValuesToInput(mergeTierValues(declared, refinement), own, axes),
         seed,
       );
       layers.push({

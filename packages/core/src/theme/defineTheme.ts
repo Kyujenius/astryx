@@ -64,11 +64,12 @@ import type {RadiusScaleConfig} from './expandRadiusScale';
 import type {ColorScaleConfig} from './expandColorScale';
 import {resolveThemeValues, type ThemeValuesInput} from './resolveThemeValues';
 import {
-  mergeThemeValues,
+  mergeThemeAxes,
   mergeTierInputs,
   resolveThemeTiers,
   WIDTH_TIERS,
   type ResolvedTierLayer,
+  type ThemeGenerativeAxes,
   type ThemeTier,
   type ThemeTierInput,
 } from './themeTiers';
@@ -384,8 +385,10 @@ export interface DefineThemeInput {
    * here produce CSS.
    *
    * Tiers partition the width axis — exactly one matches at any width — so no
-   * two tiers ever compete. Widths no declared tier covers use the theme's own
-   * values.
+   * two tiers ever compete. A tier this theme does not declare is not a
+   * boundary either: declare `mobile` and `desktop` and desktop covers
+   * everything from the phone line up to its own. Widths outside every
+   * declared tier use the theme's own values.
    *
    * Nest `'@media (pointer: coarse)'` for values that also require touch. That
    * is where a 16px body floor belongs: iOS Safari zooms an input whose text is
@@ -404,8 +407,8 @@ export interface DefineThemeInput {
    */
   mobile?: ThemeTier;
   /**
-   * What the theme looks like on a tablet-width viewport — above `mobile`'s
-   * bound and up to 1024px by default.
+   * What the theme looks like on a tablet-width viewport — up to 1024px by
+   * default, down to the bound of the nearest tier declared below it.
    *
    * Same shape as {@link DefineThemeInput.mobile}. Use `extends` to build on
    * another tier's values rather than restating them:
@@ -413,15 +416,18 @@ export interface DefineThemeInput {
    */
   tablet?: ThemeTier;
   /**
-   * What the theme looks like on a desktop-width viewport — above `tablet`'s
-   * bound and up to 1440px by default.
+   * What the theme looks like on a desktop-width viewport — up to 1440px by
+   * default, down to the bound of the nearest tier declared below it.
    *
    * Same shape as {@link DefineThemeInput.mobile}.
    */
   desktop?: ThemeTier;
   /**
-   * What the theme looks like above `desktop`'s bound — the open top of the
-   * scale, so it takes no `maxWidth`.
+   * What the theme looks like above the nearest boundary below it — the open
+   * top of the scale, so it takes no `maxWidth`.
+   *
+   * Declaring it on its own is an error: with nothing below it to bound it, it
+   * would match every width. Those values belong on the theme itself.
    *
    * Same shape as {@link DefineThemeInput.mobile}.
    */
@@ -474,12 +480,12 @@ export interface DefinedTheme {
    */
   __tierInput?: ThemeTierInput;
   /**
-   * The value axes this theme was declared with, kept for the same reason —
-   * an extending theme's tiers must merge over what was declared, not over
-   * what it resolved to.
+   * The generative axes this theme resolved from, merged down its `extends`
+   * chain — what a tier of a theme extending this one has to see whole in
+   * order to restate one field of an axis.
    * @internal
    */
-  __valuesInput?: ThemeValuesInput;
+  __axes?: ThemeGenerativeAxes;
 }
 
 // =============================================================================
@@ -564,6 +570,12 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
     tokens: input.tokens,
     components: input.components,
   };
+  const ownAxes: ThemeGenerativeAxes = {
+    typography: input.typography,
+    color: input.color,
+    radius: input.radius,
+    motion: input.motion,
+  };
   const seed = base
     ? {tokens: base.tokens, components: base.components}
     : undefined;
@@ -574,6 +586,10 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
   // from its resolved output, so an inherited axis a tier only partly restates
   // (a scale that raises `base` and keeps the theme's `ratio`) still resolves
   // against what the theme actually declared.
+  // Width tiers. A tier is resolved on top of what this theme resolved to,
+  // with only the axes it actually restates re-expanded — so a tier changes
+  // what it names and nothing else, and the theme's own explicit tokens go on
+  // beating a generated axis inside a tier exactly as they do outside one.
   const ownTierInput: ThemeTierInput = {};
   for (const tier of WIDTH_TIERS) {
     const declared = input[tier];
@@ -581,15 +597,25 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
       ownTierInput[tier] = declared;
     }
   }
-  const __valuesInput = base?.__valuesInput
-    ? mergeThemeValues(base.__valuesInput, ownValues)
-    : ownValues;
+  // A base built before `__axes` existed cannot complete a partial scale, and
+  // the shipped default it would fall back to is not the base theme's. Refuse
+  // rather than resolve its tiers against the wrong ratio — the same reasoning
+  // that makes `extends: undefined` a hard error.
+  if (base?.__tierInput && !base.__axes) {
+    throw new Error(
+      `defineTheme("${input.name}"): the theme it extends declares width tiers but carries no ` +
+        `axis configs, so a tier that states part of a scale cannot be completed from it. ` +
+        `Rebuild that theme with the current \`astryx theme build\`.`,
+    );
+  }
+  const __axes = base?.__axes ? mergeThemeAxes(base.__axes, ownAxes) : ownAxes;
   const __tierInput = mergeTierInputs(base?.__tierInput, ownTierInput);
   const __tiers = resolveThemeTiers(
     input.name,
     __tierInput,
-    __valuesInput,
-    seed,
+    {tokens: input.tokens, components: input.components},
+    {tokens, components},
+    __axes,
   );
 
   // On-media token overrides (base's resolved surface, then
@@ -624,7 +650,7 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
     __onLight,
     __tiers,
     __tierInput: __tiers ? __tierInput : undefined,
-    __valuesInput,
+    __axes,
   };
 
   registerTheme(theme);

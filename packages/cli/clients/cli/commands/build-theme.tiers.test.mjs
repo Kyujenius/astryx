@@ -225,7 +225,42 @@ describe('theme build width tiers', () => {
     // The declarations travel too, so an extending theme can re-resolve the
     // tier against the ratio this theme was declared with.
     expect(js).toContain('__tierInput');
-    expect(js).toContain('__valuesInput');
+    expect(js).toContain('__axes');
+    // ...but only the axes a tier can restate part of. The theme's resolved
+    // tokens and components are already in the module; carrying the
+    // declarations as well would duplicate its two largest fields.
+    expect(js).not.toContain('__valuesInput');
+  });
+
+  it('keeps a tier-less theme module free of tier fields', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'lean',
+      `{
+        name: 'lean',
+        typography: {scale: {base: 14, ratio: 1.2}},
+        tokens: {'--spacing-4': '16px'},
+        components: {card: {base: {borderWidth: '2px'}}},
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    const js = fs.readFileSync(path.join(themesDir, 'lean.js'), 'utf-8');
+    expect(js).not.toContain('__tiers');
+    expect(js).not.toContain('__tierInput');
+    // The generative axes still travel — a theme extending this one may
+    // declare a tier that restates one field of its scale — but they are the
+    // small ones, not a second copy of the tokens and components above.
+    const axesAt = js.indexOf('__axes');
+    expect(axesAt).toBeGreaterThan(-1);
+    expect(js.length - axesAt).toBeLessThan(js.length / 4);
   });
 
   it('leaves a theme with no tiers unchanged', async () => {
@@ -249,6 +284,119 @@ describe('theme build width tiers', () => {
 
     const css = fs.readFileSync(path.join(themesDir, 'no-tiers.css'), 'utf-8');
     expect(css).not.toContain('@media');
+  });
+
+  it('emits every tier media block after everything without one', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'ordered',
+      `{
+        name: 'ordered',
+        tokens: {'--spacing-4': '16px'},
+        onDark: {tokens: {'--color-bg': '#000000'}},
+        mobile: {tokens: {'--spacing-4': '12px', '--color-bg': '#111111'}},
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    const css = fs.readFileSync(path.join(themesDir, 'ordered.css'), 'utf-8');
+
+    // A media query adds no specificity, so the tier wins only by coming
+    // last. The runtime path orders these the same way; the two must agree.
+    expect(css).toContain('[data-astryx-media="dark"]');
+    expect(css.indexOf('@media')).toBeGreaterThan(
+      css.lastIndexOf('[data-astryx-media="dark"]'),
+    );
+    expect(css.indexOf('@media')).toBeGreaterThan(
+      css.lastIndexOf('--spacing-4: 16px'),
+    );
+  });
+
+  it('gives an undeclared tier no breakpoint in the built stylesheet', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'gapped',
+      `{
+        name: 'gapped',
+        tokens: {'--spacing-4': '16px'},
+        mobile: {tokens: {'--spacing-4': '12px'}},
+        desktop: {tokens: {'--spacing-4': '20px'}},
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    const css = fs.readFileSync(path.join(themesDir, 'gapped.css'), 'utf-8');
+    expect(css).toContain('@media (width <= 756px)');
+    // No tablet declared, so no 1024px line and no width left uncovered
+    // between the two tiers this theme does declare.
+    expect(css).toContain('@media (756px < width <= 1440px)');
+    expect(css).not.toContain('1024px');
+  });
+
+  it('types a custom variant a tier is the only place to declare', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'tier-variant',
+      `{
+        name: 'tier-variant',
+        mobile: {
+          components: {button: {'variant:brandy': {borderWidth: '3px'}}},
+        },
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+    expect(result.code).toBe(0);
+
+    // Styled but untypeable is the failure this guards: the CSS ships either
+    // way, so without the augmentation `<Button variant="brandy">` is a type
+    // error against a variant the theme really does define.
+    const variants = fs.readFileSync(
+      path.join(themesDir, 'tier-variant.variants.d.ts'),
+      'utf-8',
+    );
+    expect(variants).toContain('brandy');
+  });
+
+  it('rejects a private var a tier is the only place to set', async () => {
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'tier-private',
+      `{
+        name: 'tier-private',
+        mobile: {
+          components: {button: {base: {'--_button-pad': '3px'}}},
+        },
+      }`,
+    );
+
+    const result = await runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    );
+
+    expect(`${result.stdout}${result.stderr}`).toContain('private var');
   });
 
   it('fails the build with a usable message when a tier is misdeclared', async () => {

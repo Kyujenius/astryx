@@ -59,6 +59,8 @@ export type {
   TierTypeScale,
   TierTypographyConfig,
   TierConditionKey,
+  TierBreakpoints,
+  ThemeGenerativeAxes,
 } from './themeTiers';
 
 export type {

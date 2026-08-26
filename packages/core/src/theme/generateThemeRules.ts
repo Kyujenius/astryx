@@ -15,7 +15,7 @@
  * @position packages/core/src/theme/generateThemeRules.ts
  */
 
-import type {DefinedTheme} from './defineTheme';
+import type {ComponentStyleMap, DefinedTheme} from './defineTheme';
 import {parseStyleKey} from '../utils/parseStyleKey';
 import {getDerivedVars} from './derivedVarRegistry';
 import {cssVar, classPrefix, dataAttrNamespace} from '../naming';
@@ -335,7 +335,22 @@ function expandContainerPadding(
  * Returns an array of CSS rule strings — the shared format used by both
  * the runtime path (useInsertionEffect) and the build path (astryx theme build).
  */
-export function generateThemeRules(theme: DefinedTheme): string[] {
+/**
+ * The parts of a theme that turn into CSS rules.
+ *
+ * Narrower than `DefinedTheme` on purpose: a width tier is not a whole theme,
+ * and it calls this with a layer's resolved values. Typing the parameter as
+ * `DefinedTheme` would let a future field be read here and silently lost for
+ * every tier, with no type error to catch it.
+ */
+export interface ThemeRuleSource {
+  /** Resolved token values. */
+  tokens: Record<string, string>;
+  /** Resolved component style overrides. */
+  components?: ComponentStyleMap;
+}
+
+export function generateThemeRules(theme: ThemeRuleSource): string[] {
   const parts: string[] = [];
   const tokens = theme.tokens;
 
@@ -793,16 +808,28 @@ export function generateTierCSS(theme: DefinedTheme): ThemeCSSOutput {
 
   // Everything the base theme emits, so a tier rule that merely repeats one
   // can be recognized and dropped.
-  const baseRules = new Set(generateThemeRules(theme));
+  const themeRules = new Set(generateThemeRules(theme));
+
+  // The baseline a layer has to beat is whatever else applies where it does.
+  // For a width tier that is the base theme, because tiers are disjoint and no
+  // other tier can be matching. A pointer refinement is NOT disjoint from the
+  // tier it sits in — on a coarse-pointer phone both match — so its baseline
+  // is that tier, and a refinement that returns a value to the base theme's
+  // must still be emitted, or the tier underneath keeps applying.
+  let tierTokens: Record<string, string> = theme.tokens;
+  let tierRules: Set<string> = themeRules;
 
   const proseBlocks: string[] = [];
   const componentBlocks: string[] = [];
 
   for (const layer of tiers) {
-    // Only the tokens whose value differs from the base theme's.
+    const baseTokens = layer.condition ? tierTokens : theme.tokens;
+    const baseRules = layer.condition ? tierRules : themeRules;
+
+    // Only the tokens whose value differs from that baseline.
     const changedTokens: Record<string, string> = {};
     for (const [name, value] of Object.entries(layer.tokens)) {
-      if (theme.tokens[name] !== value) {
+      if (baseTokens[name] !== value) {
         changedTokens[name] = value;
       }
     }
@@ -810,11 +837,20 @@ export function generateTierCSS(theme: DefinedTheme): ThemeCSSOutput {
     // Rules are generated from the layer's FULL resolution, so a value baked
     // into a rule (a prose font-size, say) is this tier's value rather than
     // the base theme's. The identical-rule prune then drops what did not move.
-    const layerRules = generateThemeRules({
-      name: theme.name,
+    const fullRules = generateThemeRules({
       tokens: layer.tokens,
       components: layer.components,
-    }).filter(rule => !isScopeTokenBlock(rule) && !baseRules.has(rule));
+    });
+    const layerRules = fullRules.filter(
+      rule => !isScopeTokenBlock(rule) && !baseRules.has(rule),
+    );
+
+    // A width tier becomes the baseline for the pointer refinements that
+    // follow it, which is the order resolveThemeTiers emits them in.
+    if (!layer.condition) {
+      tierTokens = layer.tokens;
+      tierRules = new Set(fullRules);
+    }
 
     const componentParts: string[] = [];
     const proseParts: string[] = [];

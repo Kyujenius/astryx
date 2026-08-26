@@ -334,6 +334,11 @@ export const myTheme = defineTheme({
    * Bounds default to 756 / 1024 / 1440; `wide` is the open top and takes no
    * `maxWidth`. Setting one moves both of its adjacent boundaries.
    *
+   * A tier you do NOT declare is not a boundary. Declare `mobile` and
+   * `desktop` and there is one line, not three — desktop covers everything
+   * from the phone line up to 1440px. (`wide` on its own is an error: it would
+   * have no lower boundary and match every width.)
+   *
    * A tier's value is a partial theme — the same axes as above, resolved the
    * same way — so state only what differs. `extends` names where a tier starts
    * from; it defaults to the theme's own values.
@@ -358,10 +363,12 @@ export const myTheme = defineTheme({
   // not the cascade — `tablet` still applies only at tablet widths.
   tablet: {extends: 'mobile'},
 
-  // Nothing here means "the theme's own values", so most themes declare no
-  // `desktop` at all. Shown for completeness.
+  // Declaring nothing here is not "the theme's own values in the desktop band"
+  // — it removes the 1440px line entirely, so `wide` (if declared) reaches
+  // down to wherever `tablet` ends. Declare it to keep the line.
   // desktop: {maxWidth: 1440},
 
-  // The open top: everything above `desktop`. No `maxWidth`.
+  // The open top: everything above the nearest boundary below it. No
+  // `maxWidth`, and never the only tier a theme declares.
   // wide: {typography: {scale: {base: 16}}},
 });
