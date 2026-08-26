@@ -63,6 +63,7 @@ import {
 /** @type {any} */ let _generateThemeRulesSplit = null;
 /** @type {any} */ let _generateOnMediaCSS = null;
 /** @type {any} */ let _generateTierCSS = null;
+/** @type {any} */ let _dataTokenDefaults = null;
 /** @type {any} */ let _coreImportError = null;
 try {
   const coreTheme = await import('@astryxdesign/core/theme');
@@ -70,6 +71,7 @@ try {
   _generateThemeRulesSplit = coreTheme.generateThemeRulesSplit;
   _generateOnMediaCSS = coreTheme.generateOnMediaCSS;
   _generateTierCSS = coreTheme.generateTierCSS;
+  _dataTokenDefaults = coreTheme.dataTokenDefaults;
 } catch (e) {
   // Capture the reason so the theme action can surface a precise, actionable
   // error. We don't throw here: this module is imported eagerly by the CLI
@@ -1235,25 +1237,31 @@ export async function themeBuild(
     // Width-tier layers — the same generator the runtime path uses. Held back
     // and pushed last, after the on-media rules: a `@media` block adds no
     // specificity, so being emitted last is the whole of why a tier wins where
-    // it matches. The runtime path orders these the same way, and the two must
-    // not disagree.
+    // it matches. The runtime path orders these the same way.
     const tierCss = _generateTierCSS(resolvedTheme);
-    // #3658: also emit attribute-specific rules so <Theme mode> can override
-    // color-scheme. A `[light, dark]` tuple set only inside a tier still
-    // produces light-dark(), so the guard has to consider the tier CSS too —
-    // without it the built path ships light-dark() with nothing to resolve
-    // against, while the runtime path (which always sets color-scheme on its
-    // wrapper) renders correctly. The two must not disagree.
     const componentInner = component.join('\n\n');
     const componentScope =
       component.length > 0
         ? `@scope (${scopeSelector}) to (${scopeTo}) {\n${componentInner}\n}`
         : '';
-    const needsColorScheme =
-      componentScope.includes('light-dark(') ||
-      tierCss.component.includes('light-dark(') ||
-      tierCss.prose.includes('light-dark(');
-    const colorSchemeDecl = needsColorScheme
+
+    // #3658: also emit attribute-specific rules so <Theme mode> can override
+    // color-scheme. Decide from the theme's own resolved values, including its
+    // width tiers — NOT the generated CSS, which also carries theme-independent
+    // data-token defaults containing light-dark() pairs. A tuple declared only
+    // inside a tier still needs color-scheme, while those defaults must not force
+    // it onto every theme.
+    const themeOwnValues = JSON.stringify([
+      resolvedTheme.tokens ?? {},
+      resolvedTheme.components ?? {},
+      ...(resolvedTheme.__tiers ?? []).flatMap(
+        (/** @type {{tokens?: Record<string, string>, components?: object}} */ layer) => [
+          layer.tokens ?? {},
+          layer.components ?? {},
+        ],
+      ),
+    ]);
+    const colorSchemeDecl = themeOwnValues.includes('light-dark(')
       ? '  :root { color-scheme: light dark; }\n  html[data-theme="light"] { color-scheme: light; }\n  html[data-theme="dark"] { color-scheme: dark; }\n\n'
       : '';
     if (colorSchemeDecl || componentScope) {
@@ -1278,6 +1286,26 @@ export async function themeBuild(
     if (cssParts.length === 0) {
       logger.log('No overrides found — nothing to build.');
       return null;
+    }
+    // The data-token defaults are theme-independent and go in @layer
+    // astryx-base, below the theme's own overrides. Formatted here from the
+    // public `dataTokenDefaults` export, byte for byte as the `<Theme>`
+    // runtime emits it — build-theme.data-tokens.test.mjs is the drift guard.
+    // Placed after the reset block and before the theme block: a layer's order
+    // is fixed by where it is first declared, so emitting it anywhere else in
+    // the file would invert reset < astryx-base < astryx-theme for a consumer
+    // who imports this stylesheet on its own.
+    const baseCss = _dataTokenDefaults
+      ? `:root {\n${Object.entries(_dataTokenDefaults)
+          .map(([name, value]) => `  ${name}: ${value};`)
+          .join('\n')}\n}`
+      : '';
+    if (baseCss) {
+      cssParts.splice(
+        prose.length > 0 ? 1 : 0,
+        0,
+        `@layer astryx-base {\n${baseCss}\n}`,
+      );
     }
     css = cssParts.join('\n\n') + '\n';
   }
