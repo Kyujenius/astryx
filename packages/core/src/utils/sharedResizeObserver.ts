@@ -57,9 +57,9 @@ function getObserver(): ResizeObserver | null {
  * logic. Subsequent callbacks fire on actual resizes.
  *
  * An element may carry several callbacks: two independent features can watch
- * the same node — a card watching its children for content growth and a Text
- * inside it watching itself for truncation — and neither knows about the
- * other. Registering the same callback twice is a no-op.
+ * the same node — a scroll container watching its children for content growth
+ * and a Text inside it watching itself for truncation — and neither knows
+ * about the other. Registering the same callback twice is a no-op.
  *
  * Call `unobserveResize` when the element unmounts or observation is
  * no longer needed. The shared observer is destroyed when the last

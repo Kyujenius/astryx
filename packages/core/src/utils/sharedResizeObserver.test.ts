@@ -154,9 +154,9 @@ describe('sharedResizeObserver', () => {
     );
 
     // Two features can watch one node without knowing about each other — a
-    // card watching a child for content growth, a Text inside it watching
-    // itself for truncation — so the second registration must not evict the
-    // first.
+    // scroll container watching a child for content growth, a Text inside it
+    // watching itself for truncation — so the second registration must not
+    // evict the first.
     expect(cb1).toHaveBeenCalledTimes(1);
     // cb2: once on registration, once from the observer.
     expect(cb2).toHaveBeenCalledTimes(2);
