@@ -1122,3 +1122,181 @@ describe('completing a scale the theme never declared', () => {
     }
   });
 });
+
+// =============================================================================
+// Inherited overrides inside a tier
+//
+// An explicit `tokens`/`components` override is applied LAST at the theme
+// level, above every generated axis — that is the whole of what pinning a
+// token means. A tier that regenerates an axis must not undo that, and a tier
+// of a theme that INHERITED the override must not undo it either: the override
+// reaches the tier through the resolved seed, which sits below the regenerated
+// axis rather than above it.
+// =============================================================================
+
+describe('a tier keeps the overrides its theme inherited', () => {
+  /** A base whose explicit overrides beat its own generated axes. */
+  function pinnedBase(name: string) {
+    return defineTheme({
+      name,
+      color: {accent: '#0064E0'}, //            generates a blue accent…
+      tokens: {'--color-accent': '#FF0000'}, // …which this pins to red
+      typography: {scale: {base: 14, ratio: 1.25}},
+      components: {heading: {'level:1': {fontSize: '99px'}}},
+    });
+  }
+
+  it('keeps an inherited pinned token when the tier regenerates that axis', () => {
+    const child = defineTheme({
+      name: 'inherit-token',
+      extends: pinnedBase('inherit-token-base'),
+      // The child changes nothing. The tier restates a DIFFERENT part of the
+      // color axis, which regenerates the whole of it — including the accent
+      // the base deliberately pinned and nobody here mentioned.
+      mobile: {color: {neutralStyle: 'warm'}},
+    });
+
+    expect(child.tokens['--color-accent']).toBe('#FF0000');
+    expect(child.__tiers?.[0].tokens['--color-accent']).toBe('#FF0000');
+  });
+
+  it('keeps an inherited component override when the tier regenerates the type scale', () => {
+    const child = defineTheme({
+      name: 'inherit-component',
+      extends: pinnedBase('inherit-component-base'),
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(child.components?.heading?.['level:1']?.fontSize).toBe('99px');
+    expect(child.__tiers?.[0].components?.heading?.['level:1']?.fontSize).toBe(
+      '99px',
+    );
+  });
+
+  it('emits neither of them into the tier block, because neither moved', () => {
+    const child = defineTheme({
+      name: 'inherit-quiet',
+      extends: pinnedBase('inherit-quiet-base'),
+      mobile: {color: {neutralStyle: 'warm'}},
+    });
+
+    const {component, prose} = generateTierCSS(child);
+    expect(component).not.toContain('--color-accent');
+    expect(prose).not.toContain('99px');
+  });
+
+  it('still lets the tier itself override an inherited pin', () => {
+    const child = defineTheme({
+      name: 'inherit-overridden',
+      extends: pinnedBase('inherit-overridden-base'),
+      mobile: {tokens: {'--color-accent': '#00FF00'}},
+    });
+
+    expect(child.__tiers?.[0].tokens['--color-accent']).toBe('#00FF00');
+  });
+
+  it("does not resurrect a base pin the child's own axis legitimately beat", () => {
+    // The mirror case. An `extends` replaces a scale outright, so the child's
+    // color axis beats the base's pinned accent at the root — and the tier has
+    // to agree with the root, not re-apply a declaration that already lost.
+    const child = defineTheme({
+      name: 'inherit-superseded',
+      extends: pinnedBase('inherit-superseded-base'),
+      color: {accent: '#00A000'},
+      mobile: {color: {neutralStyle: 'warm'}},
+    });
+
+    expect(child.tokens['--color-accent']).not.toBe('#FF0000');
+    expect(child.__tiers?.[0].tokens['--color-accent']).toBe(
+      child.tokens['--color-accent'],
+    );
+  });
+
+  it('carries the same rule two levels down an extends chain', () => {
+    const middle = defineTheme({
+      name: 'inherit-middle',
+      extends: pinnedBase('inherit-deep-base'),
+      tokens: {'--spacing-4': '16px'},
+    });
+    const leaf = defineTheme({
+      name: 'inherit-leaf',
+      extends: middle,
+      mobile: {color: {neutralStyle: 'warm'}},
+    });
+
+    expect(leaf.__tiers?.[0].tokens['--color-accent']).toBe('#FF0000');
+    expect(leaf.__tiers?.[0].tokens['--spacing-4']).toBe('16px');
+  });
+
+  it('refuses a base built before the fields tiers resolve against existed', () => {
+    // A built module from an older CLI carries neither `__axes` nor the
+    // declared overrides, so a tier could neither complete a partial scale
+    // from it nor keep its pins. Silent wrong values are the alternative.
+    const stale = {
+      name: 'stale-built',
+      __built: true,
+      tokens: {'--color-accent': '#FF0000'},
+    } as unknown as ReturnType<typeof defineTheme>;
+
+    expect(() =>
+      defineTheme({
+        name: 'on-stale',
+        extends: stale,
+        mobile: {tokens: {'--spacing-4': '12px'}},
+      }),
+    ).toThrow(/older `astryx theme build`/);
+
+    // …and a theme that declares no tier is unaffected by the staleness.
+    expect(() =>
+      defineTheme({name: 'on-stale-untiered', extends: stale}),
+    ).not.toThrow();
+  });
+});
+
+describe('a tier of a theme extending a BUILT theme', () => {
+  /** The shape `astryx theme build` serializes — resolved values plus the
+   * declarations and axis configs an extending theme needs to read back. */
+  function builtBase() {
+    const live = defineTheme({
+      name: 'built-shaped-source',
+      color: {accent: '#0064E0'},
+      tokens: {'--color-accent': '#FF0000'},
+      typography: {scale: {base: 14, ratio: 1.25}},
+      components: {heading: {'level:1': {fontSize: '99px'}}},
+    });
+    return {
+      name: 'built-shaped',
+      __built: true,
+      tokens: live.tokens,
+      components: live.components,
+      __axes: live.__axes,
+      __onDark: live.__onDark,
+      __onLight: live.__onLight,
+    } as unknown as ReturnType<typeof defineTheme>;
+  }
+
+  it('keeps the built theme pins its tier never mentioned', () => {
+    const child = defineTheme({
+      name: 'on-built',
+      extends: builtBase(),
+      mobile: {color: {neutralStyle: 'warm'}, typography: {scale: {base: 16}}},
+    });
+
+    expect(child.__tiers?.[0].tokens['--color-accent']).toBe('#FF0000');
+    expect(child.__tiers?.[0].components?.heading?.['level:1']?.fontSize).toBe(
+      '99px',
+    );
+  });
+
+  it('completes a partial scale from the built theme own ratio', () => {
+    const child = defineTheme({
+      name: 'on-built-scale',
+      extends: builtBase(),
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    // 16 × 1.25 = 20px = 1.25rem. The shipped default ratio of 1.2 would give
+    // 1.2rem, so this is the assertion that the built theme's ratio came back.
+    expect(child.__tiers?.[0].tokens['--font-size-lg']).toBe('1.25rem');
+  });
+});

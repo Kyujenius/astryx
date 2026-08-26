@@ -399,6 +399,44 @@ describe('theme build width tiers', () => {
     expect(`${result.stdout}${result.stderr}`).toContain('private var');
   });
 
+  it('carries the axes a tier of an extending theme resolves against', () => {
+    // `__axes` is the whole of what an extending theme needs to read back:
+    // it completes a partial scale, and it is the baseline that tells this
+    // theme's pinned tokens from its generated ones, so a tier of the
+    // extending theme keeps the pins. Nothing else has to be serialized for
+    // that — see `overridesAgainst` in themeTiers.ts.
+    const project = path.join(tmpDir, 'project');
+    const themesDir = path.join(project, 'themes');
+    const themeFile = writeTheme(
+      themesDir,
+      'pinned-base',
+      `{
+        name: 'pinned-base',
+        color: {accent: '#0064E0'},
+        typography: {scale: {base: 14, ratio: 1.25}},
+        tokens: {'--color-accent': '#FF0000'},
+      }`,
+    );
+
+    return runCli(
+      ['theme', 'build', path.relative(project, themeFile)],
+      project,
+    ).then(result => {
+      expect(result.code).toBe(0);
+
+      const js = fs.readFileSync(
+        path.join(themesDir, 'pinned-base.js'),
+        'utf-8',
+      );
+      expect(js).toMatch(/__axes[\s\S]*"ratio": 1\.25/);
+      expect(js).toMatch(/__axes[\s\S]*#0064E0/);
+      // The pinned value is in the resolved tokens, where it always was.
+      expect(js).toMatch(/"--color-accent": "#FF0000"/);
+      // And the declarations are NOT duplicated alongside them.
+      expect(js).not.toContain('__inputComponents');
+    });
+  });
+
   it('fails the build with a usable message when a tier is misdeclared', async () => {
     const project = path.join(tmpDir, 'project');
     const themesDir = path.join(project, 'themes');

@@ -597,15 +597,18 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
       ownTierInput[tier] = declared;
     }
   }
-  // A base built before `__axes` existed cannot complete a partial scale, and
-  // the shipped default it would fall back to is not the base theme's. Refuse
-  // rather than resolve its tiers against the wrong ratio — the same reasoning
+  // A base built before `__axes` existed carries neither its axis configs nor
+  // its declared overrides, so a tier of this theme could neither complete a
+  // partial scale from it nor keep its explicit overrides above a regenerated
+  // axis. Both fail silently and wrongly. Refuse instead — the same reasoning
   // that makes `extends: undefined` a hard error.
-  if (base?.__tierInput && !base.__axes) {
+  const willHaveTiers =
+    Object.keys(ownTierInput).length > 0 || base?.__tierInput !== undefined;
+  if (base && !base.__axes && willHaveTiers) {
     throw new Error(
-      `defineTheme("${input.name}"): the theme it extends declares width tiers but carries no ` +
-        `axis configs, so a tier that states part of a scale cannot be completed from it. ` +
-        `Rebuild that theme with the current \`astryx theme build\`.`,
+      `defineTheme("${input.name}"): the theme it extends was built by an older \`astryx theme build\` ` +
+        `and carries neither its axis configs nor its declared overrides, which width tiers need in order to ` +
+        `resolve against it. Rebuild that theme with the current CLI.`,
     );
   }
   const __axes = base?.__axes ? mergeThemeAxes(base.__axes, ownAxes) : ownAxes;
@@ -613,7 +616,6 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
   const __tiers = resolveThemeTiers(
     input.name,
     __tierInput,
-    {tokens: input.tokens, components: input.components},
     {tokens, components},
     __axes,
   );

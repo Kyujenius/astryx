@@ -457,11 +457,66 @@ export interface ThemeGenerativeAxes {
  * a config, and so travel into a tier as declarations rather than as resolved
  * values, to keep beating a generated axis there as they do everywhere else.
  */
-export interface ThemeOwnOverrides {
-  /** Explicit token overrides, as declared. */
-  tokens?: Partial<Record<TokenName, TokenValue>>;
-  /** Component style overrides, as declared. */
-  components?: ComponentStyleMap;
+/**
+ * The parts of `resolved` that differ from what the theme's own axes generate
+ * — that is, everything an explicit override put there.
+ *
+ * A tier has to re-apply these on top of anything it regenerates, or an
+ * override stops being an override inside the tier: at the theme level an
+ * explicit token is applied last, above every generated axis, and that is the
+ * whole of what "pin this token" means. Arriving only through the resolved
+ * seed puts it at the bottom instead, where a regenerated axis beats it.
+ *
+ * Derived rather than tracked. The alternative — carrying the declarations
+ * down the `extends` chain — has to be serialized into every built theme, and
+ * measured at 10.5 KB on a 19 KB module. The axes are already there, so the
+ * question "did an override put this here?" can be asked of the values
+ * themselves: it did exactly when the value is not the one its axis computes.
+ *
+ * Two consequences worth stating. A token no axis generates (`--spacing-4`)
+ * is always an override, which is correct — and harmless, since no tier can
+ * regenerate it. And an override that happens to set exactly the value its
+ * axis would have produced is indistinguishable from the generated one, which
+ * is also harmless: the two values are equal.
+ *
+ * Reading the values from the RESOLVED side is what keeps a tier agreeing with
+ * its theme about which override won. A base theme's pinned token is
+ * legitimately beaten by an extending theme's generated axis (an `extends`
+ * replaces a scale outright), and by then the resolved value simply is the
+ * generated one — so it is not treated as pinned, and the tier regenerates it
+ * exactly as the root did.
+ */
+function overridesAgainst<T>(resolved: T | undefined, generated: unknown): T {
+  if (!resolved || typeof resolved !== 'object') {
+    return resolved as T;
+  }
+  if (!generated || typeof generated !== 'object') {
+    return resolved;
+  }
+
+  const out: Record<string, unknown> = {};
+  for (const [key, resolvedValue] of Object.entries(resolved)) {
+    const generatedValue = (generated as Record<string, unknown>)[key];
+    if (generatedValue === undefined) {
+      // Nothing generates this, so it can only have been set explicitly.
+      out[key] = resolvedValue;
+      continue;
+    }
+    if (
+      resolvedValue !== null &&
+      typeof resolvedValue === 'object' &&
+      !Array.isArray(resolvedValue)
+    ) {
+      const nested = overridesAgainst(resolvedValue, generatedValue);
+      if (nested && Object.keys(nested).length > 0) {
+        out[key] = nested;
+      }
+    } else if (resolvedValue !== generatedValue) {
+      out[key] = resolvedValue;
+    }
+  }
+
+  return out as T;
 }
 
 /**
@@ -671,12 +726,12 @@ function resolveExtendsChain(
  * nothing renders from. Completion comes from the theme's own config where
  * there is one and from the shipped scale where there is not.
  *
- * The theme's own explicit `tokens` and `components` ride along so they keep
- * beating a generated axis inside a tier, exactly as they do outside one.
+ * The theme's effective explicit overrides ride along on top, so they keep
+ * beating a generated axis inside a tier exactly as they do outside one.
  */
 function tierValuesToInput(
   declared: TierValues,
-  own: ThemeOwnOverrides,
+  own: ThemeValuesSeed,
   axes: ThemeGenerativeAxes,
 ): ThemeValuesInput {
   return {
@@ -708,7 +763,6 @@ function tierValuesToInput(
 export function resolveThemeTiers(
   themeName: string,
   tierInput: ThemeTierInput,
-  own: ThemeOwnOverrides,
   seed: ThemeValuesSeed,
   axes: ThemeGenerativeAxes,
 ): ResolvedTierLayer[] | undefined {
@@ -718,6 +772,15 @@ export function resolveThemeTiers(
   if (declaredTiers.length === 0) {
     return undefined;
   }
+
+  // What the theme's axes alone produce, and so everything in its resolved
+  // values that an explicit override must have put there — the layer every
+  // tier re-applies over whatever it regenerates.
+  const generated = resolveThemeValues({...axes});
+  const own: ThemeValuesSeed = {
+    tokens: overridesAgainst(seed.tokens, generated.tokens),
+    components: overridesAgainst(seed.components, generated.components),
+  };
 
   const breakpoints = resolveBreakpoints(declaredTiers, tierInput, themeName);
   const layers: ResolvedTierLayer[] = [];
