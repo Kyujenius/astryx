@@ -1,0 +1,227 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 37,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "cwm-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 61,
+        "message": "Type '{ children: string; key: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 75,
+        "message": "Type '\"filled\" | \"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 19,
+        "message": "Type '{ children: string; variant: \"error\" | \"warning\" | \"success\"; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 35,
+        "message": "Type '\"success\" | undefined' is not assignable to type 'keyof TextColorMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "fwc-14": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 56,
+        "message": "Type '{ items: { src: string; alt: string; type: string; }[]; startIndex: number; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & LightboxProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "io-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 38,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 17,
+        "message": "Type '{ children: Element[]; direction: string; }' is not assignable to type 'IntrinsicAttributes & LayoutProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 21,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 22,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 23,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 24,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 27,
+        "message": "Type '{ children: Element[]; direction: string; }' is not assignable to type 'IntrinsicAttributes & LayoutProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 31,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 42,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 52,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 62,
+        "message": "Type '{ label: string; isSelected: boolean; onChange: Dispatch<SetStateAction<boolean>>; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 10,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 6,
+        "message": "'\"@astryxdesign/core/MobileNav\"' has no exported member named 'MobileNavItem'. Did you mean 'MobileNav'?",
+        "code": "TS2724"
+      },
+      {
+        "line": 38,
+        "message": "Property 'label' is missing in type '{ children: string; key: string; variant: \"ghost\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 45,
+        "message": "Type '{ children: string; variant: \"ghost\"; onPress: () => void; \"aria-label\": string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 52,
+        "message": "Type '{ children: Element[]; isOpen: boolean; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & MobileNavProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "sd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 35,
+        "message": "Type '{ children: string; variant: string; }' is not assignable to type 'IntrinsicAttributes & BannerProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 38,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ty-8": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 23,
+        "message": "Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 24,
+        "message": "Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 25,
+        "message": "Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 27,
+        "message": "Type '{ children: string; align: string; color: \"secondary\"; }' is not assignable to type 'IntrinsicAttributes & TextProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "wd-2": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 52,
+        "message": "Type '\"outlined\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 57,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 62,
+        "message": "Type '\"filled\"' is not assignable to type 'keyof ButtonVariantMap | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  }
+}

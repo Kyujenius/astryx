@@ -1,0 +1,118 @@
+{
+  "iterationId": "89361796",
+  "createdAt": "2026-08-26T11:05:57.845Z",
+  "config": {
+    "target": "astryx",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": true
+  },
+  "prompts": [
+    {
+      "id": "cs-4",
+      "category": "complex-selector",
+      "prompt": "Make a snack selector field. Users can choose Apple, Banana, or Orange, but there should also be an Other option that reveals a text input for a custom snack before applying it.",
+      "expectedComponents": [
+        "ComplexSelector",
+        "TextInput",
+        "RadioList"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-14",
+      "category": "feature-with-constraint",
+      "prompt": "Build a media gallery that mixes images and videos. Clicking any item opens a lightbox viewer. Videos should show native playback controls. Images should support zoom on double-click.",
+      "expectedComponents": [
+        "Lightbox"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-2",
+      "category": "workflow-description",
+      "prompt": "Create a multi-step form wizard with back/next buttons and a progress indicator",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-2",
+      "category": "data-display",
+      "prompt": "Display a list of transactions with amount, date, and status indicator",
+      "expectedComponents": [
+        "Card",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-4",
+      "category": "integration-oriented",
+      "prompt": "Build a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.",
+      "expectedComponents": [
+        "NumberInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-8",
+      "category": "typography",
+      "prompt": "Create a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text",
+      "expectedComponents": [
+        "Card",
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
