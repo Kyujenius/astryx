@@ -320,4 +320,48 @@ export const myTheme = defineTheme({
    */
   // onDark: {tokens: {'--color-accent': '#90CAF9'}, components: {button: {'variant:ghost': {borderWidth: '1px'}}}},
   // onLight: {tokens: {'--color-accent': '#0B5FCC'}},
+
+  // ───────────────────────────────────────────────────────────────────────
+  // Responsive width tiers
+  // ───────────────────────────────────────────────────────────────────────
+
+  /**
+   * What the theme looks like at each viewport width. Declaring a tier turns
+   * it on; a theme that declares none behaves exactly as it did before.
+   *
+   * The four tiers — `mobile`, `tablet`, `desktop`, `wide` — PARTITION the
+   * width axis, so exactly one matches at a time and no two ever compete.
+   * Bounds default to 756 / 1024 / 1440; `wide` is the open top and takes no
+   * `maxWidth`. Setting one moves both of its adjacent boundaries.
+   *
+   * A tier's value is a partial theme — the same axes as above, resolved the
+   * same way — so state only what differs. `extends` names where a tier starts
+   * from; it defaults to the theme's own values.
+   *
+   * Nest `'@media (pointer: coarse)'` for values that also need touch. That is
+   * where a 16px body floor goes: iOS Safari zooms an input whose text is
+   * under 16px, which is a fact about the finger, not about the window — a
+   * desktop window dragged narrow should reflow, not resize its type.
+   */
+  mobile: {
+    maxWidth: 756,
+    // Layout spacing tightens on a phone…
+    tokens: {'--spacing-4': '12px'},
+    '@media (pointer: coarse)': {
+      // …and on touch, body text floors to 16px. Say only `base`: the theme's
+      // own `ratio` carries over, so the whole ladder lifts with it.
+      typography: {scale: {base: 16}},
+    },
+  },
+
+  // Build on another tier instead of restating it. This is value inheritance,
+  // not the cascade — `tablet` still applies only at tablet widths.
+  tablet: {extends: 'mobile'},
+
+  // Nothing here means "the theme's own values", so most themes declare no
+  // `desktop` at all. Shown for completeness.
+  // desktop: {maxWidth: 1440},
+
+  // The open top: everything above `desktop`. No `maxWidth`.
+  // wide: {typography: {scale: {base: 16}}},
 });

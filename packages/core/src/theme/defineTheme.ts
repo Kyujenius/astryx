@@ -38,7 +38,7 @@
 
 import type {IconRegistry} from '../Icon/globalIconRegistry';
 import type {IndicatorRegistry} from '../Indicator/types';
-import type {TypographyConfig, FontWeight} from './types';
+import type {TypographyConfig} from './types';
 import {
   resolveOnMedia,
   type OnMediaOverrides,
@@ -59,20 +59,24 @@ import {
   fontWeightDefaults,
   typeScaleDefaults,
 } from './tokens.stylex';
+import type {MotionScaleConfig} from './expandMotionScale';
+import type {RadiusScaleConfig} from './expandRadiusScale';
+import type {ColorScaleConfig} from './expandColorScale';
+import {resolveThemeValues, type ThemeValuesInput} from './resolveThemeValues';
 import {
-  expandTypeScale,
-  generateTypeScaleComponents,
-  type TypeScaleConfig,
-} from './expandTypeScale';
-import {expandMotionScale, type MotionScaleConfig} from './expandMotionScale';
-import {expandRadiusScale, type RadiusScaleConfig} from './expandRadiusScale';
-import {expandColorScale, type ColorScaleConfig} from './expandColorScale';
+  mergeThemeValues,
+  mergeTierInputs,
+  resolveThemeTiers,
+  WIDTH_TIERS,
+  type ResolvedTierLayer,
+  type ThemeTier,
+  type ThemeTierInput,
+} from './themeTiers';
 
 import type {DomainTokenName} from './domainTokens';
 import {domainTokenDefaults} from './domainTokens';
 import type {SyntaxThemeDefinition} from './syntax';
 import {registerTheme} from './themeRegistry';
-import {deepMergeComponents} from './mergeComponents';
 
 // =============================================================================
 // Types
@@ -370,6 +374,58 @@ export interface DefineThemeInput {
    * but for the inverse case (e.g. dark-mode page with a light popover).
    */
   onLight?: OnMediaOverrides;
+  /**
+   * What the theme looks like on a phone-width viewport — 756px and under by
+   * default.
+   *
+   * Declaring a tier turns it on. Its value is a partial theme: the same axes
+   * as the theme itself (`typography`, `color`, `radius`, `motion`, `tokens`,
+   * `components`), resolved through the same pipeline, so only the axes set
+   * here produce CSS.
+   *
+   * Tiers partition the width axis — exactly one matches at any width — so no
+   * two tiers ever compete. Widths no declared tier covers use the theme's own
+   * values.
+   *
+   * Nest `'@media (pointer: coarse)'` for values that also require touch. That
+   * is where a 16px body floor belongs: iOS Safari zooms an input whose text is
+   * under 16px, which is a property of the finger, not of the window width.
+   *
+   * @example
+   * ```tsx
+   * mobile: {
+   *   maxWidth: 640,                            // optional; defaults to 756
+   *   tokens: {'--spacing-4': '12px'},          // narrow, any pointer
+   *   '@media (pointer: coarse)': {             // narrow AND touch
+   *     typography: {scale: {base: 16}},        // ratio inherited
+   *   },
+   * }
+   * ```
+   */
+  mobile?: ThemeTier;
+  /**
+   * What the theme looks like on a tablet-width viewport — above `mobile`'s
+   * bound and up to 1024px by default.
+   *
+   * Same shape as {@link DefineThemeInput.mobile}. Use `extends` to build on
+   * another tier's values rather than restating them:
+   * `tablet: {extends: 'mobile'}`.
+   */
+  tablet?: ThemeTier;
+  /**
+   * What the theme looks like on a desktop-width viewport — above `tablet`'s
+   * bound and up to 1440px by default.
+   *
+   * Same shape as {@link DefineThemeInput.mobile}.
+   */
+  desktop?: ThemeTier;
+  /**
+   * What the theme looks like above `desktop`'s bound — the open top of the
+   * scale, so it takes no `maxWidth`.
+   *
+   * Same shape as {@link DefineThemeInput.mobile}.
+   */
+  wide?: ThemeTier;
 }
 
 /** A defined theme — ready to pass to <Theme> */
@@ -405,6 +461,25 @@ export interface DefinedTheme {
    * @internal
    */
   __onLight?: ResolvedOnMedia;
+  /**
+   * Resolved width-tier layers, in emission order. Undefined when the theme
+   * declares no tier, so a theme without tiers is unchanged.
+   * @internal
+   */
+  __tiers?: ResolvedTierLayer[];
+  /**
+   * The tier declarations this theme resolved from, kept so a theme that
+   * extends this one can re-resolve them against its own values.
+   * @internal
+   */
+  __tierInput?: ThemeTierInput;
+  /**
+   * The value axes this theme was declared with, kept for the same reason —
+   * an extending theme's tiers must merge over what was declared, not over
+   * what it resolved to.
+   * @internal
+   */
+  __valuesInput?: ThemeValuesInput;
 }
 
 // =============================================================================
@@ -432,50 +507,6 @@ export const tokenDefaults: Record<string, string> = {
 // =============================================================================
 // defineTheme
 // =============================================================================
-
-/**
- * Resolve a token value to a CSS string.
- * - String values pass through as-is
- * - [light, dark] tuples become light-dark(light, dark)
- */
-function resolveTokenValue(value: TokenValue): string {
-  if (Array.isArray(value)) {
-    return `light-dark(${value[0]}, ${value[1]})`;
-  }
-  return value;
-}
-
-/**
- * Resolve a FontWeight name to a var() reference.
- * Named weights map to var(--font-weight-*); raw values pass through.
- */
-function resolveFontWeight(weight: FontWeight): string {
-  const named: Record<string, string> = {
-    normal: 'var(--font-weight-normal)',
-    medium: 'var(--font-weight-medium)',
-    semibold: 'var(--font-weight-semibold)',
-    bold: 'var(--font-weight-bold)',
-  };
-  return named[weight] ?? weight;
-}
-
-/**
- * Build the full CSS font-family value from family + fallbacks.
- * Quotes the family name if it contains spaces.
- */
-function buildFontFamily(
-  family?: string,
-  fallbacks?: string,
-): string | undefined {
-  if (!family) {
-    return undefined;
-  }
-  const quoted = family.includes(' ') ? `"${family}"` : family;
-  if (fallbacks) {
-    return `${quoted}, ${fallbacks}`;
-  }
-  return quoted;
-}
 
 /**
  * Describe a rejected `extends` value for the error message — enough to tell a
@@ -506,9 +537,7 @@ function describeBadBase(value: unknown): string {
  * precedence over generated values.
  */
 export function defineTheme(input: DefineThemeInput): DefinedTheme {
-  const tokens: Record<string, string> = {};
-
-  // 0. Pre-seed from base theme when `extends` is provided (lowest precedence).
+  // Pre-seed from the base theme when `extends` is provided (lowest precedence).
   // A base that is not a theme is refused rather than ignored: `extends` used
   // to inherit nothing when its value was undefined, which is what a named
   // import silently resolving to the wrong module hands over, and the theme
@@ -522,146 +551,53 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
     );
   }
   const base = input.extends;
-  if (base) {
-    for (const [key, value] of Object.entries(base.tokens)) {
-      tokens[key] = value;
+
+  // The theme's own value axes, and the resolved base an `extends` supplies.
+  // Both are handed to the tier resolver unchanged, so a width tier resolves
+  // as a peer of this resolution rather than as a patch applied after it.
+  const ownValues: ThemeValuesInput = {
+    typography: input.typography,
+    color: input.color,
+    radius: input.radius,
+    motion: input.motion,
+    syntax: input.syntax,
+    tokens: input.tokens,
+    components: input.components,
+  };
+  const seed = base
+    ? {tokens: base.tokens, components: base.components}
+    : undefined;
+
+  const {tokens, components} = resolveThemeValues(ownValues, seed);
+
+  // Width tiers. A tier's values are merged from the theme's own input, not
+  // from its resolved output, so an inherited axis a tier only partly restates
+  // (a scale that raises `base` and keeps the theme's `ratio`) still resolves
+  // against what the theme actually declared.
+  const ownTierInput: ThemeTierInput = {};
+  for (const tier of WIDTH_TIERS) {
+    const declared = input[tier];
+    if (declared !== undefined) {
+      ownTierInput[tier] = declared;
     }
   }
+  const __valuesInput = base?.__valuesInput
+    ? mergeThemeValues(base.__valuesInput, ownValues)
+    : ownValues;
+  const __tierInput = mergeTierInputs(base?.__tierInput, ownTierInput);
+  const __tiers = resolveThemeTiers(
+    input.name,
+    __tierInput,
+    __valuesInput,
+    seed,
+  );
 
-  // Build typeScale config from typography if present
-  const typo = input.typography;
-  let typeScaleConfig: TypeScaleConfig | undefined;
-  if (typo?.scale) {
-    // Collect weight overrides from typography roles
-    const headingWeights: Partial<Record<1 | 2 | 3 | 4 | 5 | 6, string>> = {};
-    const headingRole = typo.heading;
-    if (headingRole?.weights) {
-      for (const [level, w] of Object.entries(headingRole.weights)) {
-        if (w) {
-          headingWeights[Number(level) as 1 | 2 | 3 | 4 | 5 | 6] =
-            resolveFontWeight(w);
-        }
-      }
-    }
-    // Default heading weight from role
-    const defaultHeadingWeight = headingRole?.weight
-      ? resolveFontWeight(headingRole.weight)
-      : undefined;
-    if (defaultHeadingWeight) {
-      for (let i = 1; i <= 6; i++) {
-        if (!(i in headingWeights)) {
-          headingWeights[i as 1 | 2 | 3 | 4 | 5 | 6] = defaultHeadingWeight;
-        }
-      }
-    }
-
-    // Text weight overrides from roles
-    const textWeights: Partial<Record<string, string>> = {};
-    if (typo.body?.weight) {
-      textWeights.body = resolveFontWeight(typo.body.weight);
-    }
-    if (typo.code?.weight) {
-      textWeights.code = resolveFontWeight(typo.code.weight);
-    }
-
-    typeScaleConfig = {
-      base: typo.scale.base,
-      ratio: typo.scale.ratio,
-      weights: {
-        ...(Object.keys(headingWeights).length > 0
-          ? {heading: headingWeights}
-          : {}),
-        ...(Object.keys(textWeights).length > 0 ? {text: textWeights} : {}),
-      },
-    };
-  }
-
-  // 1. Apply color-generated tokens (lowest precedence for colors)
-  if (input.color) {
-    const colorTokens = expandColorScale(input.color);
-    for (const [key, value] of Object.entries(colorTokens)) {
-      tokens[key] = value;
-    }
-  }
-
-  // 1a. Apply typeScale-generated tokens (lowest precedence for type)
-  if (typeScaleConfig) {
-    const typeScaleTokens = expandTypeScale(typeScaleConfig);
-    for (const [key, value] of Object.entries(typeScaleTokens)) {
-      tokens[key] = value;
-    }
-  }
-
-  // 1b. Apply radius-generated tokens (lowest precedence for radius)
-  if (input.radius) {
-    const radiusTokens = expandRadiusScale(input.radius);
-    for (const [key, value] of Object.entries(radiusTokens)) {
-      tokens[key] = value;
-    }
-  }
-
-  // 1c. Apply motion-generated tokens (same precedence as typeScale)
-  if (input.motion) {
-    const motionTokens = expandMotionScale(input.motion);
-    for (const [key, value] of Object.entries(motionTokens)) {
-      tokens[key] = value;
-    }
-  }
-
-  // 1d. Apply typography font family tokens
-  if (typo) {
-    // Heading inherits from body if not specified
-    const bodyFamily = buildFontFamily(typo.body?.family, typo.body?.fallbacks);
-    const headingFamily =
-      buildFontFamily(typo.heading?.family, typo.heading?.fallbacks) ??
-      bodyFamily;
-    const codeFamily = buildFontFamily(typo.code?.family, typo.code?.fallbacks);
-
-    if (bodyFamily) {
-      tokens['--font-family-body'] = bodyFamily;
-    }
-    if (headingFamily) {
-      tokens['--font-family-heading'] = headingFamily;
-    }
-    if (codeFamily) {
-      tokens['--font-family-code'] = codeFamily;
-    }
-  }
-
-  // 1e. Apply syntax theme tokens (before explicit overrides)
-  if (input.syntax) {
-    const syntaxMap = input.syntax.tokens;
-    const prefix = '--color-syntax-';
-    for (const [key, value] of Object.entries(syntaxMap)) {
-      tokens[prefix + key] = value;
-    }
-  }
-
-  // 2. Apply explicit token overrides (highest precedence — overwrites generated tokens)
-  if (input.tokens) {
-    for (const [key, value] of Object.entries(input.tokens)) {
-      if (value !== undefined) {
-        tokens[key] = resolveTokenValue(value);
-      }
-    }
-  }
-
-  // 3. Generate component overrides: base (lowest) → typeScale → explicit (highest)
-  let components = input.components;
-  if (typeScaleConfig) {
-    const generated = generateTypeScaleComponents(typeScaleConfig);
-    components = deepMergeComponents(generated, input.components);
-  }
-  if (base?.components) {
-    components = deepMergeComponents(base.components, components);
-  }
-
-  // 4. Resolve on-media token overrides (base's resolved surface, then
+  // On-media token overrides (base's resolved surface, then
   // defaults, then this theme's own overrides)
   const __onDark = resolveOnMedia('dark', input.onDark, base?.__onDark);
   const __onLight = resolveOnMedia('light', input.onLight, base?.__onLight);
 
-  // 5. Merge icons — input icons override base icons
+  // Icons — input icons override base icons
   const icons =
     input.icons && base?.icons
       ? {...base.icons, ...input.icons}
@@ -686,6 +622,9 @@ export function defineTheme(input: DefineThemeInput): DefinedTheme {
         : undefined,
     __onDark,
     __onLight,
+    __tiers,
+    __tierInput: __tiers ? __tierInput : undefined,
+    __valuesInput,
   };
 
   registerTheme(theme);
@@ -700,6 +639,7 @@ export {
   generateThemeRules,
   generateThemeRulesSplit,
   generateOnMediaCSS,
+  generateTierCSS,
   generateThemeCSS,
   type ThemeRulesSplit,
   type ThemeCSSOutput,

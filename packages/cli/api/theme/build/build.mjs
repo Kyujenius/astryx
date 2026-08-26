@@ -62,12 +62,14 @@ import {
 /** @type {any} */ let _defineTheme = null;
 /** @type {any} */ let _generateThemeRulesSplit = null;
 /** @type {any} */ let _generateOnMediaCSS = null;
+/** @type {any} */ let _generateTierCSS = null;
 /** @type {any} */ let _coreImportError = null;
 try {
   const coreTheme = await import('@astryxdesign/core/theme');
   _defineTheme = coreTheme.defineTheme;
   _generateThemeRulesSplit = coreTheme.generateThemeRulesSplit;
   _generateOnMediaCSS = coreTheme.generateOnMediaCSS;
+  _generateTierCSS = coreTheme.generateTierCSS;
 } catch (e) {
   // Capture the reason so the theme action can surface a precise, actionable
   // error. We don't throw here: this module is imported eagerly by the CLI
@@ -826,10 +828,16 @@ function generateBuiltModule(themeDef, iconInfo, iconsSpecifier) {
     return `  ${field}: ${body},\n`;
   };
 
+  // Everything a theme that `extends` this built one has to be able to read
+  // back. A field missing here is silently lost by the extending theme.
+  // SYNC: packages/core/src/theme/defineTheme.ts (DefinedTheme)
   const inheritableFields =
     serializeField('components', themeDef.components) +
     serializeField('__onDark', themeDef.__onDark) +
-    serializeField('__onLight', themeDef.__onLight);
+    serializeField('__onLight', themeDef.__onLight) +
+    serializeField('__tiers', themeDef.__tiers) +
+    serializeField('__tierInput', themeDef.__tierInput) +
+    serializeField('__valuesInput', themeDef.__valuesInput);
 
   return `${iconImport}/**
  * ${themeDef.name} theme — built by \`${getCliInvocation()} theme build\`
@@ -1130,6 +1138,11 @@ export async function themeBuild(
     // theme has none of them — and hand the WHOLE object over: picking fields
     // by name is how `extends` (and `color`, and `syntax`) used to be dropped
     // on the way in.
+    // Fields that only ever appear on RAW defineTheme() input, never on an
+    // already-resolved theme. Their presence is how the build tells the two
+    // apart and decides to run defineTheme() itself. A field missing from this
+    // list is dropped without a word, so every new input field belongs here.
+    // SYNC: packages/core/src/theme/defineTheme.ts (DefineThemeInput)
     const INPUT_ONLY_FIELDS = [
       'extends',
       'typography',
@@ -1139,6 +1152,10 @@ export async function themeBuild(
       'syntax',
       'onDark',
       'onLight',
+      'mobile',
+      'tablet',
+      'desktop',
+      'wide',
     ];
     const needsResolution = INPUT_ONLY_FIELDS.some(
       field => themeDef[field] !== undefined,
@@ -1163,16 +1180,36 @@ export async function themeBuild(
         `@layer reset {\n@scope (${scopeSelector}) to (${scopeTo}) {\n${proseInner}\n}\n}`,
       );
     }
-    if (component.length > 0) {
+    // Width-tier layers — the same generator the runtime path uses.
+    const tierCss = _generateTierCSS
+      ? _generateTierCSS(resolvedTheme)
+      : {prose: '', component: ''};
+    if (tierCss.prose) {
+      cssParts.push(`@layer reset {\n${tierCss.prose}\n}`);
+    }
+    if (component.length > 0 || tierCss.component) {
       const componentInner = component.join('\n\n');
-      const componentScope = `@scope (${scopeSelector}) to (${scopeTo}) {\n${componentInner}\n}`;
+      const componentScope =
+        component.length > 0
+          ? `@scope (${scopeSelector}) to (${scopeTo}) {\n${componentInner}\n}`
+          : '';
       // #3658: also emit attribute-specific rules so <Theme mode> can override color-scheme
-      const colorSchemeDecl = componentScope.includes('light-dark(')
+      // A `[light, dark]` tuple set only inside a tier still produces
+      // light-dark(), so the guard has to consider the tier CSS too — without
+      // it the built path ships light-dark() with nothing to resolve against,
+      // while the runtime path (which always sets color-scheme on its wrapper)
+      // renders correctly. The two must not disagree.
+      const needsColorScheme =
+        componentScope.includes('light-dark(') ||
+        tierCss.component.includes('light-dark(') ||
+        tierCss.prose.includes('light-dark(');
+      const colorSchemeDecl = needsColorScheme
         ? '  :root { color-scheme: light dark; }\n  html[data-theme="light"] { color-scheme: light; }\n  html[data-theme="dark"] { color-scheme: dark; }\n\n'
         : '';
-      cssParts.push(
-        `@layer astryx-theme {\n${colorSchemeDecl}${componentScope}\n}`,
-      );
+      const body = [componentScope, tierCss.component]
+        .filter(Boolean)
+        .join('\n\n');
+      cssParts.push(`@layer astryx-theme {\n${colorSchemeDecl}${body}\n}`);
     }
     // On-media rules (MediaTheme dark/light surface overrides)
     if (_generateOnMediaCSS) {

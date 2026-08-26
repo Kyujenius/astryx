@@ -759,6 +759,112 @@ export function generateOnMediaCSS(theme: DefinedTheme): string {
 }
 
 /**
+ * Generate CSS for a theme's width tiers, split by layer.
+ *
+ * Each tier layer becomes one `@media` block wrapping a `@scope` identical to
+ * the base theme's, emitted after the base rules so it wins where it matches —
+ * a media query contributes no specificity, so source order is the whole
+ * mechanism. Because tiers partition the width axis, at most one tier block
+ * matches at a time and no two ever compete.
+ *
+ * Prose and component rules are split exactly as the base theme's are, so a
+ * tier's prose defaults keep sitting at reset-layer priority rather than
+ * quietly gaining the power to beat a class.
+ *
+ * Two prunes keep the output honest, both by comparing against what the base
+ * theme already emits:
+ *
+ * - **Tokens** are diffed value by value, so a tier's `:scope` block carries
+ *   only the tokens it actually changes, not the theme's whole map.
+ * - **Rules identical to a base rule are dropped.** A tier resolves a complete
+ *   theme, so most rules it generates come out byte-identical to the base's —
+ *   pure weight in the stylesheet, and the bulk of what a naive emitter ships.
+ *
+ * A layer left with nothing to say emits nothing at all.
+ */
+export function generateTierCSS(theme: DefinedTheme): ThemeCSSOutput {
+  const tiers = theme.__tiers;
+  if (!tiers || tiers.length === 0) {
+    return {prose: '', component: ''};
+  }
+
+  const scopeSelector = themeScopeStart(theme.name);
+  const scopeTo = THEME_SCOPE_TO;
+
+  // Everything the base theme emits, so a tier rule that merely repeats one
+  // can be recognized and dropped.
+  const baseRules = new Set(generateThemeRules(theme));
+
+  const proseBlocks: string[] = [];
+  const componentBlocks: string[] = [];
+
+  for (const layer of tiers) {
+    // Only the tokens whose value differs from the base theme's.
+    const changedTokens: Record<string, string> = {};
+    for (const [name, value] of Object.entries(layer.tokens)) {
+      if (theme.tokens[name] !== value) {
+        changedTokens[name] = value;
+      }
+    }
+
+    // Rules are generated from the layer's FULL resolution, so a value baked
+    // into a rule (a prose font-size, say) is this tier's value rather than
+    // the base theme's. The identical-rule prune then drops what did not move.
+    const layerRules = generateThemeRules({
+      name: theme.name,
+      tokens: layer.tokens,
+      components: layer.components,
+    }).filter(rule => !isScopeTokenBlock(rule) && !baseRules.has(rule));
+
+    const componentParts: string[] = [];
+    const proseParts: string[] = [];
+
+    const tokenEntries = Object.entries(changedTokens);
+    if (tokenEntries.length > 0) {
+      const declarations = tokenEntries
+        .map(([prop, value]) => `      ${prop}: ${value};`)
+        .join('\n');
+      componentParts.push(`    :scope {\n${declarations}\n    }`);
+    }
+
+    for (const rule of layerRules) {
+      const target = rule.trimStart().startsWith(':where(')
+        ? proseParts
+        : componentParts;
+      target.push(indentRule(rule));
+    }
+
+    const wrap = (parts: string[]): string =>
+      `@media ${layer.query} {\n  @scope (${scopeSelector}) to (${scopeTo}) {\n${parts.join('\n\n')}\n  }\n}`;
+
+    if (componentParts.length > 0) {
+      componentBlocks.push(wrap(componentParts));
+    }
+    if (proseParts.length > 0) {
+      proseBlocks.push(wrap(proseParts));
+    }
+  }
+
+  return {
+    prose: proseBlocks.join('\n\n'),
+    component: componentBlocks.join('\n\n'),
+  };
+}
+
+/** Whether a generated rule is the `:scope` token block. */
+function isScopeTokenBlock(rule: string): boolean {
+  return rule.trimStart().startsWith(':scope');
+}
+
+/** Indent a generated rule one level further, for nesting inside `@media`. */
+function indentRule(rule: string): string {
+  return rule
+    .split('\n')
+    .map(line => (line.length > 0 ? `  ${line}` : line))
+    .join('\n');
+}
+
+/**
  * Generate layered CSS for a theme — runtime path.
  *
  * Returns two CSS blocks for injection into different layers:
@@ -793,6 +899,19 @@ export function generateThemeCSS(theme: DefinedTheme): ThemeCSSOutput {
     componentCss = componentCss
       ? `${componentCss}\n\n${onMediaCss}`
       : onMediaCss;
+  }
+
+  // Width tiers last within each layer: a media query adds no specificity, so
+  // being emitted after the base rules is the whole of why a tier wins where
+  // it matches.
+  const tierCss = generateTierCSS(theme);
+  if (tierCss.component) {
+    componentCss = componentCss
+      ? `${componentCss}\n\n${tierCss.component}`
+      : tierCss.component;
+  }
+  if (tierCss.prose) {
+    proseCss = proseCss ? `${proseCss}\n\n${tierCss.prose}` : tierCss.prose;
   }
 
   return {prose: proseCss, component: componentCss};

@@ -22,6 +22,7 @@ export {
   defineTheme,
   generateThemeCSS,
   generateOnMediaCSS,
+  generateTierCSS,
   generateThemeRules,
   generateThemeRulesSplit,
   type ThemeCSSOutput,
@@ -44,6 +45,21 @@ export type {
   ComponentStyleMap,
   StyleOverrides,
 } from './defineTheme';
+
+// Width tiers — responsive theming
+export {
+  WIDTH_TIERS,
+  DEFAULT_TIER_MAX_WIDTH,
+  tierWidthQuery,
+} from './themeTiers';
+export type {
+  WidthTier,
+  ThemeTier,
+  TierValues,
+  TierTypeScale,
+  TierTypographyConfig,
+  TierConditionKey,
+} from './themeTiers';
 
 export type {
   SyntaxTokenName,

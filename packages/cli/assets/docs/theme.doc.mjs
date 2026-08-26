@@ -257,11 +257,58 @@ const brandTheme = defineTheme({
             ['indicators', 'Shallow-merged: child indicators override matching names from the base.'],
             ['onDark, onLight', "Deep-merged per surface: the base's resolved surface first, then the child's overrides."],
             ['typography, motion, radius, color', 'Child config replaces base entirely (these are scale inputs, not additive).'],
+            ['mobile, tablet, desktop, wide', "Inherited and re-resolved against the child's values, so a variant theme keeps the responsive behaviour it was built on. Where both declare a tier, the child's values win per field."],
           ],
         },
         {
           type: 'prose',
           text: 'Inheritance is resolved when the theme is defined, so an extended theme is flat: `astryx theme build` emits one self-contained stylesheet holding everything the child inherited, and the base theme\'s CSS does not need to be loaded next to it. A base that is not a theme (most often an import that missed) is a build error rather than a theme that silently inherits nothing.',
+        },
+      ],
+    },
+    {
+      title: 'Responsive Width Tiers',
+      category: 'guide',
+      content: [
+        {
+          type: 'prose',
+          text: 'A theme can say what it looks like at each viewport width. The four tiers — `mobile`, `tablet`, `desktop`, `wide` — **partition** the width axis, so exactly one matches at any width and no two ever compete. Declaring a tier turns it on; a theme that declares none emits no tier CSS at all.',
+        },
+        {
+          type: 'code',
+          lang: 'tsx',
+          label: 'A theme that adapts on a phone',
+          code: "const acmeTheme = defineTheme({\n  name: 'acme',\n  typography: {scale: {base: 14, ratio: 1.2}},\n  tokens: {'--spacing-4': '16px'},\n\n  mobile: {\n    maxWidth: 756,                      // optional; this is the default\n    tokens: {'--spacing-4': '12px'},    // narrow, any pointer\n    '@media (pointer: coarse)': {\n      typography: {scale: {base: 16}},  // narrow AND touch; ratio inherited\n    },\n  },\n\n  tablet: {extends: 'mobile'},          // start from mobile's values\n});",
+        },
+        {
+          type: 'table',
+          headers: ['Tier', 'Matches', 'Default bound'],
+          rows: [
+            ['mobile', 'width <= 756px', '756'],
+            ['tablet', '756px < width <= 1024px', '1024'],
+            ['desktop', '1024px < width <= 1440px', '1440'],
+            ['wide', 'width > 1440px', 'none — the open top, so it takes no maxWidth'],
+          ],
+        },
+        {
+          type: 'prose',
+          text: "A tier's value is a partial theme: the same axes as the theme itself (`typography`, `color`, `radius`, `motion`, `tokens`, `components`), resolved through the same pipeline. State only what differs — a scale that sets `base` and not `ratio` inherits the theme's ratio. Setting a `maxWidth` moves both of that tier's boundaries, since a tier's lower bound is always the tier below it. Widths no declared tier covers use the theme's own values.",
+        },
+        {
+          type: 'prose',
+          text: "**`extends` is value inheritance, not the cascade.** It defaults to the theme's own values; naming another tier starts from that tier's resolved values instead. `tablet: {extends: 'mobile'}` takes mobile's *values* — mobile's CSS still applies only at mobile widths.",
+        },
+        {
+          type: 'prose',
+          text: '**Precedence.** Tiers partition, so no two tiers can both match and the question never arises. Within a tier, explicit `tokens` beat values generated from a scale — the same rule the theme itself follows — and a nested pointer refinement wins over the tier it sits in.',
+        },
+        {
+          type: 'prose',
+          text: "Nest `'@media (pointer: coarse)'` (or `'@media (pointer: fine)'`) for values that also require a pointer type. Keep width and pointer separate: a 16px body floor exists because iOS Safari zooms an input whose text is under 16px — a fact about the finger, true on a phone and an iPad alike and never true of a desktop window dragged narrow. Resizing a window is a layout gesture; the layout reflows and the type holds.",
+        },
+        {
+          type: 'prose',
+          text: 'Tiers are plain CSS media queries inside the theme stylesheet, so they render correctly on the server with no hydration flash and need no `useMediaQuery`. Both distribution modes emit them from the same generator — but only a built theme (`astryx theme build`) is in the stylesheet at first paint, so prefer the built path for a responsive theme.',
         },
       ],
     },
