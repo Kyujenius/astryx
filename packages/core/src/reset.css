@@ -355,8 +355,14 @@
 
   /*
    * Ensure hidden elements are actually hidden.
+   *
+   * `hidden="until-found"` is excluded: it carries its own UA style
+   * (`content-visibility: hidden`) that lets the browser's find-in-page
+   * index the content and reveal it on match. Applying `display: none`
+   * here would defeat that — the text becomes unsearchable because the
+   * rendering is suppressed before the browser can scan it.
    */
-  :where([hidden]) {
+  :where([hidden]:not([hidden='until-found'])) {
     display: none;
   }
 
