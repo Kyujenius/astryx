@@ -34,6 +34,14 @@ export const colorDefaults = {
   '--color-overlay': 'light-dark(#01122866, #11111299)',
   '--color-overlay-hover': 'light-dark(#0536590C, #FFFFFF0C)',
   '--color-overlay-pressed': 'light-dark(#05365919, #FFFFFF19)',
+  // Translucent on purpose (5% light / 50% dark): a muted surface is usually
+  // painted ON another surface — a Card on the body wash, a ProgressBar track
+  // in a panel — and the alpha is what keeps it reading as one step down from
+  // whatever is behind it rather than a fixed grey. Theming this to an opaque
+  // hex works on the body wash and goes wrong everywhere else: over a card,
+  // inside a popover, or on a nested panel it paints a flat block instead of a
+  // tint. If you override it, check it over every surface it lands on, and
+  // prefer keeping an alpha channel — a solid value only has to be wrong once.
   '--color-background-muted': 'light-dark(#0536590C, #1111127F)',
 
   // Text
