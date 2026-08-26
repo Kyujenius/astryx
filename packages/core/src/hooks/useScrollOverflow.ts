@@ -77,7 +77,7 @@ export function useScrollOverflow() {
   const scrollRef = useCallback(
     (el: HTMLElement | null) => {
       if (elRef.current) {
-        unobserveResize(elRef.current);
+        unobserveResize(elRef.current, measure);
         elRef.current.removeEventListener('scroll', measure);
       }
 
@@ -94,7 +94,7 @@ export function useScrollOverflow() {
   useEffect(() => {
     return () => {
       if (elRef.current) {
-        unobserveResize(elRef.current);
+        unobserveResize(elRef.current, measure);
         elRef.current.removeEventListener('scroll', measure);
       }
     };

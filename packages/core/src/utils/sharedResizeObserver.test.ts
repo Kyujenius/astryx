@@ -164,6 +164,46 @@ describe('sharedResizeObserver', () => {
     unobserveResize(el);
   });
 
+  it('is called with a callback everywhere in core', async () => {
+    // The one-argument form removes EVERY callback on the element, so a
+    // caller using it takes another feature's callback out with its own.
+    // Nothing in core may rely on it.
+    const {readdirSync, readFileSync} = await import('node:fs');
+    const {join} = await import('node:path');
+    const src = join(__dirname, '..');
+
+    const files: string[] = [];
+    const walk = (dir: string) => {
+      for (const entry of readdirSync(dir, {withFileTypes: true})) {
+        const full = join(dir, entry.name);
+        if (entry.isDirectory()) {
+          walk(full);
+        } else if (
+          /\.tsx?$/.test(entry.name) &&
+          !entry.name.includes('.test.')
+        ) {
+          files.push(full);
+        }
+      }
+    };
+    walk(src);
+
+    const oneArg: string[] = [];
+    for (const file of files) {
+      if (file.endsWith('sharedResizeObserver.ts')) {
+        continue;
+      }
+      for (const line of readFileSync(file, 'utf-8').split('\n')) {
+        const call = /unobserveResize\(([^)]*)\)/.exec(line);
+        if (call && call[1].trim() !== '' && !call[1].includes(',')) {
+          oneArg.push(`${file.slice(src.length + 1)}: ${line.trim()}`);
+        }
+      }
+    }
+
+    expect(oneArg).toEqual([]);
+  });
+
   it('keeps the other callbacks when one unobserves by identity', async () => {
     const {observeResize, unobserveResize} =
       await import('./sharedResizeObserver');

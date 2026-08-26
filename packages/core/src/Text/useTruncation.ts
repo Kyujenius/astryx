@@ -70,6 +70,9 @@ export function useTruncation(
   const [isTruncated, setIsTruncated] = useState(false);
   const [fullText, setFullText] = useState('');
   const elementRef = useRef<HTMLElement | null>(null);
+  // Remembered so the element can be unobserved by callback identity: another
+  // feature may be watching the same node through the shared observer.
+  const observedCallbackRef = useRef<(() => void) | null>(null);
 
   const checkTruncation = useCallback(
     (element: HTMLElement) => {
@@ -109,8 +112,9 @@ export function useTruncation(
   const ref: RefCallback<HTMLElement> = useCallback(
     (element: HTMLElement | null) => {
       // Cleanup previous observation
-      if (elementRef.current) {
-        unobserveResize(elementRef.current);
+      if (elementRef.current && observedCallbackRef.current) {
+        unobserveResize(elementRef.current, observedCallbackRef.current);
+        observedCallbackRef.current = null;
       }
 
       elementRef.current = element;
@@ -120,9 +124,11 @@ export function useTruncation(
         // observeResize fires the callback once on registration,
         // so no separate initial check is needed.
         if (typeof ResizeObserver !== 'undefined') {
-          observeResize(element, () => {
+          const onResize = () => {
             checkTruncation(element);
-          });
+          };
+          observedCallbackRef.current = onResize;
+          observeResize(element, onResize);
         } else {
           checkTruncation(element);
         }

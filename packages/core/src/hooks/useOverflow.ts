@@ -137,7 +137,9 @@ export function useOverflow(
   const containerElRef = useRef<HTMLElement | null>(null);
   const measureElRef = useRef<HTMLElement | null>(null);
   const observedElRef = useRef<HTMLElement | null>(null);
+  const observedCallbackRef = useRef<(() => void) | null>(null);
   const observedMeasureElRef = useRef<HTMLElement | null>(null);
+  const observedMeasureCallbackRef = useRef<(() => void) | null>(null);
 
   const calculate = useCallback(() => {
     const container = containerElRef.current;
@@ -219,18 +221,21 @@ export function useOverflow(
       containerElRef.current = el;
 
       // Clean up previous observation
-      if (observedElRef.current) {
-        unobserveResize(observedElRef.current);
+      if (observedElRef.current && observedCallbackRef.current) {
+        unobserveResize(observedElRef.current, observedCallbackRef.current);
         observedElRef.current = null;
+        observedCallbackRef.current = null;
       }
 
       if (el) {
         const target =
           observeParent && el.parentElement ? el.parentElement : el;
-        observeResize(target, () => {
+        const onResize = () => {
           calculate();
-        });
+        };
+        observeResize(target, onResize);
         observedElRef.current = target;
+        observedCallbackRef.current = onResize;
       }
     },
     [calculate, observeParent],
@@ -238,9 +243,16 @@ export function useOverflow(
 
   const measureRef = useCallback(
     (el: HTMLElement | null) => {
-      if (observedMeasureElRef.current) {
-        unobserveResize(observedMeasureElRef.current);
+      if (
+        observedMeasureElRef.current &&
+        observedMeasureCallbackRef.current
+      ) {
+        unobserveResize(
+          observedMeasureElRef.current,
+          observedMeasureCallbackRef.current,
+        );
         observedMeasureElRef.current = null;
+        observedMeasureCallbackRef.current = null;
       }
 
       measureElRef.current = el;
@@ -248,10 +260,12 @@ export function useOverflow(
         return;
       }
 
-      observeResize(el, () => {
+      const onResize = () => {
         calculate();
-      });
+      };
+      observeResize(el, onResize);
       observedMeasureElRef.current = el;
+      observedMeasureCallbackRef.current = onResize;
     },
     [calculate],
   );

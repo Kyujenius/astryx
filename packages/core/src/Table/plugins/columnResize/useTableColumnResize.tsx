@@ -727,11 +727,15 @@ export function useTableColumnResize<T extends Record<string, unknown>>(
   // --table-resize-height on the <table> element. This is initialized
   // entirely by the resize plugin — the base table has no knowledge of it.
   const observedTableRef = useRef<HTMLTableElement | null>(null);
+  // Unobserve by callback identity — the shared observer can carry another
+  // feature's callback on the same table.
+  const observedCallbackRef = useRef<(() => void) | null>(null);
 
   const measureRef = useCallback((el: HTMLDivElement | null) => {
-    if (observedTableRef.current) {
-      unobserveResize(observedTableRef.current);
+    if (observedTableRef.current && observedCallbackRef.current) {
+      unobserveResize(observedTableRef.current, observedCallbackRef.current);
       observedTableRef.current = null;
+      observedCallbackRef.current = null;
     }
     if (!el) {
       return;
@@ -743,19 +747,21 @@ export function useTableColumnResize<T extends Record<string, unknown>>(
     }
 
     if (table && typeof ResizeObserver !== 'undefined') {
-      observeResize(table, () => {
+      const onResize = () => {
         const height = table.getBoundingClientRect().height;
         table.style.setProperty('--table-resize-height', `${height}px`);
-      });
+      };
+      observeResize(table, onResize);
       observedTableRef.current = table;
+      observedCallbackRef.current = onResize;
     }
   }, []);
 
   // Clean up observer on unmount
   useEffect(() => {
     return () => {
-      if (observedTableRef.current) {
-        unobserveResize(observedTableRef.current);
+      if (observedTableRef.current && observedCallbackRef.current) {
+        unobserveResize(observedTableRef.current, observedCallbackRef.current);
       }
     };
   }, []);

@@ -80,7 +80,7 @@ export function useChatNewMessages({
   const cleanupRef = useRef<(() => void) | null>(null);
 
   const attach = useCallback((el: HTMLElement) => {
-    observeResize(el, () => {
+    const onResize = () => {
       onResizeRef.current?.();
 
       const messages = el.getElementsByClassName('astryx-chat-message');
@@ -92,9 +92,10 @@ export function useChatNewMessages({
           setHasNewMessages(true);
         }
       }
-    });
+    };
 
-    cleanupRef.current = () => unobserveResize(el);
+    observeResize(el, onResize);
+    cleanupRef.current = () => unobserveResize(el, onResize);
   }, []);
 
   const detach = useCallback(() => {

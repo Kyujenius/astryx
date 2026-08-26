@@ -587,8 +587,8 @@ export function AppShell({
       shellEl.style.setProperty('--_app-shell-header-height', `${height}px`);
     };
 
-    observeResize(headerEl, () => updateHeight());
-    return () => unobserveResize(headerEl);
+    observeResize(headerEl, updateHeight);
+    return () => unobserveResize(headerEl, updateHeight);
   }, [isAuto]);
 
   // =========================================================================

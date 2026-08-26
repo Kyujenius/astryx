@@ -495,7 +495,7 @@ export function TabList({
     }
     const onResize = () => revealSelectedTabRef.current();
     observeResize(root, onResize);
-    return () => unobserveResize(root);
+    return () => unobserveResize(root, onResize);
   }, [hasScroll, listRef]);
 
   const scrollByPage = useCallback((direction: -1 | 1) => {
