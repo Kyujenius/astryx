@@ -28,9 +28,10 @@
  * `scripts/check-badge-contrast.test.mjs` holds every theme to that.
  *
  * Responsive type: the 14px / 1.2 scale remains the default. On a coarse
- * primary pointer, the mobile and tablet bands raise the base to 16px while
- * retaining the 1.2 ratio, intentionally lifting the full type ladder through
- * 1024px. Fine-pointer viewports keep the default scale at every width.
+ * primary pointer, the mobile and tablet bands raise the base to 16px and
+ * compress the ratio to 1.1745. That lifts the lower ladder while keeping
+ * Display 1 at the default 42px through 1024px. Fine-pointer viewports keep the
+ * default scale at every width.
  *
  * Only overrides tokens that differ from the defaults.
  */
@@ -91,11 +92,14 @@ export const neutralTheme = defineTheme({
     },
   },
 
-  // Touch typography experiment: raise the full 1.2-ratio ladder from a 14px
-  // to a 16px base through tablet widths. The tablet tier inherits mobile's
-  // coarse-pointer refinement, while fine pointers retain the default scale.
+  // Touch typography experiment: raise the base from 14px to 16px through
+  // tablet widths, then compress the ratio so Display 1 stays at 42px. The
+  // tablet tier inherits mobile's coarse-pointer refinement, while fine
+  // pointers retain the default scale.
   mobile: {
-    '@media (pointer: coarse)': {typography: {scale: {base: 16}}},
+    '@media (pointer: coarse)': {
+      typography: {scale: {base: 16, ratio: 1.1745}},
+    },
   },
   tablet: {extends: 'mobile'},
 

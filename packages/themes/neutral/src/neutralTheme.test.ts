@@ -48,8 +48,14 @@ describe('Neutral responsive typography', () => {
     const tabletTouch = layers[3];
 
     expect(neutralTheme.tokens['--font-size-base']).toBe('0.875rem');
+    expect(neutralTheme.tokens['--font-size-5xl']).toBe('2.625rem');
     expect(mobileTouch.tokens['--font-size-base']).toBe('1rem');
+    expect(mobileTouch.tokens['--font-size-5xl']).toBe('2.625rem');
+    expect(mobileTouch.tokens['--text-display-1-leading']).toBe(
+      neutralTheme.tokens['--text-display-1-leading'],
+    );
     expect(tabletTouch.tokens['--font-size-base']).toBe('1rem');
+    expect(tabletTouch.tokens['--font-size-5xl']).toBe('2.625rem');
     expect(tabletTouch.tokens['--font-size-lg']).toBe(
       mobileTouch.tokens['--font-size-lg'],
     );
