@@ -27,6 +27,11 @@
  * All 9 saturated badge values pass WCAG AA against their label (>= 4.5:1);
  * `scripts/check-badge-contrast.test.mjs` holds every theme to that.
  *
+ * Responsive type: the 14px / 1.2 scale remains the default. On a coarse
+ * primary pointer, the mobile and tablet bands raise the base to 16px while
+ * retaining the 1.2 ratio, intentionally lifting the full type ladder through
+ * 1024px. Fine-pointer viewports keep the default scale at every width.
+ *
  * Only overrides tokens that differ from the defaults.
  */
 
@@ -85,6 +90,14 @@ export const neutralTheme = defineTheme({
         '"SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     },
   },
+
+  // Touch typography experiment: raise the full 1.2-ratio ladder from a 14px
+  // to a 16px base through tablet widths. The tablet tier inherits mobile's
+  // coarse-pointer refinement, while fine pointers retain the default scale.
+  mobile: {
+    '@media (pointer: coarse)': {typography: {scale: {base: 16}}},
+  },
+  tablet: {extends: 'mobile'},
 
   // Motion: snappier than default to match shadcn/Tailwind conventions.
   // Produces: fast-min=95ms, fast=125ms, fast-max=165ms,
