@@ -5,29 +5,41 @@ export const docs = {
   name: 'useResizable',
   displayName: 'useResizable',
   group: 'Resizable',
-  keywords: ['resize', 'resizable', 'drag', 'split', 'panel', 'sidebar', 'divider', 'splitter'],
+  keywords: [
+    'resize',
+    'resizable',
+    'drag',
+    'split',
+    'panel',
+    'sidebar',
+    'divider',
+    'splitter',
+  ],
   params: [
     {
       name: 'defaultSize',
-      type: "number | string",
+      type: 'number | string',
       description: 'Initial size in pixels or percentage string (e.g. "20%").',
     },
     {
       name: 'minSizePx',
       type: 'number',
-      description: 'Minimum size in pixels. Raising it above the current size grows the region to match.',
+      description:
+        'Minimum size in pixels. Raising it above the current size grows the region to match.',
       default: '50',
     },
     {
       name: 'maxSizePx',
       type: 'number',
-      description: 'Maximum size in pixels. Lowering it below the current size shrinks the region to match; raising it again leaves the size where it is.',
+      description:
+        'Maximum size in pixels. Lowering it below the current size shrinks the region to match; raising it again leaves the size where it is.',
       default: 'Infinity',
     },
     {
       name: 'collapsible',
       type: 'boolean',
-      description: 'Whether dragging below the collapsed threshold collapses the region to zero.',
+      description:
+        'Whether dragging below the collapsed threshold collapses the region to zero.',
       default: 'false',
     },
     {
@@ -38,23 +50,27 @@ export const docs = {
     {
       name: 'autoSaveId',
       type: 'string',
-      description: 'Key for localStorage persistence of size and collapse state across sessions.',
+      description:
+        'Key for localStorage persistence of size and collapse state across sessions.',
     },
     {
       name: 'defaultIsCollapsed',
       type: 'boolean',
-      description: 'Initial collapse state (uncontrolled). A persisted entry wins over it.',
+      description:
+        'Initial collapse state (uncontrolled). A persisted entry wins over it.',
       default: 'false',
     },
     {
       name: 'isCollapsed',
       type: 'boolean',
-      description: 'Controlled collapse state. collapse(), expand() and a drag past the threshold then report through onCollapseChange instead of changing state internally.',
+      description:
+        'Controlled collapse state. collapse(), expand() and a drag past the threshold then report through onCollapseChange instead of changing state internally.',
     },
     {
       name: 'onCollapseChange',
       type: '(isCollapsed: boolean) => void',
-      description: 'Called once per collapse state change, via drag or programmatically.',
+      description:
+        'Called once per collapse state change, via drag or programmatically.',
     },
   ],
   returns: [
@@ -86,16 +102,34 @@ export const docs = {
     {
       name: 'props',
       type: 'ResizableProps',
-      description: 'Props to spread on the resizable component or pass to ResizeHandle.',
+      description:
+        'Props to spread on the resizable component or pass to ResizeHandle.',
     },
   ],
   usage: {
-    description: 'Hook for adding drag-to-resize behavior to layout regions. Supports single-region and multi-region configurations with snap points, collapsible panels, localStorage persistence, and cascade resize ordering.',
+    description:
+      'Hook for adding drag-to-resize behavior to layout regions. Supports single-region and multi-region configurations with snap points, collapsible panels, localStorage persistence, and cascade resize ordering.',
     bestPractices: [
-      {guidance: true, description: 'Use with Layout or AppShell sidebar for resizable navigation panels.'},
-      {guidance: true, description: 'Set autoSaveId to persist user-chosen sizes across page reloads.'},
-      {guidance: true, description: 'Derive maxSizePx from available space when the region shares width with other content — the region follows the ceiling down as it moves.'},
-      {guidance: false, description: 'Set minSizePx too small; content becomes unreadable. Prefer collapsible for panels that can hide entirely.'},
+      {
+        guidance: true,
+        description:
+          'Use with Layout or AppShell sidebar for resizable navigation panels.',
+      },
+      {
+        guidance: true,
+        description:
+          'Set autoSaveId to persist user-chosen sizes across page reloads.',
+      },
+      {
+        guidance: true,
+        description:
+          'Derive maxSizePx from available space when the region shares width with other content — the region follows the ceiling down as it moves.',
+      },
+      {
+        guidance: false,
+        description:
+          'Set minSizePx too small; content becomes unreadable. Prefer collapsible for panels that can hide entirely.',
+      },
     ],
   },
   relatedComponents: ['Resizable', 'AppShell', 'Layout', 'SideNav'],
@@ -106,16 +140,23 @@ export const docs = {
 
 /** @type {import('@astryxdesign/cli/authoring').HookTranslationDoc} */
 export const docsDense = {
-  description: 'Adds drag-to-resize behavior to layout regions. Supports single-/multi-region configs w/ snap points, collapsible panels, localStorage persistence, cascade resize ordering.',
+  description:
+    'Adds drag-to-resize behavior to layout regions. Supports single-/multi-region configs w/ snap points, collapsible panels, localStorage persistence, cascade resize ordering.',
   paramDescriptions: {
     defaultSize: 'initial size in px / percentage string (e.g. "20%").',
-    minSizePx: 'min size in px. Raising it above current size grows region to match.',
-    maxSizePx: 'max size in px. Lowering it below current size shrinks region to match; raising it again leaves size where it is.',
-    collapsible: 'whether dragging below collapsed threshold collapses region to zero.',
+    minSizePx:
+      'min size in px. Raising it above current size grows region to match.',
+    maxSizePx:
+      'max size in px. Lowering it below current size shrinks region to match; raising it again leaves size where it is.',
+    collapsible:
+      'whether dragging below collapsed threshold collapses region to zero.',
     snaps: 'px values to snap to during drag.',
-    autoSaveId: 'key for localStorage persistence of size + collapse state across sessions.',
-    defaultIsCollapsed: 'initial collapse state (uncontrolled); persisted entry wins.',
-    isCollapsed: 'controlled collapse state; collapse()/expand()/drag report instead of mutating.',
+    autoSaveId:
+      'key for localStorage persistence of size + collapse state across sessions.',
+    defaultIsCollapsed:
+      'initial collapse state (uncontrolled); persisted entry wins.',
+    isCollapsed:
+      'controlled collapse state; collapse()/expand()/drag report instead of mutating.',
     onCollapseChange: 'called once per collapse state change.',
   },
   returnDescriptions: {
@@ -127,12 +168,29 @@ export const docsDense = {
     props: 'props to spread on resizable component / pass to ResizeHandle.',
   },
   usage: {
-    description: 'Adds drag-to-resize behavior to layout regions. Supports single-/multi-region configs w/ snap points, collapsible panels, localStorage persistence, cascade resize ordering.',
+    description:
+      'Adds drag-to-resize behavior to layout regions. Supports single-/multi-region configs w/ snap points, collapsible panels, localStorage persistence, cascade resize ordering.',
     bestPractices: [
-      {guidance: true, description: 'Use w/ Layout / AppShell sidebar for resizable navigation panels.'},
-      {guidance: true, description: 'Set autoSaveId to persist user-chosen sizes across page reloads.'},
-      {guidance: true, description: 'Derive maxSizePx from available space when region shares width w/ other content — region follows ceiling down as it moves.'},
-      {guidance: false, description: 'Set minSizePx too small; content becomes unreadable. Prefer collapsible for panels that can hide entirely.'},
+      {
+        guidance: true,
+        description:
+          'Use w/ Layout / AppShell sidebar for resizable navigation panels.',
+      },
+      {
+        guidance: true,
+        description:
+          'Set autoSaveId to persist user-chosen sizes across page reloads.',
+      },
+      {
+        guidance: true,
+        description:
+          'Derive maxSizePx from available space when region shares width w/ other content — region follows ceiling down as it moves.',
+      },
+      {
+        guidance: false,
+        description:
+          'Set minSizePx too small; content becomes unreadable. Prefer collapsible for panels that can hide entirely.',
+      },
     ],
   },
 };

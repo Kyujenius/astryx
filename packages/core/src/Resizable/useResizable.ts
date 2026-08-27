@@ -11,7 +11,7 @@
  *
  * SYNC: When modified, update these files to stay in sync:
  * - /packages/core/src/Resizable/useResizable.doc.mjs
- * - /packages/core/src/Resizable/useResizable.test.tsx
+ * - /packages/core/src/Resizable/useResizable.test.ts
  * - /packages/core/src/Resizable/Resizable.doc.mjs
  * - /packages/core/src/Resizable/index.ts
  * - /apps/storybook/stories/useResizable.stories.tsx
@@ -313,19 +313,25 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
   // The band can move under a size the viewer already chose. Correct only a
   // size that became illegal; widening the band again must not restore it.
   // Render-time correction prevents an out-of-band size from being committed.
-  const [lastBounds, setLastBounds] = useState(() => ({
+  const [lastConstraints, setLastConstraints] = useState(() => ({
     min: minSizePx,
     max: maxSizePx,
+    isCollapsed,
     clampedTo: null as number | null,
   }));
-  if (lastBounds.min !== minSizePx || lastBounds.max !== maxSizePx) {
+  if (
+    lastConstraints.min !== minSizePx ||
+    lastConstraints.max !== maxSizePx ||
+    lastConstraints.isCollapsed !== isCollapsed
+  ) {
     const legal = isCollapsed
       ? size
       : clampSize(size, minSizePx, maxSizePx, snaps);
     const hasMoved = legal !== size;
-    setLastBounds({
+    setLastConstraints({
       min: minSizePx,
       max: maxSizePx,
+      isCollapsed,
       clampedTo: hasMoved ? legal : null,
     });
     if (hasMoved) {
@@ -335,16 +341,16 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
 
   // Notify after commit so consumers mirroring the size stay in sync without
   // running their callback during render.
-  const notifiedBoundsRef = useRef(lastBounds);
+  const notifiedConstraintsRef = useRef(lastConstraints);
   useEffect(() => {
-    if (notifiedBoundsRef.current === lastBounds) {
+    if (notifiedConstraintsRef.current === lastConstraints) {
       return;
     }
-    notifiedBoundsRef.current = lastBounds;
-    if (lastBounds.clampedTo != null) {
-      onSizeChange?.(lastBounds.clampedTo);
+    notifiedConstraintsRef.current = lastConstraints;
+    if (lastConstraints.clampedTo != null) {
+      onSizeChange?.(lastConstraints.clampedTo);
     }
-  }, [lastBounds, onSizeChange]);
+  }, [lastConstraints, onSizeChange]);
 
   useEffect(() => {
     if (autoSaveId) {
