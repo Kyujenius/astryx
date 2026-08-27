@@ -272,7 +272,7 @@ const brandTheme = defineTheme({
       content: [
         {
           type: 'prose',
-          text: 'A theme can say what it looks like at each viewport width. The four tiers — `mobile`, `tablet`, `desktop`, `wide` — **partition** the width axis, so exactly one matches at any width and no two ever compete. Declaring a tier turns it on; a theme that declares none emits no tier CSS at all.',
+          text: 'A theme can say what it looks like at each viewport width. The four tiers — `mobile`, `tablet`, `desktop`, `wide` — form **disjoint bands**, so at most one tier matches at any width and no two ever compete. Declaring a tier turns it on; a theme that declares none emits no tier CSS at all.',
         },
         {
           type: 'code',
@@ -292,7 +292,7 @@ const brandTheme = defineTheme({
         },
         {
           type: 'prose',
-          text: "The bands above assume all four tiers are declared. **A tier you do not declare is not a boundary.** Declare `mobile` and `desktop` and there is one line, not three: desktop covers everything from the phone line up to 1440px. Declaring `wide` on its own is an error for the same reason — it would have no lower boundary and match every width. Above the widest declared tier, and below the narrowest, the theme's own values apply.",
+          text: "The bands above assume all four tiers are declared. **A tier you do not declare is not a boundary.** The lowest declared bounded tier owns every width up to its upper bound: declare only `desktop` and desktop values apply through 1440px, including phone widths. Declare `mobile` and `desktop` and there is one line between them, not a hidden tablet line. Above the highest declared bounded tier the theme's own values apply, unless `wide` is declared. `wide` on its own is an error because it would have no lower boundary and match every width.",
         },
         {
           type: 'prose',

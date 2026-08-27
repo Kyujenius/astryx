@@ -14,17 +14,18 @@
  *
  * Two properties define the model:
  *
- * **Tiers partition the width axis.** Exactly one tier matches at any viewport
- * width, so there is never a question of which tier wins — the question does
- * not arise.
+ * **Declared tier bands do not overlap.** At most one tier matches at any
+ * viewport width, so there is never a question of which tier wins — the
+ * question does not arise.
  *
  * Only *declared* tiers take part in that partition. A tier a theme does not
  * declare is not a narrower band with nothing in it — it is not a boundary at
  * all, and the tier above it reaches down to wherever the nearest declared
- * tier below it ends. A theme declaring `mobile` and `desktop` has one
- * boundary and two bands: phone, and everything else up to the desktop line.
- * Above the widest declared tier, and below the narrowest, the theme's own
- * values apply — which is what a theme with no tiers resolves to everywhere.
+ * tier below it ends. The lowest declared bounded tier owns every width up to
+ * its upper bound: declaring `desktop` alone therefore applies desktop values
+ * through 1440px, phone widths included. The theme's own values apply above
+ * the highest declared bounded tier unless `wide` is declared; with no tiers,
+ * they apply everywhere.
  *
  * **`extends` is value inheritance, not the cascade.** A tier that extends
  * another is resolved by merging their inputs and running the result through
@@ -295,7 +296,7 @@ export interface ResolvedTierLayer {
  * Only declared, bounded tiers appear. An absent tier is a boundary the theme
  * does not have.
  */
-export type TierBreakpoints = Readonly<Partial<Record<WidthTier, number>>>;
+type TierBreakpoints = Readonly<Partial<Record<WidthTier, number>>>;
 
 /**
  * Build the width query for a tier.

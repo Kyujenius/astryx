@@ -329,9 +329,9 @@ export const myTheme = defineTheme({
    * What the theme looks like at each viewport width. Declaring a tier turns
    * it on; a theme that declares none behaves exactly as it did before.
    *
-   * The four tiers — `mobile`, `tablet`, `desktop`, `wide` — PARTITION the
-   * width axis, so exactly one matches at a time and no two ever compete.
-   * Bounds default to 756 / 1024 / 1440; `wide` is the open top and takes no
+   * The four tiers — `mobile`, `tablet`, `desktop`, `wide` — form disjoint
+   * bands, so at most one matches at a time and no two ever compete. Bounds
+   * default to 756 / 1024 / 1440; `wide` is the open top and takes no
    * `maxWidth`. Setting one moves both of its adjacent boundaries.
    *
    * A tier you do NOT declare is not a boundary. Declare `mobile` and

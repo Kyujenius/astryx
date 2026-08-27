@@ -30,9 +30,9 @@ defineTheme({
 });
 ```
 
-- **Tiers partition the width axis** — exactly one matches at any width, so no
-  two ever compete and there is no precedence question between them. Bounds
-  default to 756 / 1024 / 1440; `wide` is the open top and takes no `maxWidth`.
+- **Declared tier bands do not overlap** — at most one tier matches at any
+  width, so two tiers never compete. Bounds default to 756 / 1024 / 1440;
+  `wide` is the open top and takes no `maxWidth`.
 - **A tier you do not declare is not a boundary.** Declare `mobile` and
   `desktop` and there is one line, not three: desktop covers everything from
   the phone line up to 1440px, with no band falling back to the theme's own
