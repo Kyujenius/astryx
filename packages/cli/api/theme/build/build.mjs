@@ -47,10 +47,7 @@ import {
   collectThemingTargets,
   targetsByKey,
 } from '../../../foundation/discovery/theming-targets.mjs';
-import {
-  collectUnloadedFonts,
-  formatFontLoadingHelp,
-} from './font-warning.mjs';
+import {collectUnloadedFonts, formatFontLoadingHelp} from './font-warning.mjs';
 
 // Import shared theme processing from core. `astryx theme build` MUST produce the
 // exact same CSS as the `<Theme>` runtime, so it has exactly one generation
@@ -345,7 +342,6 @@ function readComponentDeclarations(pascalName) {
   return contents;
 }
 
-
 /** @type {Map<string, Array<{moduleName: string, interfacePrefix: string}>>} */
 const _augmentationTargetCache = new Map();
 
@@ -404,7 +400,8 @@ async function resolveAugmentationTargetCandidates(componentName) {
     for (const entry of entries) {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (entry.name === 'node_modules' || entry.name === '__tests__') continue;
+        if (entry.name === 'node_modules' || entry.name === '__tests__')
+          continue;
         await scan(full);
         continue;
       }
@@ -590,12 +587,13 @@ async function generateVariantDeclarationsAsync(themeDef) {
       if (values.size === 0) continue;
 
       const propPascal = prop.charAt(0).toUpperCase() + prop.slice(1);
-      const target = (await resolveAugmentationTargetCandidates(component)).find(
-        candidate =>
-          componentHasAugmentableInterface(
-            candidate.moduleName,
-            `${candidate.interfacePrefix}${propPascal}Map`,
-          ),
+      const target = (
+        await resolveAugmentationTargetCandidates(component)
+      ).find(candidate =>
+        componentHasAugmentableInterface(
+          candidate.moduleName,
+          `${candidate.interfacePrefix}${propPascal}Map`,
+        ),
       );
 
       // Only augment interfaces that actually exist as an extension point in
@@ -886,7 +884,6 @@ function generateBuiltModule(themeDef, iconInfo, iconsSpecifier) {
     serializeField('components', themeDef.components) +
     serializeField('__onDark', themeDef.__onDark) +
     serializeField('__onLight', themeDef.__onLight) +
-    serializeField('__tiers', themeDef.__tiers) +
     serializeField('__tierInput', themeDef.__tierInput) +
     serializeField('__axes', themeDef.__axes) +
     serializeField('__equalOverrides', themeDef.__equalOverrides);
@@ -1255,10 +1252,9 @@ export async function themeBuild(
       resolvedTheme.tokens ?? {},
       resolvedTheme.components ?? {},
       ...(resolvedTheme.__tiers ?? []).flatMap(
-        (/** @type {{tokens?: Record<string, string>, components?: object}} */ layer) => [
-          layer.tokens ?? {},
-          layer.components ?? {},
-        ],
+        (
+          /** @type {{tokens?: Record<string, string>, components?: object}} */ layer,
+        ) => [layer.tokens ?? {}, layer.components ?? {}],
       ),
     ]);
     const colorSchemeDecl = themeOwnValues.includes('light-dark(')
@@ -1519,8 +1515,9 @@ Or with a <link> tag:
     ...new Set([
       ...collectUnloadedFonts(resolvedTheme),
       ...(resolvedTheme?.__tiers ?? []).flatMap(
-        (/** @type {{tokens?: Record<string, string>, components?: object}} */ layer) =>
-          collectUnloadedFonts(layer),
+        (
+          /** @type {{tokens?: Record<string, string>, components?: object}} */ layer,
+        ) => collectUnloadedFonts(layer),
       ),
     ]),
   ];

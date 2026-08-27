@@ -27,6 +27,7 @@ import {describe, it, expect, beforeAll, beforeEach, afterEach} from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
+import {pathToFileURL} from 'node:url';
 import {ensureCoreBuilt} from './ensure-core-built.mjs';
 import {runCli} from '../../../test-utils/run-cli.mjs';
 
@@ -204,7 +205,7 @@ describe('theme build width tiers', () => {
     expect(css).toContain('html[data-theme="dark"] { color-scheme: dark; }');
   });
 
-  it('carries the tiers into the built module so an extending theme keeps them', async () => {
+  it('carries sparse tier inputs into a built module so an extending theme keeps them', async () => {
     const project = path.join(tmpDir, 'project');
     const themesDir = path.join(project, 'themes');
     const themeFile = writeTheme(
@@ -223,16 +224,27 @@ describe('theme build width tiers', () => {
     );
     expect(result.code).toBe(0);
 
-    const js = fs.readFileSync(path.join(themesDir, 'built-base.js'), 'utf-8');
-    expect(js).toContain('__tiers');
-    // The declarations travel too, so an extending theme can re-resolve the
-    // tier against the ratio this theme was declared with.
+    const jsPath = path.join(themesDir, 'built-base.js');
+    const js = fs.readFileSync(jsPath, 'utf-8');
+    // The resolved layers are already in the adjacent CSS. Duplicating them in
+    // JS nearly doubles a tiered module; an extending theme needs the sparse
+    // declarations and axes instead, then resolves its own layers from them.
+    expect(js).not.toContain('__tiers');
     expect(js).toContain('__tierInput');
     expect(js).toContain('__axes');
-    // ...but only the axes a tier can restate part of. The theme's resolved
-    // tokens and components are already in the module; carrying the
-    // declarations as well would duplicate its two largest fields.
     expect(js).not.toContain('__valuesInput');
+
+    // Prove those sparse fields are sufficient using the generated module,
+    // rather than only asserting that its text contains some keys.
+    const {builtBaseTheme} = await import(
+      `${pathToFileURL(jsPath).href}?test=${Date.now()}`
+    );
+    const {defineTheme} = await import('@astryxdesign/core/theme');
+    const child = defineTheme({
+      name: 'built-child',
+      extends: builtBaseTheme,
+    });
+    expect(child.__tiers?.[0].tokens['--font-size-lg']).toBe('1.4375rem');
   });
 
   it('keeps a tier-less theme module free of tier fields', async () => {

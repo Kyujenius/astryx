@@ -573,9 +573,15 @@ export function resolveEqualOverrides(
 
   const inheritedTokenPaths = (inherited?.tokens ?? [])
     .map(name => [name])
-    .filter(path => valueAtPath(generatedByOwnAxes.tokens, path) === undefined);
+    .filter(
+      path =>
+        valueAtPath(generatedByOwnAxes.tokens, path) === undefined &&
+        valueAtPath(explicit.tokens, path) === undefined,
+    );
   const inheritedComponentPaths = (inherited?.components ?? []).filter(
-    path => valueAtPath(generatedByOwnAxes.components, path) === undefined,
+    path =>
+      valueAtPath(generatedByOwnAxes.components, path) === undefined &&
+      valueAtPath(explicit.components, path) === undefined,
   );
 
   const ownTokenPaths = equalLeafPaths(

@@ -1373,6 +1373,19 @@ describe('an explicit pin equal to its generated value', () => {
     expect(child.__equalOverrides).toBeUndefined();
   });
 
+  it('drops inherited metadata when the child replaces the pin with a distinct value', () => {
+    const child = defineTheme({
+      name: 'equal-pin-explicitly-replaced',
+      extends: equalPinnedBase('equal-pin-explicitly-replaced-base'),
+      tokens: {'--font-size-base': '2rem'},
+      mobile: {typography: {scale: {base: 16}}},
+    });
+
+    expect(child.tokens['--font-size-base']).toBe('2rem');
+    expect(child.__tiers?.[0].tokens['--font-size-base']).toBe('2rem');
+    expect(child.__equalOverrides).toBeUndefined();
+  });
+
   it('lets an explicit tier value beat the pin', () => {
     const child = defineTheme({
       name: 'equal-pin-tier-wins',
