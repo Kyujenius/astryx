@@ -12,14 +12,17 @@ to before.
 ```ts
 defineTheme({
   name: 'acme',
-  typography: {scale: {base: 14, ratio: 1.2}},
   tokens: {'--spacing-4': '16px'},
 
   mobile: {
     maxWidth: 756, // optional; this is the default
     tokens: {'--spacing-4': '12px'}, // narrow, any pointer
     '@media (pointer: coarse)': {
-      typography: {scale: {base: 16}}, // narrow AND touch; ratio inherited
+      tokens: {
+        '--size-element-sm': '36px',
+        '--size-element-md': '40px',
+        '--size-element-lg': '44px',
+      },
     },
   },
 
@@ -41,10 +44,15 @@ defineTheme({
 - **`extends` is value inheritance, not the cascade** — it defaults to the
   theme's own values, and naming another tier starts from that tier's resolved
   values. The extended tier still applies only in its own band.
-- **Pointer is a separate axis, nested inside a tier.** The 16px body floor is
-  an iOS Safari input-zoom fix, true on a phone and an iPad alike and never
-  true of a desktop window dragged narrow — so width and pointer must not be
-  fused into one condition.
+- **Pointer is a separate axis, nested inside a tier.** Use it for values that
+  depend on the primary pointer rather than viewport width — for example,
+  taller controls under a coarse pointer. A narrow desktop window still has a
+  fine pointer, while a tablet can be wider than `mobile` and still need the
+  coarse-pointer values.
+- **Explicit tokens stay pinned inside tiers.** If a theme pins a generated
+  scale token and changes that scale in a tier, the pinned step stays fixed
+  while neighbouring generated steps move; pin only when that uneven scale is
+  intentional.
 - Tiers are plain CSS media queries in the theme stylesheet: SSR-safe, no
   `useMediaQuery`, no hydration flash. Both distribution modes emit them from
   the same generator, last in each layer so a tier beats everything without a

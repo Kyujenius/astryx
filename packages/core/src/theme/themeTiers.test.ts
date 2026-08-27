@@ -14,7 +14,6 @@ import {
   generateTierCSS,
   generateThemeRules,
   WIDTH_TIERS,
-  DEFAULT_TIER_MAX_WIDTH,
 } from './index';
 import {durationDefaults, radiusDefaults} from './tokens.stylex';
 
@@ -167,12 +166,7 @@ describe('tier queries', () => {
     expect(queries(theme)).toEqual(['(width <= 756px)']);
   });
 
-  it('defaults match the documented breakpoints', () => {
-    expect(DEFAULT_TIER_MAX_WIDTH).toEqual({
-      mobile: 756,
-      tablet: 1024,
-      desktop: 1440,
-    });
+  it('matches the documented tier vocabulary', () => {
     expect(WIDTH_TIERS).toEqual(['mobile', 'tablet', 'desktop', 'wide']);
   });
 });
@@ -185,10 +179,11 @@ describe('pointer refinement', () => {
   it('ands the pointer onto the tier width', () => {
     const theme = defineTheme({
       name: 'touch',
-      typography: {scale: {base: 14, ratio: 1.2}},
       mobile: {
         tokens: {'--spacing-4': '12px'},
-        '@media (pointer: coarse)': {typography: {scale: {base: 16}}},
+        '@media (pointer: coarse)': {
+          tokens: {'--size-element-md': '40px'},
+        },
       },
     });
 
@@ -196,6 +191,7 @@ describe('pointer refinement', () => {
       '(width <= 756px)',
       '(width <= 756px) and (pointer: coarse)',
     ]);
+    expect(theme.__tiers?.[1].tokens['--size-element-md']).toBe('40px');
   });
 
   it('emits the refinement after its tier, so it wins where both match', () => {
@@ -303,15 +299,15 @@ describe('extends', () => {
   });
 
   it('carries a pointer refinement along with the tier it extends', () => {
-    // `extends: 'mobile'` asks to be like mobile, and the touch values are
-    // part of what mobile is — the iOS input-zoom bug the 16px floor exists
-    // for fires on an iPad too.
+    // `extends: 'mobile'` asks to be like mobile, including the taller control
+    // sizing mobile declares for a coarse primary pointer.
     const theme = defineTheme({
       name: 'refinement-inherit',
-      typography: {scale: {base: 14, ratio: 1.2}},
       mobile: {
         tokens: {'--spacing-4': '12px'},
-        '@media (pointer: coarse)': {typography: {scale: {base: 16}}},
+        '@media (pointer: coarse)': {
+          tokens: {'--size-element-md': '40px'},
+        },
       },
       tablet: {extends: 'mobile'},
     });
@@ -326,7 +322,7 @@ describe('extends', () => {
     const tabletTouch = theme.__tiers?.find(
       l => l.tier === 'tablet' && l.condition,
     );
-    expect(tabletTouch?.tokens['--font-size-base']).toBe('1rem');
+    expect(tabletTouch?.tokens['--size-element-md']).toBe('40px');
   });
 
   it('lets the extending tier override an inherited refinement', () => {

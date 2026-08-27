@@ -343,19 +343,27 @@ export const myTheme = defineTheme({
    * same way — so state only what differs. `extends` names where a tier starts
    * from; it defaults to the theme's own values.
    *
-   * Nest `'@media (pointer: coarse)'` for values that also need touch. That is
-   * where a 16px body floor goes: iOS Safari zooms an input whose text is
-   * under 16px, which is a fact about the finger, not about the window — a
-   * desktop window dragged narrow should reflow, not resize its type.
+   * An explicit token keeps winning inside a tier. If you pin a token generated
+   * by a scale, then change that scale in a tier, the pinned step stays fixed
+   * while its generated neighbours move — pin only when that uneven scale is
+   * intentional.
+   *
+   * Nest `'@media (pointer: coarse)'` for values that depend on the primary
+   * pointer rather than the viewport width — for example, taller controls for
+   * a finger or stylus. A narrow desktop window still has a fine pointer; a
+   * wider tablet can still need the coarse-pointer values.
    */
   mobile: {
     maxWidth: 756,
     // Layout spacing tightens on a phone…
     tokens: {'--spacing-4': '12px'},
     '@media (pointer: coarse)': {
-      // …and on touch, body text floors to 16px. Say only `base`: the theme's
-      // own `ratio` carries over, so the whole ladder lifts with it.
-      typography: {scale: {base: 16}},
+      // Coarse primary pointers get taller controls without changing typography.
+      tokens: {
+        '--size-element-sm': '36px',
+        '--size-element-md': '40px',
+        '--size-element-lg': '44px',
+      },
     },
   },
 

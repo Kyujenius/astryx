@@ -278,7 +278,7 @@ const brandTheme = defineTheme({
           type: 'code',
           lang: 'tsx',
           label: 'A theme that adapts on a phone',
-          code: "const acmeTheme = defineTheme({\n  name: 'acme',\n  typography: {scale: {base: 14, ratio: 1.2}},\n  tokens: {'--spacing-4': '16px'},\n\n  mobile: {\n    maxWidth: 756,                      // optional; this is the default\n    tokens: {'--spacing-4': '12px'},    // narrow, any pointer\n    '@media (pointer: coarse)': {\n      typography: {scale: {base: 16}},  // narrow AND touch; ratio inherited\n    },\n  },\n\n  tablet: {extends: 'mobile'},          // start from mobile's values\n});",
+          code: "const acmeTheme = defineTheme({\n  name: 'acme',\n  tokens: {'--spacing-4': '16px'},\n\n  mobile: {\n    maxWidth: 756,                      // optional; this is the default\n    tokens: {'--spacing-4': '12px'},    // narrow, any pointer\n    '@media (pointer: coarse)': {\n      // Taller controls for a coarse primary pointer.\n      tokens: {\n        '--size-element-sm': '36px',\n        '--size-element-md': '40px',\n        '--size-element-lg': '44px',\n      },\n    },\n  },\n\n  tablet: {extends: 'mobile'},          // start from mobile's values\n});",
         },
         {
           type: 'table',
@@ -304,11 +304,11 @@ const brandTheme = defineTheme({
         },
         {
           type: 'prose',
-          text: '**Precedence.** Tiers partition, so no two tiers can both match and the question never arises. Within a tier, explicit `tokens` beat values generated from a scale — the same rule the theme itself follows — and a nested pointer refinement wins over the tier it sits in. Tier CSS is emitted last in each layer, after everything the theme emits without a media query, so a tier always wins where it matches.',
+          text: '**Precedence.** Tiers partition, so no two tiers can both match and the question never arises. Within a tier, explicit `tokens` beat values generated from a scale — the same rule the theme itself follows — and a nested pointer refinement wins over the tier it sits in. Tier CSS is emitted last in each layer, after everything the theme emits without a media query, so a tier always wins where it matches. A pin stays pinned: if `tokens` fixes one generated scale token (for example `--font-size-base`) and a tier changes that scale, the pinned step stays fixed while neighbouring generated steps move. Use that deliberately; otherwise the ladder becomes uneven.',
         },
         {
           type: 'prose',
-          text: "Nest `'@media (pointer: coarse)'` (or `'@media (pointer: fine)'`) for values that also require a pointer type. Keep width and pointer separate: a 16px body floor exists because iOS Safari zooms an input whose text is under 16px — a fact about the finger, true on a phone and an iPad alike and never true of a desktop window dragged narrow. Resizing a window is a layout gesture; the layout reflows and the type holds.",
+          text: "Nest `'@media (pointer: coarse)'` (or `'@media (pointer: fine)'`) for values that depend on the primary pointer rather than viewport width. For example, a theme can give controls more height under a finger or stylus without enlarging them in a narrow desktop window. Keep width and pointer separate: a desktop window dragged narrow still has a fine pointer, while a tablet can be wider than `mobile` and still need coarse-pointer sizing.",
         },
         {
           type: 'prose',

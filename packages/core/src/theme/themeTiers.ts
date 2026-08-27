@@ -37,18 +37,22 @@
  * ```ts
  * mobile: {
  *   tokens: {'--spacing-4': '12px'},              // narrow, any pointer
- *   '@media (pointer: coarse)': {                  // narrow AND touch
- *     typography: {scale: {base: 16}},
+ *   '@media (pointer: coarse)': {                  // narrow AND coarse
+ *     tokens: {
+ *       '--size-element-sm': '36px',
+ *       '--size-element-md': '40px',
+ *       '--size-element-lg': '44px',
+ *     },
  *   },
  * }
  * ```
  *
- * Width and pointer stay separate because the reasons to adapt are separate. A
- * 16px body floor is a *touch* concern — iOS Safari zooms an input whose text
- * is under 16px, on a phone and on a tablet alike, and never on a desktop
- * window dragged narrow. Tighter gutters are a *width* concern. Fusing them
- * into one condition gives the wrong answer to every device that is one but
- * not the other.
+ * Width and pointer stay separate because the reasons to adapt are separate.
+ * Tighter gutters are a *width* concern; giving controls more room under a
+ * finger or stylus is a *pointer* concern. A desktop window dragged narrow
+ * still has a fine pointer, while a tablet can be wider than `mobile` and
+ * still need coarse-pointer sizing. Fusing the axes gives the wrong answer to
+ * devices that are one but not the other.
  *
  * Unset means nothing is emitted: a theme that declares no tier produces no
  * tier layer, no CSS, and output byte-identical to a theme defined before
@@ -101,10 +105,7 @@ export type WidthTier = (typeof WIDTH_TIERS)[number];
  * `desktop`. 756 is the canonical phone line, 1024 is iPad landscape, and 1440
  * is the usual laptop-to-large-display boundary.
  */
-export const DEFAULT_TIER_MAX_WIDTH: Record<
-  Exclude<WidthTier, 'wide'>,
-  number
-> = {
+const DEFAULT_TIER_MAX_WIDTH: Record<Exclude<WidthTier, 'wide'>, number> = {
   mobile: 756,
   tablet: 1024,
   desktop: 1440,
@@ -188,7 +189,7 @@ const TIER_CONDITION_KEYS: ReadonlyArray<TierConditionKey> = [
  *
  * @example
  * ```
- * // Floor body text to 16px on touch; keep the theme's ratio.
+ * // Raise the base at one width; keep the theme's ratio.
  * scale: {base: 16}
  * ```
  */
@@ -309,10 +310,7 @@ export type TierBreakpoints = Readonly<Partial<Record<WidthTier, number>>>;
  * bands are half-open and adjacent, and writing `min-width: 757px` to express
  * that invites the off-by-one it looks like.
  */
-export function tierWidthQuery(
-  tier: WidthTier,
-  breakpoints: TierBreakpoints,
-): string {
+function tierWidthQuery(tier: WidthTier, breakpoints: TierBreakpoints): string {
   const index = WIDTH_TIERS.indexOf(tier);
 
   let lower: number | undefined;
@@ -968,10 +966,9 @@ export function resolveThemeTiers(
     //
     // A refinement travels along `extends` with the rest of the tier: a
     // `tablet` that extends `mobile` is asking to be like mobile, and the
-    // touch values are part of what mobile is. It would be a strange
-    // inheritance that carried the phone's gutters to a tablet but not its
-    // 16px body floor — the iOS input-zoom bug the floor exists for fires on
-    // an iPad just as readily.
+    // pointer-dependent values are part of what mobile is. It would be strange
+    // inheritance to carry the phone's gutters to a tablet but not the taller
+    // control sizing the same tier declares for a coarse primary pointer.
     for (const condition of TIER_CONDITION_KEYS) {
       let refinement: TierValues | undefined;
       for (const link of chain) {

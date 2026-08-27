@@ -47,11 +47,7 @@ export type {
 } from './defineTheme';
 
 // Width tiers — responsive theming
-export {
-  WIDTH_TIERS,
-  DEFAULT_TIER_MAX_WIDTH,
-  tierWidthQuery,
-} from './themeTiers';
+export {WIDTH_TIERS} from './themeTiers';
 export type {
   WidthTier,
   ThemeTier,
@@ -60,7 +56,6 @@ export type {
   TierTypographyConfig,
   TierConditionKey,
   TierBreakpoints,
-  ThemeGenerativeAxes,
 } from './themeTiers';
 
 export type {
