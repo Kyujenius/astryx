@@ -2,6 +2,6 @@
 '@astryxdesign/core': patch
 ---
 
-[feat] Collapsible animates its content reveal — height interpolates via `interpolate-size` and the content fades in behind it, with durations and easings exposed as theme-tunable custom properties (#5567)
+[feat] Collapsible animates its content reveal via `grid-template-rows` with a parallel opacity fade, matching SideNavItem's battle-tested pattern. Durations and easings are exposed as theme-tunable custom properties (#5567)
 
 @ernestt
