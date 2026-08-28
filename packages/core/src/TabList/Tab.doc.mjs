@@ -10,6 +10,8 @@ export const docs = {
   description:
     'Individual tab item that renders as a button or an anchor link, with selected-state styling and optional icons.',
   usage: {
+    description:
+      'Use Tab inside TabList to switch between related views or navigate among peer destinations while preserving a clear selected state.',
     accessibility: [
       {name: 'Status end content', description: 'A Badge or StatusDot in `endContent` retains its own accessible name, non-color cue, and contrast requirements. Measure it against every Tab background it can occupy, including selected, hover, pressed, and focus-visible states.'},
       {name: 'Hidden label', description: 'When `isLabelHidden` is true, do not expect a status indicator to identify the Tab. The required `label` still names the Tab, while the indicator separately names and communicates its status.'},

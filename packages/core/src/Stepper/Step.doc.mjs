@@ -12,6 +12,8 @@ export const docs = {
   description:
     'Individual step within a Stepper. Renders a progress-bar segment, an indicator, and a label with optional description. Progress (completed/active/not-started) is derived from the parent Stepper\'s activeStep and this step\'s step index.',
   usage: {
+    description:
+      'Use Step inside Stepper to present one stage of a sequence with its label, progress state, optional description, and optional content.',
     accessibility: [
       {name: 'Status semantics', description: 'The visible status glyph is aria-hidden, so the component must continue exposing equivalent localized status text and current-step semantics to assistive technology.'},
       {name: 'Status indicator contrast', description: 'Success, warning, error, current, and completed glyphs are meaningful state indicators and need 3:1 against every surface on which the Stepper is supported. Measure custom indicators independently.'},
