@@ -7,50 +7,23 @@ export const docs = {
   displayName: 'Radio List',
   group: 'Radio',
   category: 'Data Input',
-  keywords: [
-    'radiolist',
-    'radio',
-    'radiogroup',
-    'radiobutton',
-    'optionlist',
-    'singlechoice',
-    'choicelist',
-  ],
+  keywords: ["radiolist","radio","radiogroup","radiobutton","optionlist","singlechoice","choicelist"],
   theming: {
     targets: [
       {className: 'astryx-radio-list', visualProps: ['orientation', 'size']},
-      {
-        className: 'astryx-radio-list-item',
-        visualProps: ['size'],
-        states: ['selected', 'disabled'],
-      },
-      {
-        className: 'astryx-radio-indicator',
-        visualProps: ['size'],
-        states: ['checked', 'disabled'],
-      },
+      {className: 'astryx-radio-list-item', visualProps: ['size'], states: ['selected', 'disabled']},
+      {className: 'astryx-radio-indicator', visualProps: ['size'], states: ['checked', 'disabled']},
       {className: 'astryx-radio-indicator-dot', visualProps: ['size']},
-      {
-        className: 'astryx-radio',
-        visualProps: ['size'],
-        states: ['checked', 'disabled'],
-        deprecatedFor: 'radio-indicator',
-      },
-      {
-        className: 'astryx-radio-dot',
-        visualProps: ['size'],
-        deprecatedFor: 'radio-indicator-dot',
-      },
+      {className: 'astryx-radio', visualProps: ['size'], states: ['checked', 'disabled'], deprecatedFor: 'radio-indicator'},
+      {className: 'astryx-radio-dot', visualProps: ['size'], deprecatedFor: 'radio-indicator-dot'},
     ],
   },
-  description:
-    'Radio group container with field integration for label, description, and status.',
+  description: 'Radio group container with field integration for label, description, and status.',
   props: [
     {
       name: 'label',
       type: 'string',
-      description:
-        'Label text for the radio group (always rendered for accessibility).',
+      description: 'Label text for the radio group (always rendered for accessibility).',
       required: true,
     },
     {
@@ -124,8 +97,7 @@ export const docs = {
     {
       name: 'isOptional',
       type: 'boolean',
-      description:
-        'Whether the field is optional (mutually exclusive with isRequired).',
+      description: 'Whether the field is optional (mutually exclusive with isRequired).',
       default: 'false',
     },
     {
@@ -153,94 +125,28 @@ export const docs = {
     {
       name: 'xstyle',
       type: 'StyleXStyles',
-      description:
-        'StyleX styles for layout customization (margins, positioning, sizing). Must be a stylex.create() value: not an inline style object like style={{}}.',
+      description: 'StyleX styles for layout customization (margins, positioning, sizing). Must be a stylex.create() value: not an inline style object like style={{}}.',
     },
   ],
-  components: [{name: 'RadioListItem'}],
+  components: [
+    {name: 'RadioListItem'},
+  ],
   usage: {
     description:
       'A group of options where only one can be selected at a time. All options are visible at once, making it easy to compare choices. Use it when users need to pick one option from a small set.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Keep the number of options small: typically 2 to 7 choices.',
-      },
-      {
-        guidance: true,
-        description:
-          'Use clear, concise labels that differentiate each option at a glance.',
-      },
-      {
-        guidance: true,
-        description:
-          "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional.",
-      },
-      {
-        guidance: false,
-        description:
-          'Use when multiple selections are needed; use CheckboxList instead.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use for long lists; use Selector for better discoverability.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use horizontal layout with more than 4 options; it wraps awkwardly.',
-      },
-      {
-        guidance: false,
-        description:
-          'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.',
-      },
-    ],
-    accessibility: [
-      {
-        name: 'Group and item names',
-        description:
-          'Provide a group label and a unique visible label for every RadioListItem. Descriptions supplement labels but do not replace them.',
-      },
-      {
-        name: 'Control and state contrast',
-        description:
-          'Each radio boundary and selected mark are meaningful control information and need 3:1 against adjacent colors.',
-      },
-      {
-        name: 'Keyboard behavior',
-        description:
-          'Keep the group in one radio tab stop and preserve arrow-key navigation and selection between enabled items.',
-      },
-      {
-        name: 'Content slots',
-        description:
-          'Meaningful start or end icons and status content need 3:1 and an equivalent accessible meaning; label-redundant visuals may be decorative.',
-      },
-      {
-        name: 'Focus, status, and disabled',
-        description:
-          'Focus needs 3:1 against adjacent colors. Validation needs a text message. Disabled groups or items are contrast-exempt and must not remain selectable.',
-      },
+      { guidance: true, description: 'Keep the number of options small: typically 2 to 7 choices.' },
+      { guidance: true, description: 'Use clear, concise labels that differentiate each option at a glance.' },
+      { guidance: true, description: "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional." },
+      { guidance: false, description: 'Use when multiple selections are needed; use CheckboxList instead.' },
+      { guidance: false, description: 'Use for long lists; use Selector for better discoverability.' },
+      { guidance: false, description: 'Use horizontal layout with more than 4 options; it wraps awkwardly.' },
+      { guidance: false, description: 'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.' },
     ],
     anatomy: [
-      {
-        name: 'Header',
-        required: false,
-        description: 'Optional heading above the radio list.',
-      },
-      {
-        name: 'Children',
-        required: true,
-        description: 'The radio list items rendered as selectable options.',
-      },
-      {
-        name: 'Label/Value',
-        required: true,
-        description: 'The text label and associated value for each radio item.',
-      },
+      {name: 'Header', required: false, description: 'Optional heading above the radio list.'},
+      {name: 'Children', required: true, description: 'The radio list items rendered as selectable options.'},
+      {name: 'Label/Value', required: true, description: 'The text label and associated value for each radio item.'},
     ],
   },
 };
@@ -251,58 +157,18 @@ export const docsZh = {
     description:
       'A group of options where only one can be selected at a time. All options are visible at once, making it easy to compare choices. Use it when users need to pick one option from a small set.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Keep the number of options small: typically 2 to 7 choices.',
-      },
-      {
-        guidance: true,
-        description:
-          'Use clear, concise labels that differentiate each option at a glance.',
-      },
-      {
-        guidance: true,
-        description:
-          "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional.",
-      },
-      {
-        guidance: false,
-        description:
-          'Use when multiple selections are needed; use CheckboxList instead.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use for long lists; use Selector for better discoverability.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use horizontal layout with more than 4 options; it wraps awkwardly.',
-      },
-      {
-        guidance: false,
-        description:
-          'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.',
-      },
+      { guidance: true, description: 'Keep the number of options small: typically 2 to 7 choices.' },
+      { guidance: true, description: 'Use clear, concise labels that differentiate each option at a glance.' },
+      { guidance: true, description: "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional." },
+      { guidance: false, description: 'Use when multiple selections are needed; use CheckboxList instead.' },
+      { guidance: false, description: 'Use for long lists; use Selector for better discoverability.' },
+      { guidance: false, description: 'Use horizontal layout with more than 4 options; it wraps awkwardly.' },
+      { guidance: false, description: 'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.' },
     ],
     anatomy: [
-      {
-        name: 'Header',
-        required: false,
-        description: 'Optional heading above the radio list.',
-      },
-      {
-        name: 'Children',
-        required: true,
-        description: 'The radio list items rendered as selectable options.',
-      },
-      {
-        name: 'Label/Value',
-        required: true,
-        description: 'The text label and associated value for each radio item.',
-      },
+      {name: 'Header', required: false, description: 'Optional heading above the radio list.'},
+      {name: 'Children', required: true, description: 'The radio list items rendered as selectable options.'},
+      {name: 'Label/Value', required: true, description: 'The text label and associated value for each radio item.'},
     ],
   },
 };
@@ -315,58 +181,18 @@ export const docsDense = {
     description:
       'A group of options where only one can be selected at a time. All options are visible at once, making it easy to compare choices. Use it when users need to pick one option from a small set.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Keep the number of options small: typically 2 to 7 choices.',
-      },
-      {
-        guidance: true,
-        description:
-          'Use clear, concise labels that differentiate each option at a glance.',
-      },
-      {
-        guidance: true,
-        description:
-          "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional.",
-      },
-      {
-        guidance: false,
-        description:
-          'Use when multiple selections are needed; use CheckboxList instead.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use for long lists; use Selector for better discoverability.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use horizontal layout with more than 4 options; it wraps awkwardly.',
-      },
-      {
-        guidance: false,
-        description:
-          'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.',
-      },
+      { guidance: true, description: 'Keep the number of options small: typically 2 to 7 choices.' },
+      { guidance: true, description: 'Use clear, concise labels that differentiate each option at a glance.' },
+      { guidance: true, description: "Pre-select a default option when there's a sensible default; don't leave the group empty unless the choice is optional." },
+      { guidance: false, description: 'Use when multiple selections are needed; use CheckboxList instead.' },
+      { guidance: false, description: 'Use for long lists; use Selector for better discoverability.' },
+      { guidance: false, description: 'Use horizontal layout with more than 4 options; it wraps awkwardly.' },
+      { guidance: false, description: 'Wrap a disabled RadioList in Tooltip to explain why it is disabled; disabled controls swallow the hover events the wrapper needs. Use the disabledMessage prop instead.' },
     ],
     anatomy: [
-      {
-        name: 'Header',
-        required: false,
-        description: 'Optional heading above the radio list.',
-      },
-      {
-        name: 'Children',
-        required: true,
-        description: 'The radio list items rendered as selectable options.',
-      },
-      {
-        name: 'Label/Value',
-        required: true,
-        description: 'The text label and associated value for each radio item.',
-      },
+      {name: 'Header', required: false, description: 'Optional heading above the radio list.'},
+      {name: 'Children', required: true, description: 'The radio list items rendered as selectable options.'},
+      {name: 'Label/Value', required: true, description: 'The text label and associated value for each radio item.'},
     ],
   },
 };

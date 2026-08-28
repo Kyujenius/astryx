@@ -6,17 +6,7 @@ export const docs = {
   name: 'StatusDot',
   displayName: 'Status Dot',
   category: 'Feedback & Status',
-  keywords: [
-    'statusdot',
-    'dot',
-    'indicator',
-    'status',
-    'signal',
-    'presence',
-    'availability',
-    'online',
-    'pip',
-  ],
+  keywords: ["statusdot","dot","indicator","status","signal","presence","availability","online","pip"],
   props: [
     {
       name: 'variant',
@@ -40,13 +30,14 @@ export const docs = {
     {
       name: 'tooltip',
       type: 'string',
-      description: 'Tooltip text shown on hover to explain the status meaning.',
+      description:
+        'Tooltip text shown on hover to explain the status meaning.',
     },
     {
       name: 'icon',
       type: 'ReactNode',
       description:
-        "Optional icon rendered centered inside the dot, painted in currentColor (the variant's ink). Gives the status a non-color mark, so use a different icon per status. Booleans and empty strings are ignored, so `cond && <Icon />` is safe. Same contract as AvatarStatusDot.",
+        'Optional icon rendered centered inside the dot, painted in currentColor (the variant\'s ink). Gives the status a non-color mark, so use a different icon per status. Booleans and empty strings are ignored, so `cond && <Icon />` is safe. Same contract as AvatarStatusDot.',
     },
     {
       name: 'xstyle',
@@ -60,74 +51,20 @@ export const docs = {
       {className: 'astryx-status-dot', visualProps: ['variant']},
       // Still emitted beside the names above, so themes written against
       // them keep working. Drop in the next major.
-      {
-        className: 'astryx-statusdot',
-        visualProps: ['variant'],
-        deprecatedFor: 'status-dot',
-      },
+      {className: 'astryx-statusdot', visualProps: ['variant'], deprecatedFor: 'status-dot'},
     ],
   },
   usage: {
     description:
       'A small colored dot that communicates status like online/offline presence or severity levels. Supports five semantic variants and an optional pulse animation. Always pair with a visible text label, as color alone should not carry meaning.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.',
-      },
-      {
-        guidance: true,
-        description:
-          'Always pair with a visible text label so status is not conveyed by color alone.',
-      },
-      {
-        guidance: true,
-        description:
-          'Provide a descriptive `label` prop for screen reader accessibility.',
-      },
-      {
-        guidance: true,
-        description:
-          'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.',
-      },
-      {
-        guidance: true,
-        description:
-          "If you can't add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).",
-      },
-      {
-        guidance: false,
-        description:
-          'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.',
-      },
-    ],
-    accessibility: [
-      {
-        name: 'Accessible name',
-        description:
-          'Provide `label` even when visible text appears nearby so assistive technology can identify the status dot.',
-      },
-      {
-        name: 'Color meaning',
-        description:
-          'Never rely on the dot color alone. Pair it with visible status text, a distinct meaningful icon, or an equivalent cue elsewhere.',
-      },
-      {
-        name: 'Visual contrast',
-        description:
-          'When the dot is a meaningful visible status indicator, it needs 3:1 contrast against its adjacent surface. A redundant dot may be decorative.',
-      },
-      {
-        name: 'Motion',
-        description:
-          "Pulse only for meaningful changing states and preserve the component's reduced-motion behavior.",
-      },
+      { guidance: true, description: 'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.' },
+      { guidance: true, description: 'Always pair with a visible text label so status is not conveyed by color alone.' },
+      { guidance: true, description: 'Provide a descriptive `label` prop for screen reader accessibility.' },
+      { guidance: true, description: 'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.' },
+      { guidance: true, description: 'If you can\'t add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).' },
+      { guidance: false, description: 'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.' },
+      { guidance: false, description: 'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.' },
     ],
   },
 };
@@ -152,7 +89,8 @@ export const docsZh = {
     {
       name: 'isPulsing',
       type: 'boolean',
-      description: '启用脉冲动画；尊重 prefers-reduced-motion: reduce 设置。',
+      description:
+        '启用脉冲动画；尊重 prefers-reduced-motion: reduce 设置。',
       default: 'false',
     },
     {
@@ -173,99 +111,38 @@ export const docsZh = {
       {className: 'astryx-status-dot', visualProps: ['variant']},
       // Still emitted beside the names above, so themes written against
       // them keep working. Drop in the next major.
-      {
-        className: 'astryx-statusdot',
-        visualProps: ['variant'],
-        deprecatedFor: 'status-dot',
-      },
+      {className: 'astryx-statusdot', visualProps: ['variant'], deprecatedFor: 'status-dot'},
     ],
   },
   usage: {
     description:
       'A small colored dot that communicates status like online/offline presence or severity levels. Supports five semantic variants and an optional pulse animation. Always pair with a visible text label, as color alone should not carry meaning.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.',
-      },
-      {
-        guidance: true,
-        description:
-          'Always pair with a visible text label so status is not conveyed by color alone.',
-      },
-      {
-        guidance: true,
-        description:
-          'Provide a descriptive `label` prop for screen reader accessibility.',
-      },
-      {
-        guidance: true,
-        description:
-          'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.',
-      },
-      {
-        guidance: true,
-        description:
-          "If you can't add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).",
-      },
-      {
-        guidance: false,
-        description:
-          'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.',
-      },
+      { guidance: true, description: 'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.' },
+      { guidance: true, description: 'Always pair with a visible text label so status is not conveyed by color alone.' },
+      { guidance: true, description: 'Provide a descriptive `label` prop for screen reader accessibility.' },
+      { guidance: true, description: 'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.' },
+      { guidance: true, description: 'If you can\'t add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).' },
+      { guidance: false, description: 'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.' },
+      { guidance: false, description: 'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.' },
     ],
   },
 };
 
 /** @type {import('@astryxdesign/cli/authoring').ComponentTranslationDoc} */
 export const docsDense = {
-  description:
-    'Small colored dot indicator for status display (online/offline, severity, etc).',
+  description: 'Small colored dot indicator for status display (online/offline, severity, etc).',
   usage: {
     description:
       'A small colored dot that communicates status like online/offline presence or severity levels. Supports five semantic variants and an optional pulse animation. Always pair with a visible text label, as color alone should not carry meaning.',
     bestPractices: [
-      {
-        guidance: true,
-        description:
-          'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.',
-      },
-      {
-        guidance: true,
-        description:
-          'Always pair with a visible text label so status is not conveyed by color alone.',
-      },
-      {
-        guidance: true,
-        description:
-          'Provide a descriptive `label` prop for screen reader accessibility.',
-      },
-      {
-        guidance: true,
-        description:
-          'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.',
-      },
-      {
-        guidance: true,
-        description:
-          "If you can't add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).",
-      },
-      {
-        guidance: false,
-        description:
-          'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.',
-      },
-      {
-        guidance: false,
-        description:
-          'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.',
-      },
+      { guidance: true, description: 'Use StatusDot as a binary present/absent signal; avoid encoding many distinct states in a single dot, since color and size alone cannot reliably distinguish them.' },
+      { guidance: true, description: 'Always pair with a visible text label so status is not conveyed by color alone.' },
+      { guidance: true, description: 'Provide a descriptive `label` prop for screen reader accessibility.' },
+      { guidance: true, description: 'Pair the dot with an icon that carries the status as a distinct shape when it must stand on its own without adjacent text, so meaning survives without color.' },
+      { guidance: true, description: 'If you can\'t add a label or an icon, make sure the status is conveyed elsewhere accessibly (e.g. adjacent text, a table column, or a live region).' },
+      { guidance: false, description: 'Rely on color alone to communicate status; StatusDot is not fully accessible in isolation, so the builder must make the status distinguishable in context via a label, an icon, or an accessible alternative.' },
+      { guidance: false, description: 'Use the pulse animation for purely decorative purposes; reserve it for states that require immediate attention.' },
     ],
   },
   propDescriptions: {
