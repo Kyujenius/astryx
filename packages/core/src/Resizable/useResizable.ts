@@ -311,46 +311,47 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
   );
 
   // The band can move under a size the viewer already chose. Correct only a
-  // size that became illegal; widening the band again must not restore it.
-  // Render-time correction prevents an out-of-band size from being committed.
-  const [lastConstraints, setLastConstraints] = useState(() => ({
+  // size that became illegal; widening the band again must not restore or
+  // re-snap it. Render-time correction prevents an out-of-band commit.
+  const lastConstraintsRef = useRef({
     min: minSizePx,
     max: maxSizePx,
     isCollapsed,
-    clampedTo: null as number | null,
-  }));
+  });
+  const pendingClampRef = useRef<number | null>(null);
+  const lastConstraints = lastConstraintsRef.current;
   if (
     lastConstraints.min !== minSizePx ||
     lastConstraints.max !== maxSizePx ||
     lastConstraints.isCollapsed !== isCollapsed
   ) {
-    const legal = isCollapsed
-      ? size
-      : clampSize(size, minSizePx, maxSizePx, snaps);
-    const hasMoved = legal !== size;
-    setLastConstraints({
+    lastConstraintsRef.current = {
       min: minSizePx,
       max: maxSizePx,
       isCollapsed,
-      clampedTo: hasMoved ? legal : null,
-    });
-    if (hasMoved) {
+    };
+    const isOutsideBand = size < minSizePx || size > maxSizePx;
+    if (!isCollapsed && isOutsideBand) {
+      const legal = clampSize(size, minSizePx, maxSizePx, snaps);
+      pendingClampRef.current = legal;
       setSize(legal);
+    } else {
+      pendingClampRef.current = null;
     }
   }
 
   // Notify after commit so consumers mirroring the size stay in sync without
   // running their callback during render.
-  const notifiedConstraintsRef = useRef(lastConstraints);
   useEffect(() => {
-    if (notifiedConstraintsRef.current === lastConstraints) {
+    const clampedTo = pendingClampRef.current;
+    if (clampedTo == null) {
       return;
     }
-    notifiedConstraintsRef.current = lastConstraints;
-    if (lastConstraints.clampedTo != null) {
-      onSizeChange?.(lastConstraints.clampedTo);
+    pendingClampRef.current = null;
+    if (clampedTo === size) {
+      onSizeChange?.(clampedTo);
     }
-  }, [lastConstraints, onSizeChange]);
+  }, [size, onSizeChange]);
 
   useEffect(() => {
     if (autoSaveId) {
