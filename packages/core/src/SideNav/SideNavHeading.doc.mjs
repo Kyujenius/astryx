@@ -8,6 +8,12 @@ export const docs = {
   displayName: 'Side Nav Heading',
   isHiddenFromOverview: true,
   description: 'Product/suite/account heading with smart interaction boundary logic for links and a menu popover.',
+  usage: {
+    accessibility: [
+      {name: 'Status end content', description: 'Status indicators in `headerEndContent` keep their own accessible name, visible non-color cue, and contrast requirements against the heading surface in every supported interaction state.'},
+      {name: 'Collapsed navigation', description: '`headerEndContent` is hidden when the SideNav collapses, so it cannot be the only place that communicates a status users must still know in the collapsed presentation.'},
+    ],
+  },
   props: [
     {
       name: 'heading',

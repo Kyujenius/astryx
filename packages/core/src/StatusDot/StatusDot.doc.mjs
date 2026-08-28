@@ -69,7 +69,7 @@ export const docs = {
     accessibility: [
       {name: 'Accessible name', description: 'Provide `label` even when visible text appears nearby so assistive technology can identify the status dot.'},
       {name: 'Color meaning', description: 'Never rely on the dot color alone. Pair it with visible status text, a distinct meaningful icon, or an equivalent cue elsewhere.'},
-      {name: 'Visual contrast', description: 'When the dot is a meaningful visible status indicator, it needs 3:1 contrast against its adjacent surface. A redundant dot may be decorative.'},
+      {name: 'Visual contrast', description: 'With adjacent visible status text, the dot is redundant and may be decorative. With a distinct icon, measure the mark against the dot plate at 3:1. A plain standalone dot is only sufficient for a binary present/absent cue and then its plate needs 3:1 against every adjacent surface.'},
       {name: 'Motion', description: 'Pulse only for meaningful changing states and preserve the component\'s reduced-motion behavior.'},
     ],
   },

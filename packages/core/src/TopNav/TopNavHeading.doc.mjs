@@ -8,6 +8,12 @@ export const docs = {
   displayName: 'Top Nav Heading',
   isHiddenFromOverview: true,
   description: 'Product/suite/account heading for the TopNav heading slot. Supports smart interaction boundary logic: logo, heading text, superheading/subheading with independent links, and an optional menu popover with automatic chevron indicator.',
+  usage: {
+    accessibility: [
+      {name: 'Status end content', description: 'Status indicators in `headerEndContent` keep their own accessible name, visible non-color cue, and contrast requirements. Measure them against every heading background and interaction state in which they render.'},
+      {name: 'Interaction boundaries', description: 'A status indicator supplements the heading and must not become the only cue that identifies a link or menu trigger. The heading links, menu trigger, and focus indicators retain their own semantics and contrast.'},
+    ],
+  },
   props: [
     {
       name: 'logo',

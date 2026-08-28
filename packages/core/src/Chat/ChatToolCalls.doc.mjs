@@ -22,6 +22,12 @@ export const docs = {
       {guidance: false, description: "Don't display tool calls outside a chat message context; they are designed to sit inside an assistant message, not as standalone UI."},
       {guidance: false, description: "Don't use custom wrappers around individual calls; the component handles single vs. grouped layout automatically based on the array length."},
     ],
+    accessibility: [
+      {name: 'Status semantics', description: 'Pending, running, complete, and error must be available as text or an accessible name, not only through the status icon. Include `errorMessage` so failed calls expose useful detail beyond the red treatment.'},
+      {name: 'Status indicator contrast', description: 'Complete and error icons are meaningful shapes and need 3:1 against their composited circular plate. Pending and running use a meaningful Spinner arc that needs 3:1 against the row surface; its track may be decorative.'},
+      {name: 'Color meaning', description: 'The distinct clock/spinner, check, and error shapes prevent color-only meaning. Do not replace them with one repeated icon whose only difference is color.'},
+      {name: 'Expanded content', description: 'Tool labels, targets, durations, error text, badges, and focus indicators retain their own contrast requirements in both collapsed and expanded presentations.'},
+    ],
     anatomy: [
       {name: 'Status icon', required: true, description: 'A colored circle with a check, cross, or spinner indicating whether the call is pending, running, complete, or errored.'},
       {name: 'Tool name', required: true, description: 'The function or tool name displayed in monospace: bash, edit, read, web_search, etc.'},
