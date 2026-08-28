@@ -98,17 +98,19 @@ const styles = stylex.create({
   pressable: {
     transform: {
       default: 'scale(1)',
-      ':active': 'scale(0.98)',
+      ':active:where(:not(:disabled,[aria-disabled="true"]))': 'scale(0.98)',
     },
   },
-  disabled: {
+  inactive: {
     cursor: 'default',
-    opacity: 0.5,
     backgroundImage: 'none',
     transform: {
       default: 'none',
       ':active': 'none',
     },
+  },
+  disabled: {
+    opacity: 0.5,
   },
   ariaDisabled: {
     // The variants' hover treatment already steps aside for
@@ -205,7 +207,7 @@ const variants = stylex.create({
       ':hover:where(:not(:disabled,[aria-disabled="true"]))': {
         '@media (hover: hover)': `linear-gradient(${colorVars['--color-overlay-hover']}, ${colorVars['--color-overlay-hover']})`,
       },
-      ':active': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
+      ':active:where(:not(:disabled,[aria-disabled="true"]))': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
     },
   },
   secondary: {
@@ -216,7 +218,7 @@ const variants = stylex.create({
       ':hover:where(:not(:disabled,[aria-disabled="true"]))': {
         '@media (hover: hover)': `linear-gradient(${colorVars['--color-overlay-hover']}, ${colorVars['--color-overlay-hover']})`,
       },
-      ':active': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
+      ':active:where(:not(:disabled,[aria-disabled="true"]))': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
     },
   },
   ghost: {
@@ -227,7 +229,7 @@ const variants = stylex.create({
       ':hover:where(:not(:disabled,[aria-disabled="true"]))': {
         '@media (hover: hover)': `linear-gradient(${colorVars['--color-overlay-hover']}, ${colorVars['--color-overlay-hover']})`,
       },
-      ':active': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
+      ':active:where(:not(:disabled,[aria-disabled="true"]))': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
     },
   },
   destructive: {
@@ -242,7 +244,7 @@ const variants = stylex.create({
       ':hover:where(:not(:disabled,[aria-disabled="true"]))': {
         '@media (hover: hover)': `linear-gradient(${colorVars['--color-overlay-hover']}, ${colorVars['--color-overlay-hover']})`,
       },
-      ':active': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
+      ':active:where(:not(:disabled,[aria-disabled="true"]))': `linear-gradient(${colorVars['--color-overlay-pressed']}, ${colorVars['--color-overlay-pressed']})`,
     },
   },
 });
@@ -297,7 +299,8 @@ export interface ButtonProps extends BaseProps<HTMLButtonElement> {
    */
   isDisabled?: boolean;
   /**
-   * Whether the button is in a loading state.
+   * Whether the button is in a loading state. Loading prevents interaction
+   * without dimming the spinner; explicit disabled states remain dimmed.
    * @default false
    */
   isLoading?: boolean;
@@ -600,6 +603,10 @@ export function Button({
   // not disabled, so clicks keep landing and can interrupt the in-flight action.
   const buttonDisabled =
     isDisabled || groupDisabled || (isLoadingState && !isInterruptible);
+  // A loading button remains non-interactive, but its spinner communicates an
+  // active state and must retain contrast. Only explicitly disabled controls
+  // receive the visually dimmed treatment.
+  const visuallyDisabled = isDisabled || groupDisabled;
   // isIconOnly prop is the source of truth for icon-only rendering.
   // When false (default), label is always rendered as visible text.
 
@@ -665,7 +672,8 @@ export function Button({
     styles.base,
     sizeStyles[size],
     isIconOnly && styles.iconOnly,
-    buttonDisabled && styles.disabled,
+    buttonDisabled && styles.inactive,
+    visuallyDisabled && styles.disabled,
     useAriaDisabled && styles.ariaDisabled,
     renderAsLink && styles.link,
     !buttonGroup && styles.pressable,
