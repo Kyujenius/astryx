@@ -23,6 +23,12 @@ export const docs = {
       {guidance: false, description: 'Nest cards inside other cards; flatten the hierarchy or use spacing and dividers instead.'},
       {guidance: false, description: 'Use color variants for status; use Banner or Badge for that. Color cards are for categorization.'},
     ],
+    accessibility: [
+      {name: 'Container surface', description: 'A non-interactive Card background, border, and elevation are decorative when spacing, headings, and content already communicate the grouping. They do not inherently need 3:1 contrast against the page.'},
+      {name: 'Content contrast', description: 'Text must meet its applicable text threshold against the Card\'s rendered background. Meaningful icons and graphics need 3:1; label-redundant visuals may be decorative.'},
+      {name: 'Color variants', description: 'Do not use the Card color as the only status or category cue. Keep a visible label or other identifying content; if removing the color changes understanding, treat it as meaningful and test it at 3:1 against adjacent colors.'},
+      {name: 'Nested controls', description: 'Buttons, links, inputs, and other interactive children keep their own contrast, focus, naming, and state requirements. A decorative Card boundary does not exempt nested controls.'},
+    ],
     anatomy: [
       {name: 'Container', required: true, description: 'The outer box with border, background, border-radius, and padding.'},
       {name: 'Content', required: true, description: 'Any children rendered inside the card. Often a stack of heading, text, and actions.'},

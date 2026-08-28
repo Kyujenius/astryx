@@ -15,6 +15,12 @@ export const docs = {
       {guidance: true, description: 'When focused, toggle selection with Space or Enter.'},
       {guidance: false, description: 'Use for navigation; use ClickableCard for that.'},
     ],
+    accessibility: [
+      {name: 'Accessible selection', description: 'Provide `label`; the selected state must remain programmatically exposed and keyboard operable. Do not rely on Card color alone to communicate selection.'},
+      {name: 'Selection indicator', description: 'The visible selection ring or equivalent state indicator is meaningful and needs 3:1 against each adjacent color. Themes adding a filled variant must choose a ring that contrasts with both the Card and its surroundings.'},
+      {name: 'Focus and content', description: 'Measure focus separately from selection at 3:1 against adjacent colors. Text uses its applicable text threshold, and meaningful icons or graphics need 3:1 against the rendered Card background.'},
+      {name: 'Unselected and disabled', description: 'An unselected non-semantic Card surface may remain decorative when content identifies the option. A genuinely disabled SelectableCard is contrast-exempt, but selected and disabled must remain distinguishable by more than color alone.'},
+    ],
     anatomy: [
       {name: 'Container', required: true, description: 'Interactive div with accent border on selection.'},
       {name: 'Content', required: true, description: 'Children rendered inside the card.'},
