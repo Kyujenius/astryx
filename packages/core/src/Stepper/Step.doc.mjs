@@ -22,7 +22,8 @@ export const docs = {
     {
       name: 'label',
       type: 'string',
-      description: 'Step label text.',
+      description:
+        'Step label text. Kept to a single line and ellipsized when the step is narrower than the label, so a row of horizontal steps stays the same height and the track under them stays straight. The full string is still read out as part of the step, so a truncated label costs nothing in the accessible name — but short labels survive narrow layouts better.',
       required: true,
     },
     {

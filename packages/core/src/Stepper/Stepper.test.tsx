@@ -1021,4 +1021,170 @@ describe('Stepper', () => {
       expect(isInstant(getByTestId('b'))).toBe(true);
     });
   });
+
+  describe('Stepper collapse (narrow containers)', () => {
+    const FRAME = '.astryx-stepper-frame';
+    const SUMMARY = '.astryx-stepper-summary';
+
+    /**
+     * jsdom has no layout, so the width the stepper measures itself at is
+     * described by hand. It has to be in place before the first render: the
+     * shared resize observer takes its opening measurement synchronously as it
+     * subscribes, during commit, and that is the reading the collapse turns on.
+     */
+    function atWidth(width: number, ui: React.ReactElement) {
+      const original = Object.getOwnPropertyDescriptor(
+        Element.prototype,
+        'clientWidth',
+      );
+      Object.defineProperty(Element.prototype, 'clientWidth', {
+        configurable: true,
+        get(this: Element) {
+          return this.classList.contains('astryx-stepper-frame') ? width : 0;
+        },
+      });
+      try {
+        return render(ui);
+      } finally {
+        if (original) {
+          Object.defineProperty(Element.prototype, 'clientWidth', original);
+        }
+      }
+    }
+
+    const fourSteps = (
+      props: Partial<React.ComponentProps<typeof Stepper>>,
+    ) => (
+      <Stepper activeStep={1} {...props}>
+        <Step step={0} label="Cart" />
+        <Step step={1} label="Shipping" description="Where it goes" />
+        <Step step={2} label="Delivery" />
+        <Step step={3} label="Payment" />
+      </Stepper>
+    );
+
+    it('keeps every label while each step has room for one', () => {
+      // Four steps across 600px is 150 each, comfortably over the threshold.
+      atWidth(600, fourSteps({}));
+      for (const name of ['Cart', 'Shipping', 'Delivery', 'Payment']) {
+        expect(screen.getByText(name)).toBeInTheDocument();
+      }
+      expect(document.querySelector(FRAME)).toBeInTheDocument();
+    });
+
+    it('drops the labels and names the current step once they no longer fit', () => {
+      // 320px over four steps is 80 each, under the 112px a label needs.
+      atWidth(320, fourSteps({}));
+      const summary = document.querySelector<HTMLElement>(SUMMARY);
+      expect(summary).not.toBeNull();
+
+      // Only the current step is named where it can be seen, and only it keeps
+      // a description — the rest have no label left to hang one under.
+      expect(within(summary!).getByText('Shipping')).toBeInTheDocument();
+      expect(within(summary!).getByText('Where it goes')).toBeInTheDocument();
+
+      const list = screen.getByRole('list');
+      expect(within(list).queryByText('Where it goes')).toBeNull();
+      expect(screen.getAllByRole('listitem')).toHaveLength(4);
+    });
+
+    it('collapses later the more steps there are', () => {
+      // 320px is ample for two steps at 160 each, and far too little for four.
+      atWidth(
+        320,
+        <Stepper activeStep={0}>
+          <Step step={0} label="Details" />
+          <Step step={1} label="Review" />
+        </Stepper>,
+      );
+      expect(screen.getByRole('list')).toBeInTheDocument();
+      expect(document.querySelector('.astryx-stepper-summary')).toBeNull();
+    });
+
+    it('leaves a vertical stepper alone at any width', () => {
+      // A column gives every label a row of its own, so there is nothing to
+      // run out of and no frame to measure.
+      atWidth(120, fourSteps({orientation: 'vertical'}));
+      for (const name of ['Cart', 'Shipping', 'Delivery', 'Payment']) {
+        expect(screen.getByText(name)).toBeInTheDocument();
+      }
+      expect(document.querySelector(FRAME)).toBeNull();
+    });
+
+    it('keeps the sequence whole for a screen reader after collapsing', () => {
+      atWidth(320, fourSteps({}));
+      const items = screen.getAllByRole('listitem');
+      // Every step still names itself and the current one is still marked, so
+      // the list reads as a complete sequence with the labels off the screen.
+      // The status word rides along with the name, as it does when visible —
+      // "Cart" is behind the current step, so it reads as completed.
+      expect(items.map(li => li.textContent)).toEqual([
+        'Cartcompleted',
+        'Shipping',
+        'Delivery',
+        'Payment',
+      ]);
+      expect(items[1]).toHaveAttribute('aria-current', 'step');
+    });
+
+    it('offers no step controls on a stepper that cannot be navigated', () => {
+      // A linear flow is driven by the form's own Back and Continue; a second
+      // pair pointed at a step it will not honour is worse than none.
+      atWidth(320, fourSteps({}));
+      expect(screen.queryByRole('button', {name: 'Next step'})).toBeNull();
+      expect(screen.queryByRole('button', {name: 'Previous step'})).toBeNull();
+    });
+
+    it('moves a step at a time through the controls when one is given', async () => {
+      const user = userEvent.setup();
+      const onStepClick = vi.fn();
+      atWidth(320, fourSteps({onStepClick}));
+
+      await user.click(screen.getByRole('button', {name: 'Next step'}));
+      expect(onStepClick).toHaveBeenCalledWith(2);
+
+      await user.click(screen.getByRole('button', {name: 'Previous step'}));
+      expect(onStepClick).toHaveBeenCalledWith(0);
+    });
+
+    it('stops the controls at both ends of the sequence', () => {
+      const onStepClick = vi.fn();
+      // Disabled the Astryx way: aria-disabled, so the control keeps its place
+      // in the tab order and can still explain itself at the end of a flow.
+      const disabled = (name: string) =>
+        screen.getByRole('button', {name}).getAttribute('aria-disabled');
+
+      const {unmount} = atWidth(320, fourSteps({onStepClick, activeStep: 0}));
+      expect(disabled('Previous step')).toBe('true');
+      expect(disabled('Next step')).not.toBe('true');
+      unmount();
+
+      atWidth(320, fourSteps({onStepClick, activeStep: 3}));
+      expect(disabled('Previous step')).not.toBe('true');
+      expect(disabled('Next step')).toBe('true');
+    });
+
+    it('takes the collapsed steps out of the tab order', () => {
+      // The label goes and the click target goes with it: a 4px bar is not
+      // something to press, and a focus stop with nothing visible to show for
+      // it is worse than no focus stop at all.
+      atWidth(320, fourSteps({onStepClick: vi.fn()}));
+      const stepButtons = screen
+        .getAllByRole('button')
+        .filter(b => (b.getAttribute('aria-label') ?? '').startsWith('Go to'));
+      expect(stepButtons).toHaveLength(0);
+    });
+
+    it('keeps on-track nodes pressable, dropping only their labels', () => {
+      // On-track puts the indicator on the line itself, so collapsing the
+      // whole target would take the track with it. The nodes stay.
+      atWidth(
+        320,
+        fourSteps({indicatorPosition: 'on-track', onStepClick: vi.fn()}),
+      );
+      expect(
+        screen.getByRole('button', {name: /^Go to step 3: Delivery/}),
+      ).toBeInTheDocument();
+    });
+  });
 });

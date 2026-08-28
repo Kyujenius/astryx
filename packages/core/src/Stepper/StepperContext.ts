@@ -54,6 +54,46 @@ export interface StepperContextValue {
    * index. Returns a cleanup function to call on unmount.
    */
   registerStep: (index: number) => () => void;
+  /**
+   * How many steps have registered. Needed to know how much width each one is
+   * getting, and to tell the last step from the rest without counting
+   * children — which would couple the stepper to how they were grouped.
+   *
+   * Internal: not part of the public API.
+   */
+  stepCount: number;
+  /**
+   * True once the stepper is too narrow to give every step a legible label, at
+   * which point the steps drop theirs and the stepper names the current one
+   * below the track instead. Always false when vertical, which gives every
+   * label a row of its own and never runs out of room.
+   *
+   * Decided by the parent because it depends on how much width there is and
+   * how many steps are dividing it, and neither is knowable from inside a
+   * single step.
+   *
+   * Internal: not part of the public API.
+   */
+  isCompact: boolean;
+  /**
+   * Where the current step draws itself once the labels have gone. The
+   * stepper owns the row — it is outside the `<ol>`, so that the list keeps
+   * exactly the children it was given and the on-track connectors can go on
+   * reading their own `:first-child`/`:last-child` position — and the active
+   * step fills it through a portal.
+   *
+   * A portal rather than the step handing its label up through this context:
+   * an indicator can be any node, so a registered copy would either go stale
+   * or change identity on every render and re-register forever. Rendered in
+   * place, it is the same node the step already built, kept live by the same
+   * render that built it.
+   *
+   * Null until the row exists, which is never on a stepper wide enough not to
+   * need one.
+   *
+   * Internal: not part of the public API.
+   */
+  summarySlot: HTMLElement | null;
 }
 
 export const StepperContext = createContext<StepperContextValue | null>(null);

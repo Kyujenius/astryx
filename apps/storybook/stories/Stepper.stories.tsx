@@ -1114,6 +1114,90 @@ export const StepAdvance: Story = {
 };
 
 // ============================================================
+// NARROW CONTAINERS — the stepper collapses itself
+// ============================================================
+
+export const NarrowCollapse: Story = {
+  name: 'Narrow — Collapsed Track',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A horizontal stepper measures its own width and collapses once a step has less than ~112px to work with, so the breakpoint follows the step count rather than the viewport. Labels give way to a bare track, and the current step is named underneath. The two indicator positions collapse differently on purpose: `separated` drops its click targets along with the labels, leaving a 4px bar too small to aim at, so the paired controls become the only way through — while `on-track` keeps its indicators as a row of nodes on the rail, still tappable. Controls appear only when `onStepClick` is set; a stepper driven solely by a form’s own Back and Continue does not get a second, competing pair.',
+      },
+    },
+  },
+  render: () => {
+    const [a, setA] = useState(1);
+    const [b, setB] = useState(1);
+    const [c, setC] = useState(1);
+    const steps = ['Cart', 'Shipping', 'Delivery', 'Payment'];
+    return (
+      <div style={{display: 'grid', gap: 40}}>
+        <div style={{maxWidth: 560}}>
+          <Text type="label">560px — four steps still fit</Text>
+          <Stepper activeStep={a} onStepClick={setA} label="Checkout">
+            {steps.map((s, i) => (
+              <Step key={s} step={i} label={s} />
+            ))}
+          </Stepper>
+        </div>
+        <div style={{maxWidth: 320}}>
+          <Text type="label">320px — separated, navigable</Text>
+          <Stepper activeStep={a} onStepClick={setA} label="Checkout">
+            {steps.map((s, i) => (
+              <Step key={s} step={i} label={s} />
+            ))}
+          </Stepper>
+        </div>
+        <div style={{maxWidth: 320}}>
+          <Text type="label">320px — on-track keeps its nodes pressable</Text>
+          <Stepper
+            activeStep={b}
+            onStepClick={setB}
+            indicatorPosition="on-track"
+            label="Checkout">
+            {steps.map((s, i) => (
+              <Step key={s} step={i} label={s} indicator="number" />
+            ))}
+          </Stepper>
+        </div>
+        <div style={{maxWidth: 320}}>
+          <Text type="label">320px — no onStepClick, so no controls</Text>
+          <Stepper activeStep={c} label="Checkout">
+            {steps.map((s, i) => (
+              <Step key={s} step={i} label={s} />
+            ))}
+          </Stepper>
+          <div style={{marginTop: 12, display: 'flex', gap: 8}}>
+            <Button
+              label="Back"
+              variant="secondary"
+              onClick={() => setC(n => Math.max(0, n - 1))}
+            />
+            <Button
+              label="Continue"
+              onClick={() => setC(n => Math.min(3, n + 1))}
+            />
+          </div>
+        </div>
+        <div style={{maxWidth: 320}}>
+          <Text type="label">
+            320px — a description rides along with the current step
+          </Text>
+          <Stepper activeStep={a} onStepClick={setA} label="Checkout">
+            <Step step={0} label="Cart" description="Review your items" />
+            <Step step={1} label="Shipping" description="Where it goes" />
+            <Step step={2} label="Delivery" description="How fast" />
+            <Step step={3} label="Payment" description="How you pay" />
+          </Stepper>
+        </div>
+      </div>
+    );
+  },
+};
+
+// ============================================================
 // FRAGMENT-GROUPED STEPS
 // ============================================================
 

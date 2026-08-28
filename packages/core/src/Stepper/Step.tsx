@@ -32,7 +32,8 @@
  * - /packages/cli/assets/templates/blocks/components/Step/ (showcase blocks)
  */
 
-import {useEffect, type ReactNode} from 'react';
+import {useLayoutEffect, type ReactNode} from 'react';
+import {createPortal} from 'react-dom';
 import * as stylex from '@stylexjs/stylex';
 
 import {
@@ -303,7 +304,8 @@ const styles = stylex.create({
     // Stretch, not flex-start: a flex-start child is sized to fit-content,
     // which is floored at its own min-content and would spill the label past
     // the step's slice of the track and into the next step. Stretched, the
-    // label row is exactly as wide as the step and the label wraps inside it.
+    // label row is exactly as wide as the step and the label ellipsizes
+    // inside it.
     alignItems: 'stretch',
     flex: 1,
     // `flex: 1` alone does not make the steps equal: a flex item's default
@@ -455,6 +457,10 @@ const styles = stylex.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacingVars['--spacing-2'],
+    // The row is a flex item wherever a step stacks it under a bar, so it
+    // needs the floor released too — otherwise it holds itself open at the
+    // label's min-content width and the label never reaches its ellipsis.
+    minWidth: 0,
   },
 
   // Indicator icon container
@@ -553,11 +559,16 @@ const styles = stylex.create({
     fontWeight: fontWeightVars['--font-weight-normal'],
     color: colorVars['--color-text-primary'],
     // Horizontal steps divide the track evenly, so a label can end up with
-    // less room than it wants. Let it shrink past its longest word and break
-    // that word rather than overlap the neighbouring step. Inert wherever
-    // there is room, which is every vertical stepper.
+    // less room than it wants. It stays on one line and ellipsizes rather than
+    // wrapping, so every step in a row keeps the same height and the track
+    // below them stays straight. minWidth releases the flex floor that would
+    // otherwise hold the label at its min-content width and let it overlap the
+    // neighbouring step. Inert wherever there is room, which is most vertical
+    // steppers. The full string stays in the accessible name either way.
     minWidth: 0,
-    overflowWrap: 'break-word',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   labelInProgress: {
     fontWeight: fontWeightVars['--font-weight-semibold'],
@@ -871,6 +882,17 @@ const styles = stylex.create({
   otMarginTop: (value: string) => ({
     marginBlockStart: value,
   }),
+  // The current step, named below a track whose own labels have collapsed.
+  // Centred rather than indented under an indicator: there is one of these and
+  // it sits under the whole track, so it lines up with the track's middle and
+  // not with any one segment of it.
+  summaryRoot: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: spacingVars['--spacing-0-5'],
+    minWidth: 0,
+  },
 });
 
 /**
@@ -923,10 +945,19 @@ export function Step({
     density: ctxDensity,
     indicatorPosition,
     registerStep,
+    isCompact,
+    summarySlot,
   } = ctx;
 
-  // Register this step index with the parent Stepper for duplicate detection.
-  useEffect(() => registerStep(step), [registerStep, step]);
+  // Register this step index with the parent Stepper, which uses the tally
+  // both to warn about duplicate indices and to work out how much width each
+  // step is getting.
+  //
+  // A layout effect, not an effect: the width each step has is the stepper's
+  // width divided by this count, so a stepper narrow enough to collapse can
+  // only know it once every step is counted. Running after paint would show
+  // the full stepper for a frame and then snap it shut.
+  useLayoutEffect(() => registerStep(step), [registerStep, step]);
 
   const density = densityProp ?? ctxDensity;
   // Inline padding of a separated step's hover target. Density varies the block
@@ -1238,6 +1269,50 @@ export function Step({
     status: status ?? undefined,
   });
 
+  // ======= SUMMARY: this step, drawn below a collapsed track =======
+  //
+  // Only the current step draws one, into a row the stepper owns and keeps
+  // outside the `<ol>` — so the list is left with exactly the children it was
+  // given, and the on-track connectors go on reading their own
+  // `:first-child`/`:last-child` position to decide which caps to hide.
+  //
+  // Rendered here rather than handed up as data because it reuses
+  // `iconLabelNode` whole: `indicator` resolution, the status glyphs, the
+  // completed check and the disabled tints are a hundred lines above, and any
+  // copy of them would drift. The description is re-wrapped, though — the row
+  // version indents itself under an indicator, and centred under a track there
+  // is nothing to line it up with.
+  const summaryNode =
+    isCompact && isActive && summarySlot != null
+      ? createPortal(
+          <div
+            {...mergeProps(stepThemeProps, stylex.props(styles.summaryRoot))}>
+            {iconLabelNode}
+            {isRenderable(description) ? (
+              <span {...stylex.props(styles.description)}>{description}</span>
+            ) : null}
+          </div>,
+          summarySlot,
+        )
+      : null;
+
+  // What a collapsed step still owes a screen reader. Dropping the label takes
+  // it out of the accessibility tree as well as off the screen, so the name
+  // goes back in hidden — the list stays a complete, ordered sequence with
+  // every status and `aria-current` intact at any width, and the row the
+  // stepper adds below the track is then free to be decoration.
+  //
+  // Not needed when an on-track step is clickable: there the collapse only
+  // takes the label out of a button still named by `stepAriaLabel`, and a
+  // second copy would have the step announced twice.
+  const compactNameNode =
+    isCompact && (indicatorPosition === 'separated' || !isClickable) ? (
+      <>
+        <VisuallyHidden>{label}</VisuallyHidden>
+        {statusTextNode}
+      </>
+    ) : null;
+
   // ======= ON-TRACK: indicator is a node on the connector =======
   if (indicatorPosition === 'on-track') {
     // Connector fill is purely progress-based (matches the separated bar):
@@ -1463,14 +1538,21 @@ export function Step({
             )}
           />
         </div>
-        <div
-          {...stylex.props(
-            styles.otLabelWrapH,
-            styles.otMarginTop(densitySpace),
-          )}>
-          {labelLineNode}
-          {otDescriptionNode}
-        </div>
+        {/* On-track drops the label alone, not the target around it: the
+            indicator here is a node *on* the line, so taking the whole
+            wrapper would take the track with it. What is left is a row of
+            nodes on a rail — still tappable, and a better narrow-width
+            affordance than the bare 4px bar the separated layout falls to. */}
+        {!isCompact && (
+          <div
+            {...stylex.props(
+              styles.otLabelWrapH,
+              styles.otMarginTop(densitySpace),
+            )}>
+            {labelLineNode}
+            {otDescriptionNode}
+          </div>
+        )}
       </>
     );
 
@@ -1508,7 +1590,9 @@ export function Step({
             {innerH}
           </div>
         )}
-        {otContentNode}
+        {compactNameNode}
+        {!isCompact && otContentNode}
+        {summaryNode}
       </li>
     );
   }
@@ -1602,7 +1686,13 @@ export function Step({
         )}
         aria-hidden="true"
       />
-      {isClickable ? (
+      {/* The click target goes with the label, deliberately. A step narrow
+          enough to lose its label is narrow enough that all that would be left
+          to press is a 4px bar; the stepper puts a pair of named controls
+          under the track instead. */}
+      {isCompact ? (
+        compactNameNode
+      ) : isClickable ? (
         <button
           type="button"
           onClick={handleClick}
@@ -1630,7 +1720,8 @@ export function Step({
           {descriptionNode}
         </div>
       )}
-      {contentNode}
+      {!isCompact && contentNode}
+      {summaryNode}
     </li>
   );
 }

@@ -21,13 +21,23 @@
  * - /packages/cli/assets/templates/blocks/components/Stepper/ (showcase blocks)
  */
 
-import {useCallback, useMemo, useRef, useState, type ReactNode} from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import * as stylex from '@stylexjs/stylex';
 
 import {spacingVars} from '../theme/tokens.stylex';
-import {mergeProps} from '../utils';
+import {mergeProps, rtlStyles} from '../utils';
+import {observeResize, unobserveResize} from '../utils/sharedResizeObserver';
 import type {BaseProps} from '../BaseProps';
 import {themeProps} from '../utils';
+import {Icon} from '../Icon';
+import {IconButton} from '../IconButton';
 import {useTranslator} from '../i18n';
 import {
   StepperContext,
@@ -35,6 +45,17 @@ import {
   type StepperIndicatorPosition,
   type StepperContextValue,
 } from './StepperContext';
+
+/**
+ * Width below which a step can no longer hold its own label. Under about this
+ * much a one-word label starts breaking mid-word and a two-word one stacks,
+ * which costs more vertical space than the row that replaces all of them — and
+ * reads worse, because every step pays for text only one of them needs now.
+ *
+ * Applied per step rather than to the stepper, so where the collapse happens
+ * follows the count: four steps hold out to 448px, seven need 784px.
+ */
+const MIN_STEP_WIDTH = 112;
 
 export interface StepperProps extends BaseProps<HTMLOListElement> {
   /** Ref forwarded to the root element */
@@ -86,14 +107,18 @@ const styles = stylex.create({
     margin: 0,
     padding: 0,
   },
+  // The gap between steps is the break between connector segments, so it is
+  // sized to match the connector's own thickness (BAR_WIDTH, the same token).
+  // That keeps the track reading as one dashed line rather than as bars with
+  // an arbitrary space between them, and holds at any theme scale.
   horizontal: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    gap: spacingVars['--spacing-0-5'],
+    gap: spacingVars['--spacing-1'],
   },
   vertical: {
     flexDirection: 'column',
-    gap: spacingVars['--spacing-0-5'],
+    gap: spacingVars['--spacing-1'],
   },
   // On-track: steps must abut so their connector segments form one continuous
   // line, so the inter-step gap collapses to zero.
@@ -105,6 +130,32 @@ const styles = stylex.create({
   verticalOnTrack: {
     flexDirection: 'column',
     gap: 0,
+  },
+  // The element the collapse threshold is measured against, and the one that
+  // stacks the track above the row naming the step it is on.
+  frame: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: spacingVars['--spacing-2'],
+    width: '100%',
+  },
+  // Laid out as a row so the controls can bracket the step: they belong at the
+  // edges the flow moves between, and the name reads between them.
+  summary: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: spacingVars['--spacing-2'],
+    justifyContent: 'space-between',
+    minWidth: 0,
+  },
+  // Centred, so the name sits under the middle of the track rather than
+  // drifting toward whichever control happens to be enabled.
+  summaryBody: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    minWidth: 0,
+    textAlign: 'center',
   },
 });
 
@@ -155,6 +206,12 @@ export function Stepper({
   // deregister on unmount; a Map tracks count per index so we can warn when
   // two Steps share the same `step` value (which breaks aria-current).
   const stepCountsRef = useRef<Map<number, number>>(new Map());
+  // How many steps there are, which the stepper needs for real and not only
+  // for the warning: the width each step is getting is this divided into the
+  // width the stepper got. Counted from what registers rather than from the
+  // children, so grouping steps in a fragment or an array cannot change the
+  // answer.
+  const [stepCount, setStepCount] = useState(0);
   const registerStep = useCallback((index: number) => {
     const counts = stepCountsRef.current;
     const prev = counts.get(index) ?? 0;
@@ -165,6 +222,7 @@ export function Stepper({
           `This breaks \`aria-current="step"\` and causes both to show as active simultaneously.`,
       );
     }
+    setStepCount(c => c + 1);
     return () => {
       const cur = counts.get(index) ?? 1;
       if (cur <= 1) {
@@ -172,6 +230,7 @@ export function Stepper({
       } else {
         counts.set(index, cur - 1);
       }
+      setStepCount(c => c - 1);
     };
   }, []);
 
@@ -203,6 +262,54 @@ export function Stepper({
   const previousActiveStep =
     seen.current === activeStep ? seen.previous : seen.current;
 
+  const isHorizontal = orientation === 'horizontal';
+
+  // A vertical stepper gives every label a row of its own and can never run
+  // out of width for them, so it opts out of all of this and renders exactly
+  // the DOM it always has.
+  const [frameWidth, setFrameWidth] = useState(0);
+  const frameRef = useRef<HTMLDivElement | null>(null);
+  const attachFrame = useCallback((el: HTMLDivElement | null) => {
+    if (frameRef.current) {
+      unobserveResize(frameRef.current);
+    }
+    frameRef.current = el;
+    if (el) {
+      // observeResize calls back once, synchronously, as it subscribes. That
+      // is what keeps the collapse off the screen: a ref callback runs during
+      // commit, so the width lands and the re-render happens before the
+      // browser has painted the uncollapsed stepper it would otherwise show
+      // first.
+      observeResize(el, entry => setFrameWidth(entry.target.clientWidth));
+    }
+  }, []);
+  useEffect(
+    () => () => {
+      if (frameRef.current) {
+        unobserveResize(frameRef.current);
+      }
+    },
+    [],
+  );
+
+  // Width is measured rather than asked of a container query because the
+  // answer changes what is *rendered*, not just how it looks: the labels and
+  // their click targets leave the DOM entirely. A query could only have hidden
+  // them, which would leave every step's text in the tree for a consumer's
+  // `getByText` to trip over and every collapsed step still holding a focus
+  // stop with nothing visible to show for it.
+  //
+  // Either value being zero means the stepper has not been told something it
+  // needs yet — on the server, and for the one commit before the observer
+  // fires and the steps register — and until it has, it renders whole.
+  const isCompact =
+    isHorizontal &&
+    frameWidth > 0 &&
+    stepCount > 0 &&
+    frameWidth / stepCount < MIN_STEP_WIDTH;
+
+  const [summarySlot, setSummarySlot] = useState<HTMLElement | null>(null);
+
   const ctxValue = useMemo<StepperContextValue>(
     () => ({
       activeStep,
@@ -213,6 +320,9 @@ export function Stepper({
       density,
       indicatorPosition,
       registerStep,
+      stepCount,
+      isCompact,
+      summarySlot,
     }),
     [
       activeStep,
@@ -222,6 +332,9 @@ export function Stepper({
       density,
       indicatorPosition,
       registerStep,
+      stepCount,
+      isCompact,
+      summarySlot,
     ],
   );
 
@@ -235,22 +348,91 @@ export function Stepper({
         ? styles.verticalOnTrack
         : styles.vertical;
 
+  const list = (
+    <ol
+      ref={ref}
+      aria-label={label}
+      {...rest}
+      {...mergeProps(
+        themeProps('stepper', {orientation, indicatorPosition}),
+        stylex.props(styles.root, orientationStyle, xstyle),
+        className,
+        style,
+      )}>
+      {/* Each step renders its own progress bar segment; no child
+          introspection needed — steps derive state from context. */}
+      {children}
+    </ol>
+  );
+
+  if (!isHorizontal) {
+    return <StepperContext value={ctxValue}>{list}</StepperContext>;
+  }
+
+  // Controls, and only where there is something for them to do. A linear
+  // stepper is driven by the form's own Back and Continue, and a second pair
+  // pointed at a step the flow will not honour is worse than none.
+  //
+  // Unlike TabList's scroll arrows — decorative, aria-hidden, skipped by the
+  // keyboard because every tab can still be reached by arrowing the strip —
+  // these are the only way through a collapsed stepper. So they are real
+  // controls with real names, and they take focus.
+  const control = (delta: -1 | 1) => {
+    if (onStepClick == null) {
+      return null;
+    }
+    const name =
+      delta === -1
+        ? t('@astryx.stepper.previousStep')
+        : t('@astryx.stepper.nextStep');
+    return (
+      <IconButton
+        variant="ghost"
+        label={name}
+        tooltip={name}
+        icon={
+          <Icon
+            icon={delta === -1 ? 'chevronLeft' : 'chevronRight'}
+            xstyle={rtlStyles.mirror}
+          />
+        }
+        isDisabled={
+          delta === -1 ? activeStep <= 0 : activeStep >= stepCount - 1
+        }
+        onClick={() => onStepClick(activeStep + delta)}
+      />
+    );
+  };
+
   return (
     <StepperContext value={ctxValue}>
-      <ol
-        ref={ref}
-        aria-label={label}
-        {...rest}
+      <div
+        ref={attachFrame}
         {...mergeProps(
-          themeProps('stepper', {orientation, indicatorPosition}),
-          stylex.props(styles.root, orientationStyle, xstyle),
-          className,
-          style,
+          themeProps('stepper-frame'),
+          stylex.props(styles.frame),
         )}>
-        {/* Each step renders its own progress bar segment; no child
-            introspection needed — steps derive state from context. */}
-        {children}
-      </ol>
+        {list}
+        {isCompact && (
+          <div
+            {...mergeProps(
+              themeProps('stepper-summary'),
+              stylex.props(styles.summary),
+            )}>
+            {control(-1)}
+            {/* The list above still carries every step's name and status, so
+                this row repeats one of them for the eye only. Hiding it keeps
+                a screen reader from hearing the current step named twice,
+                while leaving the controls either side of it reachable. */}
+            <div
+              ref={setSummarySlot}
+              aria-hidden="true"
+              {...stylex.props(styles.summaryBody)}
+            />
+            {control(1)}
+          </div>
+        )}
+      </div>
     </StepperContext>
   );
 }
