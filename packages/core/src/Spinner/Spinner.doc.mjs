@@ -59,6 +59,13 @@ export const docs = {
       {guidance: false, description: 'Use for content areas with known dimensions; use Skeleton to preserve layout instead.'},
       {guidance: false, description: 'Stack multiple spinners in the same view; use one to represent the overall loading state.'},
     ],
+    accessibility: [
+      {name: 'Accessible name', description: 'Provide a specific loading label through visible `label` content or `aria-label`; avoid leaving every spinner announced only as “Loading”.'},
+      {name: 'Arc contrast', description: 'The moving arc communicates that work is in progress and needs 3:1 contrast against its immediate background.'},
+      {name: 'Track', description: 'The faint circular track is decorative when the arc alone clearly identifies loading, so the track does not independently require 3:1.'},
+      {name: 'Background shade', description: 'Choose a shade that keeps the arc distinguishable on its actual surface, including media and colored backgrounds.'},
+      {name: 'Motion', description: 'Preserve reduced-motion behavior and avoid using multiple simultaneous spinners that make the page difficult to track.'},
+    ],
   },
 };
 
