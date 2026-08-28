@@ -139,6 +139,21 @@ function readInPage([target, unchangedSelector]) {
   const glyph = button.querySelector('svg');
   if (!glyph) return {status: 'noglyph'};
 
+  // What is actually PAINTED, not what the glyph inherits. `color` on the
+  // <svg> is only a promise: the geometry inside honours it where it declares
+  // `currentColor`, and ignores it the moment anything hardcodes a stroke or
+  // fill. Reading `color` passes in both cases, which is the hole this closes.
+  const paints = [];
+  for (const node of glyph.querySelectorAll(
+    'path,circle,rect,line,polyline,polygon,ellipse',
+  )) {
+    const cs = getComputedStyle(node);
+    // A node paints with whichever of the two is not `none`; both can be set,
+    // and then both have to be right.
+    if (cs.stroke && cs.stroke !== 'none') paints.push(cs.stroke);
+    if (cs.fill && cs.fill !== 'none') paints.push(cs.fill);
+  }
+
   let opacity = 1;
   for (let el = glyph; el && el !== document.body; el = el.parentElement) {
     opacity *= Number(getComputedStyle(el).opacity);
@@ -160,6 +175,7 @@ function readInPage([target, unchangedSelector]) {
   return {
     status: 'ok',
     color: getComputedStyle(glyph).color,
+    paints: [...new Set(paints)],
     opacity: Number(opacity.toFixed(3)),
     ground,
     unchanged,
@@ -184,6 +200,14 @@ async function checkCase(context, testCase) {
       `http://localhost:${port}/iframe.html?id=${testCase.story}&viewMode=story`,
       {waitUntil: 'networkidle', timeout: 30000},
     );
+    // Storybook settles the network before it mounts the story, so
+    // `networkidle` alone reads an empty root and every case fails for the
+    // wrong reason. Wait for the element the case is about, with a glyph
+    // inside it — which is exactly what the reads below need.
+    await page.waitForSelector(`.${testCase.target} svg`, {
+      state: 'attached',
+      timeout: 30000,
+    });
 
     const args = [testCase.target, testCase.unchangedSelector];
     const rest = await page.evaluate(readInPage, args);
@@ -195,11 +219,14 @@ async function checkCase(context, testCase) {
       return {failures: [`.${testCase.target} holds no glyph to colour`], notes};
     }
 
-    // 1 — resting contrast, composited the way it is seen.
-    const painted = composite(rest.color, rest.ground, rest.opacity);
+    // 1 — resting contrast, composited the way it is seen. Measured on the
+    // painted stroke/fill rather than the inherited colour: they can differ,
+    // and only one of them is on screen.
+    const restPaint = rest.paints[0] || rest.color;
+    const painted = composite(restPaint, rest.ground, rest.opacity);
     const ratio = contrastRatio(painted, rest.ground);
     notes.push(
-      `rest ${rest.color}${rest.opacity === 1 ? '' : ` @ ${rest.opacity}`} on ${rest.ground} — ${ratio}:1`,
+      `rest ${restPaint}${rest.opacity === 1 ? '' : ` @ ${rest.opacity}`} on ${rest.ground} — ${ratio}:1`,
     );
     if (ratio < MIN_CONTRAST) {
       failures.push(
@@ -217,17 +244,38 @@ async function checkCase(context, testCase) {
       style.id = 'reach-probe';
       style.textContent = css;
       document.head.appendChild(style);
-    }, `@layer astryx-theme { .${testCase.target} { color: ${SENTINEL}; } }`);
+    },
+      // The probe stylesheet, plus a blanket transition kill.
+      //
+      // These affordances transition `color` between their rest and hover
+      // states, so a read taken right after the sentinel lands returns an
+      // interpolated value and the case fails for a reason that has nothing
+      // to do with reachability — measured mid-flight at rgb(61, 62, 62)
+      // between the old colour and the new. What is being asserted is the
+      // settled paint, so the animation is removed rather than waited on:
+      // a sleep long enough for one theme's duration is a race in another.
+      `@layer astryx-theme { .${testCase.target} { color: ${SENTINEL}; } }
+       *, *::before, *::after {
+         transition-duration: 0s !important;
+         animation-duration: 0s !important;
+       }`);
 
     const themed = await page.evaluate(readInPage, args);
-    if (themed.color !== SENTINEL) {
+    const unmoved = themed.paints.filter(p => p !== SENTINEL);
+    if (themed.paints.length === 0) {
       failures.push(
-        `a colour on .${testCase.target} in @layer astryx-theme did not reach the glyph — ` +
-          `it stayed ${themed.color}. The glyph names its own colour, so the ` +
-          `target a theme is told to use cannot move it.`,
+        `.${testCase.target}'s glyph paints nothing — no stroke or fill ` +
+          `resolved on any of its geometry, so there is nothing to colour.`,
+      );
+    } else if (unmoved.length > 0) {
+      failures.push(
+        `a colour on .${testCase.target} in @layer astryx-theme did not reach the ` +
+          `PAINTED glyph — stroke/fill stayed ${unmoved.join(', ')} while the ` +
+          `inherited color read ${themed.color}. Geometry that hardcodes its ` +
+          `paint ignores the target a theme is told to use.`,
       );
     } else {
-      notes.push(`themed → ${themed.color}`);
+      notes.push(`themed → painted ${themed.paints.join(', ')}`);
     }
 
     // 3 — and still reaches it under hover.
@@ -235,13 +283,15 @@ async function checkCase(context, testCase) {
     await header.hover({force: true});
     await page.waitForTimeout(120);
     const hovered = await page.evaluate(readInPage, args);
-    if (hovered.color !== SENTINEL) {
+    const unmovedHover = hovered.paints.filter(p => p !== SENTINEL);
+    if (unmovedHover.length > 0) {
       failures.push(
-        `the themed colour is lost on hover — glyph went to ${hovered.color}. ` +
-          `A hover rule that re-states the resting colour takes the theme's away.`,
+        `the themed colour is lost on hover — painted stroke/fill went to ` +
+          `${unmovedHover.join(', ')}. A hover rule that re-states the resting ` +
+          `colour takes the theme's away.`,
       );
     } else {
-      notes.push(`hovered → ${hovered.color}`);
+      notes.push(`hovered → painted ${hovered.paints.join(', ')}`);
     }
 
     // 4 — what the target must not repaint kept its own colour.
