@@ -10,7 +10,7 @@
  */
 
 import {describe, it, expect, vi} from 'vitest';
-import {act, render, screen, within} from '@testing-library/react';
+import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Collapsible} from './Collapsible';
 import {CollapsibleGroup} from './CollapsibleGroup';
@@ -41,7 +41,6 @@ describe('Collapsible', () => {
     });
 
     it('renders the trigger button with an explicit type="button"', () => {
-      // Prevents implicit form submission when used inside a <form>.
       render(<Collapsible trigger="T">c</Collapsible>);
       expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
     });
@@ -154,7 +153,7 @@ describe('Collapsible', () => {
       expect(button).toHaveAttribute('aria-expanded', 'true');
     });
 
-    it('hides collapsed content accessibly while keeping it findable', async () => {
+    it('marks collapsed content inert and aria-hidden', async () => {
       const user = userEvent.setup();
       render(
         <Collapsible trigger="T">
@@ -164,44 +163,34 @@ describe('Collapsible', () => {
       const button = screen.getByRole('button');
       const content = contentFor(button);
 
-      // Open: laid out at its natural height, interactive, and not hidden.
-      expect(content).toHaveStyle({height: 'auto'});
+      // Open: interactive, not hidden.
       expect(content).not.toHaveAttribute('inert');
-      expect(content).not.toHaveAttribute('hidden');
+      expect(content).toHaveAttribute('aria-hidden', 'false');
 
       await user.click(button);
 
-      // The non-layout test DOM has no `interpolate-size` support, so it takes
-      // the component's explicit fallback: snap closed and apply the findable
-      // hidden state immediately. Real browsers keep this attribute off until
-      // transitionend; that timing is covered by the browser motion test.
-      expect(content).toHaveStyle({height: '0'});
+      // Closed: inert + aria-hidden, grid collapses to 0fr.
       expect(content).toHaveAttribute('inert');
-      expect(content).toHaveAttribute('hidden', 'until-found');
+      expect(content).toHaveAttribute('aria-hidden', 'true');
     });
 
-    it('opens when find-in-page matches inside a collapsed panel', () => {
-      const onOpenChange = vi.fn();
+    it('removes inert and aria-hidden when opened', async () => {
+      const user = userEvent.setup();
       render(
-        <Collapsible
-          trigger="T"
-          defaultIsOpen={false}
-          onOpenChange={onOpenChange}>
-          Answer that Ctrl+F found
+        <Collapsible trigger="T" defaultIsOpen={false}>
+          Body
         </Collapsible>,
       );
       const button = screen.getByRole('button');
       const content = contentFor(button);
 
-      expect(content).toHaveAttribute('hidden', 'until-found');
-      act(() => {
-        content.dispatchEvent(new Event('beforematch'));
-      });
+      expect(content).toHaveAttribute('inert');
+      expect(content).toHaveAttribute('aria-hidden', 'true');
 
-      expect(button).toHaveAttribute('aria-expanded', 'true');
-      expect(content).not.toHaveAttribute('hidden');
+      await user.click(button);
+
       expect(content).not.toHaveAttribute('inert');
-      expect(onOpenChange).toHaveBeenCalledWith(true);
+      expect(content).toHaveAttribute('aria-hidden', 'false');
     });
 
     it('floors the full-width trigger at the WCAG 2.5.8 target size', () => {
@@ -213,7 +202,6 @@ describe('Collapsible', () => {
       const user = userEvent.setup();
       render(<Collapsible trigger="T">Body</Collapsible>);
       const button = screen.getByRole('button');
-      // The chevron lives in the last span of the trigger button.
       const chevron = button.querySelectorAll('span')[1];
       const openClass = chevron.getAttribute('class');
 
@@ -260,8 +248,6 @@ describe('Collapsible', () => {
     });
 
     it('does not self-update when controlled without onOpenChange', async () => {
-      // A controlled instance is driven entirely by the isOpen prop; a click
-      // must not flip the visual state on its own.
       const user = userEvent.setup();
       render(
         <Collapsible trigger="T" isOpen={false}>
@@ -283,7 +269,6 @@ describe('Collapsible', () => {
       );
       const button = screen.getByRole('button');
       await user.click(button);
-      // Still closed — parent hasn't re-rendered with the new value yet.
       expect(button).toHaveAttribute('aria-expanded', 'false');
 
       rerender(
@@ -305,7 +290,6 @@ describe('Collapsible', () => {
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-disabled', 'true');
       expect(button).toHaveAttribute('tabindex', '-1');
-      // Never the native disabled attribute — it stays focusable/perceivable.
       expect(button).not.toBeDisabled();
     });
 
@@ -348,7 +332,7 @@ describe('Collapsible', () => {
         </Collapsible>,
       );
       const content = contentFor(screen.getByRole('button'));
-      expect(content).not.toHaveStyle({display: 'none'});
+      expect(content).not.toHaveAttribute('inert');
     });
 
     it('does not toggle its group item when disabled', async () => {
@@ -479,7 +463,6 @@ describe('Collapsible', () => {
       expect(b).toHaveAttribute('aria-expanded', 'false');
 
       await user.click(b);
-      // Opening B does not close A in multiple mode.
       expect(a).toHaveAttribute('aria-expanded', 'true');
       expect(b).toHaveAttribute('aria-expanded', 'true');
     });
