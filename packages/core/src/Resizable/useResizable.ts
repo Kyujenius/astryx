@@ -183,6 +183,15 @@ interface PersistedResizableState {
  * - a plain `0` — written by legacy collapse, which restored the region as a
  *   zero-width expanded panel (#4790); read as "collapsed, no saved size"
  */
+function clampSizeIfOutsideBand(
+  size: number,
+  min: number,
+  max: number,
+  snaps: number[],
+): number {
+  return size < min || size > max ? clampSize(size, min, max, snaps) : size;
+}
+
 function loadPersistedState(key: string): PersistedResizableState | null {
   if (typeof window === 'undefined') {
     return null;
@@ -278,7 +287,9 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
   // isCollapsed gate below rather than zeroing it, so the width the user had
   // survives a collapse, a persist round-trip, and an expand.
   const [size, setSize] = useState(() =>
-    clampSize(initial, minSizePx, maxSizePx, snaps),
+    persisted?.size != null
+      ? clampSizeIfOutsideBand(initial, minSizePx, maxSizePx, snaps)
+      : clampSize(initial, minSizePx, maxSizePx, snaps),
   );
   const [uncontrolledIsCollapsed, setUncontrolledIsCollapsed] = useState(
     () => persisted?.isCollapsed ?? defaultIsCollapsed ?? false,
@@ -330,9 +341,8 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
       max: maxSizePx,
       isCollapsed,
     };
-    const isOutsideBand = size < minSizePx || size > maxSizePx;
-    if (!isCollapsed && isOutsideBand) {
-      const legal = clampSize(size, minSizePx, maxSizePx, snaps);
+    const legal = clampSizeIfOutsideBand(size, minSizePx, maxSizePx, snaps);
+    if (!isCollapsed && legal !== size) {
       pendingClampRef.current = legal;
       setSize(legal);
     } else {
@@ -373,7 +383,12 @@ function useSingleResizable(config: UseResizableSingleConfig): ResizableRegion {
   const expand = useCallback(() => {
     const wasCollapsed = isCollapsedRef.current;
     setCollapsed(false);
-    const expandedSize = clampSize(size, minSizePx, maxSizePx, snaps);
+    const expandedSize = clampSizeIfOutsideBand(
+      size,
+      minSizePx,
+      maxSizePx,
+      snaps,
+    );
     if (expandedSize !== size) {
       setSize(expandedSize);
     }
