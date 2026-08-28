@@ -1,0 +1,19 @@
+{
+  "promptId": "fwc-10",
+  "category": "feature-with-constraint",
+  "prompt": "Build a user role assignment form. Show a list of team members with a dropdown selector next to each for their role: Viewer, Editor, Admin. Changes should save automatically.",
+  "expectedComponents": [
+    "Selector",
+    "Text",
+    "Card"
+  ],
+  "followUps": [
+    "Add a confirmation dialog when changing someone to Admin",
+    "Show a toast notification after each role change is saved"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a user role assignment form. Show a list of team members with a dropdown selector next to each for their role: Viewer, Editor, Admin. Changes should save automatically.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-10.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

@@ -1,0 +1,19 @@
+{
+  "promptId": "ty-4",
+  "category": "typography",
+  "prompt": "Create a settings page with 3 sections. Each section needs a heading, a brief description, and some form controls. Use different heading levels for the page title vs section titles.",
+  "expectedComponents": [
+    "Heading",
+    "Text",
+    "TextInput"
+  ],
+  "followUps": [
+    "Add helper text below each input using the appropriate supporting text style",
+    "Make the section headings visually smaller than the page title"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a settings page with 3 sections. Each section needs a heading, a brief description, and some form controls. Use different heading levels for the page title vs section titles.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ty-4.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

@@ -1,0 +1,19 @@
+{
+  "promptId": "wd-3",
+  "category": "workflow-description",
+  "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+  "expectedComponents": [
+    "Card",
+    "Button",
+    "TextInput"
+  ],
+  "followUps": [
+    "Add a skip button that allows skipping optional steps",
+    "Add animations/transitions between steps"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild an onboarding flow: welcome screen → profile setup → preferences → done\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/wd-3.tsx",
+  "createdAt": "2026-08-27T14:07:07.998Z"
+}

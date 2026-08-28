@@ -1,0 +1,19 @@
+{
+  "promptId": "dd-7",
+  "category": "data-display",
+  "prompt": "Display a list of services with their current status. Each service should show a status dot (green for healthy, yellow for degraded, red for down) next to the service name and last checked time.",
+  "expectedComponents": [
+    "StatusDot",
+    "Text",
+    "Card"
+  ],
+  "followUps": [
+    "Add a tooltip on the status dot showing the uptime percentage",
+    "Add a \"Refresh\" button that rechecks all service statuses"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nDisplay a list of services with their current status. Each service should show a status dot (green for healthy, yellow for degraded, red for down) next to the service name and last checked time.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/dd-7.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

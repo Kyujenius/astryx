@@ -1,0 +1,19 @@
+{
+  "promptId": "fwc-9",
+  "category": "feature-with-constraint",
+  "prompt": "Build a meeting scheduler with a date picker and a time input for start time. The meeting duration should default to 30 minutes.",
+  "expectedComponents": [
+    "DateInput",
+    "TimeInput",
+    "Button"
+  ],
+  "followUps": [
+    "Add a duration selector dropdown with options: 15 min, 30 min, 1 hour, 2 hours",
+    "Show the calculated end time based on start time and duration"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a meeting scheduler with a date picker and a time input for start time. The meeting duration should default to 30 minutes.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-9.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "promptId": "dd-6",
+  "category": "data-display",
+  "prompt": "Create a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.",
+  "expectedComponents": [
+    "HoverCard",
+    "Avatar",
+    "Text",
+    "Button"
+  ],
+  "followUps": [
+    "Add their recent activity or status to the hover card",
+    "Make the avatar show an online/offline status indicator"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/dd-6.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

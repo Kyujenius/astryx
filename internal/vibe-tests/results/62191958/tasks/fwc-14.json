@@ -1,0 +1,17 @@
+{
+  "promptId": "fwc-14",
+  "category": "feature-with-constraint",
+  "prompt": "Build a media gallery that mixes images and videos. Clicking any item opens a lightbox viewer. Videos should show native playback controls. Images should support zoom on double-click.",
+  "expectedComponents": [
+    "Lightbox"
+  ],
+  "followUps": [
+    "Add autoplay for videos when they become the active item in the gallery",
+    "Add a filmstrip thumbnail bar at the bottom of the lightbox for quick navigation"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a media gallery that mixes images and videos. Clicking any item opens a lightbox viewer. Videos should show native playback controls. Images should support zoom on double-click.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-14.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

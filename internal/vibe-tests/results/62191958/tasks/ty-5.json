@@ -1,0 +1,19 @@
+{
+  "promptId": "ty-5",
+  "category": "typography",
+  "prompt": "Build a landing page hero with a large display heading that says 'Build faster with Astryx', a subheading paragraph, and a CTA button",
+  "expectedComponents": [
+    "Heading",
+    "Text",
+    "Button"
+  ],
+  "followUps": [
+    "The heading should use the editorial display scale for maximum visual impact",
+    "Add a secondary tagline below the heading in a lighter color"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a landing page hero with a large display heading that says 'Build faster with Astryx', a subheading paragraph, and a CTA button\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ty-5.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

@@ -1,0 +1,741 @@
+{
+  "iterationId": "3b5e0443",
+  "createdAt": "2026-08-27T14:06:58.945Z",
+  "config": {
+    "holdout": false,
+    "persona": "naive",
+    "degradation": false,
+    "target": "astryx"
+  },
+  "prompts": [
+    {
+      "id": "fwc-1",
+      "category": "feature-with-constraint",
+      "prompt": "I need a banner that warns users their trial expires in X days and lets them upgrade",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-2",
+      "category": "feature-with-constraint",
+      "prompt": "Build a notification that shows unread count, but hides when count is zero",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-3",
+      "category": "feature-with-constraint",
+      "prompt": "Create a password input that shows strength indicator and has a show/hide toggle",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-2",
+      "category": "workflow-description",
+      "prompt": "Create a multi-step form wizard with back/next buttons and a progress indicator",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-3",
+      "category": "workflow-description",
+      "prompt": "Build an onboarding flow: welcome screen → profile setup → preferences → done",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-1",
+      "category": "clone-with-modification",
+      "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-2",
+      "category": "clone-with-modification",
+      "prompt": "A GitHub-style issue label picker with color dots and search",
+      "expectedComponents": [
+        "TextInput",
+        "Button",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-1",
+      "category": "state-driven",
+      "prompt": "Show a dashboard widget with loading → error → data states",
+      "expectedComponents": [
+        "Card",
+        "Skeleton"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-2",
+      "category": "state-driven",
+      "prompt": "A button that shows loading spinner while submitting, then success checkmark",
+      "expectedComponents": [
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-3",
+      "category": "state-driven",
+      "prompt": "Form that disables submit until all required fields are valid",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-1",
+      "category": "data-display",
+      "prompt": "A table of users with sortable columns and search",
+      "expectedComponents": [
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-2",
+      "category": "data-display",
+      "prompt": "Display a list of transactions with amount, date, and status indicator",
+      "expectedComponents": [
+        "Card",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-3",
+      "category": "data-display",
+      "prompt": "Show a grid of product cards with image, title, price, and add to cart button",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-1",
+      "category": "responsive-context",
+      "prompt": "Navigation that collapses to hamburger on mobile",
+      "expectedComponents": [
+        "Button",
+        "HStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-2",
+      "category": "responsive-context",
+      "prompt": "A sidebar that becomes a bottom sheet on mobile",
+      "expectedComponents": [
+        "Card",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-3",
+      "category": "responsive-context",
+      "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+      "expectedComponents": [
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-1",
+      "category": "integration-oriented",
+      "prompt": "A form that validates email and posts to /api/subscribe",
+      "expectedComponents": [
+        "TextInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-2",
+      "category": "integration-oriented",
+      "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+      "expectedComponents": [
+        "TextInput",
+        "Card",
+        "Typeahead"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-3",
+      "category": "integration-oriented",
+      "prompt": "A file upload button that shows progress and calls an upload endpoint",
+      "expectedComponents": [
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-4",
+      "category": "workflow-description",
+      "prompt": "Create a new internal tool called TodoTracker. UI Requirements: Display todos in a paginated table (default 25 per page). Columns: Title, Status, Created, Updated. Sortable by: Updated date (default desc), Created date, Title. Add a filter bar that filters by title (substring match) and status. Inline editing for todo title (with save/cancel). Status toggle button (Open <-> Closed). 'Create Todo' button that opens a modal with title input. Delete button with confirmation dialog. UI should update optimistically after any modification. Optimistic updates should be marked as 'pending' until the modification is complete.",
+      "expectedComponents": [
+        "Table",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-1",
+      "category": "page-setup",
+      "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-2",
+      "category": "page-setup",
+      "prompt": "Set up the root layout for a new internal tool. Include proper body styling, theme provider with neutralTheme, and a layout with header and main content area.",
+      "expectedComponents": [
+        "Theme",
+        "neutralTheme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-3",
+      "category": "page-setup",
+      "prompt": "Create an admin panel page layout with a fixed header, collapsible left sidebar, main content area, and a right panel for details. Wrap everything in the Astryx theme.",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutHeader",
+        "LayoutContent",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-1",
+      "category": "typography",
+      "prompt": "Show a page title with a short description underneath",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-2",
+      "category": "typography",
+      "prompt": "Create a blog post header with a big editorial headline, a publication date in small text, and an author name",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-3",
+      "category": "typography",
+      "prompt": "Build a metrics dashboard card that shows a label like 'Total Revenue', a large numeric value like '$12,340.56', and a small supporting line that says '+12% from last month'",
+      "expectedComponents": [
+        "Card",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-4",
+      "category": "typography",
+      "prompt": "Create a settings page with 3 sections. Each section needs a heading, a brief description, and some form controls. Use different heading levels for the page title vs section titles.",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-5",
+      "category": "typography",
+      "prompt": "Build a landing page hero with a large display heading that says 'Build faster with Astryx', a subheading paragraph, and a CTA button",
+      "expectedComponents": [
+        "Heading",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-6",
+      "category": "typography",
+      "prompt": "Display a code example with a label that says 'Installation' above it, the code snippet 'yarn add @astryxdesign/core', and a note below in small text",
+      "expectedComponents": [
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-7",
+      "category": "typography",
+      "prompt": "Render a markdown-formatted changelog that includes headings, paragraphs, bullet lists, and inline code. The content should use proper typography styling.",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-8",
+      "category": "typography",
+      "prompt": "Create a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text",
+      "expectedComponents": [
+        "Card",
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-9",
+      "category": "typography",
+      "prompt": "Build a comparison table header where each column has a plan name heading and a price. The 'Enterprise' plan should have visually larger display-style typography compared to the other plans.",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-10",
+      "category": "typography",
+      "prompt": "Create an article page with a full editorial-style header (large title, subtitle, author info) and a body section that renders rich text content with proper heading hierarchy, paragraphs, code blocks, and lists",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-1",
+      "category": "theme-customization",
+      "prompt": "Set up a dark mode toggle for my app. I want a button that switches between light and dark themes using the Astryx theme system.",
+      "expectedComponents": [
+        "Theme",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-2",
+      "category": "theme-customization",
+      "prompt": "I want to create a custom brand theme for my app. The primary accent color should be purple (#7B61FF), with a dark surface (#1A1A2E) and light text. Set up a proper Astryx theme with these colors.",
+      "expectedComponents": [
+        "Theme"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-3",
+      "category": "theme-customization",
+      "prompt": "I need my page background to use the wash color from the theme. Right now wrapping my app in Theme doesn't change the page background — it stays white.",
+      "expectedComponents": [
+        "Theme",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-4",
+      "category": "theme-customization",
+      "prompt": "Create a theme switcher that lets users pick between three themes: Default, Midnight (dark purple), and Earth (warm brown tones). Show a preview card for each theme.",
+      "expectedComponents": [
+        "Theme",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-5",
+      "category": "theme-customization",
+      "prompt": "I want to customize the card component's appearance in my theme — add a gradient border and increase the border radius. How do I do component-level style overrides in the Astryx theme?",
+      "expectedComponents": [
+        "Theme",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-6",
+      "category": "theme-customization",
+      "prompt": "Build a settings page where users can customize the app's appearance. Include controls for accent color, border radius, and spacing scale. Changes should apply via the Astryx theme system, not inline styles.",
+      "expectedComponents": [
+        "Theme",
+        "TextInput",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-7",
+      "category": "theme-customization",
+      "prompt": "I have a section of my app that needs a different theme than the rest — like a dark sidebar next to a light content area. How do I nest themes in Astryx?",
+      "expectedComponents": [
+        "Theme",
+        "Layout",
+        "LayoutPanel",
+        "LayoutContent"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-8",
+      "category": "theme-customization",
+      "prompt": "Create a brutalist theme for Astryx — zero border radius, high contrast black and white, bold borders, and a hot pink accent color. Wire it up with Theme.",
+      "expectedComponents": [
+        "Theme"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-9",
+      "category": "theme-customization",
+      "prompt": "Create two custom Astryx themes that share the same spacing and typography tokens but have different color palettes. The first theme ('ocean') should use blue tones (#0077B6 accent) and the second ('sunset') should use warm orange tones (#E76F51 accent). Keep it DRY — don't duplicate the shared token values.",
+      "expectedComponents": [
+        "Theme"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-4",
+      "category": "feature-with-constraint",
+      "prompt": "I need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.",
+      "expectedComponents": [
+        "Dialog",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-5",
+      "category": "workflow-description",
+      "prompt": "Build a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.",
+      "expectedComponents": [
+        "Dialog",
+        "TextInput",
+        "TextArea",
+        "Button",
+        "Layout"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-5",
+      "category": "feature-with-constraint",
+      "prompt": "Create a row actions menu for a table — each row should have a \"...\" button that opens a dropdown with Edit, Duplicate, and Delete options. Delete should be visually distinct.",
+      "expectedComponents": [
+        "DropdownMenu",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-6",
+      "category": "feature-with-constraint",
+      "prompt": "Build a shipping method selector with three options: Standard (free, 5-7 days), Express ($9.99, 2-3 days), and Overnight ($24.99, next day). Only one can be selected.",
+      "expectedComponents": [
+        "RadioList",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-7",
+      "category": "feature-with-constraint",
+      "prompt": "Create a price range filter with a slider that lets users set minimum and maximum price. Show the selected range as text above the slider.",
+      "expectedComponents": [
+        "Slider",
+        "Text"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-4",
+      "category": "integration-oriented",
+      "prompt": "Build a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.",
+      "expectedComponents": [
+        "NumberInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-8",
+      "category": "feature-with-constraint",
+      "prompt": "Create a date range picker for booking a hotel stay. Users should pick check-in and check-out dates. Past dates should be disabled.",
+      "expectedComponents": [
+        "DateInput",
+        "Calendar"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-9",
+      "category": "feature-with-constraint",
+      "prompt": "Build a meeting scheduler with a date picker and a time input for start time. The meeting duration should default to 30 minutes.",
+      "expectedComponents": [
+        "DateInput",
+        "TimeInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-4",
+      "category": "state-driven",
+      "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+      "expectedComponents": [
+        "CheckboxInput",
+        "Button",
+        "TextArea"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-5",
+      "category": "state-driven",
+      "prompt": "Create a notification preferences panel with toggle switches for Email notifications, Push notifications, and SMS alerts. Each switch should show its current state.",
+      "expectedComponents": [
+        "Switch",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-5",
+      "category": "integration-oriented",
+      "prompt": "Build a support ticket form with a subject line input, a description text area with character count, and a priority selector. Submit should post to /api/tickets.",
+      "expectedComponents": [
+        "TextInput",
+        "TextArea",
+        "Selector",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-10",
+      "category": "feature-with-constraint",
+      "prompt": "Build a user role assignment form. Show a list of team members with a dropdown selector next to each for their role: Viewer, Editor, Admin. Changes should save automatically.",
+      "expectedComponents": [
+        "Selector",
+        "Text",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-4",
+      "category": "page-setup",
+      "prompt": "Create a product detail page with breadcrumb navigation showing Home > Category > Subcategory > Product Name. The page should have a header, product info section, and a back button.",
+      "expectedComponents": [
+        "Breadcrumbs",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-6",
+      "category": "state-driven",
+      "prompt": "Show a project list page that displays an empty state when there are no projects. The empty state should have an icon, a message saying \"No projects yet\", and a \"Create Project\" button.",
+      "expectedComponents": [
+        "EmptyState",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-7",
+      "category": "state-driven",
+      "prompt": "Build a file upload component that shows a progress bar during upload. Display the filename, file size, and percentage complete. Show a success state when done.",
+      "expectedComponents": [
+        "ProgressBar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-4",
+      "category": "data-display",
+      "prompt": "Create a user profile page with tabs for Overview, Activity, and Settings. Each tab should show different content. The Overview tab should be selected by default.",
+      "expectedComponents": [
+        "TabList",
+        "Tab",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-5",
+      "category": "data-display",
+      "prompt": "Build an email inbox view with a table showing sender, subject, date, and a preview snippet. Add row selection with checkboxes and a bulk actions bar that appears when items are selected.",
+      "expectedComponents": [
+        "Table",
+        "CheckboxInput",
+        "DropdownMenu",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-6",
+      "category": "data-display",
+      "prompt": "Create a team members list where hovering over a member's name shows a hover card with their avatar, role, email, and a \"Message\" button.",
+      "expectedComponents": [
+        "HoverCard",
+        "Avatar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-11",
+      "category": "feature-with-constraint",
+      "prompt": "Build a toolbar with icon buttons for Bold, Italic, Underline, and Link. Each button should show a tooltip with the action name and keyboard shortcut on hover.",
+      "expectedComponents": [
+        "Tooltip",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-7",
+      "category": "data-display",
+      "prompt": "Display a list of services with their current status. Each service should show a status dot (green for healthy, yellow for degraded, red for down) next to the service name and last checked time.",
+      "expectedComponents": [
+        "StatusDot",
+        "Text",
+        "Card"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-12",
+      "category": "feature-with-constraint",
+      "prompt": "Build an image thumbnail grid. When a user clicks a thumbnail, open a fullscreen lightbox showing the image with a caption and a close button.",
+      "expectedComponents": [
+        "Lightbox"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-13",
+      "category": "feature-with-constraint",
+      "prompt": "Create a photo gallery for a product page. Show 4 product images as thumbnails. Clicking any thumbnail opens a lightbox gallery where users can navigate between all images with prev/next arrows and keyboard. Show a counter like '2 of 4'.",
+      "expectedComponents": [
+        "Lightbox"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-14",
+      "category": "feature-with-constraint",
+      "prompt": "Build a media gallery that mixes images and videos. Clicking any item opens a lightbox viewer. Videos should show native playback controls. Images should support zoom on double-click.",
+      "expectedComponents": [
+        "Lightbox"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-8",
+      "category": "data-display",
+      "prompt": "Show a content library table where each row has a small colored pill for its type — Article, Video, Podcast, Newsletter, and Course each need their own distinct color so they're easy to tell apart at a glance. The colors should stay consistent everywhere a type appears.",
+      "expectedComponents": [
+        "XDSBadge",
+        "XDSTable"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "tc-10",
+      "category": "theme-customization",
+      "prompt": "My docs page is light-themed, but I want the install command snippet to look like a real terminal — dark background with light syntax colors — and have a copy button. Only that snippet should be dark; the rest of the page stays light.",
+      "expectedComponents": [
+        "XDSCodeBlock",
+        "XDSSyntaxTheme"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-15",
+      "category": "feature-with-constraint",
+      "prompt": "Build a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.",
+      "expectedComponents": [
+        "XDSMultiSelector"
+      ],
+      "status": "pending"
+    }
+  ],
+  "totalPrompts": 70,
+  "completedPrompts": 0
+}

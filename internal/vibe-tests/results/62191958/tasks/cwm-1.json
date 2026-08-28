@@ -1,0 +1,18 @@
+{
+  "promptId": "cwm-1",
+  "category": "clone-with-modification",
+  "prompt": "Something like Stripe's pricing table but with monthly/annual toggle",
+  "expectedComponents": [
+    "Card",
+    "Button"
+  ],
+  "followUps": [
+    "Highlight the most popular plan with a badge",
+    "Add a comparison table below that shows features per plan"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nSomething like Stripe's pricing table but with monthly/annual toggle\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/cwm-1.tsx",
+  "createdAt": "2026-08-27T14:07:07.998Z"
+}

@@ -1,0 +1,18 @@
+{
+  "promptId": "tc-3",
+  "category": "theme-customization",
+  "prompt": "I need my page background to use the wash color from the theme. Right now wrapping my app in Theme doesn't change the page background — it stays white.",
+  "expectedComponents": [
+    "Theme",
+    "Layout"
+  ],
+  "followUps": [
+    "Also set the body background color to match",
+    "Make the content area use the surface color instead"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI need my page background to use the wash color from the theme. Right now wrapping my app in Theme doesn't change the page background — it stays white.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-3.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

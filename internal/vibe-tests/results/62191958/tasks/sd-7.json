@@ -1,0 +1,19 @@
+{
+  "promptId": "sd-7",
+  "category": "state-driven",
+  "prompt": "Build a file upload component that shows a progress bar during upload. Display the filename, file size, and percentage complete. Show a success state when done.",
+  "expectedComponents": [
+    "ProgressBar",
+    "Text",
+    "Button"
+  ],
+  "followUps": [
+    "Support multiple file uploads with individual progress bars",
+    "Add a cancel button that aborts the upload in progress"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a file upload component that shows a progress bar during upload. Display the filename, file size, and percentage complete. Show a success state when done.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/sd-7.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

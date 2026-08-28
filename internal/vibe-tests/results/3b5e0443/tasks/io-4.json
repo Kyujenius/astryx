@@ -1,0 +1,18 @@
+{
+  "promptId": "io-4",
+  "category": "integration-oriented",
+  "prompt": "Build a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.",
+  "expectedComponents": [
+    "NumberInput",
+    "Button"
+  ],
+  "followUps": [
+    "Add a \"Remove item\" button that appears when quantity is set to 0",
+    "Show the updated subtotal price next to the quantity"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a quantity selector for a shopping cart item. It should have a number input with increment/decrement, min of 1, max of 99. Changing the quantity should call an update API endpoint.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/io-4.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

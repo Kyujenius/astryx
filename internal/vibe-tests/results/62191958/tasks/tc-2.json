@@ -1,0 +1,17 @@
+{
+  "promptId": "tc-2",
+  "category": "theme-customization",
+  "prompt": "I want to create a custom brand theme for my app. The primary accent color should be purple (#7B61FF), with a dark surface (#1A1A2E) and light text. Set up a proper Astryx theme with these colors.",
+  "expectedComponents": [
+    "Theme"
+  ],
+  "followUps": [
+    "Add a matching light mode version of the theme",
+    "Override the button styles in this theme to have rounded-full corners"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI want to create a custom brand theme for my app. The primary accent color should be purple (#7B61FF), with a dark surface (#1A1A2E) and light text. Set up a proper Astryx theme with these colors.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-2.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

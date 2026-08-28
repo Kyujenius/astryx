@@ -1,0 +1,17 @@
+{
+  "promptId": "tc-9",
+  "category": "theme-customization",
+  "prompt": "Create two custom Astryx themes that share the same spacing and typography tokens but have different color palettes. The first theme ('ocean') should use blue tones (#0077B6 accent) and the second ('sunset') should use warm orange tones (#E76F51 accent). Keep it DRY — don't duplicate the shared token values.",
+  "expectedComponents": [
+    "Theme"
+  ],
+  "followUps": [
+    "Add a theme switcher that lets the user toggle between the two themes",
+    "Add a third theme that shares colors with ocean but uses different spacing"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate two custom Astryx themes that share the same spacing and typography tokens but have different color palettes. The first theme ('ocean') should use blue tones (#0077B6 accent) and the second ('sunset') should use warm orange tones (#E76F51 accent). Keep it DRY — don't duplicate the shared token values.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-9.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

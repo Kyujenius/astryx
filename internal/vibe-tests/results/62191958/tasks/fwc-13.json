@@ -1,0 +1,17 @@
+{
+  "promptId": "fwc-13",
+  "category": "feature-with-constraint",
+  "prompt": "Create a photo gallery for a product page. Show 4 product images as thumbnails. Clicking any thumbnail opens a lightbox gallery where users can navigate between all images with prev/next arrows and keyboard. Show a counter like '2 of 4'.",
+  "expectedComponents": [
+    "Lightbox"
+  ],
+  "followUps": [
+    "Highlight the currently-viewed thumbnail while the lightbox is open",
+    "Add captions to each image that display below the photo in the lightbox"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a photo gallery for a product page. Show 4 product images as thumbnails. Clicking any thumbnail opens a lightbox gallery where users can navigate between all images with prev/next arrows and keyboard. Show a counter like '2 of 4'.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-13.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

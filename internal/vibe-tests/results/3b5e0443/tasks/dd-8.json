@@ -1,0 +1,18 @@
+{
+  "promptId": "dd-8",
+  "category": "data-display",
+  "prompt": "Show a content library table where each row has a small colored pill for its type — Article, Video, Podcast, Newsletter, and Course each need their own distinct color so they're easy to tell apart at a glance. The colors should stay consistent everywhere a type appears.",
+  "expectedComponents": [
+    "XDSBadge",
+    "XDSTable"
+  ],
+  "followUps": [
+    "Add two more types — Webinar and Case Study — with their own colors that don't clash with the existing five",
+    "Make the pills smaller so they fit comfortably in a dense table row"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nShow a content library table where each row has a small colored pill for its type — Article, Video, Podcast, Newsletter, and Course each need their own distinct color so they're easy to tell apart at a glance. The colors should stay consistent everywhere a type appears.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/dd-8.tsx",
+  "createdAt": "2026-08-27T14:06:58.950Z"
+}

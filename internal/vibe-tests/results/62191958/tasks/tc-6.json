@@ -1,0 +1,20 @@
+{
+  "promptId": "tc-6",
+  "category": "theme-customization",
+  "prompt": "Build a settings page where users can customize the app's appearance. Include controls for accent color, border radius, and spacing scale. Changes should apply via the Astryx theme system, not inline styles.",
+  "expectedComponents": [
+    "Theme",
+    "TextInput",
+    "Card",
+    "Button"
+  ],
+  "followUps": [
+    "Add a preview section that shows how buttons, cards, and inputs look with the current settings",
+    "Add a reset button that restores the default theme"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a settings page where users can customize the app's appearance. Include controls for accent color, border radius, and spacing scale. Changes should apply via the Astryx theme system, not inline styles.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-6.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

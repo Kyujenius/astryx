@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-1",
+  "category": "feature-with-constraint",
+  "prompt": "I need a banner that warns users their trial expires in X days and lets them upgrade",
+  "expectedComponents": [
+    "Card",
+    "Button"
+  ],
+  "followUps": [
+    "Add a dismiss button that hides the banner and remembers the choice",
+    "Make the banner more urgent (red styling) when less than 3 days remain"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI need a banner that warns users their trial expires in X days and lets them upgrade\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-1.tsx",
+  "createdAt": "2026-08-27T14:07:07.998Z"
+}

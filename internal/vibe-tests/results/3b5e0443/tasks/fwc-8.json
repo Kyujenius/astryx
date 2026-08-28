@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-8",
+  "category": "feature-with-constraint",
+  "prompt": "Create a date range picker for booking a hotel stay. Users should pick check-in and check-out dates. Past dates should be disabled.",
+  "expectedComponents": [
+    "DateInput",
+    "Calendar"
+  ],
+  "followUps": [
+    "Show the number of nights between check-in and check-out",
+    "Highlight weekends with a different background color in the calendar"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a date range picker for booking a hotel stay. Users should pick check-in and check-out dates. Past dates should be disabled.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-8.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

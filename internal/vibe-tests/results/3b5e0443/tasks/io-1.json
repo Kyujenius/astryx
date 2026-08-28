@@ -1,0 +1,18 @@
+{
+  "promptId": "io-1",
+  "category": "integration-oriented",
+  "prompt": "A form that validates email and posts to /api/subscribe",
+  "expectedComponents": [
+    "TextInput",
+    "Button"
+  ],
+  "followUps": [
+    "Show a success message with the user's email after subscribing",
+    "Add error handling that shows the API error message"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nA form that validates email and posts to /api/subscribe\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/io-1.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

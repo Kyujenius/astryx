@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-11",
+  "category": "feature-with-constraint",
+  "prompt": "Build a toolbar with icon buttons for Bold, Italic, Underline, and Link. Each button should show a tooltip with the action name and keyboard shortcut on hover.",
+  "expectedComponents": [
+    "Tooltip",
+    "Button"
+  ],
+  "followUps": [
+    "Add an active/pressed state for buttons when formatting is applied",
+    "Add a color picker button to the toolbar"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a toolbar with icon buttons for Bold, Italic, Underline, and Link. Each button should show a tooltip with the action name and keyboard shortcut on hover.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-11.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

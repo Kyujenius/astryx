@@ -1,0 +1,18 @@
+{
+  "promptId": "sd-3",
+  "category": "state-driven",
+  "prompt": "Form that disables submit until all required fields are valid",
+  "expectedComponents": [
+    "TextInput",
+    "Button"
+  ],
+  "followUps": [
+    "Show validation errors inline below each field after blur",
+    "Add a loading state while the form is submitting"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nForm that disables submit until all required fields are valid\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/sd-3.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

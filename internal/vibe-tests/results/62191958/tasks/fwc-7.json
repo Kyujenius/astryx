@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-7",
+  "category": "feature-with-constraint",
+  "prompt": "Create a price range filter with a slider that lets users set minimum and maximum price. Show the selected range as text above the slider.",
+  "expectedComponents": [
+    "Slider",
+    "Text"
+  ],
+  "followUps": [
+    "Add preset buttons for common ranges like \"Under $25\", \"$25-$50\", \"$50-$100\"",
+    "Debounce the slider changes and show a loading indicator while results update"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a price range filter with a slider that lets users set minimum and maximum price. Show the selected range as text above the slider.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-7.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

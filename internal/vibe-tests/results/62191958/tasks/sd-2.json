@@ -1,0 +1,17 @@
+{
+  "promptId": "sd-2",
+  "category": "state-driven",
+  "prompt": "A button that shows loading spinner while submitting, then success checkmark",
+  "expectedComponents": [
+    "Button"
+  ],
+  "followUps": [
+    "Add an error state with a red X icon and error message tooltip",
+    "Make the success state auto-dismiss after 2 seconds"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nA button that shows loading spinner while submitting, then success checkmark\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/sd-2.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

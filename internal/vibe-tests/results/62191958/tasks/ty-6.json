@@ -1,0 +1,17 @@
+{
+  "promptId": "ty-6",
+  "category": "typography",
+  "prompt": "Display a code example with a label that says 'Installation' above it, the code snippet 'yarn add @astryxdesign/core', and a note below in small text",
+  "expectedComponents": [
+    "Text"
+  ],
+  "followUps": [
+    "Add a copy button next to the code",
+    "Add a second code example for npm below the yarn one"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nDisplay a code example with a label that says 'Installation' above it, the code snippet 'yarn add @astryxdesign/core', and a note below in small text\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ty-6.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

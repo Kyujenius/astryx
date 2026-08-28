@@ -1,0 +1,19 @@
+{
+  "promptId": "fwc-4",
+  "category": "feature-with-constraint",
+  "prompt": "I need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.",
+  "expectedComponents": [
+    "Dialog",
+    "Button",
+    "Layout"
+  ],
+  "followUps": [
+    "Add a checkbox that says \"Don't ask me again\" and remember the preference",
+    "Show a loading spinner on the delete button while the API call is in progress"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI need a confirmation dialog that asks \"Are you sure you want to delete this item?\" with cancel and delete buttons. The delete button should be destructive-styled.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-4.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

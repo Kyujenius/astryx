@@ -1,0 +1,20 @@
+{
+  "promptId": "tc-7",
+  "category": "theme-customization",
+  "prompt": "I have a section of my app that needs a different theme than the rest — like a dark sidebar next to a light content area. How do I nest themes in Astryx?",
+  "expectedComponents": [
+    "Theme",
+    "Layout",
+    "LayoutPanel",
+    "LayoutContent"
+  ],
+  "followUps": [
+    "Make sure the sidebar text and icons use the dark theme's colors",
+    "Add a smooth transition when the sidebar theme changes"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI have a section of my app that needs a different theme than the rest — like a dark sidebar next to a light content area. How do I nest themes in Astryx?\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-7.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

@@ -1,0 +1,17 @@
+{
+  "promptId": "fwc-15",
+  "category": "feature-with-constraint",
+  "prompt": "Build a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.",
+  "expectedComponents": [
+    "XDSMultiSelector"
+  ],
+  "followUps": [
+    "Add a second unlabeled multi-select for filtering by owner, using the same accessible pattern",
+    "Show a count of active filters next to the bar and add a 'Clear all' button"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a compact filter bar above a results table with a multi-select dropdown for filtering by tag. There's no room for a visible label above the control — the placeholder text 'Filter by tags' does the work visually — but screen reader users still need to know what the field is.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-15.tsx",
+  "createdAt": "2026-08-27T14:06:58.950Z"
+}

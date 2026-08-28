@@ -1,0 +1,203 @@
+{
+  "cs-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "dd-7": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 51,
+        "message": "Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Type '{ children: string; variant: \"destructive\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "io-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 58,
+        "message": "Type '{ children: string; onPress: () => void | undefined; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 66,
+        "message": "Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 85,
+        "message": "Type '{ children: string; size: \"sm\"; variant: \"ghost\"; onPress: () => void | undefined; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 24,
+        "message": "Property 'Brand' does not exist on type 'typeof TopNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 28,
+        "message": "Property 'Brand' does not exist on type 'typeof TopNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 32,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 33,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 38,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 43,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 48,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 61,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 62,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 63,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 74,
+        "message": "Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 76,
+        "message": "Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 78,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 89,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 90,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 91,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 103,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 104,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 18,
+    "buildSuccess": false
+  },
+  "rc-3": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Object literal may only specify known properties, and 'base' does not exist in type '{ minWidth: number; max?: number | undefined; repeat?: \"fill\" | \"fit\" | undefined; }'.",
+        "code": "TS2353"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-7": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 50,
+        "message": "Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 56,
+        "message": "Type '\"space-between\"' is not assignable to type '\"end\" | \"start\" | \"center\" | \"between\" | \"around\" | \"evenly\" | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 63,
+        "message": "Type '{ children: string; variant: \"success\"; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "ty-8": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

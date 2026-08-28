@@ -1,0 +1,18 @@
+{
+  "promptId": "rc-1",
+  "category": "responsive-context",
+  "prompt": "Navigation that collapses to hamburger on mobile",
+  "expectedComponents": [
+    "Button",
+    "HStack"
+  ],
+  "followUps": [
+    "Add a dropdown for nav items with children",
+    "Add keyboard navigation (arrow keys and escape to close)"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nNavigation that collapses to hamburger on mobile\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/rc-1.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

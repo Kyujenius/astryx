@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-3",
+  "category": "feature-with-constraint",
+  "prompt": "Create a password input that shows strength indicator and has a show/hide toggle",
+  "expectedComponents": [
+    "TextInput",
+    "Button"
+  ],
+  "followUps": [
+    "Add specific requirements that check off as you type (8+ chars, uppercase, number, symbol)",
+    "Add a 'Generate strong password' button"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a password input that shows strength indicator and has a show/hide toggle\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-3.tsx",
+  "createdAt": "2026-08-27T14:06:58.947Z"
+}

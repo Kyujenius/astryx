@@ -1,0 +1,18 @@
+{
+  "promptId": "tc-1",
+  "category": "theme-customization",
+  "prompt": "Set up a dark mode toggle for my app. I want a button that switches between light and dark themes using the Astryx theme system.",
+  "expectedComponents": [
+    "Theme",
+    "Button"
+  ],
+  "followUps": [
+    "Persist the user's theme preference to localStorage",
+    "Add a 'system' option that follows the OS preference"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nSet up a dark mode toggle for my app. I want a button that switches between light and dark themes using the Astryx theme system.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-1.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

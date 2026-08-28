@@ -1,0 +1,18 @@
+{
+  "promptId": "rc-2",
+  "category": "responsive-context",
+  "prompt": "A sidebar that becomes a bottom sheet on mobile",
+  "expectedComponents": [
+    "Card",
+    "LayoutPanel"
+  ],
+  "followUps": [
+    "Add a drag handle to resize the bottom sheet",
+    "Add swipe-to-dismiss gesture on mobile"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nA sidebar that becomes a bottom sheet on mobile\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/rc-2.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

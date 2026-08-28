@@ -1,0 +1,17 @@
+{
+  "promptId": "fwc-12",
+  "category": "feature-with-constraint",
+  "prompt": "Build an image thumbnail grid. When a user clicks a thumbnail, open a fullscreen lightbox showing the image with a caption and a close button.",
+  "expectedComponents": [
+    "Lightbox"
+  ],
+  "followUps": [
+    "Add zoom support so users can double-click to zoom in on details",
+    "Add a download button that saves the full-resolution image"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild an image thumbnail grid. When a user clicks a thumbnail, open a fullscreen lightbox showing the image with a caption and a close button.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-12.tsx",
+  "createdAt": "2026-08-27T14:06:58.950Z"
+}

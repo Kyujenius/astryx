@@ -1,0 +1,18 @@
+{
+  "promptId": "tc-10",
+  "category": "theme-customization",
+  "prompt": "My docs page is light-themed, but I want the install command snippet to look like a real terminal — dark background with light syntax colors — and have a copy button. Only that snippet should be dark; the rest of the page stays light.",
+  "expectedComponents": [
+    "XDSCodeBlock",
+    "XDSSyntaxTheme"
+  ],
+  "followUps": [
+    "Add a second snippet below it showing the command's output, using the same dark terminal look",
+    "Swap the dark look for a different dark preset to match our brand — something like Dracula"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nMy docs page is light-themed, but I want the install command snippet to look like a real terminal — dark background with light syntax colors — and have a copy button. Only that snippet should be dark; the rest of the page stays light.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/tc-10.tsx",
+  "createdAt": "2026-08-27T14:06:58.950Z"
+}

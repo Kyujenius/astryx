@@ -1,0 +1,19 @@
+{
+  "promptId": "dd-4",
+  "category": "data-display",
+  "prompt": "Create a user profile page with tabs for Overview, Activity, and Settings. Each tab should show different content. The Overview tab should be selected by default.",
+  "expectedComponents": [
+    "TabList",
+    "Tab",
+    "Card"
+  ],
+  "followUps": [
+    "Add a badge showing the count of unread items on the Activity tab",
+    "Remember the last selected tab in the URL hash"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a user profile page with tabs for Overview, Activity, and Settings. Each tab should show different content. The Overview tab should be selected by default.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/dd-4.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

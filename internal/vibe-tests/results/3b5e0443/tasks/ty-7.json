@@ -1,0 +1,18 @@
+{
+  "promptId": "ty-7",
+  "category": "typography",
+  "prompt": "Render a markdown-formatted changelog that includes headings, paragraphs, bullet lists, and inline code. The content should use proper typography styling.",
+  "expectedComponents": [
+    "Heading",
+    "Text"
+  ],
+  "followUps": [
+    "Make the changelog use the editorial heading scale",
+    "Add a table of contents at the top with links to each section"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nRender a markdown-formatted changelog that includes headings, paragraphs, bullet lists, and inline code. The content should use proper typography styling.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/ty-7.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

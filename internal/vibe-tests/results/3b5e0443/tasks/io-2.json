@@ -1,0 +1,19 @@
+{
+  "promptId": "io-2",
+  "category": "integration-oriented",
+  "prompt": "An autocomplete input that fetches suggestions from an API as you type",
+  "expectedComponents": [
+    "TextInput",
+    "Card",
+    "Typeahead"
+  ],
+  "followUps": [
+    "Add keyboard navigation (up/down arrows, enter to select)",
+    "Show a loading spinner while fetching and handle empty results"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nAn autocomplete input that fetches suggestions from an API as you type\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/io-2.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

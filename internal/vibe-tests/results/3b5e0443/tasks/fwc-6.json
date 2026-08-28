@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-6",
+  "category": "feature-with-constraint",
+  "prompt": "Build a shipping method selector with three options: Standard (free, 5-7 days), Express ($9.99, 2-3 days), and Overnight ($24.99, next day). Only one can be selected.",
+  "expectedComponents": [
+    "RadioList",
+    "Card"
+  ],
+  "followUps": [
+    "Show the estimated delivery date next to each option based on today's date",
+    "Disable the Overnight option on weekends with a tooltip explaining why"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a shipping method selector with three options: Standard (free, 5-7 days), Express ($9.99, 2-3 days), and Overnight ($24.99, next day). Only one can be selected.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-6.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

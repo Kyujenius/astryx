@@ -1,0 +1,18 @@
+{
+  "promptId": "ty-3",
+  "category": "typography",
+  "prompt": "Build a metrics dashboard card that shows a label like 'Total Revenue', a large numeric value like '$12,340.56', and a small supporting line that says '+12% from last month'",
+  "expectedComponents": [
+    "Card",
+    "Text"
+  ],
+  "followUps": [
+    "Make the numeric value use tabular numbers so digits align across cards",
+    "Add a second metric card next to it and ensure the numbers line up vertically"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a metrics dashboard card that shows a label like 'Total Revenue', a large numeric value like '$12,340.56', and a small supporting line that says '+12% from last month'\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/ty-3.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

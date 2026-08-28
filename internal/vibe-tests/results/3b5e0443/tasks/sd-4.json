@@ -1,0 +1,19 @@
+{
+  "promptId": "sd-4",
+  "category": "state-driven",
+  "prompt": "Build a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.",
+  "expectedComponents": [
+    "CheckboxInput",
+    "Button",
+    "TextArea"
+  ],
+  "followUps": [
+    "Add a \"Select all\" checkbox that toggles both checkboxes",
+    "Add a third optional checkbox for marketing emails"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a terms and conditions acceptance form. Show a scrollable text area with the terms, then checkboxes for \"I agree to the Terms of Service\" and \"I agree to the Privacy Policy\". The continue button should only enable when both are checked.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/sd-4.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

@@ -1,0 +1,18 @@
+{
+  "promptId": "sd-6",
+  "category": "state-driven",
+  "prompt": "Show a project list page that displays an empty state when there are no projects. The empty state should have an icon, a message saying \"No projects yet\", and a \"Create Project\" button.",
+  "expectedComponents": [
+    "EmptyState",
+    "Button"
+  ],
+  "followUps": [
+    "Add a search bar that shows a different empty state when search returns no results",
+    "Add a loading skeleton state while projects are being fetched"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nShow a project list page that displays an empty state when there are no projects. The empty state should have an icon, a message saying \"No projects yet\", and a \"Create Project\" button.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/sd-6.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

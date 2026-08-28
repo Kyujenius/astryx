@@ -1,0 +1,19 @@
+{
+  "promptId": "ty-8",
+  "category": "typography",
+  "prompt": "Create a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text",
+  "expectedComponents": [
+    "Card",
+    "Heading",
+    "Text"
+  ],
+  "followUps": [
+    "Add an email address that truncates with an ellipsis if it's too long",
+    "Make the role text medium weight"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a profile card with the user's name as a heading, their role as a label, their bio as body text, and their join date in small supporting text\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/ty-8.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

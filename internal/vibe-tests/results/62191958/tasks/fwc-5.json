@@ -1,0 +1,18 @@
+{
+  "promptId": "fwc-5",
+  "category": "feature-with-constraint",
+  "prompt": "Create a row actions menu for a table — each row should have a \"...\" button that opens a dropdown with Edit, Duplicate, and Delete options. Delete should be visually distinct.",
+  "expectedComponents": [
+    "DropdownMenu",
+    "Button"
+  ],
+  "followUps": [
+    "Add a confirmation dialog when Delete is clicked",
+    "Group the items into sections: one for editing actions and one for destructive actions"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a row actions menu for a table — each row should have a \"...\" button that opens a dropdown with Edit, Duplicate, and Delete options. Delete should be visually distinct.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/fwc-5.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

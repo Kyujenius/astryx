@@ -1,0 +1,19 @@
+{
+  "promptId": "wd-2",
+  "category": "workflow-description",
+  "prompt": "Create a multi-step form wizard with back/next buttons and a progress indicator",
+  "expectedComponents": [
+    "Card",
+    "Button",
+    "VStack"
+  ],
+  "followUps": [
+    "Add validation that prevents going to the next step if required fields are empty",
+    "Add the ability to click on completed steps to jump back to them"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a multi-step form wizard with back/next buttons and a progress indicator\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/wd-2.tsx",
+  "createdAt": "2026-08-27T14:07:07.998Z"
+}

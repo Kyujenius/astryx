@@ -1,0 +1,17 @@
+{
+  "promptId": "fwc-2",
+  "category": "feature-with-constraint",
+  "prompt": "Build a notification that shows unread count, but hides when count is zero",
+  "expectedComponents": [
+    "Card"
+  ],
+  "followUps": [
+    "Add a dropdown that shows the list of notifications when clicked",
+    "Add a 'Mark all as read' button to the dropdown"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a notification that shows unread count, but hides when count is zero\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/fwc-2.tsx",
+  "createdAt": "2026-08-27T14:06:58.947Z"
+}

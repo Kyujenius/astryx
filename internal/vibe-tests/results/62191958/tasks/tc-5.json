@@ -1,0 +1,18 @@
+{
+  "promptId": "tc-5",
+  "category": "theme-customization",
+  "prompt": "I want to customize the card component's appearance in my theme — add a gradient border and increase the border radius. How do I do component-level style overrides in the Astryx theme?",
+  "expectedComponents": [
+    "Theme",
+    "Card"
+  ],
+  "followUps": [
+    "Also override the button variants to have a shadow on hover",
+    "Make the heading component use a custom font family in this theme"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nI want to customize the card component's appearance in my theme — add a gradient border and increase the border radius. How do I do component-level style overrides in the Astryx theme?\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/tc-5.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

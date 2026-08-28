@@ -1,0 +1,18 @@
+{
+  "promptId": "ty-10",
+  "category": "typography",
+  "prompt": "Create an article page with a full editorial-style header (large title, subtitle, author info) and a body section that renders rich text content with proper heading hierarchy, paragraphs, code blocks, and lists",
+  "expectedComponents": [
+    "Heading",
+    "Text"
+  ],
+  "followUps": [
+    "Add a 'Table of Contents' sidebar that lists all the section headings",
+    "Make the body text use the large text type for better readability"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate an article page with a full editorial-style header (large title, subtitle, author info) and a body section that renders rich text content with proper heading hierarchy, paragraphs, code blocks, and lists\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ty-10.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}

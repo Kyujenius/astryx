@@ -1,0 +1,20 @@
+{
+  "promptId": "io-5",
+  "category": "integration-oriented",
+  "prompt": "Build a support ticket form with a subject line input, a description text area with character count, and a priority selector. Submit should post to /api/tickets.",
+  "expectedComponents": [
+    "TextInput",
+    "TextArea",
+    "Selector",
+    "Button"
+  ],
+  "followUps": [
+    "Add file attachment support with a drag-and-drop zone",
+    "Show a preview of the ticket before submitting"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a support ticket form with a subject line input, a description text area with character count, and a priority selector. Submit should post to /api/tickets.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/io-5.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

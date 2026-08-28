@@ -1,0 +1,19 @@
+{
+  "promptId": "tc-4",
+  "category": "theme-customization",
+  "prompt": "Create a theme switcher that lets users pick between three themes: Default, Midnight (dark purple), and Earth (warm brown tones). Show a preview card for each theme.",
+  "expectedComponents": [
+    "Theme",
+    "Card",
+    "Button"
+  ],
+  "followUps": [
+    "Show a live preview of each theme using actual Astryx components inside the preview cards",
+    "Save the selected theme to localStorage and restore it on page load"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a theme switcher that lets users pick between three themes: Default, Midnight (dark purple), and Earth (warm brown tones). Show a preview card for each theme.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/tc-4.tsx",
+  "createdAt": "2026-08-27T14:06:58.949Z"
+}

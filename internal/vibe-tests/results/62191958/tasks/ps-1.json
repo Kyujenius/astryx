@@ -1,0 +1,21 @@
+{
+  "promptId": "ps-1",
+  "category": "page-setup",
+  "prompt": "Create a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.",
+  "expectedComponents": [
+    "Theme",
+    "Layout",
+    "LayoutHeader",
+    "LayoutContent",
+    "LayoutPanel"
+  ],
+  "followUps": [
+    "Add a user avatar with dropdown menu in the header",
+    "Make the sidebar collapsible with a toggle button"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCreate a new page for a settings dashboard. It should have a header with the app title, a sidebar for navigation, and a main content area. Use the Astryx theme system.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ps-1.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

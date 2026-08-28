@@ -1,0 +1,186 @@
+{
+  "cs-2": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 28,
+        "message": "Type '{ label: string; options: { value: string; label: string; }[]; value: Billing; onChange: (val: string) => void; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 44,
+        "message": "Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 59,
+        "message": "Property 'label' is missing in type '{ children: string; variant: \"primary\" | \"secondary\"; }' but required in type 'ButtonProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "dd-7": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "fwc-4": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "io-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 38,
+        "message": "Type '{ children: string; onPress: () => void | undefined; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 23,
+        "message": "Property 'Brand' does not exist on type 'typeof TopNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 25,
+        "message": "Property 'Brand' does not exist on type 'typeof TopNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 29,
+        "message": "Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 30,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 31,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 32,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 33,
+        "message": "Property 'Item' does not exist on type 'typeof SideNav'.",
+        "code": "TS2339"
+      },
+      {
+        "line": 43,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 44,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 45,
+        "message": "Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 55,
+        "message": "Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 57,
+        "message": "Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 59,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 69,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 70,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 71,
+        "message": "Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 82,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      },
+      {
+        "line": 83,
+        "message": "Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 18,
+    "buildSuccess": false
+  },
+  "rc-3": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-7": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 42,
+        "message": "Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 53,
+        "message": "Type '{ children: string; variant: \"success\"; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ty-8": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-1": {
+    "target": "astryx-tailwind",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}

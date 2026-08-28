@@ -1,0 +1,18 @@
+{
+  "promptId": "cwm-3",
+  "category": "clone-with-modification",
+  "prompt": "Like Notion's page header with icon picker and cover image",
+  "expectedComponents": [
+    "Card",
+    "Button"
+  ],
+  "followUps": [
+    "Add the ability to reposition the cover image by dragging",
+    "Add a breadcrumb trail above the title"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nLike Notion's page header with icon picker and cover image\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/cwm-3.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

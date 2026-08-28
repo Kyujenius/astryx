@@ -1,0 +1,20 @@
+{
+  "promptId": "dd-5",
+  "category": "data-display",
+  "prompt": "Build an email inbox view with a table showing sender, subject, date, and a preview snippet. Add row selection with checkboxes and a bulk actions bar that appears when items are selected.",
+  "expectedComponents": [
+    "Table",
+    "CheckboxInput",
+    "DropdownMenu",
+    "Button"
+  ],
+  "followUps": [
+    "Add a \"Select all\" checkbox in the header that selects all visible rows",
+    "Add swipe-to-archive on mobile"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild an email inbox view with a table showing sender, subject, date, and a preview snippet. Add row selection with checkboxes and a bulk actions bar that appears when items are selected.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/dd-5.tsx",
+  "createdAt": "2026-08-27T14:07:08.001Z"
+}

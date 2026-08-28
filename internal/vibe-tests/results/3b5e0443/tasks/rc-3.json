@@ -1,0 +1,17 @@
+{
+  "promptId": "rc-3",
+  "category": "responsive-context",
+  "prompt": "Cards that stack vertically on mobile but show in a grid on desktop",
+  "expectedComponents": [
+    "Card"
+  ],
+  "followUps": [
+    "Add a toggle to switch between grid and list view",
+    "Add skeleton loading states that match the current layout"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nCards that stack vertically on mobile but show in a grid on desktop\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/rc-3.tsx",
+  "createdAt": "2026-08-27T14:06:58.948Z"
+}

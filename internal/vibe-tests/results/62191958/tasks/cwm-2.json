@@ -1,0 +1,19 @@
+{
+  "promptId": "cwm-2",
+  "category": "clone-with-modification",
+  "prompt": "A GitHub-style issue label picker with color dots and search",
+  "expectedComponents": [
+    "TextInput",
+    "Button",
+    "Card"
+  ],
+  "followUps": [
+    "Add the ability to create a new label inline with a color picker",
+    "Show a count of how many issues have each label"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nA GitHub-style issue label picker with color dots and search\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/cwm-2.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

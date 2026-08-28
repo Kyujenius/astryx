@@ -1,0 +1,14 @@
+{
+  "promptId": "cs-2",
+  "category": "complex-selector",
+  "prompt": "Create a project destination picker. Users open one field, search destinations, browse nested folders, and choose a folder. The popup should support keyboard navigation and should close after a folder is selected.",
+  "expectedComponents": [
+    "ComplexSelector",
+    "TextInput",
+    "TreeList"
+  ],
+  "target": "astryx",
+  "persona": "naive",
+  "taskPrompt": "You are generating React/TSX code using the Astryx design system.\nYour project is at /vercel/sandbox/repos/xds/internal/vibe-tests/results/57cf6e4c/projects/cs-2. Explore it to find available components.\n\n## Task\n\nCreate a project destination picker. Users open one field, search destinations, browse nested folders, and choose a folder. The popup should support keyboard navigation and should close after a folder is selected.\n\n## Output\n\nWrite the TSX code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/57cf6e4c/projects/cs-2/cs-2.tsx\nWrite metadata to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/57cf6e4c/projects/cs-2/cs-2.json\n\nMetadata: {\"completedAt\": \"<ISO timestamp>\", \"docsRead\": [<component names you looked up>]}\nWrite ONLY valid TSX. No markdown fences, no explanation.",
+  "createdAt": "2026-08-28T11:04:28.986Z"
+}

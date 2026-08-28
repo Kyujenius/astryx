@@ -1,0 +1,18 @@
+{
+  "promptId": "ty-1",
+  "category": "typography",
+  "prompt": "Show a page title with a short description underneath",
+  "expectedComponents": [
+    "Heading",
+    "Text"
+  ],
+  "followUps": [
+    "Make the title use the larger editorial scale",
+    "Add a label above the title that says 'Getting Started'"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nShow a page title with a short description underneath\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/ty-1.tsx",
+  "createdAt": "2026-08-27T14:07:07.999Z"
+}

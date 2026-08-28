@@ -1,0 +1,19 @@
+{
+  "promptId": "wd-1",
+  "category": "workflow-description",
+  "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+  "expectedComponents": [
+    "Card",
+    "Button",
+    "TextInput"
+  ],
+  "followUps": [
+    "Add form validation with inline error messages for required fields",
+    "Add a 'Save shipping address for future orders' checkbox"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a checkout flow: cart summary → shipping → payment → confirmation\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/3b5e0443/results/wd-1.tsx",
+  "createdAt": "2026-08-27T14:06:58.947Z"
+}

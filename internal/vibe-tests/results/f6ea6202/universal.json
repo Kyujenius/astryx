@@ -1,0 +1,959 @@
+{
+  "averages": {
+    "correctness": 81,
+    "accessibility": 98,
+    "codeQuality": 100,
+    "efficiency": 79,
+    "maintainability": 94
+  },
+  "overall": 90,
+  "byPrompt": {
+    "cs-2": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 78,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{id: \"_\", name: \"_\", children: ["
+          },
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 7 times",
+            "count": 7,
+            "example": "{id: \"_\", name: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 67,
+          "codeLines": 61,
+          "stylingLines": 1,
+          "boilerplateLines": 9,
+          "logicLines": 51,
+          "stylingRatio": 0.01639344262295082,
+          "boilerplateRatio": 0.14754098360655737,
+          "decisionsPerElement": 1.6,
+          "elementCount": 5,
+          "stylingDecisionCount": 8,
+          "duplicateRatio": 0.18
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 18
+        }
+      }
+    },
+    "cwm-1": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; options: { value: string; label: string; }[]; value: Billing; onChange: (val: string) => void; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+            "line": 28
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '\"accent\"' is not assignable to type 'keyof BadgeVariantMap | undefined'.",
+            "line": 44
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'label' is missing in type '{ children: string; variant: \"primary\" | \"secondary\"; }' but required in type 'ButtonProps'.",
+            "line": 59
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "heading-skip",
+            "severity": "minor",
+            "detail": "Heading level skipped: h1 → h3"
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 60,
+        "findings": [],
+        "metrics": {
+          "totalLines": 68,
+          "codeLines": 61,
+          "stylingLines": 0,
+          "boilerplateLines": 61,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 1.7,
+          "elementCount": 20,
+          "stylingDecisionCount": 33,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 11,
+          "avgStateSpread": 31
+        }
+      }
+    },
+    "dd-7": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 71,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 6 times",
+            "count": 6,
+            "example": "{name: \"_\", status: \"_\" as ServiceStatus, lastChecked: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 45,
+          "codeLines": 40,
+          "stylingLines": 4,
+          "boilerplateLines": 16,
+          "logicLines": 20,
+          "stylingRatio": 0.1,
+          "boilerplateRatio": 0.4,
+          "decisionsPerElement": 2.1,
+          "elementCount": 9,
+          "stylingDecisionCount": 19,
+          "duplicateRatio": 0.15
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "fwc-4": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 18
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 95,
+        "findings": [],
+        "metrics": {
+          "totalLines": 34,
+          "codeLines": 30,
+          "stylingLines": 1,
+          "boilerplateLines": 3,
+          "logicLines": 26,
+          "stylingRatio": 0.03333333333333333,
+          "boilerplateRatio": 0.1,
+          "decisionsPerElement": 1.7,
+          "elementCount": 3,
+          "stylingDecisionCount": 5,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 19
+        }
+      }
+    },
+    "io-3": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 38
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; onPress: () => void | undefined; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 38
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "input-no-label",
+            "severity": "critical",
+            "detail": "Form input without associated label",
+            "line": 30
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [],
+        "metrics": {
+          "totalLines": 61,
+          "codeLines": 56,
+          "stylingLines": 4,
+          "boilerplateLines": 20,
+          "logicLines": 32,
+          "stylingRatio": 0.07142857142857142,
+          "boilerplateRatio": 0.35714285714285715,
+          "decisionsPerElement": 1.4,
+          "elementCount": 13,
+          "stylingDecisionCount": 18,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 5,
+          "avgStateSpread": 38
+        }
+      }
+    },
+    "ps-1": {
+      "correctness": {
+        "score": 0,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 30
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 31
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 32
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 33
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Brand' does not exist on type 'typeof TopNav'.",
+            "line": 23
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Brand' does not exist on type 'typeof TopNav'.",
+            "line": 25
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: Element[]; label: string; }' is not assignable to type 'IntrinsicAttributes & SideNavProps'.",
+            "line": 29
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+            "line": 30
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+            "line": 31
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+            "line": 32
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2339: Property 'Item' does not exist on type 'typeof SideNav'.",
+            "line": 33
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+            "line": 43
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+            "line": 44
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; defaultValue: string; }' is not assignable to type 'IntrinsicAttributes & TextInputProps'.",
+            "line": 45
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+            "line": 55
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; defaultChecked: true; }' is not assignable to type 'IntrinsicAttributes & SwitchProps'.",
+            "line": 57
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+            "line": 59
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+            "line": 69
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+            "line": 70
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; type: \"password\"; }' but required in type 'TextInputProps'.",
+            "line": 71
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+            "line": 82
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2741: Property 'value' is missing in type '{ label: string; }' but required in type 'SwitchProps'.",
+            "line": 83
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 92,
+          "codeLines": 88,
+          "stylingLines": 5,
+          "boilerplateLines": 24,
+          "logicLines": 59,
+          "stylingRatio": 0.056818181818181816,
+          "boilerplateRatio": 0.2727272727272727,
+          "decisionsPerElement": 0.7,
+          "elementCount": 32,
+          "stylingDecisionCount": 23,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "moderate-state-spread",
+            "severity": "minor",
+            "detail": "Average state variable spread: 61 lines"
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 8,
+          "avgStateSpread": 61
+        }
+      }
+    },
+    "rc-3": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 20
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 80,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 6 times",
+            "count": 6,
+            "example": "{title: \"_\", description: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 31,
+          "codeLines": 28,
+          "stylingLines": 3,
+          "boilerplateLines": 3,
+          "logicLines": 22,
+          "stylingRatio": 0.10714285714285714,
+          "boilerplateRatio": 0.10714285714285714,
+          "decisionsPerElement": 2.1,
+          "elementCount": 7,
+          "stylingDecisionCount": 15,
+          "duplicateRatio": 0.21
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 4,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "sd-7": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 42
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 42
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: string; variant: \"success\"; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+            "line": 53
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 74,
+          "codeLines": 66,
+          "stylingLines": 4,
+          "boilerplateLines": 13,
+          "logicLines": 49,
+          "stylingRatio": 0.06060606060606061,
+          "boilerplateRatio": 0.19696969696969696,
+          "decisionsPerElement": 1.6,
+          "elementCount": 14,
+          "stylingDecisionCount": 23,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 9,
+          "avgStateSpread": 46
+        }
+      }
+    },
+    "ty-8": {
+      "correctness": {
+        "score": 100,
+        "findings": []
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [],
+        "metrics": {
+          "totalLines": 27,
+          "codeLines": 25,
+          "stylingLines": 3,
+          "boilerplateLines": 5,
+          "logicLines": 17,
+          "stylingRatio": 0.12,
+          "boilerplateRatio": 0.2,
+          "decisionsPerElement": 1.6,
+          "elementCount": 10,
+          "stylingDecisionCount": 16,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 8,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-1": {
+      "correctness": {
+        "score": 100,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 46
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 62
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 63
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 79
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 80
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "repeated-classname",
+            "severity": "moderate",
+            "detail": "className pattern repeated 3 times",
+            "count": 3,
+            "example": "flex justify-between"
+          }
+        ],
+        "metrics": {
+          "totalLines": 98,
+          "codeLines": 89,
+          "stylingLines": 0,
+          "boilerplateLines": 89,
+          "logicLines": 0,
+          "stylingRatio": 0,
+          "boilerplateRatio": 1,
+          "decisionsPerElement": 1.2,
+          "elementCount": 45,
+          "stylingDecisionCount": 52,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "moderate-state-spread",
+            "severity": "minor",
+            "detail": "Average state variable spread: 73 lines"
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 14,
+          "avgStateSpread": 73
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "complex-selector": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 78,
+      "maintainability": 100
+    },
+    "clone-with-modification": {
+      "correctness": 55,
+      "accessibility": 97,
+      "codeQuality": 100,
+      "efficiency": 60,
+      "maintainability": 92
+    },
+    "data-display": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 71,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 95,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 85,
+      "accessibility": 85,
+      "codeQuality": 100,
+      "efficiency": 83,
+      "maintainability": 92
+    },
+    "page-setup": {
+      "correctness": 0,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 83
+    },
+    "responsive-context": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 80,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 92
+    },
+    "typography": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 100,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 55,
+      "maintainability": 83
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 6258316,
+    "avgDurationMs": 625832,
+    "avgOutputChars": 2126,
+    "avgOutputLines": 60,
+    "avgDocsRead": 7,
+    "estimatedInputTokens": 47500,
+    "estimatedOutputTokens": 5315,
+    "byPrompt": {
+      "cs-2": {
+        "durationMs": 625834,
+        "outputChars": 1942,
+        "outputLines": 67,
+        "docsRead": [
+          "Selector",
+          "TextInput",
+          "Stack",
+          "Text",
+          "Heading"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 486
+      },
+      "cwm-1": {
+        "durationMs": 625832,
+        "outputChars": 2733,
+        "outputLines": 68,
+        "docsRead": [
+          "Stack",
+          "HStack",
+          "Heading",
+          "Text",
+          "Button",
+          "Card",
+          "Badge",
+          "Divider",
+          "SegmentedControl"
+        ],
+        "estimatedInputTokens": 6000,
+        "estimatedOutputTokens": 683
+      },
+      "dd-7": {
+        "durationMs": 625831,
+        "outputChars": 1812,
+        "outputLines": 45,
+        "docsRead": [
+          "Stack",
+          "HStack",
+          "Heading",
+          "Text",
+          "StatusDot",
+          "Card",
+          "Divider"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 453
+      },
+      "fwc-4": {
+        "durationMs": 625833,
+        "outputChars": 1035,
+        "outputLines": 34,
+        "docsRead": [
+          "AlertDialog",
+          "Button",
+          "Stack"
+        ],
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 259
+      },
+      "io-3": {
+        "durationMs": 625830,
+        "outputChars": 2012,
+        "outputLines": 61,
+        "docsRead": [
+          "Stack",
+          "HStack",
+          "Button",
+          "ProgressBar",
+          "Text",
+          "Heading",
+          "Card"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 503
+      },
+      "ps-1": {
+        "durationMs": 625830,
+        "outputChars": 3355,
+        "outputLines": 92,
+        "docsRead": [
+          "AppShell",
+          "SideNav",
+          "TopNav",
+          "Heading",
+          "Text",
+          "Stack",
+          "Card",
+          "TextInput",
+          "Switch",
+          "Divider"
+        ],
+        "estimatedInputTokens": 6625,
+        "estimatedOutputTokens": 839
+      },
+      "rc-3": {
+        "durationMs": 625831,
+        "outputChars": 1283,
+        "outputLines": 31,
+        "docsRead": [
+          "Stack",
+          "Grid",
+          "Card",
+          "Heading",
+          "Text"
+        ],
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 321
+      },
+      "sd-7": {
+        "durationMs": 625832,
+        "outputChars": 2459,
+        "outputLines": 74,
+        "docsRead": [
+          "Stack",
+          "HStack",
+          "Heading",
+          "Text",
+          "Button",
+          "ProgressBar",
+          "Card",
+          "Badge"
+        ],
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 615
+      },
+      "ty-8": {
+        "durationMs": 625830,
+        "outputChars": 967,
+        "outputLines": 27,
+        "docsRead": [
+          "Stack",
+          "Heading",
+          "Text",
+          "Card",
+          "Avatar",
+          "HStack",
+          "Divider"
+        ],
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 242
+      },
+      "wd-1": {
+        "durationMs": 625833,
+        "outputChars": 3657,
+        "outputLines": 98,
+        "docsRead": [
+          "Button",
+          "Stack",
+          "Heading",
+          "Text",
+          "TextInput",
+          "Card",
+          "Divider",
+          "Badge",
+          "HStack"
+        ],
+        "estimatedInputTokens": 6000,
+        "estimatedOutputTokens": 914
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "promptId": "wd-5",
+  "category": "workflow-description",
+  "prompt": "Build a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.",
+  "expectedComponents": [
+    "Dialog",
+    "TextInput",
+    "TextArea",
+    "Button",
+    "Layout"
+  ],
+  "followUps": [
+    "Add a rating selector (1-5 stars) above the comment field",
+    "Add form validation — title is required, comment must be at least 20 characters"
+  ],
+  "persona": "naive",
+  "degradation": false,
+  "target": "astryx",
+  "subagentPrompt": "First read AGENTS.md in this directory for component library guidance.\n\nBuild a feedback form that opens in a dialog. It should have a title field, a long-form text area for comments, and a submit button. Show a success state after submission.\n\nWrite the code to: /vercel/sandbox/repos/xds/internal/vibe-tests/results/62191958/results/wd-5.tsx",
+  "createdAt": "2026-08-27T14:07:08.000Z"
+}
