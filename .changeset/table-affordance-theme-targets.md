@@ -10,4 +10,6 @@ Setting a colour on either target now reaches the glyph. Both icons previously n
 
 The header label inside the sort button now carries `--color-text-secondary` itself, the token the `<th>` already sets, rather than inheriting it — otherwise colouring the sort target would repaint the header text along with the arrow.
 
+[fix] Table: both affordances now draw the shared rest → hover → pressed treatment, and the filter button gets a focus ring it never had. The dimming they used to carry doubled as their only hover feedback, so removing it for contrast left them with no pointer feedback at all; they now take `--color-overlay-hover` on hover and `--color-overlay-pressed` on press, with the glyph darkening a step alongside the tint so the feedback survives a forced-colors mode that drops backgrounds. Hover is guarded on `@media (hover: hover)`, so a touch device does not stick in the tint after a tap. The filter trigger previously fell back to the user agent's default outline on keyboard focus; it now draws the shared Astryx ring like every other control. Accent stays reserved for the sorted and filtered states, so "this column is sorted" never reads as "the pointer is here".
+
 @freddymeta
