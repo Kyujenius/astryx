@@ -77,6 +77,10 @@ export const TEMPLATE_COMPONENTS: Record<
     () =>
       import('../../../../packages/cli/assets/templates/pages/form-two-column/page'),
   ),
+  'form-wizard': lazy(
+    () =>
+      import('../../../../packages/cli/assets/templates/pages/form-wizard/page'),
+  ),
   'gallery-hero': lazy(
     () =>
       import('../../../../packages/cli/assets/templates/pages/gallery-hero/page'),
