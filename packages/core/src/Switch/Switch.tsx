@@ -311,7 +311,6 @@ const styles = stylex.create({
   labelWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    gap: spacingVars['--spacing-0-5'],
     justifyContent: 'center',
   },
   description: {

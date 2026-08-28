@@ -36,6 +36,22 @@ import {useInputContainer} from '../hooks';
 import {FormLayoutContext} from '../FormLayout/FormLayoutContext';
 
 const styles = stylex.create({
+  // The label and its description read as a single block, with no space
+  // between them. They need a wrapper of their own to get that: as bare
+  // siblings they pick up the column gap of whichever caller holds them
+  // (Field, CheckboxInput, Switch), which is the spacing meant to separate
+  // the label group from the control below it.
+  labelGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  // A hidden label group must not take a slot in the caller's layout, or an
+  // empty box would draw the caller's gap around nothing. Dropping the
+  // wrapper box leaves the sr-only children out of flow directly under the
+  // caller, so the group occupies no space at all.
+  labelGroupHidden: {
+    display: 'contents',
+  },
   label: {
     display: 'flex',
     alignItems: 'center',
@@ -276,7 +292,11 @@ export function FieldLabel({
   );
 
   return (
-    <>
+    <div
+      {...stylex.props(
+        styles.labelGroup,
+        isLabelHidden && styles.labelGroupHidden,
+      )}>
       <LabelElement
         ref={ref}
         id={labelID}
@@ -317,7 +337,7 @@ export function FieldLabel({
           {description}
         </span>
       )}
-    </>
+    </div>
   );
 }
 
