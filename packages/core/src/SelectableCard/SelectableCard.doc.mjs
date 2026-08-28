@@ -17,8 +17,8 @@ export const docs = {
     ],
     accessibility: [
       {name: 'Accessible selection', description: 'Provide `label`; the selected state must remain programmatically exposed and keyboard operable. Do not rely on Card color alone to communicate selection.'},
-      {name: 'Selection indicator', description: 'The visible selection ring or equivalent state indicator is meaningful and needs 3:1 against each adjacent color. Themes adding a filled variant must choose a ring that contrasts with both the Card and its surroundings.'},
-      {name: 'Focus and content', description: 'Measure focus separately from selection at 3:1 against adjacent colors. Text uses its applicable text threshold, and meaningful icons or graphics need 3:1 against the rendered Card background.'},
+      {name: 'Surface and selection indicator', description: 'The resting Card surface may be decorative when content identifies the option, but the visible selection ring or equivalent state cue is meaningful. Measure its fully rendered color at 3:1 against every adjacent color; themes adding a filled variant must choose a ring that contrasts with both the Card and its surroundings.'},
+      {name: 'Focus and content', description: 'Measure focus separately from selection at 3:1 against every adjacent color. Measure text and meaningful icons against the fully rendered Card background after resolving alpha, overlays, and the actual parent surface; text uses its applicable threshold and meaningful graphics need 3:1.'},
       {name: 'Unselected and disabled', description: 'An unselected non-semantic Card surface may remain decorative when content identifies the option. A genuinely disabled SelectableCard is contrast-exempt, but selected and disabled must remain distinguishable by more than color alone.'},
     ],
     anatomy: [

@@ -24,8 +24,8 @@ export const docs = {
       {guidance: false, description: 'Use color variants for status; use Banner or Badge for that. Color cards are for categorization.'},
     ],
     accessibility: [
-      {name: 'Container surface', description: 'A non-interactive Card background, border, and elevation are decorative when spacing, headings, and content already communicate the grouping. They do not inherently need 3:1 contrast against the page.'},
-      {name: 'Content contrast', description: 'Text must meet its applicable text threshold against the Card\'s rendered background. Meaningful icons and graphics need 3:1; label-redundant visuals may be decorative.'},
+      {name: 'Background, border, and elevation', description: 'Use the removal test: if removing the Card background, border, and shadow still leaves the grouping clear through spacing, headings, and content, those treatments are decorative under WCAG 1.4.11 and do not inherently need 3:1 against the page. Record their ratios for design review; treat a boundary as meaningful when the grouping depends on it.'},
+      {name: 'Content contrast', description: 'Measure text against the Card\'s fully rendered background after resolving alpha, overlays, and the actual parent surface. Text must meet its applicable threshold; meaningful icons and graphics need 3:1, while visuals that only repeat a visible label may be decorative.'},
       {name: 'Color variants', description: 'Do not use the Card color as the only status or category cue. Keep a visible label or other identifying content; if removing the color changes understanding, treat it as meaningful and test it at 3:1 against adjacent colors.'},
       {name: 'Nested controls', description: 'Buttons, links, inputs, and other interactive children keep their own contrast, focus, naming, and state requirements. A decorative Card boundary does not exempt nested controls.'},
     ],
