@@ -110,7 +110,11 @@ describe('the reported symptom', () => {
   });
 
   it('keeps base accessibility guidance when a translation does not replace it', async () => {
-    const docPath = path.join(CORE_SRC, 'Button', 'Button.doc.mjs');
+    const docPath = path.join(
+      import.meta.dirname,
+      '__fixtures__',
+      'component-accessibility-overlay.doc.mjs',
+    );
     const english = await loadDocs(docPath);
     const dense = await loadDocs(docPath, {dense: true});
 
