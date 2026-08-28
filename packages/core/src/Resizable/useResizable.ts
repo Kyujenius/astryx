@@ -174,15 +174,6 @@ interface PersistedResizableState {
   isCollapsed: boolean | null;
 }
 
-/**
- * Reads a persisted entry. Three formats exist in storage:
- * - `{size, isCollapsed}` — the current format; `size` is the expanded size,
- *   so the pre-collapse width survives a collapsed session
- * - a plain non-zero number — a legacy width-only entry that never recorded
- *   collapse, so `isCollapsed` is null (unknown)
- * - a plain `0` — written by legacy collapse, which restored the region as a
- *   zero-width expanded panel (#4790); read as "collapsed, no saved size"
- */
 function clampSizeIfOutsideBand(
   size: number,
   min: number,
@@ -192,6 +183,15 @@ function clampSizeIfOutsideBand(
   return size < min || size > max ? clampSize(size, min, max, snaps) : size;
 }
 
+/**
+ * Reads a persisted entry. Three formats exist in storage:
+ * - `{size, isCollapsed}` — the current format; `size` is the expanded size,
+ *   so the pre-collapse width survives a collapsed session
+ * - a plain non-zero number — a legacy width-only entry that never recorded
+ *   collapse, so `isCollapsed` is null (unknown)
+ * - a plain `0` — written by legacy collapse, which restored the region as a
+ *   zero-width expanded panel (#4790); read as "collapsed, no saved size"
+ */
 function loadPersistedState(key: string): PersistedResizableState | null {
   if (typeof window === 'undefined') {
     return null;
