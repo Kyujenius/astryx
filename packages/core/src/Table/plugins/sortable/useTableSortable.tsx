@@ -15,7 +15,13 @@
 
 import {useRef, useMemo, type ReactNode} from 'react';
 import * as stylex from '@stylexjs/stylex';
-import {colorVars, spacingVars, radiusVars} from '../../../theme/tokens.stylex';
+import {
+  colorVars,
+  spacingVars,
+  radiusVars,
+  durationVars,
+  easeVars,
+} from '../../../theme/tokens.stylex';
 import {focusOutlineProps} from '../../../utils/focusOutline.stylex';
 import {mergeProps} from '../../../utils';
 import {themeProps} from '../../../utils/themeProps';
@@ -141,7 +147,37 @@ const sortStyles = stylex.create({
     height: '100%',
     textAlign: 'inherit',
     borderRadius: radiusVars['--radius-inner'],
+    // Rest -> hover -> pressed, the treatment every other borderless control
+    // in the system draws. The resting state carries no tint: the affordance
+    // is legible on its colour alone (`--color-icon-secondary`, 4.74:1)
+    // rather than on the dimming that put it at 1.57:1.
+    backgroundColor: {
+      default: 'transparent',
+      ':active:where(:not(:disabled,[aria-disabled="true"]))':
+        colorVars['--color-overlay-pressed'],
+    },
+    transitionProperty: 'background-color, color',
+    transitionDuration: durationVars['--duration-fast'],
+    transitionTimingFunction: easeVars['--ease-standard'],
   },
+  // Guarded on `hover: hover` so a touch device does not stick in the hover
+  // tint after a tap (Component Audit Rubric A8).
+  buttonHoverOnPointer: {
+    '@media (hover: hover)': {
+      backgroundColor: {
+        ':hover:where(:not(:disabled,[aria-disabled="true"]))':
+          colorVars['--color-overlay-hover'],
+      },
+      color: {
+        // The glyph darkens a step as well, so the feedback survives a
+        // forced-colors mode that drops the background tint.
+        ':hover:where(:not(:disabled,[aria-disabled="true"]))':
+          colorVars['--color-text-primary'],
+      },
+    },
+  },
+  // Accent is the SORTED state and nothing else, so "this column is sorted"
+  // never reads as "the pointer is here".
   buttonSorted: {
     color: colorVars['--color-accent'],
   },
@@ -317,6 +353,7 @@ function SortHeaderButton<T extends Record<string, unknown>>({
         themeProps('table-sort-button', {direction}),
         focusOutlineProps.focusVisible(
           sortStyles.button,
+          sortStyles.buttonHoverOnPointer,
           direction != null && sortStyles.buttonSorted,
         ),
       )}

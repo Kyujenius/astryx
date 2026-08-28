@@ -26,7 +26,14 @@ import {
   type ReactNode,
 } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import {spacingVars, radiusVars, colorVars} from '../../../theme/tokens.stylex';
+import {
+  spacingVars,
+  radiusVars,
+  colorVars,
+  durationVars,
+  easeVars,
+} from '../../../theme/tokens.stylex';
+import {focusOutlineProps} from '../../../utils/focusOutline.stylex';
 import {Icon} from '../../../Icon';
 import {Button} from '../../../Button';
 import {Popover} from '../../../Popover';
@@ -390,7 +397,29 @@ const filterStyles = stylex.create({
     // colour on `astryx-table-filter-button` reaches it. The button holds only
     // the glyph, so there is nothing else here for the colour to reach.
     color: colorVars['--color-icon-secondary'],
+    // Rest -> hover -> pressed, matching the sort affordance beside it.
+    backgroundColor: {
+      default: 'transparent',
+      ':active:where(:not(:disabled,[aria-disabled="true"]))':
+        colorVars['--color-overlay-pressed'],
+    },
+    transitionProperty: 'background-color, color',
+    transitionDuration: durationVars['--duration-fast'],
+    transitionTimingFunction: easeVars['--ease-standard'],
   },
+  triggerHoverOnPointer: {
+    '@media (hover: hover)': {
+      backgroundColor: {
+        ':hover:where(:not(:disabled,[aria-disabled="true"]))':
+          colorVars['--color-overlay-hover'],
+      },
+      color: {
+        ':hover:where(:not(:disabled,[aria-disabled="true"]))':
+          colorVars['--color-text-primary'],
+      },
+    },
+  },
+  // Accent is the FILTERED state and nothing else.
   triggerActive: {
     color: colorVars['--color-accent'],
   },
@@ -1015,8 +1044,11 @@ function PopoverFilterTrigger({
           themeProps('table-filter-button', {
             active: hasValue ? 'active' : null,
           }),
-          stylex.props(
+          // The ring was missing here entirely: this button is keyboard
+          // reachable and drew nothing on focus.
+          focusOutlineProps.focusVisible(
             filterStyles.triggerButton,
+            filterStyles.triggerHoverOnPointer,
             hasValue && filterStyles.triggerActive,
           ),
         )}>
