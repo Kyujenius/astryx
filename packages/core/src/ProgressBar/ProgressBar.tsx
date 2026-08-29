@@ -248,7 +248,7 @@ const styles = stylex.create({
   track: {
     position: 'relative',
     width: '100%',
-    height: '8px',
+    height: '10px',
     backgroundColor: colorVars['--color-background-muted'],
     borderRadius: radiusVars['--radius-full'],
   },
@@ -285,8 +285,9 @@ const styles = stylex.create({
   },
   // A mark is a vertical tick centered on the track, a child of the
   // `role="progressbar"` element (unchanged DOM). The track no longer clips, so
-  // its height — 8px by default — may exceed the bar and overhang; the centering
-  // translate keeps any overhang symmetric. Positioned horizontally via
+  // its height — 8px by default — stays inset within the track. A theme may
+  // increase it beyond the track height; the centering translate keeps any
+  // resulting overhang symmetric. Positioned horizontally via
   // `insetInlineStart`; the translate mirrors under RTL.
   //
   // The dimensions read private vars rather than being plain declarations: a
@@ -315,8 +316,8 @@ const styles = stylex.create({
     position: 'absolute',
     insetInlineEnd: 0,
     top: '50%',
-    width: '6px',
-    height: '6px',
+    width: '10px',
+    height: '10px',
     aspectRatio: 1,
     borderRadius: '50%',
     transform: 'translateY(-50%)',

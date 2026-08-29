@@ -34,8 +34,11 @@ describe('ProgressBar', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders the stop indicator as an inset circle', () => {
+  it('renders the stop indicator as a circle matching the track height', () => {
     const {container} = render(<ProgressBar value={50} label="Progress" />);
+    const track = container.querySelector<HTMLElement>(
+      '.astryx-progress-bar-track',
+    )!;
     const indicator = container.querySelector<HTMLElement>(
       '.astryx-progress-bar-stop-indicator',
     )!;
@@ -52,17 +55,21 @@ describe('ProgressBar', () => {
     css += Array.from(document.querySelectorAll('style'))
       .map(style => style.textContent || '')
       .join('\n');
-    const indicatorRules = Array.from(indicator.classList)
-      .filter(className => /^x[a-z0-9]+$/.test(className))
-      .flatMap(
-        className =>
-          css.match(new RegExp(`\\.${className}\\b[^{]*\\{[^}]*\\}`, 'g')) ??
-          [],
-      )
-      .join('\n');
+    const rulesFor = (element: HTMLElement) =>
+      Array.from(element.classList)
+        .filter(className => /^x[a-z0-9]+$/.test(className))
+        .flatMap(
+          className =>
+            css.match(new RegExp(`\\.${className}\\b[^{]*\\{[^}]*\\}`, 'g')) ??
+            [],
+        )
+        .join('\n');
+    const trackRules = rulesFor(track);
+    const indicatorRules = rulesFor(indicator);
 
-    expect(indicatorRules).toMatch(/width:\s*6px/);
-    expect(indicatorRules).toMatch(/height:\s*6px/);
+    expect(trackRules).toMatch(/height:\s*10px/);
+    expect(indicatorRules).toMatch(/width:\s*10px/);
+    expect(indicatorRules).toMatch(/height:\s*10px/);
     expect(indicatorRules).toMatch(/aspect-ratio:\s*1/);
     expect(indicatorRules).toMatch(/border-radius:\s*50%/);
   });
