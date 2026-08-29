@@ -13,8 +13,8 @@ export const docs = {
     description:
       'Use Tab inside TabList to switch between related views or navigate among peer destinations while preserving a clear selected state.',
     accessibility: [
-      {name: 'Status end content', description: 'A Badge or StatusDot in `endContent` retains its own accessible name, non-color cue, and contrast requirements. Measure it against every Tab background it can occupy, including selected, hover, pressed, and focus-visible states.'},
-      {name: 'Hidden label', description: 'When `isLabelHidden` is true, do not expect a status indicator to identify the Tab. The required `label` still names the Tab, while the indicator separately names and communicates its status.'},
+      {name: 'Status end content', description: 'Content nested in a tab is flattened into the tab semantics and is not a separate accessibility stop. If a Badge or StatusDot communicates required state, include that state in the Tab label or provide equivalent visible text outside the nested indicator. Measure the visible indicator against every Tab background it can occupy.'},
+      {name: 'Hidden label', description: 'When `isLabelHidden` is true, `aria-label` supplies the Tab\'s entire accessible name and overrides descendant naming. Include any required status in that label; the nested indicator cannot announce it separately.'},
     ],
   },
   // Tab requires TabList context; wrap it so the preview doesn't throw.

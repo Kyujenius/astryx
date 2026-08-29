@@ -185,10 +185,10 @@ export const docs = {
     accessibility: [
       {name: 'Label and description', description: 'Always provide `label`; visually hiding it does not remove it from the accessible name. Associate helper and validation text with the input.'},
       {name: 'Text contrast', description: 'Labels, entered values, descriptions, and validation messages need 4.5:1 against their actual backgrounds. Placeholder text is not a label and must remain readable when used.'},
-      {name: 'Boundary and focus', description: 'The input boundary, required state indicators, and focus treatment need 3:1 against adjacent colors. Test focus on every supported parent surface.'},
+      {name: 'Boundary, text, and focus', description: 'The input boundary and focus treatment need 3:1 against adjacent colors. The textual “Required” and “Optional” indicators are text and need 4.5:1 at their rendered size. Test every supported parent surface.'},
       {name: 'Icons and controls', description: 'Meaningful start or status icons and loading arcs need 3:1. Clear and other interactive end controls need an accessible name, keyboard operation, and visible focus.'},
       {name: 'Status and color', description: 'Validation must include a specific text message; border color and status icons cannot be the only error, warning, or success cue.'},
-      {name: 'Disabled, read-only, and loading', description: 'Disabled inputs are contrast-exempt but must be programmatically disabled. Read-only inputs remain perceivable and focusable as appropriate. Loading must block conflicting edits and expose its busy state.'},
+      {name: 'Disabled, read-only, and loading', description: 'Disabled inputs are contrast-exempt but must be programmatically disabled. Read-only inputs remain perceivable and focusable as appropriate. Loading sets `aria-busy` and shows a Spinner, but does not itself disable or make the input read-only; choose an explicit interaction policy when edits would conflict with the pending operation.'},
     ],
     anatomy: [
       {name: 'Label', required: true, description: 'Text that identifies the field. Always rendered for accessibility even when visually hidden.'},

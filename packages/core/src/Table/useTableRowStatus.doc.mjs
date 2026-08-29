@@ -9,6 +9,8 @@ export const docs = {
   description:
     'Hook that returns a TablePlugin which prepends a narrow column signaling per-row status: a colored status dot by default, or an icon when provided. getStatus maps a row to a semantic color or raw CSS color, an optional icon, and a required accessible label. The label names the status for assistive technology and the hover tooltip; when several statuses coexist, a distinct icon or visible text is still required so sighted users do not rely on color alone. Return null for no indicator. The column header is visually blank but carries a screen-reader-only localized name ("Row status", i18n key @astryx.table.rowStatus.columnHeader). Memoize getStatus with useCallback for a stable plugin identity.',
   usage: {
+    description:
+      'Use useTableRowStatus to add a compact status column to a Table when each row needs a named state or condition.',
     accessibility: [
       {name: 'Accessible name', description: 'Always return `label`; it names the row status for assistive technology and the hover tooltip.'},
       {name: 'Visible non-color cue', description: 'An accessible label does not give sighted users a non-color cue. When several statuses coexist, provide distinct `icon` values or visible status text. Use the default dot only when it is redundant or represents a binary present/absent condition.'},

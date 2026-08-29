@@ -129,7 +129,7 @@ export const docs = {
       {name: 'Graphic contrast', description: 'When the bar alone communicates progress, its filled amount and total range need a 3:1 non-text cue. If nearby visible text communicates equivalent progress, the remaining track may be decorative.'},
       {name: 'Semantic variants', description: 'Do not rely on fill color alone to communicate success, warning, or error. Include a visible label, value, or nearby status message.'},
       {name: 'Marks', description: 'Meaningful target marks need 3:1 against whichever fill or track they overlap and require a label available to keyboard and assistive-technology users.'},
-      {name: 'Disabled and indeterminate', description: 'Disabled progress is contrast-exempt. For indeterminate progress, the animated fill remains the meaningful loading indicator and needs 3:1 against the track or adjacent surface.'},
+      {name: 'Disabled and indeterminate', description: 'Disabled progress is contrast-exempt. For indeterminate progress, the animated fill is the meaningful loading indicator and needs 3:1 against the track it moves across; nearby text does not replace that moving visual distinction.'},
     ],
   },
 };
