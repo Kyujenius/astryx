@@ -6,7 +6,7 @@
 // test fixture. Regenerate with: pnpm visual:probe-theme
 //
 // defineTheme takes six things and this covers all six:
-//   components  270 targets, 875 selectors (generated from the docs)
+//   components  272 targets, 889 selectors (generated from the docs)
 //   tokens      custom properties, read back off the themed element
 //   icons       every registry entry swapped for a marked glyph
 //   indicators  check / radio / checkbox swapped — the swap that reaches furthest
@@ -972,6 +972,14 @@ export const probeTheme = defineTheme({
         color: 'hsl(193.2 91% 12%)',
         borderColor: 'hsl(161.1 93% 25%)',
         outlineColor: 'hsl(157.5 84% 25%)',
+      },
+    },
+    'carousel-scroller': {
+      base: {
+        backgroundColor: 'hsl(330.8 89% 63%)',
+        color: 'hsl(272.4 89% 12%)',
+        borderColor: 'hsl(38.3 84% 25%)',
+        outlineColor: 'hsl(243.2 82% 25%)',
       },
     },
     center: {
@@ -3474,6 +3482,18 @@ export const probeTheme = defineTheme({
         borderColor: 'hsl(225.6 84% 25%)',
         outlineColor: 'hsl(169.2 80% 25%)',
       },
+      'contrast:standalone': {
+        backgroundColor: 'hsl(94.2 70% 56%)',
+        color: 'hsl(261.1 82% 12%)',
+        borderColor: 'hsl(235.9 91% 25%)',
+        outlineColor: 'hsl(53.2 92% 25%)',
+      },
+      'contrast:supplemental': {
+        backgroundColor: 'hsl(110.2 84% 52%)',
+        color: 'hsl(265.9 74% 12%)',
+        borderColor: 'hsl(184.9 88% 25%)',
+        outlineColor: 'hsl(171.2 92% 25%)',
+      },
     },
     'progress-bar-fill': {
       base: {
@@ -3551,6 +3571,56 @@ export const probeTheme = defineTheme({
         outlineColor: 'hsl(143.3 77% 25%)',
       },
     },
+    'progress-bar-stop-indicator': {
+      base: {
+        backgroundColor: 'hsl(354.0 89% 61%)',
+        color: 'hsl(250.3 88% 12%)',
+        borderColor: 'hsl(145.0 79% 25%)',
+        outlineColor: 'hsl(3.5 85% 25%)',
+      },
+      'variant:accent': {
+        backgroundColor: 'hsl(130.6 72% 49%)',
+        color: 'hsl(176.9 76% 12%)',
+        borderColor: 'hsl(155.2 88% 25%)',
+        outlineColor: 'hsl(35.6 71% 25%)',
+      },
+      'variant:success': {
+        backgroundColor: 'hsl(348.6 80% 54%)',
+        color: 'hsl(250.6 91% 12%)',
+        borderColor: 'hsl(6.4 88% 25%)',
+        outlineColor: 'hsl(42.5 75% 25%)',
+      },
+      'variant:warning': {
+        backgroundColor: 'hsl(145.1 76% 64%)',
+        color: 'hsl(252.9 85% 12%)',
+        borderColor: 'hsl(5.1 89% 25%)',
+        outlineColor: 'hsl(7.1 79% 25%)',
+      },
+      'variant:error': {
+        backgroundColor: 'hsl(283.9 77% 51%)',
+        color: 'hsl(197.1 91% 12%)',
+        borderColor: 'hsl(277.9 86% 25%)',
+        outlineColor: 'hsl(198.6 72% 25%)',
+      },
+      'variant:neutral': {
+        backgroundColor: 'hsl(267.6 87% 60%)',
+        color: 'hsl(14.8 75% 12%)',
+        borderColor: 'hsl(227.6 74% 25%)',
+        outlineColor: 'hsl(130.9 78% 25%)',
+      },
+      'contrast:standalone': {
+        backgroundColor: 'hsl(53.8 84% 62%)',
+        color: 'hsl(330.7 93% 12%)',
+        borderColor: 'hsl(87.6 77% 25%)',
+        outlineColor: 'hsl(12.5 90% 25%)',
+      },
+      'contrast:supplemental': {
+        backgroundColor: 'hsl(261.2 77% 61%)',
+        color: 'hsl(57.6 94% 12%)',
+        borderColor: 'hsl(357.3 85% 25%)',
+        outlineColor: 'hsl(102.7 73% 25%)',
+      },
+    },
     'progress-bar-track': {
       base: {
         backgroundColor: 'hsl(131.1 93% 62%)',
@@ -3595,6 +3665,18 @@ export const probeTheme = defineTheme({
         color: 'hsl(336.6 77% 12%)',
         borderColor: 'hsl(172.6 94% 25%)',
         outlineColor: 'hsl(201.3 74% 25%)',
+      },
+      'contrast:standalone': {
+        backgroundColor: 'hsl(190.1 78% 45%)',
+        color: 'hsl(344.5 78% 12%)',
+        borderColor: 'hsl(2.5 89% 25%)',
+        outlineColor: 'hsl(259.3 72% 25%)',
+      },
+      'contrast:supplemental': {
+        backgroundColor: 'hsl(149.4 82% 49%)',
+        color: 'hsl(332.4 80% 12%)',
+        borderColor: 'hsl(285.6 81% 25%)',
+        outlineColor: 'hsl(234.3 76% 25%)',
       },
     },
     'progressbar-fill': {
@@ -4359,6 +4441,12 @@ export const probeTheme = defineTheme({
         color: 'hsl(264.3 82% 12%)',
         borderColor: 'hsl(22.0 83% 25%)',
         outlineColor: 'hsl(220.9 77% 25%)',
+      },
+      'size:xl': {
+        backgroundColor: 'hsl(66.5 82% 64%)',
+        color: 'hsl(228.9 83% 12%)',
+        borderColor: 'hsl(259.5 74% 25%)',
+        outlineColor: 'hsl(299.9 71% 25%)',
       },
       'shade:default': {
         backgroundColor: 'hsl(94.7 82% 60%)',

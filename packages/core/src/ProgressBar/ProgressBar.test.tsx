@@ -23,6 +23,57 @@ describe('ProgressBar', () => {
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
   });
 
+  it('uses the standalone contrast treatment by default', () => {
+    const {container} = render(<ProgressBar value={50} label="Progress" />);
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-contrast',
+      'standalone',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-stop-indicator'),
+    ).toBeInTheDocument();
+  });
+
+  it('omits the stop indicator for explicit supplemental contrast', () => {
+    const {container} = render(
+      <ProgressBar
+        value={50}
+        label="Progress"
+        hasValueLabel
+        contrast="supplemental"
+      />,
+    );
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-contrast',
+      'supplemental',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-stop-indicator'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('keeps indeterminate visuals standalone and disabled visuals supplemental', () => {
+    const {container, rerender} = render(
+      <ProgressBar isIndeterminate label="Loading" />,
+    );
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-contrast',
+      'standalone',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-stop-indicator'),
+    ).not.toBeInTheDocument();
+
+    rerender(<ProgressBar value={50} label="Canceled" isDisabled />);
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-contrast',
+      'supplemental',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-stop-indicator'),
+    ).not.toBeInTheDocument();
+  });
+
   it('uses role="progressbar" (not "meter") for determinate progress', () => {
     // A determinate ProgressBar conveys task completion, so it must be a
     // progressbar (announced on update), not a meter (a static gauge).
@@ -282,6 +333,9 @@ describe('ProgressBar', () => {
       // reading flow (inline-start → inline-end, i.e. right → left).
       expect(css).toMatch(/translateX\(100%\)/);
       expect(css).toMatch(/translateX\(-250%\)/);
+      expect(css).toMatch(
+        /box-shadow:\s*inset 0 0 0 1px var\(--color-text-primary\)/,
+      );
       // The animation-name is swapped specifically under `[dir="rtl"]`.
       expect(css).toMatch(/:is\(\[dir="rtl"\][^)]*\)[^{]*\{\s*animation-name:/);
     });
@@ -858,6 +912,9 @@ describe('ProgressBar theme target names', () => {
     expect(container.querySelector('.astryx-progress-bar-fill')).toHaveClass(
       'astryx-progressbar-fill',
     );
+    expect(
+      container.querySelector('.astryx-progress-bar-stop-indicator'),
+    ).toBeInTheDocument();
     expect(container.querySelector('.astryx-progress-bar-mark')).toHaveClass(
       'astryx-progressbar-mark',
     );

@@ -5,7 +5,7 @@
 /**
  * @file ProgressBar.tsx
  * @input Uses React, useId, stylex, color/spacing/radius/transition tokens
- * @output Exports ProgressBar component, ProgressBarProps, ProgressBarVariant types
+ * @output Exports ProgressBar component, ProgressBarProps, ProgressBarVariant, ProgressBarContrast types
  * @position Core implementation; consumed by index.ts
  *
  * SYNC: When modified, update these files to stay in sync:
@@ -49,6 +49,16 @@ const LazyProgressBarMarkTooltip = lazy(
  * Extensible via module augmentation of ProgressBarVariantMap.
  */
 export type ProgressBarVariant = keyof ProgressBarVariantMap;
+
+/**
+ * How much visible information the ProgressBar itself must carry.
+ *
+ * `standalone` is self-contained and renders a terminal stop indicator so the
+ * total range remains perceivable without nearby value text. `supplemental`
+ * removes that indicator and is only appropriate when an equivalent visible
+ * value is provided by this component or immediately nearby.
+ */
+export type ProgressBarContrast = 'standalone' | 'supplemental';
 
 /**
  * A fixed target mark drawn on the progress track.
@@ -112,6 +122,18 @@ export interface ProgressBarProps extends BaseProps<HTMLDivElement> {
    * @default 'accent'
    */
   variant?: ProgressBarVariant;
+  /**
+   * Controls whether the graphic must communicate its full range by itself.
+   *
+   * Use `supplemental` only when an equivalent visible value (for example,
+   * "65%" or "3 of 5") is rendered by this component or immediately nearby.
+   * This prop is explicit: ProgressBar does not inspect surrounding DOM to
+   * guess whether equivalent text exists. Indeterminate bars always use the
+   * standalone fill/track color pairing because their moving fill is the
+   * meaningful state indicator. Disabled bars use the supplemental treatment.
+   * @default 'standalone'
+   */
+  contrast?: ProgressBarContrast;
   /**
    * When true, renders an animated indeterminate progress indicator.
    * Use when the progress amount is unknown (e.g. loading, processing).
@@ -249,6 +271,7 @@ const styles = stylex.create({
     height: '100%',
     width: '40%',
     borderRadius: radiusVars['--radius-full'],
+    boxShadow: `inset 0 0 0 1px ${colorVars['--color-text-primary']}`,
     animationName: {
       default: indeterminateSlide,
       ':is([dir="rtl"] *)': indeterminateSlideRtl,
@@ -287,6 +310,21 @@ const styles = stylex.create({
       default: 'translate(-50%, -50%)',
       ':is([dir="rtl"] *)': 'translate(50%, -50%)',
     },
+  },
+  stopIndicator: {
+    position: 'absolute',
+    insetInlineEnd: 0,
+    top: '50%',
+    width: '8px',
+    height: '8px',
+    boxSizing: 'border-box',
+    borderRadius: radiusVars['--radius-full'],
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    borderColor: colorVars['--color-text-primary'],
+    backgroundColor: colorVars['--color-background-surface'],
+    transform: 'translateY(-50%)',
+    pointerEvents: 'none',
   },
 });
 
@@ -392,6 +430,8 @@ function defaultFormatValueLabel(value: number, max: number): string {
  * @example
  * ```
  * <ProgressBar value={75} label="Upload progress" />
+ * <ProgressBar value={75} label="Upload progress" hasValueLabel
+ *   contrast="supplemental" />
  * <ProgressBar isIndeterminate label="Loading..." />
  * <ProgressBar value={3.2} max={5} label="Disk usage" hasValueLabel
  *   formatValueLabel={(v, m) => `${v} GB / ${m} GB`} />
@@ -424,6 +464,7 @@ export function ProgressBar({
   hasValueLabel = false,
   formatValueLabel = defaultFormatValueLabel,
   variant = 'accent',
+  contrast = 'standalone',
   isIndeterminate = false,
   isDisabled = false,
   marks,
@@ -448,6 +489,11 @@ export function ProgressBar({
   const showValueLabel = hasValueLabel && !isIndeterminate;
 
   const fillVariant = isDisabled ? 'disabled' : variant;
+  const visualContrast = isIndeterminate
+    ? 'standalone'
+    : isDisabled
+      ? 'supplemental'
+      : contrast;
 
   // Marks make no sense without a determinate value, so they are only drawn
   // in determinate mode. Non-finite mark values are dropped; the rest are
@@ -481,7 +527,7 @@ export function ProgressBar({
       {...mergeProps(
         themeProps(
           'progress-bar',
-          {variant},
+          {variant, contrast: visualContrast},
           // `progressbar` ran the compound name together; themes styling it
           // keep working until the next major.
           {legacyNames: ['progressbar']},
@@ -560,6 +606,18 @@ export function ProgressBar({
               stylex.props(styles.fill, variantStyles[fillVariant]),
             )}
             style={{width: `${percentage}%`}}
+          />
+        )}
+        {!isIndeterminate && !isDisabled && visualContrast === 'standalone' && (
+          <span
+            aria-hidden="true"
+            {...mergeProps(
+              themeProps('progress-bar-stop-indicator', {
+                variant: fillVariant,
+                contrast: visualContrast,
+              }),
+              stylex.props(styles.stopIndicator),
+            )}
           />
         )}
         {/* Target marks — children of the progressbar element (unchanged),

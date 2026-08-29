@@ -51,9 +51,17 @@ export const docs = {
       default: "'accent'",
     },
     {
+      name: 'contrast',
+      type: "'standalone' | 'supplemental'",
+      description:
+        '`standalone` renders the self-contained range treatment, including a terminal stop indicator. Use `supplemental` only when an equivalent visible value is rendered by ProgressBar or immediately nearby. The component never inspects surrounding DOM to infer this.',
+      default: "'standalone'",
+    },
+    {
       name: 'isIndeterminate',
       type: 'boolean',
-      description: 'Animated loading indicator for unknown progress.',
+      description:
+        'Animated loading indicator for unknown progress. Uses the standalone treatment with a contrasting inner boundary so the moving segment remains distinguishable across themes; no terminal stop is rendered.',
       default: 'false',
     },
     {
@@ -77,9 +85,13 @@ export const docs = {
   ],
   theming: {
     targets: [
-      {className: 'astryx-progress-bar', visualProps: ['variant']},
+      {className: 'astryx-progress-bar', visualProps: ['variant', 'contrast']},
       {className: 'astryx-progress-bar-fill', visualProps: ['variant']},
       {className: 'astryx-progress-bar-track'},
+      {
+        className: 'astryx-progress-bar-stop-indicator',
+        visualProps: ['variant', 'contrast'],
+      },
       {
         className: 'astryx-progress-bar-mark',
         visualProps: ['variant', 'placement'],
@@ -88,7 +100,7 @@ export const docs = {
       // them keep working. Drop in the next major.
       {
         className: 'astryx-progressbar',
-        visualProps: ['variant'],
+        visualProps: ['variant', 'contrast'],
         deprecatedFor: 'progress-bar',
       },
       {
@@ -119,6 +131,7 @@ export const docs = {
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
@@ -174,6 +187,13 @@ export const docsZh = {
       default: "'accent'",
     },
     {
+      name: 'contrast',
+      type: "'standalone' | 'supplemental'",
+      description:
+        '`standalone` 使用可独立理解的范围呈现并显示终点标记。仅当组件内或附近有等效的可见数值时使用 `supplemental`；组件不会检查周围 DOM 来自动推断。',
+      default: "'standalone'",
+    },
+    {
       name: 'isIndeterminate',
       type: 'boolean',
       description: '用于未知进度的动画加载指示器。',
@@ -200,9 +220,13 @@ export const docsZh = {
   ],
   theming: {
     targets: [
-      {className: 'astryx-progress-bar', visualProps: ['variant']},
+      {className: 'astryx-progress-bar', visualProps: ['variant', 'contrast']},
       {className: 'astryx-progress-bar-fill', visualProps: ['variant']},
       {className: 'astryx-progress-bar-track'},
+      {
+        className: 'astryx-progress-bar-stop-indicator',
+        visualProps: ['variant', 'contrast'],
+      },
       {
         className: 'astryx-progress-bar-mark',
         visualProps: ['variant', 'placement'],
@@ -211,7 +235,7 @@ export const docsZh = {
       // them keep working. Drop in the next major.
       {
         className: 'astryx-progressbar',
-        visualProps: ['variant'],
+        visualProps: ['variant', 'contrast'],
         deprecatedFor: 'progress-bar',
       },
       {
@@ -242,6 +266,7 @@ export const docsZh = {
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
@@ -260,6 +285,7 @@ export const docsDense = {
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
@@ -273,7 +299,8 @@ export const docsDense = {
     hasValueLabel: 'Show formatted value text (ignored when indeterminate).',
     formatValueLabel: 'Custom value label formatter; defaults to percentage string.',
     variant: 'Semantic color variant.',
-    isIndeterminate: 'Animated loading indicator for unknown progress.',
+    contrast: 'standalone (default) includes the self-contained endpoint treatment; supplemental requires an equivalent visible value nearby and is never inferred from surrounding DOM.',
+    isIndeterminate: 'Animated loading indicator for unknown progress. Uses the standalone treatment and omits the terminal stop.',
     marks: 'Fixed target marks ({value, label?}) drawn on the track in the 0..max scale; stay visible past the fill. Marks inside the fill take the variant on-color; marks on the bare track take the primary text color (secondary when disabled). A label reveals a tooltip on hover/focus. Ignored when indeterminate.',
     isDisabled: 'Visually disabled: grays out fill and text.',
     xstyle: 'StyleX styles for layout customization. Must be stylex.create() value.',

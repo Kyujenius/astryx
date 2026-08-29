@@ -25,6 +25,12 @@ const meta: Meta<typeof ProgressBar> = {
       options: ['accent', 'success', 'warning', 'error', 'neutral'],
       description: 'Semantic color variant',
     },
+    contrast: {
+      control: 'select',
+      options: ['standalone', 'supplemental'],
+      description:
+        'Standalone includes its own endpoint cue; supplemental requires an equivalent visible value',
+    },
     isLabelHidden: {
       control: 'boolean',
       description: 'Visually hide the label',
@@ -55,6 +61,7 @@ export const WithValueLabel: Story = {
     value: 75,
     label: 'Storage used',
     hasValueLabel: true,
+    contrast: 'supplemental',
   },
 };
 
@@ -64,6 +71,7 @@ export const CustomFormat: Story = {
     max: 5,
     label: 'Disk usage',
     hasValueLabel: true,
+    contrast: 'supplemental',
     formatValueLabel: (value: number, max: number) => `${value} GB / ${max} GB`,
   },
 };
@@ -77,11 +85,41 @@ export const Variants: Story = {
         gap: '16px',
         width: '300px',
       }}>
-      <ProgressBar value={60} label="Accent" variant="accent" hasValueLabel />
-      <ProgressBar value={80} label="Success" variant="success" hasValueLabel />
-      <ProgressBar value={50} label="Warning" variant="warning" hasValueLabel />
-      <ProgressBar value={92} label="Error" variant="error" hasValueLabel />
-      <ProgressBar value={35} label="Neutral" variant="neutral" hasValueLabel />
+      <ProgressBar
+        value={60}
+        label="Accent"
+        variant="accent"
+        hasValueLabel
+        contrast="supplemental"
+      />
+      <ProgressBar
+        value={80}
+        label="Success"
+        variant="success"
+        hasValueLabel
+        contrast="supplemental"
+      />
+      <ProgressBar
+        value={50}
+        label="Warning"
+        variant="warning"
+        hasValueLabel
+        contrast="supplemental"
+      />
+      <ProgressBar
+        value={92}
+        label="Error"
+        variant="error"
+        hasValueLabel
+        contrast="supplemental"
+      />
+      <ProgressBar
+        value={35}
+        label="Neutral"
+        variant="neutral"
+        hasValueLabel
+        contrast="supplemental"
+      />
     </div>
   ),
 };
@@ -100,6 +138,7 @@ export const Disabled: Story = {
         label="Upload canceled"
         isDisabled
         hasValueLabel
+        contrast="supplemental"
       />
       <ProgressBar isIndeterminate label="Processing disabled" isDisabled />
     </div>
@@ -142,6 +181,7 @@ export const HiddenLabelWithValue: Story = {
     label: 'Upload',
     isLabelHidden: true,
     hasValueLabel: true,
+    contrast: 'supplemental',
   },
 };
 
@@ -150,6 +190,7 @@ export const Empty: Story = {
     value: 0,
     label: 'Not started',
     hasValueLabel: true,
+    contrast: 'supplemental',
   },
 };
 
@@ -159,6 +200,7 @@ export const Full: Story = {
     label: 'Complete',
     hasValueLabel: true,
     variant: 'success',
+    contrast: 'supplemental',
   },
 };
 
