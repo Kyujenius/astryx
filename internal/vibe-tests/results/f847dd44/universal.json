@@ -1,0 +1,2182 @@
+{
+  "averages": {
+    "correctness": 52,
+    "accessibility": 100,
+    "codeQuality": 98,
+    "efficiency": 89,
+    "maintainability": 98
+  },
+  "overall": 87,
+  "byPrompt": {
+    "cs-4": {
+      "correctness": {
+        "score": 55,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 32
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 13
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 22
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 32
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 95,
+        "findings": [],
+        "metrics": {
+          "totalLines": 45,
+          "codeLines": 42,
+          "stylingLines": 0,
+          "boilerplateLines": 5,
+          "logicLines": 37,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.11904761904761904,
+          "decisionsPerElement": 0.3,
+          "elementCount": 9,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 29
+        }
+      }
+    },
+    "cwm-1": {
+      "correctness": {
+        "score": 0,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 23
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 24
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 32
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 35
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 36
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 40
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 48
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 92,
+        "findings": [],
+        "metrics": {
+          "totalLines": 61,
+          "codeLines": 57,
+          "stylingLines": 0,
+          "boilerplateLines": 11,
+          "logicLines": 46,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.19298245614035087,
+          "decisionsPerElement": 0.7,
+          "elementCount": 21,
+          "stylingDecisionCount": 15,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 11,
+          "avgStateSpread": 24
+        }
+      }
+    },
+    "dd-8": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 32
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 45
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 79,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 7 times",
+            "count": 7,
+            "example": "{title: \"_\", type: \"_\" as ContentType, author: \"_\", date: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 59,
+          "codeLines": 54,
+          "stylingLines": 0,
+          "boilerplateLines": 16,
+          "logicLines": 38,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.2962962962962963,
+          "decisionsPerElement": 0.2,
+          "elementCount": 16,
+          "stylingDecisionCount": 3,
+          "duplicateRatio": 0.13
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "fwc-3": {
+      "correctness": {
+        "score": 40,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 40
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 28
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 29
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 40
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 44
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 87,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 3 times",
+            "count": 3,
+            "example": "if (score <= N) return {score, label: \"_\"};"
+          }
+        ],
+        "metrics": {
+          "totalLines": 52,
+          "codeLines": 48,
+          "stylingLines": 0,
+          "boilerplateLines": 7,
+          "logicLines": 41,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.14583333333333334,
+          "decisionsPerElement": 0.9,
+          "elementCount": 7,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0.06
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 5,
+          "avgStateSpread": 18
+        }
+      }
+    },
+    "io-4": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 26
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 95,
+        "findings": [],
+        "metrics": {
+          "totalLines": 39,
+          "codeLines": 35,
+          "stylingLines": 0,
+          "boilerplateLines": 4,
+          "logicLines": 31,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.11428571428571428,
+          "decisionsPerElement": 0.5,
+          "elementCount": 4,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 2,
+          "avgStateSpread": 25
+        }
+      }
+    },
+    "ps-4": {
+      "correctness": {
+        "score": 10,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 34
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 13
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 21
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 22
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 28
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 32
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"secondary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 34
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 97,
+        "findings": [
+          {
+            "rule": "heading-skip",
+            "severity": "minor",
+            "detail": "Heading level skipped: h1 → h3"
+          }
+        ]
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 90,
+        "findings": [],
+        "metrics": {
+          "totalLines": 40,
+          "codeLines": 37,
+          "stylingLines": 0,
+          "boilerplateLines": 9,
+          "logicLines": 28,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.24324324324324326,
+          "decisionsPerElement": 0.6,
+          "elementCount": 18,
+          "stylingDecisionCount": 11,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 9,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "rc-1": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 23
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 94,
+        "findings": [
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 25
+          },
+          {
+            "rule": "index-key",
+            "severity": "minor",
+            "detail": "Array index as key",
+            "line": 34
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 83,
+        "findings": [
+          {
+            "rule": "duplicate-lines",
+            "severity": "moderate",
+            "detail": "Line repeated 4 times",
+            "count": 4,
+            "example": "{label: \"_\", href: \"_\"},"
+          }
+        ],
+        "metrics": {
+          "totalLines": 41,
+          "codeLines": 38,
+          "stylingLines": 0,
+          "boilerplateLines": 8,
+          "logicLines": 30,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.21052631578947367,
+          "decisionsPerElement": 0.3,
+          "elementCount": 8,
+          "stylingDecisionCount": 2,
+          "duplicateRatio": 0.11
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 1,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "sd-3": {
+      "correctness": {
+        "score": 70,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 55
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 20
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"primary\"; isDisabled: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 55
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 94,
+        "findings": [],
+        "metrics": {
+          "totalLines": 61,
+          "codeLines": 57,
+          "stylingLines": 0,
+          "boilerplateLines": 8,
+          "logicLines": 49,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.14035087719298245,
+          "decisionsPerElement": 0.5,
+          "elementCount": 8,
+          "stylingDecisionCount": 4,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 3,
+          "avgStateSpread": 27
+        }
+      }
+    },
+    "ty-5": {
+      "correctness": {
+        "score": 85,
+        "findings": [
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 10
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 100,
+        "findings": []
+      },
+      "efficiency": {
+        "score": 89,
+        "findings": [],
+        "metrics": {
+          "totalLines": 20,
+          "codeLines": 18,
+          "stylingLines": 0,
+          "boilerplateLines": 5,
+          "logicLines": 13,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.2777777777777778,
+          "decisionsPerElement": 1.2,
+          "elementCount": 5,
+          "stylingDecisionCount": 6,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 100,
+        "findings": [],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 5,
+          "avgStateSpread": 0
+        }
+      }
+    },
+    "wd-4": {
+      "correctness": {
+        "score": 0,
+        "findings": [
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 116
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 128
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 131
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 143
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 144
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 160
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 166
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 179
+          },
+          {
+            "rule": "phantom-prop",
+            "severity": "critical",
+            "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+            "line": 180
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 113
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 114
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 116
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 118
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 128
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 131
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 141
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"primary\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 143
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 144
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: \"Open\" | \"Closed\"; variant: \"secondary\" | \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 160
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"destructive\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 166
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ page: number; total: number; onChange: Dispatch<SetStateAction<number>>; variant: \"pages\"; }' is not assignable to type 'IntrinsicAttributes & PaginationProps'.",
+            "line": 172
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ children: Element[]; isOpen: true; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & DialogProps'.",
+            "line": 174
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 176
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+            "line": 178
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 179
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+            "line": 180
+          },
+          {
+            "rule": "type-error",
+            "severity": "critical",
+            "detail": "TS2322: Type '{ isOpen: true; title: string; description: string; actionLabel: string; actionVariant: \"destructive\"; onAction: () => void; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & AlertDialogProps'.",
+            "line": 193
+          }
+        ]
+      },
+      "accessibility": {
+        "score": 100,
+        "findings": []
+      },
+      "codeQuality": {
+        "score": 92,
+        "findings": [
+          {
+            "rule": "high-complexity",
+            "severity": "moderate",
+            "detail": "Cyclomatic complexity: 26"
+          }
+        ]
+      },
+      "efficiency": {
+        "score": 81,
+        "findings": [],
+        "metrics": {
+          "totalLines": 199,
+          "codeLines": 185,
+          "stylingLines": 0,
+          "boilerplateLines": 88,
+          "logicLines": 97,
+          "stylingRatio": 0,
+          "boilerplateRatio": 0.4756756756756757,
+          "decisionsPerElement": 0.5,
+          "elementCount": 43,
+          "stylingDecisionCount": 23,
+          "duplicateRatio": 0
+        }
+      },
+      "maintainability": {
+        "score": 78,
+        "findings": [
+          {
+            "rule": "high-state-spread",
+            "severity": "moderate",
+            "detail": "Average state variable spread: 94 lines"
+          }
+        ],
+        "metrics": {
+          "semanticRatio": 1,
+          "magicValueCount": 0,
+          "semanticValueCount": 21,
+          "avgStateSpread": 94
+        }
+      }
+    }
+  },
+  "byCategory": {
+    "complex-selector": {
+      "correctness": 55,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 95,
+      "maintainability": 100
+    },
+    "clone-with-modification": {
+      "correctness": 0,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 92,
+      "maintainability": 100
+    },
+    "data-display": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 97,
+      "efficiency": 79,
+      "maintainability": 100
+    },
+    "feature-with-constraint": {
+      "correctness": 40,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 87,
+      "maintainability": 100
+    },
+    "integration-oriented": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 95,
+      "maintainability": 100
+    },
+    "page-setup": {
+      "correctness": 10,
+      "accessibility": 97,
+      "codeQuality": 100,
+      "efficiency": 90,
+      "maintainability": 100
+    },
+    "responsive-context": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 94,
+      "efficiency": 83,
+      "maintainability": 100
+    },
+    "state-driven": {
+      "correctness": 70,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 94,
+      "maintainability": 100
+    },
+    "typography": {
+      "correctness": 85,
+      "accessibility": 100,
+      "codeQuality": 100,
+      "efficiency": 89,
+      "maintainability": 100
+    },
+    "workflow-description": {
+      "correctness": 0,
+      "accessibility": 100,
+      "codeQuality": 92,
+      "efficiency": 81,
+      "maintainability": 78
+    }
+  },
+  "darkModeRate": 0,
+  "cost": {
+    "totalDurationMs": 4053201,
+    "avgDurationMs": 405320,
+    "avgOutputChars": 2302,
+    "avgOutputLines": 62,
+    "avgDocsRead": 6.6,
+    "inputTokens": null,
+    "outputTokens": null,
+    "usageComplete": false,
+    "completeUsageRuns": 0,
+    "incompleteUsageRuns": 10,
+    "durationSources": {
+      "result-metadata": 10
+    },
+    "estimatedInputTokens": 45000,
+    "estimatedOutputTokens": 5756,
+    "byPrompt": {
+      "cs-4": {
+        "durationMs": 405323,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 1362,
+        "outputLines": 45,
+        "docsRead": [
+          "Selector",
+          "TextInput",
+          "Button",
+          "VStack"
+        ],
+        "inputTokens": 2875,
+        "outputTokens": 341,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 341
+      },
+      "cwm-1": {
+        "durationMs": 405320,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 2680,
+        "outputLines": 61,
+        "docsRead": [
+          "SegmentedControl",
+          "Card",
+          "Heading",
+          "Text",
+          "Button",
+          "Badge",
+          "HStack",
+          "VStack",
+          "Divider"
+        ],
+        "inputTokens": 6000,
+        "outputTokens": 670,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 6000,
+        "estimatedOutputTokens": 670
+      },
+      "dd-8": {
+        "durationMs": 405320,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 2350,
+        "outputLines": 59,
+        "docsRead": [
+          "Table",
+          "Badge",
+          "Heading",
+          "VStack"
+        ],
+        "inputTokens": 2875,
+        "outputTokens": 588,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 2875,
+        "estimatedOutputTokens": 588
+      },
+      "fwc-3": {
+        "durationMs": 405321,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 1764,
+        "outputLines": 52,
+        "docsRead": [
+          "TextInput",
+          "ProgressBar",
+          "Button",
+          "Text",
+          "VStack",
+          "HStack"
+        ],
+        "inputTokens": 4125,
+        "outputTokens": 441,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 4125,
+        "estimatedOutputTokens": 441
+      },
+      "io-4": {
+        "durationMs": 405319,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 1050,
+        "outputLines": 39,
+        "docsRead": [
+          "NumberInput",
+          "VStack",
+          "Text"
+        ],
+        "inputTokens": 2250,
+        "outputTokens": 263,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 2250,
+        "estimatedOutputTokens": 263
+      },
+      "ps-4": {
+        "durationMs": 405319,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 1673,
+        "outputLines": 40,
+        "docsRead": [
+          "Breadcrumbs",
+          "BreadcrumbItem",
+          "Heading",
+          "Text",
+          "Button",
+          "VStack",
+          "HStack",
+          "Divider",
+          "Badge"
+        ],
+        "inputTokens": 6000,
+        "outputTokens": 418,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 6000,
+        "estimatedOutputTokens": 418
+      },
+      "rc-1": {
+        "durationMs": 405319,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 1240,
+        "outputLines": 41,
+        "docsRead": [
+          "TopNav",
+          "MobileNav",
+          "MobileNavToggle",
+          "SideNavItem",
+          "SideNavSection",
+          "Link",
+          "Heading",
+          "HStack"
+        ],
+        "inputTokens": 5375,
+        "outputTokens": 310,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 5375,
+        "estimatedOutputTokens": 310
+      },
+      "sd-3": {
+        "durationMs": 405320,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 2005,
+        "outputLines": 61,
+        "docsRead": [
+          "TextInput",
+          "Selector",
+          "CheckboxInput",
+          "Button",
+          "FormLayout",
+          "Heading",
+          "VStack"
+        ],
+        "inputTokens": 4750,
+        "outputTokens": 501,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 4750,
+        "estimatedOutputTokens": 501
+      },
+      "ty-5": {
+        "durationMs": 405319,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 721,
+        "outputLines": 20,
+        "docsRead": [
+          "Heading",
+          "Text",
+          "Button",
+          "VStack",
+          "Center"
+        ],
+        "inputTokens": 3500,
+        "outputTokens": 180,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 3500,
+        "estimatedOutputTokens": 180
+      },
+      "wd-4": {
+        "durationMs": 405321,
+        "durationSource": "result-metadata",
+        "durationQuality": "derived",
+        "outputChars": 8175,
+        "outputLines": 199,
+        "docsRead": [
+          "Table",
+          "Button",
+          "TextInput",
+          "Selector",
+          "Dialog",
+          "AlertDialog",
+          "Badge",
+          "HStack",
+          "VStack",
+          "Heading",
+          "Pagination"
+        ],
+        "inputTokens": 7250,
+        "outputTokens": 2044,
+        "tokenSource": "estimate",
+        "tokenQuality": "estimated",
+        "usageComplete": false,
+        "estimatedInputTokens": 7250,
+        "estimatedOutputTokens": 2044
+      }
+    }
+  },
+  "execution": {
+    "runs": [
+      {
+        "promptId": "cs-4",
+        "taskId": "cs-4",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 55,
+            "findings": [
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 32
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 13
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 22
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 32
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 95,
+            "findings": [],
+            "metrics": {
+              "totalLines": 45,
+              "codeLines": 42,
+              "stylingLines": 0,
+              "boilerplateLines": 5,
+              "logicLines": 37,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.11904761904761904,
+              "decisionsPerElement": 0.3,
+              "elementCount": 9,
+              "stylingDecisionCount": 3,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 3,
+              "avgStateSpread": 29
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405323,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 2875,
+          "outputTokens": 341,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "cwm-1",
+        "taskId": "cwm-1",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 0,
+            "findings": [
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 23
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 24
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 32
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 35
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 36
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 40
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 48
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 92,
+            "findings": [],
+            "metrics": {
+              "totalLines": 61,
+              "codeLines": 57,
+              "stylingLines": 0,
+              "boilerplateLines": 11,
+              "logicLines": 46,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.19298245614035087,
+              "decisionsPerElement": 0.7,
+              "elementCount": 21,
+              "stylingDecisionCount": 15,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 11,
+              "avgStateSpread": 24
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405320,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 6000,
+          "outputTokens": 670,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "dd-8",
+        "taskId": "dd-8",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 85,
+            "findings": [
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 32
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 97,
+            "findings": [
+              {
+                "rule": "index-key",
+                "severity": "minor",
+                "detail": "Array index as key",
+                "line": 45
+              }
+            ]
+          },
+          "efficiency": {
+            "score": 79,
+            "findings": [
+              {
+                "rule": "duplicate-lines",
+                "severity": "moderate",
+                "detail": "Line repeated 7 times",
+                "count": 7,
+                "example": "{title: \"_\", type: \"_\" as ContentType, author: \"_\", date: \"_\"},"
+              }
+            ],
+            "metrics": {
+              "totalLines": 59,
+              "codeLines": 54,
+              "stylingLines": 0,
+              "boilerplateLines": 16,
+              "logicLines": 38,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.2962962962962963,
+              "decisionsPerElement": 0.2,
+              "elementCount": 16,
+              "stylingDecisionCount": 3,
+              "duplicateRatio": 0.13
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 1,
+              "avgStateSpread": 0
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405320,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 2875,
+          "outputTokens": 588,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "fwc-3",
+        "taskId": "fwc-3",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 40,
+            "findings": [
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 40
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 28
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 29
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 40
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 44
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 87,
+            "findings": [
+              {
+                "rule": "duplicate-lines",
+                "severity": "moderate",
+                "detail": "Line repeated 3 times",
+                "count": 3,
+                "example": "if (score <= N) return {score, label: \"_\"};"
+              }
+            ],
+            "metrics": {
+              "totalLines": 52,
+              "codeLines": 48,
+              "stylingLines": 0,
+              "boilerplateLines": 7,
+              "logicLines": 41,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.14583333333333334,
+              "decisionsPerElement": 0.9,
+              "elementCount": 7,
+              "stylingDecisionCount": 6,
+              "duplicateRatio": 0.06
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 5,
+              "avgStateSpread": 18
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405321,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 4125,
+          "outputTokens": 441,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "io-4",
+        "taskId": "io-4",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 85,
+            "findings": [
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 26
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 95,
+            "findings": [],
+            "metrics": {
+              "totalLines": 39,
+              "codeLines": 35,
+              "stylingLines": 0,
+              "boilerplateLines": 4,
+              "logicLines": 31,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.11428571428571428,
+              "decisionsPerElement": 0.5,
+              "elementCount": 4,
+              "stylingDecisionCount": 2,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 2,
+              "avgStateSpread": 25
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405319,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 2250,
+          "outputTokens": 263,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "ps-4",
+        "taskId": "ps-4",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 10,
+            "findings": [
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 34
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 13
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 21
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 22
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 28
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 32
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"secondary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 34
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 97,
+            "findings": [
+              {
+                "rule": "heading-skip",
+                "severity": "minor",
+                "detail": "Heading level skipped: h1 → h3"
+              }
+            ]
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 90,
+            "findings": [],
+            "metrics": {
+              "totalLines": 40,
+              "codeLines": 37,
+              "stylingLines": 0,
+              "boilerplateLines": 9,
+              "logicLines": 28,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.24324324324324326,
+              "decisionsPerElement": 0.6,
+              "elementCount": 18,
+              "stylingDecisionCount": 11,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 9,
+              "avgStateSpread": 0
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405319,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 6000,
+          "outputTokens": 418,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "rc-1",
+        "taskId": "rc-1",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 85,
+            "findings": [
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 23
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 94,
+            "findings": [
+              {
+                "rule": "index-key",
+                "severity": "minor",
+                "detail": "Array index as key",
+                "line": 25
+              },
+              {
+                "rule": "index-key",
+                "severity": "minor",
+                "detail": "Array index as key",
+                "line": 34
+              }
+            ]
+          },
+          "efficiency": {
+            "score": 83,
+            "findings": [
+              {
+                "rule": "duplicate-lines",
+                "severity": "moderate",
+                "detail": "Line repeated 4 times",
+                "count": 4,
+                "example": "{label: \"_\", href: \"_\"},"
+              }
+            ],
+            "metrics": {
+              "totalLines": 41,
+              "codeLines": 38,
+              "stylingLines": 0,
+              "boilerplateLines": 8,
+              "logicLines": 30,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.21052631578947367,
+              "decisionsPerElement": 0.3,
+              "elementCount": 8,
+              "stylingDecisionCount": 2,
+              "duplicateRatio": 0.11
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 1,
+              "avgStateSpread": 0
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405319,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 5375,
+          "outputTokens": 310,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "sd-3",
+        "taskId": "sd-3",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 70,
+            "findings": [
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 55
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 20
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"primary\"; isDisabled: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 55
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 94,
+            "findings": [],
+            "metrics": {
+              "totalLines": 61,
+              "codeLines": 57,
+              "stylingLines": 0,
+              "boilerplateLines": 8,
+              "logicLines": 49,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.14035087719298245,
+              "decisionsPerElement": 0.5,
+              "elementCount": 8,
+              "stylingDecisionCount": 4,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 3,
+              "avgStateSpread": 27
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405320,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 4750,
+          "outputTokens": 501,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "ty-5",
+        "taskId": "ty-5",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 85,
+            "findings": [
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 10
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 100,
+            "findings": []
+          },
+          "efficiency": {
+            "score": 89,
+            "findings": [],
+            "metrics": {
+              "totalLines": 20,
+              "codeLines": 18,
+              "stylingLines": 0,
+              "boilerplateLines": 5,
+              "logicLines": 13,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.2777777777777778,
+              "decisionsPerElement": 1.2,
+              "elementCount": 5,
+              "stylingDecisionCount": 6,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 100,
+            "findings": [],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 5,
+              "avgStateSpread": 0
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405319,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 3500,
+          "outputTokens": 180,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      },
+      {
+        "promptId": "wd-4",
+        "taskId": "wd-4",
+        "harness": "unknown",
+        "model": "unknown",
+        "score": {
+          "correctness": {
+            "score": 0,
+            "findings": [
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 116
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 128
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 131
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 143
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 144
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 160
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 166
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 179
+              },
+              {
+                "rule": "phantom-prop",
+                "severity": "critical",
+                "detail": "onPress is React Native; use onClick for React DOM. Handler will never fire.",
+                "line": 180
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 113
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 114
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 116
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 118
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 128
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 131
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 141
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"primary\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 143
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 144
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: \"Open\" | \"Closed\"; variant: \"secondary\" | \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 160
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"destructive\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 166
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ page: number; total: number; onChange: Dispatch<SetStateAction<number>>; variant: \"pages\"; }' is not assignable to type 'IntrinsicAttributes & PaginationProps'.",
+                "line": 172
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ children: Element[]; isOpen: true; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & DialogProps'.",
+                "line": 174
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 176
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+                "line": 178
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"primary\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 179
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+                "line": 180
+              },
+              {
+                "rule": "type-error",
+                "severity": "critical",
+                "detail": "TS2322: Type '{ isOpen: true; title: string; description: string; actionLabel: string; actionVariant: \"destructive\"; onAction: () => void; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & AlertDialogProps'.",
+                "line": 193
+              }
+            ]
+          },
+          "accessibility": {
+            "score": 100,
+            "findings": []
+          },
+          "codeQuality": {
+            "score": 92,
+            "findings": [
+              {
+                "rule": "high-complexity",
+                "severity": "moderate",
+                "detail": "Cyclomatic complexity: 26"
+              }
+            ]
+          },
+          "efficiency": {
+            "score": 81,
+            "findings": [],
+            "metrics": {
+              "totalLines": 199,
+              "codeLines": 185,
+              "stylingLines": 0,
+              "boilerplateLines": 88,
+              "logicLines": 97,
+              "stylingRatio": 0,
+              "boilerplateRatio": 0.4756756756756757,
+              "decisionsPerElement": 0.5,
+              "elementCount": 43,
+              "stylingDecisionCount": 23,
+              "duplicateRatio": 0
+            }
+          },
+          "maintainability": {
+            "score": 78,
+            "findings": [
+              {
+                "rule": "high-state-spread",
+                "severity": "moderate",
+                "detail": "Average state variable spread: 94 lines"
+              }
+            ],
+            "metrics": {
+              "semanticRatio": 1,
+              "magicValueCount": 0,
+              "semanticValueCount": 21,
+              "avgStateSpread": 94
+            }
+          }
+        },
+        "duration": {
+          "valueMs": 405321,
+          "source": "result-metadata",
+          "quality": "derived"
+        },
+        "usage": {
+          "inputTokens": 7250,
+          "outputTokens": 2044,
+          "source": "estimate",
+          "quality": "estimated",
+          "complete": false
+        }
+      }
+    ],
+    "byHarnessModel": [
+      {
+        "dimensions": {
+          "harness": "unknown",
+          "model": "unknown"
+        },
+        "runCount": 10,
+        "averageScore": 87,
+        "averageDurationMs": 405320,
+        "usage": {
+          "complete": false,
+          "completeRuns": 0,
+          "incompleteRuns": 10,
+          "inputTokens": null,
+          "outputTokens": null
+        }
+      }
+    ],
+    "byFixture": [],
+    "byCondition": []
+  }
+}

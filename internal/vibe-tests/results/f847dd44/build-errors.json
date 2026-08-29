@@ -1,0 +1,292 @@
+{
+  "cs-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 13,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 22,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 32,
+        "message": "Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "cwm-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 23,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 24,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 32,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 35,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 36,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 40,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 48,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 7,
+    "buildSuccess": false
+  },
+  "dd-8": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 32,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "fwc-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 28,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 29,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 40,
+        "message": "Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 44,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 4,
+    "buildSuccess": false
+  },
+  "io-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 26,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "ps-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 13,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 21,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 22,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 28,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 32,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 34,
+        "message": "Type '{ label: string; variant: \"secondary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 6,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 23,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "sd-3": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 20,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 55,
+        "message": "Type '{ label: string; variant: \"primary\"; isDisabled: boolean; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "ty-5": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 10,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "wd-4": {
+    "target": "astryx-tailwind",
+    "errors": [
+      {
+        "line": 113,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 114,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 116,
+        "message": "Type '{ label: string; variant: \"primary\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 118,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 128,
+        "message": "Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 131,
+        "message": "Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 141,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 143,
+        "message": "Type '{ label: string; variant: \"primary\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 144,
+        "message": "Type '{ label: string; variant: \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 160,
+        "message": "Type '{ label: \"Open\" | \"Closed\"; variant: \"secondary\" | \"ghost\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 166,
+        "message": "Type '{ label: string; variant: \"destructive\"; size: \"sm\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 172,
+        "message": "Type '{ page: number; total: number; onChange: Dispatch<SetStateAction<number>>; variant: \"pages\"; }' is not assignable to type 'IntrinsicAttributes & PaginationProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 174,
+        "message": "Type '{ children: Element[]; isOpen: true; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & DialogProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 176,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 178,
+        "message": "Type 'string' is not assignable to type 'SpacingStep | undefined'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 179,
+        "message": "Type '{ label: string; variant: \"primary\"; onPress: () => void; isDisabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 180,
+        "message": "Type '{ label: string; variant: \"ghost\"; onPress: () => void; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 193,
+        "message": "Type '{ isOpen: true; title: string; description: string; actionLabel: string; actionVariant: \"destructive\"; onAction: () => void; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & AlertDialogProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 18,
+    "buildSuccess": false
+  }
+}
