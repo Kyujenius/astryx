@@ -34,6 +34,39 @@ describe('ProgressBar', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders the stop indicator as an inset circle', () => {
+    const {container} = render(<ProgressBar value={50} label="Progress" />);
+    const indicator = container.querySelector<HTMLElement>(
+      '.astryx-progress-bar-stop-indicator',
+    )!;
+    let css = '';
+    for (const sheet of Array.from(document.styleSheets)) {
+      try {
+        for (const rule of Array.from(sheet.cssRules)) {
+          css += rule.cssText + '\n';
+        }
+      } catch {
+        // ignore cross-origin sheets
+      }
+    }
+    css += Array.from(document.querySelectorAll('style'))
+      .map(style => style.textContent || '')
+      .join('\n');
+    const indicatorRules = Array.from(indicator.classList)
+      .filter(className => /^x[a-z0-9]+$/.test(className))
+      .flatMap(
+        className =>
+          css.match(new RegExp(`\\.${className}\\b[^{]*\\{[^}]*\\}`, 'g')) ??
+          [],
+      )
+      .join('\n');
+
+    expect(indicatorRules).toMatch(/width:\s*6px/);
+    expect(indicatorRules).toMatch(/height:\s*6px/);
+    expect(indicatorRules).toMatch(/aspect-ratio:\s*1/);
+    expect(indicatorRules).toMatch(/border-radius:\s*50%/);
+  });
+
   it('omits the stop indicator for explicit supplemental contrast', () => {
     const {container} = render(
       <ProgressBar
