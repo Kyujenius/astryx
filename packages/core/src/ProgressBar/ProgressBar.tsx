@@ -319,10 +319,6 @@ const styles = stylex.create({
     height: '10px',
     boxSizing: 'border-box',
     borderRadius: radiusVars['--radius-full'],
-    borderWidth: '2px',
-    borderStyle: 'solid',
-    borderColor: colorVars['--color-text-primary'],
-    backgroundColor: colorVars['--color-background-surface'],
     transform: 'translateY(-50%)',
     pointerEvents: 'none',
   },
@@ -616,7 +612,7 @@ export function ProgressBar({
                 variant: fillVariant,
                 contrast: visualContrast,
               }),
-              stylex.props(styles.stopIndicator),
+              stylex.props(styles.stopIndicator, variantStyles[fillVariant]),
             )}
           />
         )}
