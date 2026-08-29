@@ -7,7 +7,7 @@ export const doc = {
   name: 'ProgressBar — Semantic Standalone',
   displayName: 'ProgressBar — Semantic Standalone',
   description:
-    'All semantic variants using the self-contained endpoint treatment.',
+    'Standalone semantic variants for progress without a visible numeric value. The endpoint remains part of the graphic.',
   isReady: true,
   aspectRatio: 4 / 3,
   componentsUsed: ['ProgressBar', 'VStack'],

@@ -7,7 +7,7 @@ export const doc = {
   name: 'ProgressBar — Contrast Presentations',
   displayName: 'ProgressBar — Contrast Presentations',
   description:
-    'Compare the self-contained standalone treatment with a supplemental bar paired with a visible value.',
+    'Use standalone when the graphic is the only visible progress cue. Use supplemental only when an equivalent value is visible beside the bar.',
   isReady: true,
   aspectRatio: 16 / 9,
   componentsUsed: ['ProgressBar', 'VStack'],

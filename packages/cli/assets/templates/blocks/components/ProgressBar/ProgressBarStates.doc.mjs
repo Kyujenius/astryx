@@ -6,7 +6,8 @@ export const doc = {
   exampleFor: 'ProgressBar',
   name: 'ProgressBar — Loading and Disabled States',
   displayName: 'ProgressBar — Loading and Disabled States',
-  description: 'Indeterminate and disabled progress treatments shown together.',
+  description:
+    'Use indeterminate when progress cannot be calculated. Use disabled for canceled or inactive work; disabled progress is intentionally lower emphasis.',
   isReady: true,
   aspectRatio: 16 / 9,
   componentsUsed: ['ProgressBar', 'VStack'],

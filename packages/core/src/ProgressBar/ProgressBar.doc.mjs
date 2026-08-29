@@ -126,12 +126,14 @@ export const docs = {
   },
   usage: {
     description:
-      'A horizontal bar showing the completion progress of a task. Use it for operations where the duration is known, or as an animated indicator when progress can\'t be calculated. Supports semantic color variants, value labels, and custom formatting.',
+      'A horizontal bar showing task completion. The default standalone presentation carries the full visual range itself; supplemental is a quieter presentation for bars paired with an equivalent visible value. Use indeterminate progress only when the amount completed cannot be calculated.',
     bestPractices: [
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
-      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue; its endpoint identifies the total range.' },
+      { guidance: true, description: 'Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information. `hasValueLabel` is the built-in pairing.' },
+      { guidance: false, description: 'Use supplemental only because it looks quieter. A hidden label or ARIA value is not an equivalent visible cue.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
@@ -261,12 +263,14 @@ export const docsZh = {
   },
   usage: {
     description:
-      'A horizontal bar showing the completion progress of a task. Use it for operations where the duration is known, or as an animated indicator when progress can\'t be calculated. Supports semantic color variants, value labels, and custom formatting.',
+      'A horizontal bar showing task completion. The default standalone presentation carries the full visual range itself; supplemental is a quieter presentation for bars paired with an equivalent visible value. Use indeterminate progress only when the amount completed cannot be calculated.',
     bestPractices: [
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
-      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue; its endpoint identifies the total range.' },
+      { guidance: true, description: 'Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information. `hasValueLabel` is the built-in pairing.' },
+      { guidance: false, description: 'Use supplemental only because it looks quieter. A hidden label or ARIA value is not an equivalent visible cue.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
@@ -280,12 +284,14 @@ export const docsDense = {
     'Progress bar for displaying determinate or indeterminate progress.',
   usage: {
     description:
-      'A horizontal bar showing the completion progress of a task. Use it for operations where the duration is known, or as an animated indicator when progress can\'t be calculated. Supports semantic color variants, value labels, and custom formatting.',
+      'A horizontal bar showing task completion. The default standalone presentation carries the full visual range itself; supplemental is a quieter presentation for bars paired with an equivalent visible value. Use indeterminate progress only when the amount completed cannot be calculated.',
     bestPractices: [
       { guidance: true, description: "Use a determinate bar when the total amount of work is known, and indeterminate when it's not." },
       { guidance: true, description: 'Choose a color variant that matches the context: accent for general progress, success for completion, warning or error for alerts.' },
       { guidance: true, description: "Always provide a label, even if hidden; screen readers need it to announce what's loading." },
-      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue. Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information.' },
+      { guidance: true, description: 'Keep the default standalone treatment when the graphic is the only visible progress cue; its endpoint identifies the total range.' },
+      { guidance: true, description: 'Use supplemental only when a visible value such as “65%” or “3 of 5” provides equivalent information. `hasValueLabel` is the built-in pairing.' },
+      { guidance: false, description: 'Use supplemental only because it looks quieter. A hidden label or ARIA value is not an equivalent visible cue.' },
       { guidance: false, description: 'Place icons or labels inside the bar; compose them alongside it using layout components.' },
       { guidance: false, description: "Use a progress bar for instant actions; it's meant for operations that take noticeable time." },
       { guidance: false, description: 'Use multiple progress bars stacked together for the same operation; use one bar with a value label instead.' },
