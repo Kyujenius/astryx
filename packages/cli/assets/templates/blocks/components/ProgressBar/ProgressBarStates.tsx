@@ -7,7 +7,7 @@ import {VStack} from '@astryxdesign/core/Layout';
 
 export default function ProgressBarStates() {
   return (
-    <VStack gap={4} width="100%" style={{maxWidth: 360}}>
+    <VStack gap={4} style={{width: 300}}>
       <ProgressBar isIndeterminate label="Processing" />
       <ProgressBar
         value={60}

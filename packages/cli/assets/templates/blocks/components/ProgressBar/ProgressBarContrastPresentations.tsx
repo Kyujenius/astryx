@@ -7,7 +7,7 @@ import {VStack} from '@astryxdesign/core/Layout';
 
 export default function ProgressBarContrastPresentations() {
   return (
-    <VStack gap={4} width="100%" style={{maxWidth: 360}}>
+    <VStack gap={4} style={{width: 300}}>
       <ProgressBar value={60} label="Standalone — graphic only" />
       <ProgressBar
         value={60}
