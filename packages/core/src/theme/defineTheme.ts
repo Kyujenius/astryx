@@ -301,9 +301,11 @@ export interface DefineThemeInput {
    */
   color?: ColorScaleConfig;
   /**
-   * Approved palette metadata. Every family has a complete light ramp and may
-   * provide a dark ramp. Child themes inherit families by name and replace a
-   * complete family when overriding it.
+   * Approved authoring palette metadata. Every family has a complete light
+   * ramp and may provide a dark ramp. Child themes inherit families by name
+   * and replace a complete family when overriding it. Production theme builds
+   * emit this as separate opt-in palette artifacts rather than placing it in
+   * the default runtime module.
    */
   palettes?: ThemePalettes;
   /** Token overrides — flat map of CSS custom property names to values.
@@ -394,7 +396,10 @@ export interface DefinedTheme {
   name: string;
   /** Token overrides — only the tokens the consumer specified */
   tokens: Record<string, string>;
-  /** Approved tonal palettes available to authoring and audit tooling. */
+  /**
+   * Approved tonal palettes available on source themes for authoring and audit
+   * tooling. Built themes omit this field and expose separate palette artifacts.
+   */
   palettes?: ThemePalettes;
   /** Component style overrides */
   components?: ComponentStyleMap;

@@ -172,7 +172,7 @@ export const doc = {
     {
       value: 'theme.build',
       description:
-        'A theme build receipt: name, token- and component-override counts, output size, the written outputs {css, js, dts, and variantsDts when applicable}, and any validation warnings.',
+        'A theme build receipt: name, token- and component-override counts, output size, the written outputs {css, js, dts, optional variantsDts, and opt-in palette artifacts when applicable}, and any validation warnings.',
     },
     {
       value: 'theme.build.check',
@@ -182,7 +182,7 @@ export const doc = {
     {
       value: 'theme.build.batch',
       description:
-        'Several themes built in one invocation: `count` plus one {file, receipt} per theme in argument order, where receipt is that theme\'s theme.build (or theme.build.check) envelope, or null when it produced no CSS.',
+        "Several themes built in one invocation: `count` plus one {file, receipt} per theme in argument order, where receipt is that theme's theme.build (or theme.build.check) envelope, or null when it produced no CSS.",
     },
     {
       value: 'theme.list',
