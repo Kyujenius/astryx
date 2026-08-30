@@ -154,8 +154,6 @@ export interface ComponentAccessibilityThemeCoverage {
   tables: ComponentAccessibilityThemeTable[];
   /** Theme visuals intentionally excluded from measurement, with a reason. */
   notMeasured?: string[];
-  /** Extra findings that do not fit a measurement table. */
-  notes?: string[];
 }
 
 /**

@@ -802,7 +802,6 @@ export interface AccessibilityThemeCoverage {
   theme: string;
   tables: AccessibilityThemeTable[];
   notMeasured?: string[];
-  notes?: string[];
 }
 
 export interface AnatomyElement {

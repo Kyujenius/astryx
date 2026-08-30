@@ -519,20 +519,6 @@ function ThemeCoverageSection({
               </List>
             </VStack>
           )}
-          {(theme.notes?.length ?? 0) > 0 && (
-            <List density="compact" listStyle="disc">
-              {theme.notes?.map(note => (
-                <ListItem
-                  key={note}
-                  label={
-                    <Text color="secondary" weight="normal">
-                      {note}
-                    </Text>
-                  }
-                />
-              ))}
-            </List>
-          )}
         </VStack>
       ))}
     </VStack>
