@@ -611,6 +611,40 @@ const neutralSyntax = defineSyntaxTheme({
   },
 });
 
+/**
+ * Filled semantic colors are shared by Badge and StatusDot. ProgressBar uses
+ * the same colors except where its fill-on-track relationship needs a
+ * contrast-specific stop (light-mode warning).
+ */
+const FILLED_STATE_COLORS = {
+  info: lightDark(palette('blue', 45), palette('blue', 60, 'dark')),
+  success: lightDark(palette('green', 45), palette('green', 60, 'dark')),
+  warning: lightDark(palette('yellow', 80), palette('yellow', 75, 'dark')),
+  error: lightDark(palette('red', 50), palette('red', 60, 'dark')),
+} as const;
+
+const FILLED_STATE_TEXT = {
+  standard: lightDark(palette('neutral', 100), palette('neutral', 10)),
+  onBright: palette('neutral', 10),
+} as const;
+
+/**
+ * Progress is a fill-on-track relationship, not a control boundary. Every
+ * variant uses the same neutral track so the remaining range has one stable
+ * visual treatment.
+ */
+const PROGRESS_TRACK = lightDark(
+  palette('neutral', 85),
+  palette('neutral', 20, 'dark'),
+);
+// The bright Badge yellow is only 1.01:1 against the light neutral track.
+// Progress therefore uses yellow, light-mode tone 50, the closest darker tone
+// that clears 3:1. Dark mode keeps the brighter semantic yellow.
+const PROGRESS_WARNING_FILL = lightDark(
+  palette('yellow', 50),
+  palette('yellow', 80, 'dark'),
+);
+
 export const neutralTheme = defineTheme({
   name: 'neutral',
   palettes: neutralPalettes,
@@ -984,17 +1018,13 @@ export const neutralTheme = defineTheme({
     ],
 
     // =========================================================================
-    // Radius — slightly larger than default (kept as-is)
-    // --radius-none and --radius-full are always fixed and must never be
-    // scaled by a theme (see defineTheme's radius config docs) — 0 and
-    // 9999px respectively, matching @astryxdesign/core's own defaults.
+    // Radius — a deliberately non-linear adjustment. The higher-order radius
+    // config cannot produce inner=6px and element=10px while preserving the
+    // default 12px container and 28px page steps, so only the two values that
+    // differ from the defaults are overridden explicitly.
     // =========================================================================
-    '--radius-none': '0px',
     '--radius-inner': '0.375rem',
     '--radius-element': '0.625rem',
-    '--radius-container': '0.75rem',
-    '--radius-page': '1.75rem',
-    '--radius-full': '9999px',
 
     // =========================================================================
     // Shadows
@@ -1035,31 +1065,32 @@ export const neutralTheme = defineTheme({
 
   components: {
     // =========================================================================
-    // Button — primary gets white text, secondary gets a border, destructive
-    // uses the OKLCH red filled treatment.
+    // Button — primary/secondary/ghost inherit the semantic global tokens.
+    // Destructive uses the status surface/text pair rather than inventing a
+    // component-local red.
     // =========================================================================
     button: {
       'variant:destructive': {
-        backgroundColor: 'var(--color-error-muted)', // locked pastel red bg
-        color: 'var(--color-error)', // locked T30 red — matches banner/input error text
+        backgroundColor: 'var(--color-error-muted)',
+        color: 'var(--color-error)',
       },
     },
 
     // =========================================================================
     // Badge —
-    //   Semantic (info/success/warning/error): filled saturated T50 + contrasting
+    //   Semantic (info/success/warning/error): filled saturated tone 50 + contrasting
     //     text (white, or dark on yellow). The filled-button rule from #2150
     //     §3 — text contrast locks the bg stop, so this stays at T50 in
     //     BOTH modes, unlike pastel surfaces which invert by mode.
     //   Categorical (blue/green/red/orange/etc.): pastel-tinted hue surface +
-    //     colored text — light mode = soft T87-T90 + dark T30 text; dark mode
-    //     = T20 tinted + T80 light pastel text (sources: --color-background-X
+    //     colored text — light mode = soft tones 87-90 + dark tone 30 text; dark mode
+    //     = tone 20 tinted + tone 80 light pastel text (sources: --color-background-X
     //     and --color-text-X tokens).
     //   Neutral: light gray bg + dark text (or inverted in dark mode).
     // =========================================================================
     badge: {
       // Semantic — filled saturated bg + contrasting text.
-      //   Light: vivid T45-T55 from the OKLCH palette + white text
+      //   Light: vivid tones 45-55 from the OKLCH palette + white text
       //          (~4.5-5:1 — Material/Linear/Vercel pop).
       //   Dark : T60 stop from the dark-mode tonal palette (chroma×0.85,
       //          +5 stop-lift taper from issue #2150 §4) + DARK text.
@@ -1067,48 +1098,40 @@ export const neutralTheme = defineTheme({
       //          and tames the §4 vibration. Same dark-text-on-bright-bg
       //          treatment that warning yellow uses in both modes.
       'variant:info': {
-        // Light: T50 #0074e2 (palette saturated stop)
-        // Dark : T60 stop from dark-mode tonal palette of source #0074e2
-        backgroundColor: 'light-dark(#0074e2, #6d9cfe)',
-        color: 'light-dark(#ffffff, #171717)',
+        // Blue: light-mode tone 45 / dark-mode tone 60.
+        backgroundColor: FILLED_STATE_COLORS.info,
+        color: FILLED_STATE_TEXT.standard,
       },
       'variant:neutral': {
         // Mirrors the gray categorical badge — same neutral chip treatment
-        // (Neutral 200 light / semi-transparent white wash dark) sourced
+        // (Neutral light-mode tone 90 / semi-transparent white wash in dark
+        // mode) sourced
         // from the gray hue tokens, so a single change at the token layer
         // updates both variants.
         backgroundColor: 'var(--color-background-gray)',
         color: 'var(--color-text-gray)',
       },
       'variant:success': {
-        // Light: T45 #198100 (palette saturated stop)
-        // Dark : T60 stop from dark-mode tonal palette of source #198100
-        backgroundColor: 'light-dark(#198100, #64af4c)',
-        color: 'light-dark(#ffffff, #171717)',
+        // Green: light-mode tone 45 / dark-mode tone 60.
+        backgroundColor: FILLED_STATE_COLORS.success,
+        color: FILLED_STATE_TEXT.standard,
       },
       'variant:warning': {
-        // Yellow stays at the same hex in both modes — chroma reduction
-        // is barely visible at T85, and dark text on yellow doesn't
-        // suffer from the §4 vibration concern.
-        backgroundColor: '#ffce2f',
-        color: '#171717',
+        // Yellow: light-mode tone 80 / dark-mode tone 75, both with dark text.
+        backgroundColor: FILLED_STATE_COLORS.warning,
+        color: FILLED_STATE_TEXT.onBright,
       },
       'variant:error': {
-        // Light: T58 #c9303a. The T55 stop #e33f4a pairs with white at only
-        //        4.14:1 — the label is 12px/500, so AA wants 4.5, not the 3:1
-        //        large-text allowance. One tonal step down holds the hue
-        //        (OKLCH H 21.9 -> 22.8, C 0.200 -> 0.189) and reaches 5.29:1.
-        // Dark : T60 stop from dark-mode tonal palette of Tailwind red-600
-        //        source #dc2626 (kept on H=27 alarm-red rather than coral).
-        //        Dark text on it is 6.60:1 and unchanged.
-        backgroundColor: 'light-dark(#c9303a, #ff705d)',
-        color: 'light-dark(#ffffff, #171717)',
+        // Red: light-mode tone 50 / dark-mode tone 60. The light-mode tone is
+        // the brightest red that still clears AA with the badge's white label.
+        backgroundColor: FILLED_STATE_COLORS.error,
+        color: FILLED_STATE_TEXT.standard,
       },
 
       // Categorical — bg + text reference the per-hue tokens, so behavior
       // tracks the categorical palette automatically:
-      //   Light: pastel T87-T90 bg + dark T30 colored text (low-key chip)
-      //   Dark : tinted T20 bg + light T80 colored text (per #2150 §5,
+      //   Light: pastel tones 87-90 bg + dark tone 30 colored text (low-key chip)
+      //   Dark : tinted tone 20 bg + light tone 80 colored text (per #2150 §5,
       //          inverted from light to avoid the "pastel-in-both-modes"
       //          anti-pattern that makes locked light pastels glow on a
       //          dark body)
@@ -1154,55 +1177,91 @@ export const neutralTheme = defineTheme({
       },
     },
 
+    // Token uses the same categorical color language as Badge. Core already
+    // maps red–pink and gray to the shared --color-background-X / --color-text-X
+    // pairs, so those variants stay aligned automatically. Only the default
+    // Token needs a redirect: match Badge neutral to the gray palette pair
+    // instead of using the generic translucent --color-neutral wash.
+    token: {
+      'color:default': {
+        backgroundColor: 'var(--color-background-gray)',
+        color: 'var(--color-text-gray)',
+      },
+    },
+
     // =========================================================================
     // StatusDot — fill uses the SAME vivid stops as the filled semantic Badge
     // (and ProgressBar), so a dot and its badge read as one status language.
     //
     // The default component maps each variant to a raw semantic token
     // (--color-success / --color-error / --color-warning / --color-icon-
-    // secondary), which in light mode are the dark T30/T40 stops meant to
+    // secondary), which in light mode are dark tones 30 and 40 meant to
     // sit as TEXT on a pastel surface — as a solid dot they read muddy
     // (dark green / maroon / brown). Redirect them to the badge fills.
     //
-    //   success → badge success bg  (green T45 / dark-ramp T60)
-    //   warning → badge warning bg  (yellow T85, same hex both modes)
-    //   error   → badge error bg    (red T58 / dark-ramp T60)
-    //   accent  → badge info bg     (blue T50 / dark-ramp T60) — the
+    //   success → badge success bg  (green light tone 45 / dark tone 60)
+    //   warning → badge warning bg  (yellow tone 85, same hex both modes)
+    //   error   → badge error bg    (red light tone 58 / dark tone 60)
+    //   accent  → badge info bg     (blue light tone 50 / dark tone 60) — the
     //             StatusDot "accent" is the info/attention color, so it
     //             pairs with the info badge rather than --color-accent
     //             (near-black #262626, the darkest offender).
     //
     // `neutral` is intentionally NOT overridden: the neutral badge bg is a
-    // near-invisible light gray (--color-background-gray #e5e5e5 / 10% white
+    // near-invisible light gray (--color-background-gray tone 90 / 10% white
     // wash), fine as a large pill but unreadable as an 8px dot. It keeps the
     // component default's visible mid-gray (--color-icon-secondary), which is
     // not among the "too dark" cases.
     // =========================================================================
-    statusdot: {
-      'variant:success': {backgroundColor: 'light-dark(#198100, #64af4c)'},
-      'variant:warning': {backgroundColor: '#ffce2f'},
-      'variant:error': {backgroundColor: 'light-dark(#c9303a, #ff705d)'},
-      'variant:accent': {backgroundColor: 'light-dark(#0074e2, #6d9cfe)'},
+    'status-dot': {
+      'variant:success': {backgroundColor: FILLED_STATE_COLORS.success},
+      'variant:warning': {backgroundColor: FILLED_STATE_COLORS.warning},
+      'variant:error': {backgroundColor: FILLED_STATE_COLORS.error},
+      'variant:accent': {backgroundColor: FILLED_STATE_COLORS.info},
+    },
+
+    // AvatarStatusDot shares the same filled state language as StatusDot.
+    'avatar-status-dot': {
+      'variant:success': {backgroundColor: FILLED_STATE_COLORS.success},
+      'variant:error': {backgroundColor: FILLED_STATE_COLORS.error},
     },
 
     // =========================================================================
     // Banner — sits on a hue-tinted surface with colored text/icon:
-    //   Light: pastel T90 bg (pulled from --color-{X}-muted / --color-background-blue)
-    //          + dark T30 colored text (--color-text-{hue}).
-    //   Dark : tinted T20 bg (same tokens, dark slot) + light T80 colored text.
+    //   Light: pastel tone 90 bg (pulled from --color-{X}-muted / --color-background-blue)
+    //          + dark tone 30 colored text (--color-text-{hue}).
+    //   Dark : tinted tone 20 bg (same tokens, dark slot) + light tone 80 colored text.
     //          Per #2150 §5 — large hue-tinted surfaces in dark mode invert
     //          to a deep tinted bg + light text rather than locking the
     //          light-mode pastel.
     //
-    // The inner-header *-muted token carries the tinted background for every
-    // status, info included. A theme override that sets a plain CSS property
-    // instead lands in @layer astryx-theme, which StyleX's @layer priority4
-    // outranks, so `backgroundColor` here would silently do nothing and the
-    // info banner would paint no background at all.
+    // The inner header and its nested text, icon, and action consumers resolve
+    // their colors through semantic tokens. Rebind those public tokens here so
+    // the whole Banner subtree stays synchronized. A direct `backgroundColor`
+    // component override would win through @layer astryx-theme, but it would
+    // update only the targeted element rather than the related consumers.
     //
     // Status overrides reference --color-text-{hue} so text/icon colors
     // stay in sync with the palette anchors automatically.
     banner: {
+      base: {
+        // Secondary actions sit inside a tinted header. The global neutral
+        // wash darkens light surfaces and lightens dark surfaces, which moves
+        // colored Banner text toward the action fill in both modes. Invert
+        // that wash locally so action surfaces add contrast instead.
+        '--color-neutral': lightDark(
+          withAlpha(palette('neutral', 100), '33'),
+          withAlpha(palette('neutral', 0), '33'),
+        ),
+        '--color-overlay-hover': lightDark(
+          withAlpha(palette('neutral', 100), '1A'),
+          withAlpha(palette('neutral', 0), '1A'),
+        ),
+        '--color-overlay-pressed': lightDark(
+          withAlpha(palette('neutral', 100), '33'),
+          withAlpha(palette('neutral', 0), '33'),
+        ),
+      },
       'status:info': {
         '--color-accent-muted': 'var(--color-background-blue)',
         '--color-text-primary': 'var(--color-text-blue)',
@@ -1230,21 +1289,19 @@ export const neutralTheme = defineTheme({
     },
 
     // =========================================================================
-    // TextInput — no per-status overrides needed. The global tokens
-    // --color-{success,error,warning} carry the correct values in both
-    // modes (light=T40 dark colored, dark=T80 light pastel) for both
-    // surfaces the input border/icon touches: the input surface
-    // (white/T15-dark) and the status message bubble (light pastel T90 /
-    // dark T20). Verified all six combinations clear AA non-text 3:1.
+    // TextInput / FieldStatus — no per-status overrides needed. FieldStatus
+    // deliberately uses the same muted background + colored foreground pairs
+    // as Banner for success, warning, and error. The global tokens also carry
+    // the correct values for the input border/icon in both modes (light-mode
+    // tone 40 dark colored, dark-mode tone 80 light pastel). Verified the
+    // message pairs clear
+    // AA text 4.5:1 and the input affordances clear AA non-text 3:1.
     // =========================================================================
 
     // =========================================================================
-    // Switch — off-state track uses the same lifted-neutral surface as the
-    // ProgressBar track (--color-border-emphasized). Aligns the two
-    // "channel-on-body" components so their off-states share one visual
-    // language: light T85 #d4d4d4 sits one step darker than the body T95
-    // bg, dark T35 #525252 sits one step lighter than the body T10. Each
-    // is a defined channel, not a wash that blends in.
+    // Switch — the off-state track is itself the control boundary, so it uses
+    // the globally contrast-safe emphasized border token. ProgressBar is a
+    // different relationship (fill on track) and is configured separately.
     // =========================================================================
     switch: {
       base: {
@@ -1252,33 +1309,35 @@ export const neutralTheme = defineTheme({
       },
     },
 
-    progressbar: {
+    'progress-bar': {
       base: {
-        // Track uses --color-background-muted; override it to
-        // --color-border-emphasized (Neutral T85 #d4d4d4 in light mode) so
-        // the track is clearly darker than the body bg (Neutral T95 #f1f1f1)
-        // and reads as a defined channel rather than blending in. Dark
-        // mode inherits T35 #525252 — same one-step-lighter behavior.
-        '--color-background-muted': 'var(--color-border-emphasized)',
+        '--color-background-muted': PROGRESS_TRACK,
       },
-      // Vivid stops match the filled semantic badge colors (info/success/
-      // warning/error variants in the badge override above). Same hex
-      // values; documented per role with palette provenance.
+      // Vivid stops match the filled semantic badge colors except light-mode
+      // warning, which moves darker so every variant can share one gray track.
       'variant:accent': {
-        // Blue T50 saturated stop (= variant:info badge bg)
-        '--color-accent': '#0074e2',
+        '--color-accent': FILLED_STATE_COLORS.info,
       },
       'variant:success': {
-        // Green T45 saturated stop (= variant:success badge bg)
-        '--color-success': '#198100',
+        '--color-success': FILLED_STATE_COLORS.success,
       },
       'variant:warning': {
-        // Yellow T85 saturated stop (= variant:warning badge bg)
-        '--color-warning': '#ffce2f',
+        '--color-warning': PROGRESS_WARNING_FILL,
       },
       'variant:error': {
-        // Red T58 saturated stop (= variant:error badge bg)
-        '--color-error': '#c9303a',
+        '--color-error': FILLED_STATE_COLORS.error,
+      },
+    },
+    // Keep the live neutral fill aligned with the primary Button without
+    // rebinding disabled progress on the ProgressBar root.
+    'progress-bar-fill': {
+      'variant:neutral': {
+        '--color-text-disabled': 'var(--color-accent)',
+      },
+    },
+    'progress-bar-mark': {
+      'variant:neutral+placement:fill': {
+        '--color-text-primary': 'var(--color-on-accent)',
       },
     },
 
@@ -1288,6 +1347,79 @@ export const neutralTheme = defineTheme({
     card: {
       base: {
         padding: 'var(--spacing-3)',
+      },
+    },
+
+    // SelectableCard's ring is a meaningful selected-state indicator. Use the
+    // lightest same-hue palette tone that clears WCAG 1.4.11 against each Card
+    // surface, rather than the much stronger text/icon stop. Neutral variants
+    // use a balanced gray just above the same threshold.
+    'selectable-card': {
+      base: {
+        '--selectable-card-ring-color': lightDark(
+          palette('neutral', 55),
+          palette('neutral', 40, 'dark'),
+        ),
+      },
+      'variant:red': {
+        '--selectable-card-ring-color': lightDark(
+          palette('red', 50),
+          'var(--color-border-red)',
+        ),
+      },
+      'variant:orange': {
+        '--selectable-card-ring-color': lightDark(
+          palette('orange', 50),
+          'var(--color-border-orange)',
+        ),
+      },
+      'variant:yellow': {
+        '--selectable-card-ring-color': lightDark(
+          palette('yellow', 50),
+          'var(--color-border-yellow)',
+        ),
+      },
+      'variant:green': {
+        '--selectable-card-ring-color': lightDark(
+          palette('green', 45),
+          'var(--color-border-green)',
+        ),
+      },
+      'variant:teal': {
+        '--selectable-card-ring-color': lightDark(
+          palette('teal', 45),
+          'var(--color-border-teal)',
+        ),
+      },
+      'variant:cyan': {
+        '--selectable-card-ring-color': lightDark(
+          palette('cyan', 45),
+          'var(--color-border-cyan)',
+        ),
+      },
+      'variant:blue': {
+        '--selectable-card-ring-color': lightDark(
+          palette('blue', 50),
+          'var(--color-border-blue)',
+        ),
+      },
+      'variant:purple': {
+        '--selectable-card-ring-color': lightDark(
+          palette('purple', 50),
+          'var(--color-border-purple)',
+        ),
+      },
+      'variant:pink': {
+        '--selectable-card-ring-color': lightDark(
+          palette('pink', 50),
+          'var(--color-border-pink)',
+        ),
+      },
+      'variant:gray': {
+        '--selectable-card-ring-color': lightDark(
+          palette('neutral', 50),
+          palette('neutral', 50, 'dark'),
+        ),
       },
     },
 
