@@ -194,16 +194,23 @@ function overlayComponentDoc(docs, translation) {
     });
   };
 
-  /** Preserve the new accessibility field without changing established translated output.
+  /** Preserve structured accessibility data without changing established translated output.
    * @param {any} baseUsage
    * @param {any} translatedUsage
    */
   const mergeUsage = (baseUsage, translatedUsage) => {
     if (!translatedUsage) return baseUsage;
-    if (!baseUsage?.accessibility || translatedUsage.accessibility !== undefined) {
-      return translatedUsage;
-    }
-    return {...translatedUsage, accessibility: baseUsage.accessibility};
+    return {
+      ...translatedUsage,
+      ...(translatedUsage.accessibility === undefined &&
+      baseUsage?.accessibility !== undefined
+        ? {accessibility: baseUsage.accessibility}
+        : null),
+      ...(translatedUsage.accessibilityThemeCoverage === undefined &&
+      baseUsage?.accessibilityThemeCoverage !== undefined
+        ? {accessibilityThemeCoverage: baseUsage.accessibilityThemeCoverage}
+        : null),
+    };
   };
 
   const merged = {...docs, ...translation, usage: mergeUsage(docs.usage, translation.usage)};

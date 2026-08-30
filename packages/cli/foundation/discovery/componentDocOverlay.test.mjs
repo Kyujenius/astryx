@@ -120,6 +120,12 @@ describe('the reported symptom', () => {
 
     expect(english.usage.accessibility.length).toBeGreaterThan(0);
     expect(dense.usage.accessibility).toEqual(english.usage.accessibility);
+    expect(dense.usage.accessibilityThemeCoverage).toEqual(
+      english.usage.accessibilityThemeCoverage,
+    );
+    expect(dense.usage.accessibilityThemeCoverage[0].notMeasured).toContain(
+      'Decorative track — Not part of the contrast audit.',
+    );
     expect(dense.usage.bestPractices).toBeUndefined();
     expect(dense.usage.anatomy).toBeUndefined();
   });

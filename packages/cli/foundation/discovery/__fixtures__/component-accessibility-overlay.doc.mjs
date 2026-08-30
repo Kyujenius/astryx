@@ -18,6 +18,20 @@ export const docs = {
         description: 'Provide an accessible name.',
       },
     ],
+    accessibilityThemeCoverage: [
+      {
+        theme: 'Fixture',
+        tables: [
+          {
+            modes: [
+              {mode: 'Light', results: []},
+              {mode: 'Dark', results: []},
+            ],
+          },
+        ],
+        notMeasured: ['Decorative track — Not part of the contrast audit.'],
+      },
+    ],
     anatomy: [
       {
         name: 'Base-only anatomy',
