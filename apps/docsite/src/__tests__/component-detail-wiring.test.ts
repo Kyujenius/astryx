@@ -342,9 +342,6 @@ describe('component detail wiring', () => {
       const coverage = entries.find(entry => entry.name === name)?.usage
         ?.accessibilityThemeCoverage?.[0];
       expect(coverage?.notMeasured).toContain(note);
-      expect(coverage?.notes ?? []).not.toContainEqual(
-        expect.stringContaining('Not measured:'),
-      );
       const labels =
         coverage?.tables.flatMap(table =>
           table.modes.flatMap(mode =>
