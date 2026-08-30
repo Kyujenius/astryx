@@ -1,0 +1,118 @@
+{
+  "iterationId": "81403f16",
+  "createdAt": "2026-08-30T11:04:09.447Z",
+  "config": {
+    "target": "baseline",
+    "persona": "naive",
+    "holdout": false,
+    "degradation": false,
+    "cliRetrieval": false
+  },
+  "prompts": [
+    {
+      "id": "cs-1",
+      "category": "complex-selector",
+      "prompt": "Build a fruit picker where users choose both a fruit and a ripeness level in one control. The closed control should show the current choice. When opened, it should be easy to move across ripeness levels and move down to the same ripeness for the next fruit using the keyboard.",
+      "expectedComponents": [
+        "ComplexSelector"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "fwc-9",
+      "category": "feature-with-constraint",
+      "prompt": "Build a meeting scheduler with a date picker and a time input for start time. The meeting duration should default to 30 minutes.",
+      "expectedComponents": [
+        "DateInput",
+        "TimeInput",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "wd-1",
+      "category": "workflow-description",
+      "prompt": "Build a checkout flow: cart summary → shipping → payment → confirmation",
+      "expectedComponents": [
+        "Card",
+        "Button",
+        "TextInput"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "cwm-3",
+      "category": "clone-with-modification",
+      "prompt": "Like Notion's page header with icon picker and cover image",
+      "expectedComponents": [
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "sd-7",
+      "category": "state-driven",
+      "prompt": "Build a file upload component that shows a progress bar during upload. Display the filename, file size, and percentage complete. Show a success state when done.",
+      "expectedComponents": [
+        "ProgressBar",
+        "Text",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "dd-2",
+      "category": "data-display",
+      "prompt": "Display a list of transactions with amount, date, and status indicator",
+      "expectedComponents": [
+        "Card",
+        "VStack"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "rc-2",
+      "category": "responsive-context",
+      "prompt": "A sidebar that becomes a bottom sheet on mobile",
+      "expectedComponents": [
+        "Card",
+        "LayoutPanel"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "io-5",
+      "category": "integration-oriented",
+      "prompt": "Build a support ticket form with a subject line input, a description text area with character count, and a priority selector. Submit should post to /api/tickets.",
+      "expectedComponents": [
+        "TextInput",
+        "TextArea",
+        "Selector",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ps-4",
+      "category": "page-setup",
+      "prompt": "Create a product detail page with breadcrumb navigation showing Home > Category > Subcategory > Product Name. The page should have a header, product info section, and a back button.",
+      "expectedComponents": [
+        "Breadcrumbs",
+        "Card",
+        "Button"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "ty-9",
+      "category": "typography",
+      "prompt": "Build a comparison table header where each column has a plan name heading and a price. The 'Enterprise' plan should have visually larger display-style typography compared to the other plans.",
+      "expectedComponents": [
+        "Heading",
+        "Text"
+      ],
+      "status": "pending"
+    }
+  ]
+}
