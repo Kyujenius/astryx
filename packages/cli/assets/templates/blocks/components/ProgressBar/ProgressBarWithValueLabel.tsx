@@ -10,7 +10,6 @@ export default function ProgressBarWithValueLabel() {
       value={75}
       label="Storage used"
       hasValueLabel
-      contrast="supplemental"
       style={{width: 300}}
     />
   );

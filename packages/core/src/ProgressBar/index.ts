@@ -32,5 +32,5 @@ export type {
   ProgressBarProps,
   ProgressBarMark,
   ProgressBarVariant,
-  ProgressBarContrast,
+  ProgressBarPresentation,
 } from './ProgressBar';

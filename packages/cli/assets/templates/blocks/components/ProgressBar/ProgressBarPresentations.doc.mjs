@@ -4,10 +4,10 @@
 export const doc = {
   type: 'block',
   exampleFor: 'ProgressBar',
-  name: 'ProgressBar — Contrast Presentations',
-  displayName: 'ProgressBar — Contrast Presentations',
+  name: 'ProgressBar — Presentations',
+  displayName: 'ProgressBar — Presentations',
   description:
-    'Use standalone when the graphic is the only visible progress cue. Use supplemental only when an equivalent value is visible beside the bar.',
+    'Use self-contained when the graphic is the only visible progress cue. Use paired-with-value when an equivalent value is visible beside the bar.',
   isReady: true,
   aspectRatio: 16 / 9,
   componentsUsed: ['ProgressBar', 'VStack'],

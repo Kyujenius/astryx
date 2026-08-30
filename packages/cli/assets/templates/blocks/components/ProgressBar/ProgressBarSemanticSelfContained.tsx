@@ -5,7 +5,7 @@
 import {ProgressBar} from '@astryxdesign/core/ProgressBar';
 import {VStack} from '@astryxdesign/core/Layout';
 
-export default function ProgressBarSemanticStandalone() {
+export default function ProgressBarSemanticSelfContained() {
   return (
     <VStack gap={4} style={{width: 300}}>
       <ProgressBar value={60} label="Accent" variant="accent" />

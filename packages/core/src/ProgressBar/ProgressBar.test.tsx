@@ -23,24 +23,24 @@ describe('ProgressBar', () => {
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
   });
 
-  it('uses the standalone contrast treatment by default', () => {
+  it('uses the self-contained presentation by default', () => {
     const {container} = render(<ProgressBar value={50} label="Progress" />);
     expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
-      'data-contrast',
-      'standalone',
+      'data-presentation',
+      'self-contained',
     );
     expect(
-      container.querySelector('.astryx-progress-bar-stop-indicator'),
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
     ).toBeInTheDocument();
   });
 
-  it('renders the stop indicator as a circle matching the track height', () => {
+  it('renders the range-end marker as a circle matching the track height', () => {
     const {container} = render(<ProgressBar value={50} label="Progress" />);
     const track = container.querySelector<HTMLElement>(
       '.astryx-progress-bar-track',
     )!;
-    const indicator = container.querySelector<HTMLElement>(
-      '.astryx-progress-bar-stop-indicator',
+    const marker = container.querySelector<HTMLElement>(
+      '.astryx-progress-bar-range-end-marker',
     )!;
     let css = '';
     for (const sheet of Array.from(document.styleSheets)) {
@@ -65,53 +65,83 @@ describe('ProgressBar', () => {
         )
         .join('\n');
     const trackRules = rulesFor(track);
-    const indicatorRules = rulesFor(indicator);
+    const markerRules = rulesFor(marker);
 
-    expect(trackRules).toMatch(/height:\s*10px/);
-    expect(indicatorRules).toMatch(/width:\s*10px/);
-    expect(indicatorRules).toMatch(/height:\s*10px/);
-    expect(indicatorRules).toMatch(/aspect-ratio:\s*1/);
-    expect(indicatorRules).toMatch(/border-radius:\s*50%/);
+    expect(trackRules).toMatch(/height:\s*8px/);
+    expect(markerRules).toMatch(/width:\s*8px/);
+    expect(markerRules).toMatch(/height:\s*8px/);
+    expect(markerRules).toMatch(/aspect-ratio:\s*1/);
+    expect(markerRules).toMatch(/border-radius:\s*50%/);
   });
 
-  it('omits the stop indicator for explicit supplemental contrast', () => {
+  it('uses the paired presentation when it renders a visible value', () => {
+    const {container} = render(
+      <ProgressBar value={50} label="Progress" hasValueLabel />,
+    );
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-presentation',
+      'paired-with-value',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('supports a paired presentation for visible value text rendered nearby', () => {
+    const {container} = render(
+      <ProgressBar
+        value={50}
+        label="Progress"
+        presentation="paired-with-value"
+      />,
+    );
+    expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
+      'data-presentation',
+      'paired-with-value',
+    );
+    expect(
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('allows a visible value to retain the self-contained presentation', () => {
     const {container} = render(
       <ProgressBar
         value={50}
         label="Progress"
         hasValueLabel
-        contrast="supplemental"
+        presentation="self-contained"
       />,
     );
     expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
-      'data-contrast',
-      'supplemental',
+      'data-presentation',
+      'self-contained',
     );
     expect(
-      container.querySelector('.astryx-progress-bar-stop-indicator'),
-    ).not.toBeInTheDocument();
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
+    ).toBeInTheDocument();
   });
 
-  it('keeps indeterminate visuals standalone and disabled visuals supplemental', () => {
+  it('keeps indeterminate visuals self-contained and preserves disabled presentation', () => {
     const {container, rerender} = render(
       <ProgressBar isIndeterminate label="Loading" />,
     );
     expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
-      'data-contrast',
-      'standalone',
+      'data-presentation',
+      'self-contained',
     );
     expect(
-      container.querySelector('.astryx-progress-bar-stop-indicator'),
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
     ).not.toBeInTheDocument();
 
     rerender(<ProgressBar value={50} label="Canceled" isDisabled />);
     expect(container.querySelector('.astryx-progress-bar')).toHaveAttribute(
-      'data-contrast',
-      'supplemental',
+      'data-presentation',
+      'self-contained',
     );
     expect(
-      container.querySelector('.astryx-progress-bar-stop-indicator'),
-    ).not.toBeInTheDocument();
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
+    ).toBeInTheDocument();
   });
 
   it('uses role="progressbar" (not "meter") for determinate progress', () => {
@@ -373,9 +403,6 @@ describe('ProgressBar', () => {
       // reading flow (inline-start → inline-end, i.e. right → left).
       expect(css).toMatch(/translateX\(100%\)/);
       expect(css).toMatch(/translateX\(-250%\)/);
-      expect(css).toMatch(
-        /box-shadow:\s*inset 0 0 0 1px var\(--color-text-primary\)/,
-      );
       // The animation-name is swapped specifically under `[dir="rtl"]`.
       expect(css).toMatch(/:is\(\[dir="rtl"\][^)]*\)[^{]*\{\s*animation-name:/);
     });
@@ -953,7 +980,7 @@ describe('ProgressBar theme target names', () => {
       'astryx-progressbar-fill',
     );
     expect(
-      container.querySelector('.astryx-progress-bar-stop-indicator'),
+      container.querySelector('.astryx-progress-bar-range-end-marker'),
     ).toBeInTheDocument();
     expect(container.querySelector('.astryx-progress-bar-mark')).toHaveClass(
       'astryx-progressbar-mark',

@@ -15,7 +15,6 @@ export default function ProgressBarCustomFormat() {
           max={5}
           label="Disk usage"
           hasValueLabel
-          contrast="supplemental"
           formatValueLabel={(value: number, max: number) =>
             `${value} GB / ${max} GB`
           }

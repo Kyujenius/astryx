@@ -5,7 +5,7 @@
 /**
  * @file ProgressBar.tsx
  * @input Uses React, useId, stylex, color/spacing/radius/transition tokens
- * @output Exports ProgressBar component, ProgressBarProps, ProgressBarVariant, ProgressBarContrast types
+ * @output Exports ProgressBar component, ProgressBarProps, ProgressBarVariant, ProgressBarPresentation types
  * @position Core implementation; consumed by index.ts
  *
  * SYNC: When modified, update these files to stay in sync:
@@ -51,14 +51,14 @@ const LazyProgressBarMarkTooltip = lazy(
 export type ProgressBarVariant = keyof ProgressBarVariantMap;
 
 /**
- * How much visible information the ProgressBar itself must carry.
+ * How the ProgressBar is presented alongside visible value information.
  *
- * `standalone` is self-contained and renders a terminal stop indicator so the
- * total range remains perceivable without nearby value text. `supplemental`
- * removes that indicator and is only appropriate when an equivalent visible
- * value is provided by this component or immediately nearby.
+ * `self-contained` renders a range-end marker so the total range remains
+ * perceivable without nearby value text. `paired-with-value` removes that
+ * marker and is appropriate when an equivalent visible value is provided by
+ * this component or immediately nearby.
  */
-export type ProgressBarContrast = 'standalone' | 'supplemental';
+export type ProgressBarPresentation = 'self-contained' | 'paired-with-value';
 
 /**
  * A fixed target mark drawn on the progress track.
@@ -123,17 +123,16 @@ export interface ProgressBarProps extends BaseProps<HTMLDivElement> {
    */
   variant?: ProgressBarVariant;
   /**
-   * Controls whether the graphic must communicate its full range by itself.
+   * Controls how the graphic is presented alongside visible value information.
    *
-   * Use `supplemental` only when an equivalent visible value (for example,
-   * "65%" or "3 of 5") is rendered by this component or immediately nearby.
-   * This prop is explicit: ProgressBar does not inspect surrounding DOM to
-   * guess whether equivalent text exists. Indeterminate bars always use the
-   * standalone fill/track color pairing because their moving fill is the
-   * meaningful state indicator. Disabled bars use the supplemental treatment.
-   * @default 'standalone'
+   * `self-contained` includes a range-end marker. Use `paired-with-value` only
+   * when an equivalent visible value (for example, "65%" or "3 of 5") appears
+   * in this component or immediately nearby. When omitted, ProgressBar uses
+   * `paired-with-value` when `hasValueLabel` is true and `self-contained`
+   * otherwise. Indeterminate bars always use `self-contained` because their
+   * moving fill is the meaningful state indicator.
    */
-  contrast?: ProgressBarContrast;
+  presentation?: ProgressBarPresentation;
   /**
    * When true, renders an animated indeterminate progress indicator.
    * Use when the progress amount is unknown (e.g. loading, processing).
@@ -248,7 +247,7 @@ const styles = stylex.create({
   track: {
     position: 'relative',
     width: '100%',
-    height: '10px',
+    height: '8px',
     backgroundColor: colorVars['--color-background-muted'],
     borderRadius: radiusVars['--radius-full'],
   },
@@ -271,7 +270,6 @@ const styles = stylex.create({
     height: '100%',
     width: '40%',
     borderRadius: radiusVars['--radius-full'],
-    boxShadow: `inset 0 0 0 1px ${colorVars['--color-text-primary']}`,
     animationName: {
       default: indeterminateSlide,
       ':is([dir="rtl"] *)': indeterminateSlideRtl,
@@ -312,12 +310,12 @@ const styles = stylex.create({
       ':is([dir="rtl"] *)': 'translate(50%, -50%)',
     },
   },
-  stopIndicator: {
+  rangeEndMarker: {
     position: 'absolute',
     insetInlineEnd: 0,
     top: '50%',
-    width: '10px',
-    height: '10px',
+    width: '8px',
+    height: '8px',
     aspectRatio: 1,
     borderRadius: '50%',
     transform: 'translateY(-50%)',
@@ -427,8 +425,7 @@ function defaultFormatValueLabel(value: number, max: number): string {
  * @example
  * ```
  * <ProgressBar value={75} label="Upload progress" />
- * <ProgressBar value={75} label="Upload progress" hasValueLabel
- *   contrast="supplemental" />
+ * <ProgressBar value={75} label="Upload progress" hasValueLabel />
  * <ProgressBar isIndeterminate label="Loading..." />
  * <ProgressBar value={3.2} max={5} label="Disk usage" hasValueLabel
  *   formatValueLabel={(v, m) => `${v} GB / ${m} GB`} />
@@ -461,7 +458,7 @@ export function ProgressBar({
   hasValueLabel = false,
   formatValueLabel = defaultFormatValueLabel,
   variant = 'accent',
-  contrast = 'standalone',
+  presentation,
   isIndeterminate = false,
   isDisabled = false,
   marks,
@@ -486,11 +483,10 @@ export function ProgressBar({
   const showValueLabel = hasValueLabel && !isIndeterminate;
 
   const fillVariant = isDisabled ? 'disabled' : variant;
-  const visualContrast = isIndeterminate
-    ? 'standalone'
-    : isDisabled
-      ? 'supplemental'
-      : contrast;
+  const resolvedPresentation = isIndeterminate
+    ? 'self-contained'
+    : (presentation ??
+      (hasValueLabel ? 'paired-with-value' : 'self-contained'));
 
   // Marks make no sense without a determinate value, so they are only drawn
   // in determinate mode. Non-finite mark values are dropped; the rest are
@@ -524,7 +520,7 @@ export function ProgressBar({
       {...mergeProps(
         themeProps(
           'progress-bar',
-          {variant, contrast: visualContrast},
+          {variant, presentation: resolvedPresentation},
           // `progressbar` ran the compound name together; themes styling it
           // keep working until the next major.
           {legacyNames: ['progressbar']},
@@ -605,15 +601,15 @@ export function ProgressBar({
             style={{width: `${percentage}%`}}
           />
         )}
-        {!isIndeterminate && !isDisabled && visualContrast === 'standalone' && (
+        {!isIndeterminate && resolvedPresentation === 'self-contained' && (
           <span
             aria-hidden="true"
             {...mergeProps(
-              themeProps('progress-bar-stop-indicator', {
+              themeProps('progress-bar-range-end-marker', {
                 variant: fillVariant,
-                contrast: visualContrast,
+                presentation: resolvedPresentation,
               }),
-              stylex.props(styles.stopIndicator, variantStyles[fillVariant]),
+              stylex.props(styles.rangeEndMarker, variantStyles[fillVariant]),
             )}
           />
         )}
