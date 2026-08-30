@@ -193,6 +193,11 @@ export const docs = {
               'When the component owns inputs or geometry around focused controls, verify resize, occlusion, focus movement, and scroll position under the software keyboard using platform evidence when the claim depends on platform behavior.',
               'N/A when the component has no text input and does not own viewport geometry around focused controls; unavailable required platform evidence is Blocked.',
             ],
+            [
+              'Bottom-sheet edge continuity',
+              'Every BottomSheet presentation delegates safe-area and viewport-edge mechanics to the shared primitive. Apply the bottom safe-area inset exactly once, keep actions above the home indicator and browser chrome without a second empty inset, and keep the surface visually continuous through the bottom edge. On iOS Safari, verify that the browser-bar colour matches the rendered sheet surface rather than the page or scrim.',
+              'N/A when the component never presents a BottomSheet. A component that composes the shared primitive unchanged still records the primitive and applicable device evidence; unavailable iOS browser-chrome evidence is Blocked, not N/A.',
+            ],
           ],
         },
       ],
@@ -219,6 +224,10 @@ export const docs = {
             [
               'Contract differences',
               'Placement, motion, dismissal, focus, scrolling, gesture, announcement, and non-gesture paths that differ between presentations are documented and evidenced.',
+            ],
+            [
+              'Shared primitive and semantic-family frame',
+              'The system BottomSheet owns dialog lifecycle, focus return, gestures, safe-area treatment, scrolling, animation, height budgets, and browser-edge treatment. Components in one semantic family share one presentation policy and visual frame; menus may share a menu frame while listboxes and bespoke pickers keep separate adapters. Trigger, selection, submenu, search, and picker state remain in the owning component rather than moving into a universal adaptive wrapper.',
             ],
           ],
         },
@@ -292,6 +301,7 @@ Status semantics: Pass = evidenced; Fail = applicable work or obtainable evidenc
 | Input, hover, pointer, and gesture behavior | Pass/Fail/Blocked/N/A | Non-hover path, pointer/gesture/cancel evidence, platform evidence, or N/A reason |
 | Interaction/accessibility effects | Pass/Fail/Blocked/N/A | Target size, semantic/focus/keyboard/dismissal changes, reduced-motion behavior, or N/A reason |
 | Viewport geometry/obstruction | Pass/Fail/Blocked/N/A | Keyboard, safe-area, chrome, obstruction, scroll, dynamic viewport evidence, or N/A reason |
+| BottomSheet safe-area/browser chrome | Pass/Fail/Blocked/N/A | One bottom inset, unobscured actions, continuous themed surface, real iOS Safari browser-bar evidence, or N/A reason |
 | Animated overflow/clipping | Pass/Fail/Blocked/N/A | Recording/intermediate frames/trace showing no clipping, overlap, focus loss, scroll jump, blocked input, or lifecycle conflict; N/A for static components |
 | Stack reflow/intermediate-frame evidence | Pass/Fail/Blocked/N/A | Recording/intermediate frames/geometry trace for add/remove/reorder or queued UI reflow; N/A when no stack/collection motion exists |
 
@@ -300,6 +310,7 @@ Status semantics: Pass = evidenced; Fail = applicable work or obtainable evidenc
 | Check | Result | Evidence |
 | --- | --- | --- |
 | Explicit opt-in and state continuity | Pass/Fail/Blocked/N/A | Task/product rationale, state continuity, contract differences, or N/A reason |
+| Shared primitive and semantic-family frame | Pass/Fail/Blocked/N/A | Primitive/adapter ownership, sibling inventory, and evidence that domain state remains in the owning component |
 
 ### Transient and queued UI appendix, if applicable
 

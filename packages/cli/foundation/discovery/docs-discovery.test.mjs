@@ -144,6 +144,11 @@ describe('discoverBuiltinTopics', () => {
       'native top-layer dialog or popover behavior',
       'visual viewport/software keyboard behavior',
       'safe-area/platform chrome',
+      'Bottom-sheet edge continuity',
+      'bottom safe-area inset exactly once',
+      'browser-bar colour matches the rendered sheet surface',
+      'Shared primitive and semantic-family frame',
+      'Components in one semantic family share one presentation policy and visual frame',
       'Physical-device checks',
     ]) {
       expect(serialized).toContain(requiredPhrase);
