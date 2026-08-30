@@ -29,16 +29,15 @@
   <text class="text title" x="70" y="78">Theme palette architecture</text>
   <text class="muted subtitle" x="70" y="112">Keep the default application bundle small; load complete color ramps only when explicitly requested.</text>
 
-  <rect class="warning-soft" x="70" y="155" width="590" height="150" rx="16" />
-  <text class="text heading" x="100" y="198">Original PR design</text>
-  <text class="muted body" x="100" y="233">Every consumer receives theme rendering data</text>
-  <text class="muted body" x="100" y="258">plus the complete authoring palette.</text>
-  <text class="text metric" x="100" y="292">5.7 KB gzipped</text>
+  <rect class="surface" x="70" y="155" width="590" height="150" rx="16" />
+  <text class="text heading" x="100" y="198">Production today</text>
+  <text class="muted body" x="100" y="233">Current released Neutral runtime.</text>
+  <text class="text metric" x="100" y="292">3.1 KB gzipped</text>
 
   <rect class="accent-soft" x="740" y="155" width="590" height="150" rx="16" />
-  <text class="text heading" x="770" y="198">Revised PR design</text>
-  <text class="muted body" x="770" y="233">Normal component consumers receive only</text>
-  <text class="muted body" x="770" y="258">the data required to render the theme.</text>
+  <text class="text heading" x="770" y="198">Proposed default runtime</text>
+  <text class="muted body" x="770" y="233">Includes the theme changes while keeping the</text>
+  <text class="muted body" x="770" y="258">complete palette out of the default import.</text>
   <text class="text metric" x="770" y="292">3.3 KB gzipped</text>
 
   <rect class="source" x="445" y="372" width="510" height="108" rx="16" />
@@ -62,5 +61,5 @@
   <text class="text metric" x="810" y="751">2.4 KB gzipped</text>
   <text class="muted small" x="810" y="777">Loaded only by agents, audits, and advanced tools.</text>
 
-  <text class="muted small" x="70" y="828">Measured using the Neutral theme from PR #5628. Current production reference: 3.1 KB gzipped.</text>
+  <text class="muted small" x="70" y="828">Measured using the current production Neutral theme and the proposed Neutral changes from PR #5628.</text>
 </svg>
