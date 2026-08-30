@@ -276,7 +276,7 @@ describe('neutral theme component-pair contrast', () => {
       progress['variant:warning']['--color-background-muted'],
     ).toBeUndefined();
     expect(progress['variant:warning']['--color-warning']).toBe(
-      'light-dark(#927300, #f1d27c)',
+      'light-dark(#927300, #f4d170)',
     );
   });
 
