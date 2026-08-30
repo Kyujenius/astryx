@@ -95,6 +95,22 @@ describe('DropdownMenu', () => {
     );
   });
 
+  it('sizes the menu to the available viewport height', () => {
+    render(
+      <DropdownMenu button={{label: 'Actions'}} items={[{label: 'Item 1'}]} />,
+    );
+    const popover = screen
+      .getByRole('menu', {hidden: true})
+      .closest('[popover]') as HTMLElement;
+    expect(popover.style.maxBlockSize).toContain('calc(100% - 2 *');
+    expect(popover.style.positionTryOrder).toBe('most-block-size');
+
+    const surface = popover.querySelector(
+      '.astryx-popover-surface',
+    ) as HTMLElement;
+    expect(getComputedStyle(surface).display).toBe('flex');
+  });
+
   it('supports explicit menu placement', () => {
     render(
       <DropdownMenu

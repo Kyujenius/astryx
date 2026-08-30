@@ -261,9 +261,16 @@ const styles = stylex.create({
   },
 
   // Dropdown container
+  dropdownPanel: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxBlockSize: '100%',
+    minBlockSize: 0,
+  },
   dropdown: {
     boxSizing: 'border-box',
-    maxHeight: '300px',
+    maxBlockSize: '100%',
+    minBlockSize: 0,
     overflowY: 'auto',
     paddingBlock: spacingVars['--spacing-1'],
     paddingInline: spacingVars['--spacing-1'],
@@ -1718,7 +1725,7 @@ export function Selector<T extends SelectorOptionType>(
 
       {popover.render(
         hasSearch ? (
-          <div>
+          <div {...stylex.props(styles.dropdownPanel)}>
             {renderSearch()}
             {/*
               Separates the header from the options and spans the panel: the
@@ -1761,6 +1768,7 @@ export function Selector<T extends SelectorOptionType>(
           offset: shouldOverlaySelectedItem
             ? undefined
             : spacingVars['--spacing-1'],
+          clampToAvailableSpace: 'block',
           xstyle: [styles.popover, layerAnimations[popoverPlacement]],
           style: popoverOffsetStyle,
         },

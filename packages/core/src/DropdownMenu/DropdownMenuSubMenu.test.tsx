@@ -81,6 +81,21 @@ describe('DropdownMenuSubMenu', () => {
     ).toBeInTheDocument();
   });
 
+  it('sizes the flyout to the available viewport height', async () => {
+    const user = userEvent.setup();
+    render(<MoveMenu />);
+    await user.click(screen.getByRole('button', {name: /Actions/}));
+    await user.click(
+      screen.getByRole('menuitem', {name: /Move to/, hidden: true}),
+    );
+
+    const flyout = screen
+      .getByRole('menuitem', {name: 'Folder A', hidden: true})
+      .closest('[role="menu"]')
+      ?.closest('[popover]') as HTMLElement;
+    expect(flyout.style.maxBlockSize).toBe('100%');
+  });
+
   it('opens on ArrowRight and returns focus to the trigger on ArrowLeft', async () => {
     const user = userEvent.setup();
     render(<MoveMenu />);

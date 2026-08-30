@@ -239,9 +239,16 @@ const styles = stylex.create({
   },
 
   // Dropdown container
+  dropdownPanel: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxBlockSize: '100%',
+    minBlockSize: 0,
+  },
   dropdown: {
     boxSizing: 'border-box',
-    maxHeight: '300px',
+    maxBlockSize: '100%',
+    minBlockSize: 0,
     overflowY: 'auto',
     padding: spacingVars['--spacing-1'],
   },
@@ -1774,7 +1781,7 @@ export function MultiSelector<T extends MultiSelectorOptionType>({
           // options scroll under it, so the field does not slide out of reach
           // in a long list. Without one the panel is a single scroll container,
           // exactly as before.
-          <div>
+          <div {...stylex.props(styles.dropdownPanel)}>
             {renderSearch()}
             {/*
               Separates the header from the options and spans the panel: the
@@ -1807,6 +1814,7 @@ export function MultiSelector<T extends MultiSelectorOptionType>({
           placement: 'below',
           alignment: 'start',
           offset: spacingVars['--spacing-1'],
+          clampToAvailableSpace: 'block',
           xstyle: styles.popover,
         },
       )}

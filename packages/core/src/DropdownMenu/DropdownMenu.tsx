@@ -73,7 +73,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: spacingVars['--spacing-0-5'],
-    maxHeight: '300px',
+    maxBlockSize: '100%',
     overflowY: 'auto',
     '--_dropdown-menu-radius': radiusVars['--radius-container'],
     '--_dropdown-menu-padding': spacingVars['--spacing-1'],
@@ -538,6 +538,7 @@ export function DropdownMenu({
           placement,
           alignment,
           offset: spacingVars['--spacing-1'],
+          clampToAvailableSpace: 'block',
           xstyle: [popoverXstyle, layerAnimations[placement]],
         },
       )}

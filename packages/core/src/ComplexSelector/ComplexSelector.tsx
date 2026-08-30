@@ -164,7 +164,7 @@ const styles = stylex.create({
   },
   content: {
     boxSizing: 'border-box',
-    maxHeight: 'min(480px, calc(100vh - 32px))',
+    maxBlockSize: '100%',
     overflow: 'auto',
     padding: spacingVars['--spacing-3'],
   },
@@ -553,6 +553,7 @@ export function ComplexSelector<Value>({
         placement,
         alignment,
         offset: spacingVars['--spacing-1'],
+        clampToAvailableSpace: 'block',
         xstyle: [styles.popover, layerAnimations[placement]],
       })}
     </>

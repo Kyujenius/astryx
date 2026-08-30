@@ -49,6 +49,15 @@ const styles = stylex.create({
   contentWrapper: {
     position: 'relative',
   },
+  // useLayer clamps its positioned element. usePopover inserts this surface
+  // inside that element, so the surface must participate in the same flex
+  // chain or its content can still paint past the layer's available height.
+  clampBlockContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxBlockSize: '100%',
+    minBlockSize: 0,
+  },
   // Hidden close button wrapper - sr-only until focused, then positioned below
   // popover. Inline-axis centering (+ the translateY(100%) that drops it below
   // the surface) comes from rtlStyles.centerInline('100%') at the call site —
@@ -469,6 +478,9 @@ function usePopoverImplementation(
               {...surfaceProps, className: surfaceClassName},
               stylex.props(
                 styles.contentWrapper,
+                (props?.clampToAvailableSpace === 'block' ||
+                  props?.clampToAvailableSpace === 'both') &&
+                  styles.clampBlockContent,
                 hasSurface && styles.surface,
                 xstyle,
               ),
