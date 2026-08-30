@@ -10,7 +10,7 @@ import {
 } from '@astryxdesign/core/theme';
 import {neutralIconRegistry} from './icons';
 
-/** Approved tonal palette. Prefer semantic tokens before selecting a tone. */
+/** Approved tonal palette. Prefer semantic tokens before selecting a stop. */
 export const neutralPalettes = defineTonalPalettes({
   neutral: {
     light: {
@@ -545,12 +545,12 @@ export const neutralPalettes = defineTonalPalettes({
   },
 });
 
-function palette(
+function getPaletteStop(
   family: keyof typeof neutralPalettes,
-  tone: TonalPaletteTone,
+  stop: TonalPaletteTone,
   mode: 'light' | 'dark' = 'light',
 ): string {
-  return neutralPalettes[family][mode][tone];
+  return neutralPalettes[family][mode][stop];
 }
 
 function lightDark(light: string, dark: string): string {
@@ -564,26 +564,50 @@ function withAlpha(
   return `${color}${alpha}`;
 }
 
-/** Syntax colors use the same palette tones as categorical icons. */
+/** Syntax colors use the same palette stops as categorical icons. */
 const neutralSyntax = defineSyntaxTheme({
   name: 'xds-neutral',
   tokens: {
-    keyword: [palette('purple', 30), palette('purple', 80, 'dark')],
-    string: [palette('green', 30), palette('green', 80, 'dark')],
-    comment: [palette('neutral', 50), palette('neutral', 65, 'light')],
-    number: [palette('orange', 30), palette('orange', 80, 'dark')],
-    function: [palette('blue', 30), palette('blue', 80, 'dark')],
-    type: [palette('purple', 30), palette('purple', 80, 'dark')],
-    variable: [palette('neutral', 10), palette('neutral', 90, 'light')],
-    operator: [palette('neutral', 50), palette('neutral', 65, 'light')],
-    constant: [palette('orange', 30), palette('orange', 80, 'dark')],
-    tag: [palette('red', 30), palette('red', 80, 'dark')],
-    attribute: [palette('yellow', 30), palette('yellow', 80, 'dark')],
-    property: [palette('teal', 30), palette('teal', 80, 'dark')],
-    // #a3a3a3/#525252 (this pair's own disabled-text tone) failed WCAG AA
+    keyword: [
+      getPaletteStop('purple', 30),
+      getPaletteStop('purple', 80, 'dark'),
+    ],
+    string: [getPaletteStop('green', 30), getPaletteStop('green', 80, 'dark')],
+    comment: [
+      getPaletteStop('neutral', 50),
+      getPaletteStop('neutral', 65, 'light'),
+    ],
+    number: [
+      getPaletteStop('orange', 30),
+      getPaletteStop('orange', 80, 'dark'),
+    ],
+    function: [getPaletteStop('blue', 30), getPaletteStop('blue', 80, 'dark')],
+    type: [getPaletteStop('purple', 30), getPaletteStop('purple', 80, 'dark')],
+    variable: [
+      getPaletteStop('neutral', 10),
+      getPaletteStop('neutral', 90, 'light'),
+    ],
+    operator: [
+      getPaletteStop('neutral', 50),
+      getPaletteStop('neutral', 65, 'light'),
+    ],
+    constant: [
+      getPaletteStop('orange', 30),
+      getPaletteStop('orange', 80, 'dark'),
+    ],
+    tag: [getPaletteStop('red', 30), getPaletteStop('red', 80, 'dark')],
+    attribute: [
+      getPaletteStop('yellow', 30),
+      getPaletteStop('yellow', 80, 'dark'),
+    ],
+    property: [getPaletteStop('teal', 30), getPaletteStop('teal', 80, 'dark')],
+    // #a3a3a3/#525252 (this pair's own disabled-text stop) failed WCAG AA
     // against the syntax background: 2.42:1 light, 2.53:1 dark. #5386.
     punctuation: ['#6e6e6e', '#a0a0a0'], // neutral, 4.89:1 / 7.57:1
-    background: [palette('neutral', 95, 'light'), palette('neutral', 0)],
+    background: [
+      getPaletteStop('neutral', 95, 'light'),
+      getPaletteStop('neutral', 0),
+    ],
   },
 });
 
@@ -626,241 +650,337 @@ export const neutralTheme = defineTheme({
   // documented opaque exception.
   tokens: {
     // =========================================================================
-    // Core — exact numbered tones from neutralPalettes.neutral.
+    // Core — exact numbered stops from neutralPalettes.neutral.
     // =========================================================================
 
     // Dark cards and popovers match the body and rely on elevation; interactive
-    // surfaces use the next lighter neutral tone.
+    // surfaces use the next lighter neutral stop.
     '--color-background-surface': [
-      palette('neutral', 100),
-      palette('neutral', 10, 'dark'),
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 10, 'dark'),
     ],
     '--color-background-body': [
-      palette('neutral', 95),
-      palette('neutral', 5, 'dark'),
+      getPaletteStop('neutral', 95),
+      getPaletteStop('neutral', 5, 'dark'),
     ],
     '--color-background-card': [
-      palette('neutral', 100),
-      palette('neutral', 5, 'dark'),
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 5, 'dark'),
     ],
     '--color-background-popover': [
-      palette('neutral', 100),
-      palette('neutral', 5, 'dark'),
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 5, 'dark'),
     ],
     '--color-background-muted': [
-      palette('neutral', 95),
-      palette('neutral', 5, 'dark'),
+      getPaletteStop('neutral', 95),
+      getPaletteStop('neutral', 5, 'dark'),
     ],
 
     // Accent + neutral surface tints (sit alongside backgrounds)
-    '--color-accent': [palette('neutral', 15), palette('neutral', 90, 'dark')],
+    '--color-accent': [
+      getPaletteStop('neutral', 15),
+      getPaletteStop('neutral', 90, 'dark'),
+    ],
     '--color-accent-muted': [
-      palette('neutral', 95),
-      palette('neutral', 10, 'dark'),
+      getPaletteStop('neutral', 95),
+      getPaletteStop('neutral', 10, 'dark'),
     ],
     '--color-neutral': [
-      withAlpha(palette('neutral', 0), '0F'),
-      withAlpha(palette('neutral', 100), '1A'),
+      withAlpha(getPaletteStop('neutral', 0), '0F'),
+      withAlpha(getPaletteStop('neutral', 100), '1A'),
     ],
 
     // Overlays (modal scrims, hover/pressed tints)
     '--color-overlay': [
-      withAlpha(palette('neutral', 0), '80'),
-      withAlpha(palette('neutral', 0), 'CC'),
+      withAlpha(getPaletteStop('neutral', 0), '80'),
+      withAlpha(getPaletteStop('neutral', 0), 'CC'),
     ],
     '--color-overlay-hover': [
-      withAlpha(palette('neutral', 0), '0D'),
-      withAlpha(palette('neutral', 100), '0D'),
+      withAlpha(getPaletteStop('neutral', 0), '0D'),
+      withAlpha(getPaletteStop('neutral', 100), '0D'),
     ],
     '--color-overlay-pressed': [
-      withAlpha(palette('neutral', 0), '1A'),
-      withAlpha(palette('neutral', 100), '1A'),
+      withAlpha(getPaletteStop('neutral', 0), '1A'),
+      withAlpha(getPaletteStop('neutral', 100), '1A'),
     ],
 
     // Text
-    '--color-text-primary': [palette('neutral', 10), palette('neutral', 95)],
-    // Light secondary is tone 35 (#525252), not tone 50 (#777777): tone 50 only
-    // reaches 4.19:1 on the tone 95 body (#f1f1f1), just under WCAG AA 4.5:1.
-    // 600 clears it (6.9:1 on body, 7.8:1 on card). Dark stays neutral-400.
-    '--color-text-secondary': [palette('neutral', 35), palette('neutral', 65)],
-    '--color-text-disabled': [palette('neutral', 65), palette('neutral', 35)],
-    '--color-text-accent': [
-      palette('neutral', 15),
-      palette('neutral', 90, 'dark'),
+    '--color-text-primary': [
+      getPaletteStop('neutral', 10),
+      getPaletteStop('neutral', 95),
     ],
-    '--color-on-dark': palette('neutral', 100),
-    '--color-on-light': palette('neutral', 10),
+    // Light secondary is stop 35 (#525252), not stop 50 (#777777): stop 50 only
+    // reaches 4.19:1 on the stop 95 body (#f1f1f1), just under WCAG AA 4.5:1.
+    // 600 clears it (6.9:1 on body, 7.8:1 on card). Dark stays neutral-400.
+    '--color-text-secondary': [
+      getPaletteStop('neutral', 35),
+      getPaletteStop('neutral', 65),
+    ],
+    '--color-text-disabled': [
+      getPaletteStop('neutral', 65),
+      getPaletteStop('neutral', 35),
+    ],
+    '--color-text-accent': [
+      getPaletteStop('neutral', 15),
+      getPaletteStop('neutral', 90, 'dark'),
+    ],
+    '--color-on-dark': getPaletteStop('neutral', 100),
+    '--color-on-light': getPaletteStop('neutral', 10),
     // Contrast: neutral accent is near-black (L) / near-white (D)
-    '--color-on-accent': [palette('neutral', 100), palette('neutral', 10)],
-    '--color-on-success': [palette('neutral', 100), palette('neutral', 10)],
-    '--color-on-error': [palette('neutral', 100), palette('neutral', 10)],
-    '--color-on-warning': palette('neutral', 10),
+    '--color-on-accent': [
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 10),
+    ],
+    '--color-on-success': [
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 10),
+    ],
+    '--color-on-error': [
+      getPaletteStop('neutral', 100),
+      getPaletteStop('neutral', 10),
+    ],
+    '--color-on-warning': getPaletteStop('neutral', 10),
 
     // Icon
     '--color-icon-accent': [
-      palette('neutral', 15),
-      palette('neutral', 90, 'dark'),
+      getPaletteStop('neutral', 15),
+      getPaletteStop('neutral', 90, 'dark'),
     ],
-    '--color-icon-primary': [palette('neutral', 10), palette('neutral', 95)],
-    '--color-icon-secondary': [palette('neutral', 50), palette('neutral', 65)],
-    '--color-icon-disabled': [palette('neutral', 65), palette('neutral', 35)],
+    '--color-icon-primary': [
+      getPaletteStop('neutral', 10),
+      getPaletteStop('neutral', 95),
+    ],
+    '--color-icon-secondary': [
+      getPaletteStop('neutral', 50),
+      getPaletteStop('neutral', 65),
+    ],
+    '--color-icon-disabled': [
+      getPaletteStop('neutral', 65),
+      getPaletteStop('neutral', 35),
+    ],
 
     // Status colors pair dark foregrounds with pastel surfaces in light mode,
     // and light foregrounds with translucent hue surfaces in dark mode.
-    '--color-success': [palette('green', 30), palette('green', 80, 'dark')],
-    // Error uses stronger tones to preserve contrast through pressed overlays.
-    '--color-error': [palette('red', 25), palette('red', 85, 'dark')],
-    '--color-warning': [palette('yellow', 30), palette('yellow', 80, 'dark')],
+    '--color-success': [
+      getPaletteStop('green', 30),
+      getPaletteStop('green', 80, 'dark'),
+    ],
+    // Error uses stronger stops to preserve contrast through pressed overlays.
+    '--color-error': [
+      getPaletteStop('red', 25),
+      getPaletteStop('red', 85, 'dark'),
+    ],
+    '--color-warning': [
+      getPaletteStop('yellow', 30),
+      getPaletteStop('yellow', 80, 'dark'),
+    ],
     '--color-success-muted': [
-      palette('green', 85),
-      withAlpha(palette('green', 70, 'dark'), '3D'),
+      getPaletteStop('green', 85),
+      withAlpha(getPaletteStop('green', 70, 'dark'), '3D'),
     ],
     '--color-error-muted': [
-      palette('red', 85),
-      withAlpha(palette('red', 70, 'dark'), '3D'),
+      getPaletteStop('red', 85),
+      withAlpha(getPaletteStop('red', 70, 'dark'), '3D'),
     ],
     '--color-warning-muted': [
-      palette('yellow', 90),
-      withAlpha(palette('yellow', 70, 'dark'), '3D'),
+      getPaletteStop('yellow', 90),
+      withAlpha(getPaletteStop('yellow', 70, 'dark'), '3D'),
     ],
 
     // Borders retain the released Neutral appearance while referencing exact
-    // approved tones. Components that require a 3:1 identifying boundary
+    // approved stops. Components that require a 3:1 identifying boundary
     // should provide that treatment through a component-specific mapping.
     '--color-border': [
-      withAlpha(palette('neutral', 0), '14'),
-      withAlpha(palette('neutral', 100), '1A'),
+      withAlpha(getPaletteStop('neutral', 0), '14'),
+      withAlpha(getPaletteStop('neutral', 100), '1A'),
     ],
     '--color-border-emphasized': [
-      palette('neutral', 85),
-      palette('neutral', 30, 'dark'),
+      getPaletteStop('neutral', 85),
+      getPaletteStop('neutral', 30, 'dark'),
     ],
 
     // Effects
     '--color-skeleton': [
-      palette('neutral', 90),
-      palette('neutral', 30, 'dark'),
+      getPaletteStop('neutral', 90),
+      getPaletteStop('neutral', 30, 'dark'),
     ],
     '--color-shadow': [
-      withAlpha(palette('neutral', 0), '1A'),
-      withAlpha(palette('neutral', 0), '4D'),
+      withAlpha(getPaletteStop('neutral', 0), '1A'),
+      withAlpha(getPaletteStop('neutral', 0), '4D'),
     ],
     '--color-tint-hover': ['black', 'white'],
 
     // Categorical roles use pastel surfaces and dark text in light mode, then
     // translucent hue surfaces and light text in dark mode.
     '--color-background-red': [
-      palette('red', 85),
-      withAlpha(palette('red', 70, 'dark'), '3D'),
+      getPaletteStop('red', 85),
+      withAlpha(getPaletteStop('red', 70, 'dark'), '3D'),
     ],
-    '--color-border-red': [palette('red', 80), palette('red', 60, 'dark')],
-    '--color-icon-red': [palette('red', 30), palette('red', 70, 'dark')],
-    '--color-text-red': [palette('red', 25), palette('red', 85, 'dark')],
+    '--color-border-red': [
+      getPaletteStop('red', 80),
+      getPaletteStop('red', 60, 'dark'),
+    ],
+    '--color-icon-red': [
+      getPaletteStop('red', 30),
+      getPaletteStop('red', 70, 'dark'),
+    ],
+    '--color-text-red': [
+      getPaletteStop('red', 25),
+      getPaletteStop('red', 85, 'dark'),
+    ],
 
     '--color-background-orange': [
-      palette('orange', 85),
-      withAlpha(palette('orange', 70, 'dark'), '3D'),
+      getPaletteStop('orange', 85),
+      withAlpha(getPaletteStop('orange', 70, 'dark'), '3D'),
     ],
     '--color-border-orange': [
-      palette('orange', 80),
-      palette('orange', 60, 'dark'),
+      getPaletteStop('orange', 80),
+      getPaletteStop('orange', 60, 'dark'),
     ],
     '--color-icon-orange': [
-      palette('orange', 30),
-      palette('orange', 70, 'dark'),
+      getPaletteStop('orange', 30),
+      getPaletteStop('orange', 70, 'dark'),
     ],
     '--color-text-orange': [
-      palette('orange', 30),
-      palette('orange', 80, 'dark'),
+      getPaletteStop('orange', 30),
+      getPaletteStop('orange', 80, 'dark'),
     ],
 
     '--color-background-yellow': [
-      palette('yellow', 90),
-      withAlpha(palette('yellow', 70, 'dark'), '3D'),
+      getPaletteStop('yellow', 90),
+      withAlpha(getPaletteStop('yellow', 70, 'dark'), '3D'),
     ],
     '--color-border-yellow': [
-      palette('yellow', 80),
-      palette('yellow', 60, 'dark'),
+      getPaletteStop('yellow', 80),
+      getPaletteStop('yellow', 60, 'dark'),
     ],
     '--color-icon-yellow': [
-      palette('yellow', 30),
-      palette('yellow', 70, 'dark'),
+      getPaletteStop('yellow', 30),
+      getPaletteStop('yellow', 70, 'dark'),
     ],
     '--color-text-yellow': [
-      palette('yellow', 30),
-      palette('yellow', 80, 'dark'),
+      getPaletteStop('yellow', 30),
+      getPaletteStop('yellow', 80, 'dark'),
     ],
 
     '--color-background-green': [
-      palette('green', 85),
-      withAlpha(palette('green', 70, 'dark'), '3D'),
+      getPaletteStop('green', 85),
+      withAlpha(getPaletteStop('green', 70, 'dark'), '3D'),
     ],
     '--color-border-green': [
-      palette('green', 80),
-      palette('green', 60, 'dark'),
+      getPaletteStop('green', 80),
+      getPaletteStop('green', 60, 'dark'),
     ],
-    '--color-icon-green': [palette('green', 30), palette('green', 70, 'dark')],
-    '--color-text-green': [palette('green', 30), palette('green', 80, 'dark')],
+    '--color-icon-green': [
+      getPaletteStop('green', 30),
+      getPaletteStop('green', 70, 'dark'),
+    ],
+    '--color-text-green': [
+      getPaletteStop('green', 30),
+      getPaletteStop('green', 80, 'dark'),
+    ],
 
     '--color-background-teal': [
-      palette('teal', 85),
-      withAlpha(palette('teal', 70, 'dark'), '3D'),
+      getPaletteStop('teal', 85),
+      withAlpha(getPaletteStop('teal', 70, 'dark'), '3D'),
     ],
-    '--color-border-teal': [palette('teal', 80), palette('teal', 60, 'dark')],
-    '--color-icon-teal': [palette('teal', 30), palette('teal', 70, 'dark')],
-    '--color-text-teal': [palette('teal', 30), palette('teal', 80, 'dark')],
+    '--color-border-teal': [
+      getPaletteStop('teal', 80),
+      getPaletteStop('teal', 60, 'dark'),
+    ],
+    '--color-icon-teal': [
+      getPaletteStop('teal', 30),
+      getPaletteStop('teal', 70, 'dark'),
+    ],
+    '--color-text-teal': [
+      getPaletteStop('teal', 30),
+      getPaletteStop('teal', 80, 'dark'),
+    ],
 
     '--color-background-cyan': [
-      palette('cyan', 85),
-      withAlpha(palette('cyan', 70, 'dark'), '3D'),
+      getPaletteStop('cyan', 85),
+      withAlpha(getPaletteStop('cyan', 70, 'dark'), '3D'),
     ],
-    '--color-border-cyan': [palette('cyan', 80), palette('cyan', 60, 'dark')],
-    '--color-icon-cyan': [palette('cyan', 30), palette('cyan', 70, 'dark')],
-    '--color-text-cyan': [palette('cyan', 30), palette('cyan', 80, 'dark')],
+    '--color-border-cyan': [
+      getPaletteStop('cyan', 80),
+      getPaletteStop('cyan', 60, 'dark'),
+    ],
+    '--color-icon-cyan': [
+      getPaletteStop('cyan', 30),
+      getPaletteStop('cyan', 70, 'dark'),
+    ],
+    '--color-text-cyan': [
+      getPaletteStop('cyan', 30),
+      getPaletteStop('cyan', 80, 'dark'),
+    ],
 
     '--color-background-blue': [
-      palette('blue', 85),
-      withAlpha(palette('blue', 70, 'dark'), '3D'),
+      getPaletteStop('blue', 85),
+      withAlpha(getPaletteStop('blue', 70, 'dark'), '3D'),
     ],
-    '--color-border-blue': [palette('blue', 80), palette('blue', 60, 'dark')],
-    '--color-icon-blue': [palette('blue', 30), palette('blue', 70, 'dark')],
-    '--color-text-blue': [palette('blue', 30), palette('blue', 80, 'dark')],
+    '--color-border-blue': [
+      getPaletteStop('blue', 80),
+      getPaletteStop('blue', 60, 'dark'),
+    ],
+    '--color-icon-blue': [
+      getPaletteStop('blue', 30),
+      getPaletteStop('blue', 70, 'dark'),
+    ],
+    '--color-text-blue': [
+      getPaletteStop('blue', 30),
+      getPaletteStop('blue', 80, 'dark'),
+    ],
 
     '--color-background-purple': [
-      palette('purple', 85),
-      withAlpha(palette('purple', 70, 'dark'), '3D'),
+      getPaletteStop('purple', 85),
+      withAlpha(getPaletteStop('purple', 70, 'dark'), '3D'),
     ],
     '--color-border-purple': [
-      palette('purple', 80),
-      palette('purple', 60, 'dark'),
+      getPaletteStop('purple', 80),
+      getPaletteStop('purple', 60, 'dark'),
     ],
     '--color-icon-purple': [
-      palette('purple', 30),
-      palette('purple', 70, 'dark'),
+      getPaletteStop('purple', 30),
+      getPaletteStop('purple', 70, 'dark'),
     ],
     '--color-text-purple': [
-      palette('purple', 30),
-      palette('purple', 80, 'dark'),
+      getPaletteStop('purple', 30),
+      getPaletteStop('purple', 80, 'dark'),
     ],
 
     '--color-background-pink': [
-      palette('pink', 85),
-      withAlpha(palette('pink', 70, 'dark'), '3D'),
+      getPaletteStop('pink', 85),
+      withAlpha(getPaletteStop('pink', 70, 'dark'), '3D'),
     ],
-    '--color-border-pink': [palette('pink', 80), palette('pink', 60, 'dark')],
-    '--color-icon-pink': [palette('pink', 30), palette('pink', 70, 'dark')],
-    '--color-text-pink': [palette('pink', 30), palette('pink', 80, 'dark')],
+    '--color-border-pink': [
+      getPaletteStop('pink', 80),
+      getPaletteStop('pink', 60, 'dark'),
+    ],
+    '--color-icon-pink': [
+      getPaletteStop('pink', 30),
+      getPaletteStop('pink', 70, 'dark'),
+    ],
+    '--color-text-pink': [
+      getPaletteStop('pink', 30),
+      getPaletteStop('pink', 80, 'dark'),
+    ],
 
     // Gray uses the neutral categorical surface rather than a chromatic ramp.
-    '--color-background-gray': [palette('neutral', 90), 'var(--color-neutral)'],
-    '--color-border-gray': [
-      palette('neutral', 85),
-      palette('neutral', 10, 'dark'),
+    '--color-background-gray': [
+      getPaletteStop('neutral', 90),
+      'var(--color-neutral)',
     ],
-    '--color-icon-gray': [palette('neutral', 35), palette('neutral', 65)],
+    '--color-border-gray': [
+      getPaletteStop('neutral', 85),
+      getPaletteStop('neutral', 10, 'dark'),
+    ],
+    '--color-icon-gray': [
+      getPaletteStop('neutral', 35),
+      getPaletteStop('neutral', 65),
+    ],
     '--color-text-gray': [
-      palette('neutral', 15),
-      palette('neutral', 90, 'dark'),
+      getPaletteStop('neutral', 15),
+      getPaletteStop('neutral', 90, 'dark'),
     ],
 
     // =========================================================================
@@ -906,11 +1026,11 @@ export const neutralTheme = defineTheme({
       '0 4px 6px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%)), ' +
       '0 12px 24px light-dark(oklch(0 0 0 / 15%), oklch(0 0 0 / 70%)), ' +
       'inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 15%))',
-    '--shadow-inset-hover': `inset 0px 0px 0px 2px ${withAlpha(palette('blue', 45), '4D')}`,
-    '--shadow-inset-selected': `inset 0px 0px 0px 2px ${withAlpha(palette('blue', 45), '80')}`,
-    '--shadow-inset-success': `inset 0px 0px 0px 2px ${withAlpha(palette('green', 45), '4D')}`,
-    '--shadow-inset-warning': `inset 0px 0px 0px 2px ${withAlpha(palette('yellow', 85), '4D')}`,
-    '--shadow-inset-error': `inset 0px 0px 0px 2px ${withAlpha(palette('red', 50), '4D')}`,
+    '--shadow-inset-hover': `inset 0px 0px 0px 2px ${withAlpha(getPaletteStop('blue', 45), '4D')}`,
+    '--shadow-inset-selected': `inset 0px 0px 0px 2px ${withAlpha(getPaletteStop('blue', 45), '80')}`,
+    '--shadow-inset-success': `inset 0px 0px 0px 2px ${withAlpha(getPaletteStop('green', 45), '4D')}`,
+    '--shadow-inset-warning': `inset 0px 0px 0px 2px ${withAlpha(getPaletteStop('yellow', 85), '4D')}`,
+    '--shadow-inset-error': `inset 0px 0px 0px 2px ${withAlpha(getPaletteStop('red', 50), '4D')}`,
   },
 
   components: {
@@ -929,7 +1049,7 @@ export const neutralTheme = defineTheme({
     // Badge —
     //   Semantic (info/success/warning/error): filled saturated T50 + contrasting
     //     text (white, or dark on yellow). The filled-button rule from #2150
-    //     §3 — text contrast locks the bg tone, so this stays at T50 in
+    //     §3 — text contrast locks the bg stop, so this stays at T50 in
     //     BOTH modes, unlike pastel surfaces which invert by mode.
     //   Categorical (blue/green/red/orange/etc.): pastel-tinted hue surface +
     //     colored text — light mode = soft T87-T90 + dark T30 text; dark mode
@@ -942,7 +1062,7 @@ export const neutralTheme = defineTheme({
       //   Light: vivid T45-T55 from the OKLCH palette + white text
       //          (~4.5-5:1 — Material/Linear/Vercel pop).
       //   Dark : T60 stop from the dark-mode tonal palette (chroma×0.85,
-      //          +5 tone-lift taper from issue #2150 §4) + DARK text.
+      //          +5 stop-lift taper from issue #2150 §4) + DARK text.
       //          T60+white fails AA-large (~2.7:1); T60+dark hits 6.6-7:1
       //          and tames the §4 vibration. Same dark-text-on-bright-bg
       //          treatment that warning yellow uses in both modes.

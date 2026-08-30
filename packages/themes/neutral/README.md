@@ -49,10 +49,10 @@ labels identify approved entries rather than guaranteeing that each hex value
 measures at that exact HCT coordinate.
 
 Use semantic theme tokens for components. When a new semantic token or audit
-tool needs a raw color, select an exact family, mode, and numbered tone from
+tool needs a raw color, select an exact family, mode, and numbered stop from
 this palette rather than inventing or approximating a hex value. For example,
-`blue.light[45]` means blue, the light-mode ramp, tone 45. Alpha overlays should
-be derived from a numbered tone and documented at the token that uses them.
+`blue.light[45]` means blue, the light-mode ramp, stop 45. Alpha overlays should
+be derived from a numbered stop and documented at the token that uses them.
 
 ```tsx
 import {neutralPalettes} from '@astryxdesign/theme-neutral';
