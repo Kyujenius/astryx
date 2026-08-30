@@ -630,7 +630,7 @@ const neutralSyntax = defineSyntaxTheme({
 const FILLED_STATE_COLORS = {
   info: lightDark(palette('blue', 45), palette('blue', 60, 'dark')),
   success: lightDark(palette('green', 45), palette('green', 60, 'dark')),
-  warning: lightDark(palette('yellow', 85), palette('yellow', 75, 'dark')),
+  warning: lightDark(palette('yellow', 80), palette('yellow', 75, 'dark')),
   error: lightDark(palette('red', 50), palette('red', 60, 'dark')),
 } as const;
 
@@ -1134,7 +1134,7 @@ export const neutralTheme = defineTheme({
         color: FILLED_STATE_TEXT.standard,
       },
       'variant:warning': {
-        // Yellow: light-mode tone 85 / dark-mode tone 75, both with dark text.
+        // Yellow: light-mode tone 80 / dark-mode tone 75, both with dark text.
         backgroundColor: FILLED_STATE_COLORS.warning,
         color: FILLED_STATE_TEXT.onBright,
       },
