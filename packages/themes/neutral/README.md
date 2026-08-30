@@ -28,22 +28,25 @@ function App() {
 
 ### Import paths
 
-| Path                                    | Use case                                                    |
-| --------------------------------------- | ----------------------------------------------------------- |
-| `@astryxdesign/theme-neutral`           | Source build (StyleX compilation via `@astryxdesign/build`) |
-| `@astryxdesign/theme-neutral/built`     | Pre-built dist (Tailwind, plain CSS, or no build step)      |
-| `@astryxdesign/theme-neutral/theme.css` | Pre-built CSS file (import in your stylesheet)              |
+| Path                                       | Use case                                                    |
+| ------------------------------------------ | ----------------------------------------------------------- |
+| `@astryxdesign/theme-neutral`              | Source build (StyleX compilation via `@astryxdesign/build`) |
+| `@astryxdesign/theme-neutral/built`        | Pre-built dist (Tailwind, plain CSS, or no build step)      |
+| `@astryxdesign/theme-neutral/palette`      | Opt-in approved palette for application and audit code      |
+| `@astryxdesign/theme-neutral/palette.json` | Machine-readable palette for agents and tooling             |
+| `@astryxdesign/theme-neutral/theme.css`    | Pre-built CSS file (import in your stylesheet)              |
 
 If you're using `@astryxdesign/build` for StyleX source compilation, import from the bare path. Otherwise, use `/built`.
 
 ## Approved palette
 
-The source package exports `neutralPalettes`, and every built `neutralTheme`
-includes the same data at `neutralTheme.palettes`. Each family contains exact
-light- and dark-mode palette entries labeled from 0 through 100 in increments
-of five. By convention, lower labels identify darker stops and higher labels
-lighter stops in both modes. The labels identify approved entries rather than
-guaranteeing that each hex value measures at that exact HCT coordinate.
+The source package exports `neutralPalettes`. Production builds keep that data
+out of the default theme module and expose it through the opt-in `/palette` and
+`/palette.json` paths. Each family contains exact light- and dark-mode palette
+entries labeled from 0 through 100 in increments of five. By convention, lower
+labels identify darker stops and higher labels lighter stops in both modes. The
+labels identify approved entries rather than guaranteeing that each hex value
+measures at that exact HCT coordinate.
 
 Use semantic theme tokens for components. When a new semantic token or audit
 tool needs a raw color, select an exact family, mode, and numbered tone from
@@ -57,13 +60,13 @@ import {neutralPalettes} from '@astryxdesign/theme-neutral';
 const auditedInfo = neutralPalettes.blue.light[45];
 ```
 
-The pre-built theme exposes the same palette without requiring source
-compilation:
+Production and audit code can import the generated palette without adding it to
+the default runtime theme:
 
 ```tsx
-import {neutralTheme} from '@astryxdesign/theme-neutral/built';
+import {neutralPalettes} from '@astryxdesign/theme-neutral/palette';
 
-const auditedInfo = neutralTheme.palettes?.blue.light[45];
+const auditedInfo = neutralPalettes.blue.light[45];
 ```
 
 ### CSS import
