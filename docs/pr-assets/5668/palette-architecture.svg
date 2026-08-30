@@ -30,13 +30,13 @@
   <text class="muted subtitle" x="70" y="112">Keep the default application bundle small; load complete color ramps only when explicitly requested.</text>
 
   <rect class="warning-soft" x="70" y="155" width="590" height="150" rx="16" />
-  <text class="text heading" x="100" y="198">Before: palette embedded in runtime</text>
+  <text class="text heading" x="100" y="198">Original PR design</text>
   <text class="muted body" x="100" y="233">Every consumer receives theme rendering data</text>
   <text class="muted body" x="100" y="258">plus the complete authoring palette.</text>
   <text class="text metric" x="100" y="292">5.7 KB gzipped</text>
 
   <rect class="accent-soft" x="740" y="155" width="590" height="150" rx="16" />
-  <text class="text heading" x="770" y="198">After: default runtime stays lean</text>
+  <text class="text heading" x="770" y="198">Revised PR design</text>
   <text class="muted body" x="770" y="233">Normal component consumers receive only</text>
   <text class="muted body" x="770" y="258">the data required to render the theme.</text>
   <text class="text metric" x="770" y="292">3.3 KB gzipped</text>
