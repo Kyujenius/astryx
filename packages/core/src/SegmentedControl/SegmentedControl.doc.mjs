@@ -1,6 +1,6 @@
 // Copyright (c) Meta Platforms, Inc. and affiliates.
 
-import {segmentedControlAccessibilityThemeCoverage} from '../Button/buttonFamilyAccessibilityThemeCoverage.mjs';
+import {segmentedControlAccessibilityThemeCoverage} from '../accessibility/generatedThemeCoverage.mjs';
 
 /** @type {import('@astryxdesign/cli/authoring').ComponentDoc} */
 

@@ -1,18 +1,7 @@
 // Copyright (c) Meta Platforms, Inc. and affiliates.
 
 import {describe, expect, it} from 'vitest';
-import {docs as buttonDocs} from '../packages/core/src/Button/Button.doc.mjs';
-import {
-  buttonAccessibilityThemeCoverage,
-  buttonGroupAccessibilityThemeCoverage,
-  iconButtonAccessibilityThemeCoverage,
-  segmentedControlAccessibilityThemeCoverage,
-  toggleButtonAccessibilityThemeCoverage,
-} from '../packages/core/src/Button/buttonFamilyAccessibilityThemeCoverage.mjs';
-import {docs as buttonGroupDocs} from '../packages/core/src/ButtonGroup/ButtonGroup.doc.mjs';
-import {docs as iconButtonDocs} from '../packages/core/src/IconButton/IconButton.doc.mjs';
-import {docs as segmentedControlDocs} from '../packages/core/src/SegmentedControl/SegmentedControl.doc.mjs';
-import {docs as toggleButtonDocs} from '../packages/core/src/ToggleButton/ToggleButton.doc.mjs';
+import * as generatedCoverage from '../packages/core/src/accessibility/generatedThemeCoverage.mjs';
 import {neutralTheme} from '../packages/themes/neutral/src/neutralTheme.ts';
 import {
   compositeColor,
@@ -21,26 +10,31 @@ import {
 } from './accessibility/contrast-audit-engine.mjs';
 import {
   buildButtonFamilyAccessibilityThemeCoverage,
+  buttonFamilyAuditModule,
   buttonFamilyAuditProfiles,
   buttonFamilySource,
   getButtonFamilyAuditContract,
-} from './accessibility/button-family-audit-profiles.mjs';
+} from './accessibility/button-family-audit-module.mjs';
+import {
+  buildRegisteredAccessibilityCoverage,
+  componentAccessibilityAuditModules,
+} from './accessibility/component-audit-registry.mjs';
 
-const docsByComponent = {
-  Button: buttonDocs,
-  IconButton: iconButtonDocs,
-  ToggleButton: toggleButtonDocs,
-  ButtonGroup: buttonGroupDocs,
-  SegmentedControl: segmentedControlDocs,
-};
+const docsByComponent = Object.fromEntries(
+  await Promise.all(
+    buttonFamilyAuditModule.components.map(async component => [
+      component.name,
+      (await import(component.docsUrl.href)).docs,
+    ]),
+  ),
+);
 
-const generatedByComponent = {
-  Button: buttonAccessibilityThemeCoverage,
-  IconButton: iconButtonAccessibilityThemeCoverage,
-  ToggleButton: toggleButtonAccessibilityThemeCoverage,
-  ButtonGroup: buttonGroupAccessibilityThemeCoverage,
-  SegmentedControl: segmentedControlAccessibilityThemeCoverage,
-};
+const generatedByComponent = Object.fromEntries(
+  buttonFamilyAuditModule.components.map(component => [
+    component.name,
+    generatedCoverage[component.exportName],
+  ]),
+);
 
 function measurementsFor(coverage) {
   return coverage.flatMap(theme =>
@@ -80,17 +74,30 @@ describe('contrast audit engine', () => {
   });
 });
 
-describe('Button-family generated contrast coverage', () => {
-  const calculated = buildButtonFamilyAccessibilityThemeCoverage();
+describe('registered component accessibility coverage', () => {
+  it('matches every registered module and component document', async () => {
+    const calculated = buildRegisteredAccessibilityCoverage();
+    expect(Object.keys(generatedCoverage).sort()).toEqual(
+      Object.keys(calculated).sort(),
+    );
 
-  it('matches every generated theme result exactly', () => {
-    for (const [component, coverage] of Object.entries(generatedByComponent)) {
-      expect(coverage).toEqual(calculated[component]);
-      expect(docsByComponent[component].usage.accessibilityThemeCoverage).toBe(
-        coverage,
-      );
+    for (const module of componentAccessibilityAuditModules) {
+      const moduleCoverage = module.buildCoverage();
+      for (const component of module.components) {
+        expect(generatedCoverage[component.exportName]).toEqual(
+          moduleCoverage[component.name],
+        );
+        const {docs} = await import(component.docsUrl.href);
+        expect(docs.usage.accessibilityThemeCoverage).toBe(
+          generatedCoverage[component.exportName],
+        );
+      }
     }
   });
+});
+
+describe('Button-family audit module', () => {
+  const calculated = buildButtonFamilyAccessibilityThemeCoverage();
 
   it('keeps representative rendered results stable', () => {
     const buttonLight = calculated.Button[0].tables[0].modes[0];

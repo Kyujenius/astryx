@@ -761,3 +761,50 @@ export function getButtonFamilyAuditContract() {
       PARENT_PROFILES.length,
   };
 }
+
+export const buttonFamilyAuditModule = {
+  id: 'button-family',
+  components: [
+    {
+      name: 'Button',
+      exportName: 'buttonAccessibilityThemeCoverage',
+      docsUrl: new URL(
+        '../../packages/core/src/Button/Button.doc.mjs',
+        import.meta.url,
+      ),
+    },
+    {
+      name: 'IconButton',
+      exportName: 'iconButtonAccessibilityThemeCoverage',
+      docsUrl: new URL(
+        '../../packages/core/src/IconButton/IconButton.doc.mjs',
+        import.meta.url,
+      ),
+    },
+    {
+      name: 'ToggleButton',
+      exportName: 'toggleButtonAccessibilityThemeCoverage',
+      docsUrl: new URL(
+        '../../packages/core/src/ToggleButton/ToggleButton.doc.mjs',
+        import.meta.url,
+      ),
+    },
+    {
+      name: 'ButtonGroup',
+      exportName: 'buttonGroupAccessibilityThemeCoverage',
+      docsUrl: new URL(
+        '../../packages/core/src/ButtonGroup/ButtonGroup.doc.mjs',
+        import.meta.url,
+      ),
+    },
+    {
+      name: 'SegmentedControl',
+      exportName: 'segmentedControlAccessibilityThemeCoverage',
+      docsUrl: new URL(
+        '../../packages/core/src/SegmentedControl/SegmentedControl.doc.mjs',
+        import.meta.url,
+      ),
+    },
+  ],
+  buildCoverage: buildButtonFamilyAccessibilityThemeCoverage,
+};

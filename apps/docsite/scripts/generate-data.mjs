@@ -60,7 +60,7 @@ if (DOCSITE_TARGET === 'canary') {
       'tsx',
       path.join(
         REPO_ROOT,
-        'scripts/generate-button-family-accessibility-coverage.mjs',
+        'scripts/generate-component-accessibility-coverage.mjs',
       ),
     ],
     {cwd: REPO_ROOT, stdio: 'inherit'},
