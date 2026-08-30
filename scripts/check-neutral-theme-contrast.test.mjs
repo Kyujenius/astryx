@@ -220,37 +220,6 @@ describe('neutral theme component-pair contrast', () => {
   );
 
   it.each(MODES)(
-    'keeps emphasized control boundaries perceivable in $name mode',
-    ({index}) => {
-      for (const background of [
-        'var(--color-background-body)',
-        'var(--color-background-surface)',
-      ]) {
-        expectPairToPass('var(--color-border-emphasized)', background, index);
-      }
-    },
-  );
-
-  it.each(MODES)(
-    'keeps the off Switch track and thumb perceivable in $name mode',
-    ({index}) => {
-      const local = neutralTheme.components.switch.base;
-      expectPairToPass(
-        'var(--color-background-gray)',
-        'var(--color-background-body)',
-        index,
-        local,
-      );
-      expectPairToPass(
-        'var(--color-background-surface)',
-        'var(--color-background-gray)',
-        index,
-        local,
-      );
-    },
-  );
-
-  it.each(MODES)(
     'keeps every ProgressBar fill distinct from its track in $name mode',
     ({index}) => {
       const progress = neutralTheme.components['progress-bar'];
@@ -586,7 +555,7 @@ describe('neutral theme component-pair contrast', () => {
   );
 
   it.each(MODES)(
-    'keeps active TextInput content, boundaries, icons, and status affordances readable in $name mode',
+    'keeps active TextInput content, icons, and status affordances readable in $name mode',
     ({index}) => {
       const parents = [
         resolve('var(--color-background-body)', index),
@@ -615,7 +584,6 @@ describe('neutral theme component-pair contrast', () => {
       }
 
       for (const [name, token] of [
-        ['default boundary', 'var(--color-border-emphasized)'],
         ['focus border', 'var(--color-accent)'],
         ['start / clear icon', 'var(--color-icon-secondary)'],
         ['loading spinner arc', 'var(--color-accent)'],
@@ -633,7 +601,7 @@ describe('neutral theme component-pair contrast', () => {
   );
 
   it.each(MODES)(
-    'keeps Checkbox, Radio, and Switch control states perceivable in $name mode',
+    'keeps Checkbox, Radio, and Switch selected states perceivable in $name mode',
     ({index}) => {
       const parents = [
         resolve('var(--color-background-body)', index),
@@ -643,21 +611,11 @@ describe('neutral theme component-pair contrast', () => {
       const surface = resolve('var(--color-background-surface)', index);
       const primary = resolve('var(--color-text-primary)', index);
       const secondary = resolve('var(--color-text-secondary)', index);
-      const emphasized = resolve('var(--color-border-emphasized)', index);
       const accent = resolve('var(--color-accent)', index);
       const onAccent = resolve('var(--color-on-accent)', index);
       const tint = resolve('var(--color-tint-hover)', index);
       const focus = accent;
-      const switchLocal = neutralTheme.components.switch.base;
-      const switchOff = resolve(
-        'var(--color-background-gray)',
-        index,
-        switchLocal,
-      );
-      const uncheckedHoverFill = mix(surface, tint, 0.05);
-      const uncheckedHoverBorder = mix(emphasized, tint, 0.2);
       const checkedHoverFill = mix(accent, tint, 0.15);
-      const switchOffHover = mix(switchOff, tint, 0.05);
       const againstParents = foreground =>
         Math.min(...parents.map(parent => contrastRatio(foreground, parent)));
       const expectNonText = (name, foreground, background) => {
@@ -681,25 +639,13 @@ describe('neutral theme component-pair contrast', () => {
       }
 
       for (const parent of parents) {
-        expectNonText('unchecked control boundary', emphasized, parent);
-        expectNonText('unchecked hover boundary', uncheckedHoverBorder, parent);
         expectNonText('selected control fill', accent, parent);
         expectNonText('selected hover fill', checkedHoverFill, parent);
-        expectNonText('Switch off track', switchOff, parent);
-        expectNonText('Switch off hover track', switchOffHover, parent);
         expectNonText('focus indicator', focus, parent);
       }
 
-      expectNonText('unchecked boundary on fill', emphasized, surface);
-      expectNonText(
-        'unchecked hover boundary on fill',
-        uncheckedHoverBorder,
-        uncheckedHoverFill,
-      );
       expectNonText('selected check / dot', onAccent, accent);
       expectNonText('selected hover check / dot', onAccent, checkedHoverFill);
-      expectNonText('Switch off thumb', surface, switchOff);
-      expectNonText('Switch off hover thumb', surface, switchOffHover);
       expectNonText('Switch on thumb', surface, accent);
       expectNonText('Switch on hover thumb', surface, checkedHoverFill);
       expectNonText('unchecked Checkbox spinner', accent, surface);

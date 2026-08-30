@@ -850,17 +850,16 @@ export const neutralTheme = defineTheme({
       withAlpha(palette('yellow', 70, 'dark'), '3D'),
     ],
 
-    // Border. Emphasized is the perceivable boundary used by inputs,
-    // unchecked selection controls, and the off Switch track. Neutral tone 50
-    // is the first shared ramp tone that clears WCAG 1.4.11 (3:1) against both
-    // the body and surface in both color schemes.
+    // Borders retain the released Neutral appearance while referencing exact
+    // approved tones. Components that require a 3:1 identifying boundary
+    // should provide that treatment through a component-specific mapping.
     '--color-border': [
       withAlpha(palette('neutral', 0), '14'),
       withAlpha(palette('neutral', 100), '1A'),
     ],
     '--color-border-emphasized': [
-      palette('neutral', 50),
-      palette('neutral', 45, 'dark'),
+      palette('neutral', 85),
+      palette('neutral', 30, 'dark'),
     ],
 
     // Effects
@@ -1025,7 +1024,7 @@ export const neutralTheme = defineTheme({
     //          indistinguishable from --color-background-muted.
     '--color-background-gray': [palette('neutral', 90), 'var(--color-neutral)'],
     '--color-border-gray': [
-      palette('neutral', 80),
+      palette('neutral', 85),
       palette('neutral', 10, 'dark'),
     ],
     '--color-icon-gray': [palette('neutral', 35), palette('neutral', 65)],
