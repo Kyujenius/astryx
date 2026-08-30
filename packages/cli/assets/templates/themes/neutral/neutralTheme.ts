@@ -613,27 +613,42 @@ const neutralSyntax = defineSyntaxTheme({
 
 /** Shared filled-state colors for Badge, status dots, and ProgressBar. */
 const FILLED_STATE_COLORS = {
-  info: lightDark(palette('blue', 45), palette('blue', 60, 'dark')),
-  success: lightDark(palette('green', 45), palette('green', 60, 'dark')),
-  warning: lightDark(palette('yellow', 80), palette('yellow', 75, 'dark')),
-  error: lightDark(palette('red', 50), palette('red', 60, 'dark')),
+  info: lightDark(
+    getPaletteStop('blue', 45),
+    getPaletteStop('blue', 60, 'dark'),
+  ),
+  success: lightDark(
+    getPaletteStop('green', 45),
+    getPaletteStop('green', 60, 'dark'),
+  ),
+  warning: lightDark(
+    getPaletteStop('yellow', 80),
+    getPaletteStop('yellow', 75, 'dark'),
+  ),
+  error: lightDark(
+    getPaletteStop('red', 50),
+    getPaletteStop('red', 60, 'dark'),
+  ),
 } as const;
 
 const FILLED_STATE_TEXT = {
-  standard: lightDark(palette('neutral', 100), palette('neutral', 10)),
-  onBright: palette('neutral', 10),
+  standard: lightDark(
+    getPaletteStop('neutral', 100),
+    getPaletteStop('neutral', 10),
+  ),
+  onBright: getPaletteStop('neutral', 10),
 } as const;
 
 /** Shared ProgressBar track. */
 const PROGRESS_TRACK = lightDark(
-  palette('neutral', 85),
-  palette('neutral', 20, 'dark'),
+  getPaletteStop('neutral', 85),
+  getPaletteStop('neutral', 20, 'dark'),
 );
 // The Badge yellow does not reach 3:1 against the track, so ProgressBar uses a
 // darker light-mode stop.
 const PROGRESS_WARNING_FILL = lightDark(
-  palette('yellow', 50),
-  palette('yellow', 80, 'dark'),
+  getPaletteStop('yellow', 50),
+  getPaletteStop('yellow', 80, 'dark'),
 );
 
 export const neutralTheme = defineTheme({
@@ -1057,27 +1072,6 @@ export const neutralTheme = defineTheme({
       },
     },
 
-    // Badge —
-    //   Semantic (info/success/warning/error): filled saturated tone 50 + contrasting
-    //     text (white, or dark on yellow). The filled-button rule from #2150
-    //     §3 — text contrast locks the bg stop, so this stays at T50 in
-    //     BOTH modes, unlike pastel surfaces which invert by mode.
-    //   Categorical (blue/green/red/orange/etc.): pastel-tinted hue surface +
-    //     colored text — light mode = soft tones 87-90 + dark tone 30 text; dark mode
-    //     = tone 20 tinted + tone 80 light pastel text (sources: --color-background-X
-    //     and --color-text-X tokens).
-    //   Neutral: light gray bg + dark text (or inverted in dark mode).
-    // =========================================================================
-    badge: {
-      // Semantic — filled saturated bg + contrasting text.
-      //   Light: vivid tones 45-55 from the OKLCH palette + white text
-      //          (~4.5-5:1 — Material/Linear/Vercel pop).
-      //   Dark : T60 stop from the dark-mode tonal palette (chroma×0.85,
-      //          +5 stop-lift taper from issue #2150 §4) + DARK text.
-      //          T60+white fails AA-large (~2.7:1); T60+dark hits 6.6-7:1
-      //          and tames the §4 vibration. Same dark-text-on-bright-bg
-      //          treatment that warning yellow uses in both modes.
-=======
     badge: {
       // Semantic badges use shared fills with contrast-safe label colors.
       'variant:info': {
@@ -1171,16 +1165,16 @@ export const neutralTheme = defineTheme({
       base: {
         // Invert action overlays so they remain visible on tinted headers.
         '--color-neutral': lightDark(
-          withAlpha(palette('neutral', 100), '33'),
-          withAlpha(palette('neutral', 0), '33'),
+          withAlpha(getPaletteStop('neutral', 100), '33'),
+          withAlpha(getPaletteStop('neutral', 0), '33'),
         ),
         '--color-overlay-hover': lightDark(
-          withAlpha(palette('neutral', 100), '1A'),
-          withAlpha(palette('neutral', 0), '1A'),
+          withAlpha(getPaletteStop('neutral', 100), '1A'),
+          withAlpha(getPaletteStop('neutral', 0), '1A'),
         ),
         '--color-overlay-pressed': lightDark(
-          withAlpha(palette('neutral', 100), '33'),
-          withAlpha(palette('neutral', 0), '33'),
+          withAlpha(getPaletteStop('neutral', 100), '33'),
+          withAlpha(getPaletteStop('neutral', 0), '33'),
         ),
       },
       'status:info': {
@@ -1252,72 +1246,72 @@ export const neutralTheme = defineTheme({
       },
     },
 
-    // Selection rings use the lightest same-hue tone that reaches 3:1.
+    // Selection rings use the lightest same-hue stop that reaches 3:1.
     'selectable-card': {
       base: {
         '--selectable-card-ring-color': lightDark(
-          palette('neutral', 55),
-          palette('neutral', 40, 'dark'),
+          getPaletteStop('neutral', 55),
+          getPaletteStop('neutral', 40, 'dark'),
         ),
       },
       'variant:red': {
         '--selectable-card-ring-color': lightDark(
-          palette('red', 50),
+          getPaletteStop('red', 50),
           'var(--color-border-red)',
         ),
       },
       'variant:orange': {
         '--selectable-card-ring-color': lightDark(
-          palette('orange', 50),
+          getPaletteStop('orange', 50),
           'var(--color-border-orange)',
         ),
       },
       'variant:yellow': {
         '--selectable-card-ring-color': lightDark(
-          palette('yellow', 50),
+          getPaletteStop('yellow', 50),
           'var(--color-border-yellow)',
         ),
       },
       'variant:green': {
         '--selectable-card-ring-color': lightDark(
-          palette('green', 45),
+          getPaletteStop('green', 45),
           'var(--color-border-green)',
         ),
       },
       'variant:teal': {
         '--selectable-card-ring-color': lightDark(
-          palette('teal', 45),
+          getPaletteStop('teal', 45),
           'var(--color-border-teal)',
         ),
       },
       'variant:cyan': {
         '--selectable-card-ring-color': lightDark(
-          palette('cyan', 45),
+          getPaletteStop('cyan', 45),
           'var(--color-border-cyan)',
         ),
       },
       'variant:blue': {
         '--selectable-card-ring-color': lightDark(
-          palette('blue', 50),
+          getPaletteStop('blue', 50),
           'var(--color-border-blue)',
         ),
       },
       'variant:purple': {
         '--selectable-card-ring-color': lightDark(
-          palette('purple', 50),
+          getPaletteStop('purple', 50),
           'var(--color-border-purple)',
         ),
       },
       'variant:pink': {
         '--selectable-card-ring-color': lightDark(
-          palette('pink', 50),
+          getPaletteStop('pink', 50),
           'var(--color-border-pink)',
         ),
       },
       'variant:gray': {
         '--selectable-card-ring-color': lightDark(
-          palette('neutral', 50),
-          palette('neutral', 50, 'dark'),
+          getPaletteStop('neutral', 50),
+          getPaletteStop('neutral', 50, 'dark'),
         ),
       },
     },
