@@ -22,10 +22,8 @@
  * }
  * ```
  *
- * Pair the theme rule's `backgroundColor` with `--selectable-card-ring-color`.
- * SelectableCard reads that variable for built-in and added variants, retaining
- * the matching border token (or accent) as its fallback. The theme that supplied
- * the fill can therefore choose a ring that reaches 3:1 against it.
+ * Theme variants may set `--selectable-card-ring-color` when their background
+ * requires a stronger SelectableCard selection indicator.
  */
 export interface CardVariantMap {
   default: true;

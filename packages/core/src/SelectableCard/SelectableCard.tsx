@@ -153,11 +153,7 @@ const styles = stylex.create({
     borderColor: `var(--selectable-card-ring-color, ${colorVars['--color-border-yellow']})`,
     '--_card-ring': `inset 0 0 0 2px var(--selectable-card-ring-color, ${colorVars['--color-border-yellow']})`,
   },
-  // A theme-added variant paints with colours the component cannot know, so no
-  // token is guaranteed to contrast with it. The same public variable can also
-  // strengthen a built-in variant whose default border token is too subtle
-  // against that theme's Card surface. Each style keeps its prior token as the
-  // fallback when the theme does not provide an override.
+  // Theme variants may override the ring while built-in tokens remain fallbacks.
   selectedUnknown: {
     borderColor: `var(--selectable-card-ring-color, ${colorVars['--color-accent']})`,
     '--_card-ring': `inset 0 0 0 2px var(--selectable-card-ring-color, ${colorVars['--color-accent']})`,
