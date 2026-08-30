@@ -18,7 +18,7 @@ function generatedSource() {
   const exports = Object.entries(coverage)
     .map(
       ([exportName, componentCoverage]) =>
-        `export const ${exportName} = ${inspect(componentCoverage, {
+        `/** @type {import('@astryxdesign/cli/authoring').ComponentAccessibilityThemeCoverage[]} */\nexport const ${exportName} = ${inspect(componentCoverage, {
           breakLength: 100,
           compact: true,
           depth: null,
