@@ -1,16 +1,11 @@
 ---
 '@astryxdesign/theme-neutral': patch
 '@astryxdesign/cli': patch
-'@astryxdesign/core': patch
 ---
 
-[fix] Clean up the maintained neutral theme as the canonical agent-facing example:
-use current component target names, refine progress contrast,
-deduplicate semantic state colors, remove redundant radius overrides, align the
-error hover treatment, adopt the approved higher-chroma OKLCH categorical palette,
-strengthen SelectableCard selection rings without changing Card backgrounds,
-expose the complete named palette through the theme contract, map semantic
-tokens to exact palette stops, and fix the setup/font documentation. The CLI
-template ships the same theme and palette guidance.
+[fix] Define and export the complete higher-chroma OKLCH palette, map Neutral's
+semantic and categorical color tokens to exact numbered tones, and document the
+palette contract for theme authors and agents. The CLI template ships the same
+palette and mapping guidance.
 
 @rubyycheung
