@@ -8,6 +8,7 @@ import {
   parseAnatomyThemingBlock,
   parseKnowledgeDocument,
   validateAnatomyThemingMap,
+  validateDelegations,
   validateKnowledgeRoot,
   validateSchemaEvolution,
 } from './check-knowledge.mjs';
@@ -114,6 +115,10 @@ function withAnatomyTheming(record, mapping) {
 function writeButtonDoc(directory) {
   const content = `export const docs = {
   name: 'Button',
+  displayName: 'Button',
+  category: 'Actions',
+  keywords: ['button'],
+  props: [],
   usage: {
     anatomy: [
       {name: 'Root', required: true, description: 'Painted surface.'},
@@ -121,6 +126,8 @@ function writeButtonDoc(directory) {
       {name: 'Icon', required: false, description: 'Shared icon.'},
       {name: 'Content', required: false, description: 'Consumer content.'},
     ],
+    description: 'A button triggers an action. Use it for a discrete action.',
+    bestPractices: [],
   },
   theming: {
     targets: [{className: 'astryx-button'}],
@@ -275,29 +282,282 @@ describe('component theming anatomy metadata', () => {
     expect(result).toMatch(/current target "button" has no anatomy entry/);
   });
 
-  it('validates an opted-in spec without changing consumer doc bytes', () => {
+  it('validates an opted-in spec without changing consumer doc bytes', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
     const consumerDoc = writeButtonDoc(directory);
     fs.writeFileSync(
       path.join(directory, 'Button.spec.md'),
-      withAnatomyTheming(componentRecord(), valid),
+      withAnatomyTheming(componentRecord(), {
+        ...valid,
+        Icon: {none: {reason: 'intentional: Fixture-owned icon.'}},
+      }),
     );
 
-    expect(validateKnowledgeRoot(root)).toEqual([]);
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
     expect(
       fs.readFileSync(path.join(directory, 'Button.doc.mjs'), 'utf8'),
     ).toBe(consumerDoc);
   });
 
-  it('keeps the block optional while existing specs migrate', () => {
+  it('keeps the block optional while existing specs migrate', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
     fs.writeFileSync(path.join(directory, 'Button.spec.md'), componentRecord());
-    expect(validateKnowledgeRoot(root)).toEqual([]);
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
   });
+});
+
+describe('component delegation ownership', () => {
+  const canonicalTargets = [
+    {component: 'Button', key: 'button'},
+    {component: 'Icon', key: 'icon'},
+    {component: 'Indicator', key: 'radio'},
+    {component: 'RadioList', key: 'radio'},
+    {component: 'Table', key: 'table-header'},
+  ];
+  const valid = {
+    filePath: 'packages/core/src/Example/Example.spec.md',
+    anatomy: 'Icon',
+    owner: 'component:Icon',
+    target: 'icon',
+  };
+
+  it('rejects an unknown owner with the complete delegation location', () => {
+    const problems = validateDelegations(
+      [{...valid, owner: 'component:Missing'}],
+      canonicalTargets,
+    ).join('\n');
+    expect(problems).toContain(valid.filePath);
+    expect(problems).toContain('theming anatomy "Icon".delegatesTo');
+    expect(problems).toContain('owner "component:Missing"');
+    expect(problems).toContain('target "icon"');
+  });
+
+  it('rejects a missing active target under an existing owner', () => {
+    const problems = validateDelegations(
+      [{...valid, target: 'glyph'}],
+      canonicalTargets,
+    ).join('\n');
+    expect(problems).toContain('target "glyph"');
+    expect(problems).toContain('owned by "component:Icon"');
+    expect(problems).toContain('active targets for that owner: "icon"');
+  });
+
+  it('accepts a parent-owned member target only under its canonical owner', () => {
+    expect(
+      validateDelegations(
+        [
+          {
+            ...valid,
+            anatomy: 'Header',
+            owner: 'component:Table',
+            target: 'table-header',
+          },
+        ],
+        canonicalTargets,
+      ),
+    ).toEqual([]);
+    const problems = validateDelegations(
+      [
+        {
+          ...valid,
+          anatomy: 'Header',
+          owner: 'component:TableHeader',
+          target: 'table-header',
+        },
+      ],
+      canonicalTargets,
+    ).join('\n');
+    expect(problems).toContain('"component:TableHeader"');
+    expect(problems).toContain('target "table-header"');
+    expect(problems).toContain(
+      'canonical owner for target "table-header": "component:Table"',
+    );
+  });
+
+  it('does not accept a target merely because unrelated owners share its name', () => {
+    expect(
+      validateDelegations(
+        [
+          {...valid, owner: 'component:Indicator', target: 'radio'},
+          {...valid, owner: 'component:RadioList', target: 'radio'},
+        ],
+        canonicalTargets,
+      ),
+    ).toEqual([]);
+    expect(
+      validateDelegations(
+        [{...valid, owner: 'component:Button', target: 'radio'}],
+        canonicalTargets,
+      ).join('\n'),
+    ).toMatch(
+      /radio.*component:Button.*button.*component:Indicator.*component:RadioList/,
+    );
+  });
+
+  it('accepts a target owned by a member of an active family', () => {
+    const families = new Map([
+      [
+        'family:actions',
+        {
+          filePath: 'docs/families/actions.md',
+          members: ['component:Button', 'component:Icon'],
+        },
+      ],
+    ]);
+    expect(
+      validateDelegations(
+        [{...valid, owner: 'family:actions'}],
+        canonicalTargets,
+        families,
+      ),
+    ).toEqual([]);
+  });
+
+  it('rejects an unknown or inactive family owner', () => {
+    const problems = validateDelegations(
+      [{...valid, owner: 'family:missing'}],
+      canonicalTargets,
+      new Map(),
+    ).join('\n');
+    expect(problems).toContain('owner "family:missing"');
+    expect(problems).toContain('active family record');
+    expect(problems).toContain('target "icon"');
+  });
+
+  it('rejects a family target that none of its members owns', () => {
+    const families = new Map([
+      [
+        'family:actions',
+        {
+          filePath: 'docs/families/actions.md',
+          members: ['component:Button'],
+        },
+      ],
+    ]);
+    const problems = validateDelegations(
+      [{...valid, owner: 'family:actions'}],
+      canonicalTargets,
+      families,
+    ).join('\n');
+    expect(problems).toContain('target "icon"');
+    expect(problems).toContain('family:actions');
+    expect(problems).toContain('docs/families/actions.md');
+    expect(problems).toContain(
+      'canonical owner for target "icon": "component:Icon"',
+    );
+  });
+
+  it('matches shared target names only to members of the named family', () => {
+    const families = new Map([
+      [
+        'family:selection',
+        {
+          filePath: 'docs/families/selection.md',
+          members: ['component:Indicator'],
+        },
+      ],
+      [
+        'family:actions',
+        {
+          filePath: 'docs/families/actions.md',
+          members: ['component:Button'],
+        },
+      ],
+    ]);
+    expect(
+      validateDelegations(
+        [{...valid, owner: 'family:selection', target: 'radio'}],
+        canonicalTargets,
+        families,
+      ),
+    ).toEqual([]);
+    const problems = validateDelegations(
+      [{...valid, owner: 'family:actions', target: 'radio'}],
+      canonicalTargets,
+      families,
+    ).join('\n');
+    expect(problems).toContain('family:actions');
+    expect(problems).toContain('"component:Indicator", "component:RadioList"');
+  });
+
+  it.each([
+    ['draft', {}],
+    [
+      'current',
+      {
+        authority: 'current',
+        approved_by: 'cixzhang',
+        approved_at: '2026-08-30',
+      },
+    ],
+  ])(
+    'rejects an invalid delegation from an active %s record end to end',
+    async (authority, overrides) => {
+      const root = fixtureRoot();
+      const directory = path.join(root, 'packages/core/src/Button');
+      fs.mkdirSync(directory);
+      writeButtonDoc(directory);
+      fs.writeFileSync(
+        path.join(directory, 'Button.spec.md'),
+        withAnatomyTheming(componentRecord(overrides), {
+          Root: {target: 'button'},
+          Label: {inherits: 'button'},
+          Icon: {
+            delegatesTo: {
+              owner:
+                authority === 'draft' ? 'component:Missing' : 'family:missing',
+              target: 'icon',
+            },
+          },
+          Content: {
+            none: {reason: 'intentional: Consumer-owned content.'},
+          },
+        }),
+      );
+
+      const problems = (await validateKnowledgeRoot(root)).join('\n');
+      expect(problems).toContain('theming anatomy "Icon".delegatesTo');
+      expect(problems).toContain(
+        authority === 'draft' ? 'component:Missing' : 'family:missing',
+      );
+    },
+  );
+
+  it('does not validate delegations from archived records', async () => {
+    const root = fixtureRoot();
+    const directory = path.join(root, 'packages/core/src/Button');
+    fs.mkdirSync(directory);
+    writeButtonDoc(directory);
+    fs.writeFileSync(
+      path.join(directory, 'Button.spec.md'),
+      withAnatomyTheming(
+        componentRecord({
+          authority: 'archived',
+          archive_reason: 'historical',
+        }),
+        {
+          Root: {target: 'button'},
+          Label: {inherits: 'button'},
+          Icon: {
+            delegatesTo: {owner: 'family:missing', target: 'icon'},
+          },
+          Content: {
+            none: {reason: 'intentional: Consumer-owned content.'},
+          },
+        },
+      ),
+    );
+
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
+  });
+
+  it('accepts every authored delegation in the existing records', async () => {
+    expect(await validateKnowledgeRoot(repoRoot)).toEqual([]);
+  }, 60_000);
 });
 
 describe('knowledge validation', () => {
@@ -310,42 +570,42 @@ describe('knowledge validation', () => {
     expect(document.sections).toEqual(['Intent']);
   });
 
-  it('accepts aligned templates with no records', () => {
-    expect(validateKnowledgeRoot(fixtureRoot())).toEqual([]);
+  it('accepts aligned templates with no records', async () => {
+    expect(await validateKnowledgeRoot(fixtureRoot())).toEqual([]);
   });
 
-  it('rejects a structural template change without a schema update', () => {
+  it('rejects a structural template change without a schema update', async () => {
     const root = fixtureRoot();
     const template = path.join(
       root,
       'docs/templates/knowledge/component-spec.md',
     );
     fs.appendFileSync(template, '\n## Undeclared section\n');
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /template section order must exactly match the schema/,
     );
   });
 
-  it('rejects a schema whose filename and declared version disagree', () => {
+  it('rejects a schema whose filename and declared version disagree', async () => {
     const root = fixtureRoot();
     const schemaPath = path.join(root, 'docs/schemas/knowledge/v1.json');
     const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
     schema.schemaVersion = 2;
     fs.writeFileSync(schemaPath, `${JSON.stringify(schema)}\n`);
-    expect(() => validateKnowledgeRoot(root)).toThrow(
+    await expect(validateKnowledgeRoot(root)).rejects.toThrow(
       /declares schemaVersion 2/,
     );
   });
 
-  it('accepts a draft component record on the current schema', () => {
+  it('accepts a draft component record on the current schema', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
     fs.writeFileSync(path.join(directory, 'Button.spec.md'), componentRecord());
-    expect(validateKnowledgeRoot(root)).toEqual([]);
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
   });
 
-  it('rejects duplicate authority fields', () => {
+  it('rejects duplicate authority fields', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -356,12 +616,12 @@ describe('knowledge validation', () => {
         'authority: draft\nauthority: "current"',
       ),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /duplicate authority fields|duplicate frontmatter field authority/,
     );
   });
 
-  it('requires explicit approval for a current record', () => {
+  it('requires explicit approval for a current record', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -369,12 +629,12 @@ describe('knowledge validation', () => {
       path.join(directory, 'Button.spec.md'),
       componentRecord({authority: 'current'}),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /require approved_by/,
     );
   });
 
-  it('rejects an unauthorized current approval claim', () => {
+  it('rejects an unauthorized current approval claim', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -386,10 +646,12 @@ describe('knowledge validation', () => {
         approved_at: '2026-08-30',
       }),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(/authorized owner/);
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
+      /authorized owner/,
+    );
   });
 
-  it('accepts a current record with an authorized dated approval', () => {
+  it('accepts a current record with an authorized dated approval', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -401,10 +663,10 @@ describe('knowledge validation', () => {
         approved_at: '2026-08-30',
       }),
     );
-    expect(validateKnowledgeRoot(root)).toEqual([]);
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
   });
 
-  it('requires a replacement for a superseded archive', () => {
+  it('requires a replacement for a superseded archive', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -412,12 +674,12 @@ describe('knowledge validation', () => {
       path.join(directory, 'Button.spec.md'),
       componentRecord({authority: 'archived', archive_reason: 'superseded'}),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /require superseded_by/,
     );
   });
 
-  it('rejects a record claiming a future template version', () => {
+  it('rejects a record claiming a future template version', async () => {
     const root = fixtureRoot();
     const directory = path.join(root, 'packages/core/src/Button');
     fs.mkdirSync(directory);
@@ -425,12 +687,12 @@ describe('knowledge validation', () => {
       path.join(directory, 'Button.spec.md'),
       componentRecord({template_version: '4'}),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /template_version 4 is newer than 3/,
     );
   });
 
-  it('rejects active records on an old schema', () => {
+  it('rejects active records on an old schema', async () => {
     const root = fixtureRoot();
     addSchemaVersion(root, 0);
     const directory = path.join(root, 'packages/core/src/Button');
@@ -439,12 +701,12 @@ describe('knowledge validation', () => {
       path.join(directory, 'Button.spec.md'),
       componentRecord({schema_version: '0'}),
     );
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /active records must use latest schema_version 1/,
     );
   });
 
-  it('allows archived records to retain an older available schema', () => {
+  it('allows archived records to retain an older available schema', async () => {
     const root = fixtureRoot();
     addSchemaVersion(root, 0);
     const directory = path.join(root, 'packages/core/src/Button');
@@ -457,10 +719,10 @@ describe('knowledge validation', () => {
         archive_reason: 'historical',
       }),
     );
-    expect(validateKnowledgeRoot(root)).toEqual([]);
+    expect(await validateKnowledgeRoot(root)).toEqual([]);
   });
 
-  it('accepts a DESIGNOWNER approval claim on a current design record', () => {
+  it('accepts a DESIGNOWNER approval claim on a current design record', async () => {
     const root = fixtureRoot();
     const template = fs.readFileSync(
       path.join(root, 'docs/templates/knowledge/design-spec.md'),
@@ -473,12 +735,12 @@ describe('knowledge validation', () => {
       .replace('approved_at: null', 'approved_at: 2026-08-30');
     fs.mkdirSync(path.join(root, 'docs/design'), {recursive: true});
     fs.writeFileSync(path.join(root, 'docs/design/button.md'), record);
-    expect(validateKnowledgeRoot(root).join('\n')).not.toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).not.toMatch(
       /approved_by to name an authorized owner/,
     );
   });
 
-  it('requires current design records to reference current architecture', () => {
+  it('requires current design records to reference current architecture', async () => {
     const root = fixtureRoot();
     const template = fs.readFileSync(
       path.join(root, 'docs/templates/knowledge/design-spec.md'),
@@ -495,12 +757,12 @@ describe('knowledge validation', () => {
       );
     fs.mkdirSync(path.join(root, 'docs/design'), {recursive: true});
     fs.writeFileSync(path.join(root, 'docs/design/button.md'), record);
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /architecture reference architecture:missing does not resolve/,
     );
   });
 
-  it('rejects duplicate logical ids', () => {
+  it('rejects duplicate logical ids', async () => {
     const root = fixtureRoot();
     for (const name of ['Button', 'Action']) {
       const directory = path.join(root, `packages/core/src/${name}`);
@@ -510,7 +772,7 @@ describe('knowledge validation', () => {
         componentRecord(),
       );
     }
-    expect(validateKnowledgeRoot(root).join('\n')).toMatch(
+    expect((await validateKnowledgeRoot(root)).join('\n')).toMatch(
       /duplicate id component:Button/,
     );
   });

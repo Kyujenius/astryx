@@ -6,6 +6,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
+import {collectThemingTargets} from '../packages/cli/foundation/discovery/theming-targets.mjs';
 
 const require = createRequire(import.meta.url);
 const {
@@ -349,6 +350,103 @@ export function validateAnatomyThemingMap(
   return problems;
 }
 
+function collectDelegations(mapping, filePath) {
+  const delegations = [];
+  for (const [anatomy, disposition] of Object.entries(mapping)) {
+    const delegation = disposition?.delegatesTo;
+    if (!exactObjectKeys(delegation, ['owner', 'target'])) continue;
+    if (
+      !/^(component:[A-Z][A-Za-z0-9]*|family:[a-z0-9]+(?:-[a-z0-9]+)*)$/.test(
+        delegation.owner,
+      )
+    )
+      continue;
+    if (!THEME_TARGET_NAME.test(delegation.target)) continue;
+    delegations.push({
+      filePath,
+      anatomy,
+      owner: delegation.owner,
+      target: delegation.target,
+    });
+  }
+  return delegations;
+}
+
+/**
+ * Validate delegatesTo pairs against the CLI's canonical active owner/target
+ * inventory and active knowledge-family membership.
+ */
+export function validateDelegations(
+  delegations,
+  canonicalTargets,
+  activeFamilies = new Map(),
+) {
+  const targetsByOwner = new Map();
+  const ownersByTarget = new Map();
+  for (const {component, key} of canonicalTargets) {
+    const owner = `component:${component.replace(/^XDS/, '')}`;
+    const targets = targetsByOwner.get(owner) ?? new Set();
+    targets.add(key);
+    targetsByOwner.set(owner, targets);
+    const owners = ownersByTarget.get(key) ?? new Set();
+    owners.add(owner);
+    ownersByTarget.set(key, owners);
+  }
+
+  function targetOwnership(target) {
+    const owners = [...(ownersByTarget.get(target) ?? [])]
+      .sort()
+      .map(value => JSON.stringify(value));
+    return owners.length > 0
+      ? ` canonical owner${owners.length === 1 ? '' : 's'} for target ${JSON.stringify(target)}: ${owners.join(', ')}.`
+      : ` no active canonical owner declares target ${JSON.stringify(target)}.`;
+  }
+
+  const problems = [];
+  for (const {filePath, anatomy, owner, target} of delegations) {
+    const where = `${filePath}: theming anatomy ${JSON.stringify(anatomy)}.delegatesTo`;
+
+    if (owner.startsWith('family:')) {
+      const family = activeFamilies.get(owner);
+      if (!family) {
+        problems.push(
+          `${where}: owner ${JSON.stringify(owner)} does not resolve to an active family record (target ${JSON.stringify(target)}).`,
+        );
+        continue;
+      }
+
+      const memberOwners = new Set(family.members);
+      const matchingMembers = [
+        ...(ownersByTarget.get(target) ?? new Set()),
+      ].filter(member => memberOwners.has(member));
+      if (matchingMembers.length === 0) {
+        problems.push(
+          `${where}: target ${JSON.stringify(target)} is not an active canonical target of any component in ${JSON.stringify(owner)} members (${family.filePath});${targetOwnership(target)}`,
+        );
+      }
+      continue;
+    }
+
+    const ownedTargets = targetsByOwner.get(owner);
+    if (!ownedTargets) {
+      problems.push(
+        `${where}: owner ${JSON.stringify(owner)} does not exist in the canonical active component target inventory;${targetOwnership(target)}`,
+      );
+      continue;
+    }
+    if (!ownedTargets.has(target)) {
+      const available = [...ownedTargets]
+        .sort()
+        .map(value => JSON.stringify(value))
+        .join(', ');
+      problems.push(
+        `${where}: target ${JSON.stringify(target)} is not an active target owned by ${JSON.stringify(owner)}; active targets for that owner: ${available};${targetOwnership(target)}`,
+      );
+    }
+  }
+  return problems;
+}
+
 function loadComponentContract(root, specPath, componentName) {
   const directory = path.dirname(specPath);
   for (const docPath of matchingFiles(directory, name =>
@@ -591,7 +689,7 @@ function currentSchemaFiles(root) {
   );
 }
 
-export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
+export async function validateKnowledgeRoot(root = DEFAULT_ROOT) {
   const schemaDirectory = path.join(root, 'docs/schemas/knowledge');
   const schemas = new Map(
     matchingFiles(schemaDirectory, name => /^v[0-9]+\.json$/.test(name)).map(
@@ -627,6 +725,7 @@ export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
   const problems = [];
   const ids = new Map();
   const records = [];
+  const delegations = [];
 
   for (const [kind, kindSchema] of Object.entries(schema.kinds)) {
     if (
@@ -688,12 +787,10 @@ export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
         designApprovalOwners,
       ),
     );
-    if (
-      versionedSchema.schema.activeAuthorities.includes(
-        document.frontmatter.get('authority'),
-      ) &&
-      recordVersion !== latestVersion
-    ) {
+    const authority = document.frontmatter.get('authority');
+    const isActiveRecord =
+      versionedSchema.schema.activeAuthorities.includes(authority);
+    if (isActiveRecord && recordVersion !== latestVersion) {
       problems.push(
         `${filePath}: active records must use latest schema_version ${latestVersion}.`,
       );
@@ -702,6 +799,9 @@ export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
       const parsed = parseAnatomyThemingBlock(content, filePath);
       problems.push(...parsed.problems);
       if (parsed.mapping != null) {
+        if (isActiveRecord) {
+          delegations.push(...collectDelegations(parsed.mapping, filePath));
+        }
         const componentName = String(document.frontmatter.get('id') ?? '')
           .replace(/^component:/, '')
           .replace(/\/.*$/, '');
@@ -735,6 +835,30 @@ export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
     records.push({filePath, document});
   }
 
+  if (delegations.length > 0) {
+    const activeFamilies = new Map();
+    for (const {filePath, document} of records) {
+      const authority = document.frontmatter.get('authority');
+      if (
+        document.frontmatter.get('kind') !== 'family' ||
+        !schema.activeAuthorities.includes(authority)
+      )
+        continue;
+      const id = document.frontmatter.get('id');
+      const members = document.frontmatter.get('members');
+      if (typeof id !== 'string' || !Array.isArray(members)) continue;
+      if (!activeFamilies.has(id)) activeFamilies.set(id, {filePath, members});
+    }
+
+    const canonicalTargets = await collectThemingTargets(
+      path.join(root, 'packages/core/src'),
+      {includeDeprecated: false},
+    );
+    problems.push(
+      ...validateDelegations(delegations, canonicalTargets, activeFamilies),
+    );
+  }
+
   for (const {filePath, document} of records) {
     if (document.frontmatter.get('authority') !== 'current') continue;
     const kindSchema = schema.kinds[document.frontmatter.get('kind')];
@@ -761,7 +885,7 @@ export function validateKnowledgeRoot(root = DEFAULT_ROOT) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const problems = validateKnowledgeRoot();
+  const problems = await validateKnowledgeRoot();
   const baseIndex = process.argv.indexOf('--base');
   if (baseIndex !== -1) {
     const baseRevision = process.argv[baseIndex + 1];

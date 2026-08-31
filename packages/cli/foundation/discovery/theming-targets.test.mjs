@@ -41,6 +41,10 @@ const coreSrc = path.join(coreDir, 'src');
 
 /** @type {Promise<import('./theming-targets.mjs').ThemingTarget[]>} */
 const enumerated = collectThemingTargets(coreSrc);
+/** @type {Promise<import('./theming-targets.mjs').ThemingTarget[]>} */
+const activeEnumerated = collectThemingTargets(coreSrc, {
+  includeDeprecated: false,
+});
 
 describe('collectThemingTargets', () => {
   it('enumerates the whole surface, not a handful', async () => {
@@ -54,6 +58,20 @@ describe('collectThemingTargets', () => {
       expect(t.className).toBe(`astryx-${t.key}`);
       expect(t.component).toBeTruthy();
     }
+  });
+
+  it('can limit ownership checks to active targets', async () => {
+    const all = await enumerated;
+    const active = await activeEnumerated;
+    expect(
+      all.some(t => t.component === 'CodeBlock' && t.key === 'codeblock'),
+    ).toBe(true);
+    expect(
+      active.some(t => t.component === 'CodeBlock' && t.key === 'codeblock'),
+    ).toBe(false);
+    expect(
+      active.some(t => t.component === 'CodeBlock' && t.key === 'code-block'),
+    ).toBe(true);
   });
 
   it('carries the props and states a target reflects', async () => {
