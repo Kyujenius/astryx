@@ -230,9 +230,8 @@ const styles = stylex.create({
     verticalAlign: 'middle',
     // The public geometry vars, resolved into the registered `<length>` pair
     // the arithmetic below needs. Reading them here rather than in each
-    // `calc()` keeps one place where a themed value enters the component, and
-    // it is the span that reads them whether the theme target is the span or
-    // the wrapper — a custom property inherits either way.
+    // `calc()` keeps one place where a themed value enters the component: the
+    // status span that carries the theme target and draws the ring.
     [RESOLVED_DIAMETER]: 'var(--spinner-diameter)',
     [RESOLVED_STROKE]: 'var(--spinner-stroke-width)',
     // The size of the box, composed here and applied as an inline style at the
@@ -296,10 +295,12 @@ const styles = stylex.create({
 });
 
 // What each named `size` and `shade` resolve to. Both groups DECLARE the four
-// public vars, on the element that carries the `spinner` theme target, and
-// everything downstream reads them — so a theme's `@layer astryx-theme` rule
-// against `.astryx-spinner.xl` overrides the default the same way it does for
-// `--tree-list-indent` or `--button-focus-offset`, e.g.
+// public vars. Unlabelled Spinners declare them on the target itself; labelled
+// Spinners keep them on the public wrapper so consumer root overrides still
+// cascade into the status span that carries the target and draws the ring.
+// A theme's `@layer astryx-theme` rule against `.astryx-spinner.xl` overrides
+// the inherited defaults the same way it does for `--tree-list-indent` or
+// `--button-focus-offset`, e.g.
 // spinner: { 'size:xl': { '--spinner-diameter': '40px' } }.
 //
 // Declaring is only safe because #5410 moved the compiled StyleX CSS inside
@@ -471,14 +472,9 @@ export function Spinner({
       data-testid={hasLabel ? undefined : testId}
       {...(hasLabel ? {} : restProps)}
       {...mergeProps(
-        hasLabel ? '' : themeProps('spinner', {size, shade}),
+        themeProps('spinner', {size, shade}),
         stylex.props(
           styles.spinner,
-          // The defaults are declared on whichever element carries the theme
-          // target, and only there: when a label moves the target to the
-          // wrapper, this span must inherit the wrapper's value rather than
-          // declare its own, which would shadow a theme's override with the
-          // default it is trying to replace.
           !hasLabel && sizeStyles[size],
           !hasLabel && shadeStyles[shade],
           !hasLabel && xstyle,
@@ -541,7 +537,6 @@ export function Spinner({
       data-testid={testId}
       {...restProps}
       {...mergeProps(
-        themeProps('spinner', {size, shade}),
         stylex.props(
           styles.wrapper,
           sizeStyles[size],
