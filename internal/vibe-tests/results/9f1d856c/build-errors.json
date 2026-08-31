@@ -1,0 +1,132 @@
+{
+  "cs-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 32,
+        "message": "Type '{ label: string; value: string; onChange: (val: string) => void; options: string[]; }' is not assignable to type 'IntrinsicAttributes & RadioListProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 1,
+    "buildSuccess": false
+  },
+  "cwm-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 28,
+        "message": "Type '{ value: string; onChange: Dispatch<SetStateAction<string>>; options: { value: string; label: string; }[]; }' is not assignable to type 'IntrinsicAttributes & SegmentedControlProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 48,
+        "message": "Type '{ children: (string | number)[]; color: string; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "dd-1": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 62,
+        "message": "Object literal may only specify known properties, and 'id' does not exist in type 'TableColumn<Record<string, unknown>>'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 63,
+        "message": "Object literal may only specify known properties, and 'id' does not exist in type 'TableColumn<Record<string, unknown>>'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 64,
+        "message": "Object literal may only specify known properties, and 'id' does not exist in type 'TableColumn<Record<string, unknown>>'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 65,
+        "message": "Object literal may only specify known properties, and 'id' does not exist in type 'TableColumn<Record<string, unknown>>'.",
+        "code": "TS2353"
+      },
+      {
+        "line": 76,
+        "message": "Parameter 'col' implicitly has an 'any' type.",
+        "code": "TS7006"
+      }
+    ],
+    "errorCount": 5,
+    "buildSuccess": false
+  },
+  "fwc-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 3,
+        "message": "Cannot find module '@astryxdesign/core/DialogHeader' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 9,
+        "message": "Cannot find module '@astryxdesign/core/LayoutContent' or its corresponding type declarations.",
+        "code": "TS2307"
+      },
+      {
+        "line": 10,
+        "message": "Cannot find module '@astryxdesign/core/LayoutFooter' or its corresponding type declarations.",
+        "code": "TS2307"
+      }
+    ],
+    "errorCount": 3,
+    "buildSuccess": false
+  },
+  "io-4": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ps-4": {
+    "target": "astryx",
+    "errors": [
+      {
+        "line": 28,
+        "message": "Type '{ children: string; color: string; }' is not assignable to type 'IntrinsicAttributes & BadgeProps'.",
+        "code": "TS2322"
+      },
+      {
+        "line": 29,
+        "message": "Property 'label' is missing in type '{ children: string; }' but required in type 'BadgeProps'.",
+        "code": "TS2741"
+      }
+    ],
+    "errorCount": 2,
+    "buildSuccess": false
+  },
+  "rc-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "sd-7": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "ty-1": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  },
+  "wd-2": {
+    "target": "astryx",
+    "errors": [],
+    "errorCount": 0,
+    "buildSuccess": true
+  }
+}
