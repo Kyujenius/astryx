@@ -404,7 +404,10 @@ const filterStyles = stylex.create({
         colorVars['--color-overlay-pressed'],
     },
     transitionProperty: 'background-color, color',
-    transitionDuration: durationVars['--duration-fast'],
+    transitionDuration: {
+      default: durationVars['--duration-fast'],
+      '@media (prefers-reduced-motion: reduce)': '0s',
+    },
     transitionTimingFunction: easeVars['--ease-standard'],
   },
   triggerHoverOnPointer: {

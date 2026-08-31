@@ -58,6 +58,12 @@ const CASES = [
     name: 'Table sort affordance',
     story: 'core-tablefiltering--with-sorting',
     target: 'astryx-table-sort-button',
+    // Not `color`. This button holds the column name as well as the glyph,
+    // and the name belongs to the header cell — it follows
+    // `astryx-table-header-cell`, so an inherited `color` here would drag it
+    // along. The documented way to paint this affordance's glyph is the var,
+    // so the var is what gets asserted.
+    themeProperty: '--table-sort-glyph-color',
     // The header label shares the button with the glyph, so it has to keep the
     // cell's colour rather than follow the affordance's.
     unchanged: 'the header label',
@@ -67,6 +73,9 @@ const CASES = [
     name: 'Table filter affordance',
     story: 'core-tablefiltering--with-sorting',
     target: 'astryx-table-filter-button',
+    // This button holds the glyph and nothing else, so plain `color` is the
+    // whole contract and there is nothing for it to over-reach.
+    themeProperty: 'color',
     unchanged: null,
     unchangedSelector: null,
   },
@@ -254,7 +263,7 @@ async function checkCase(context, testCase) {
       // between the old colour and the new. What is being asserted is the
       // settled paint, so the animation is removed rather than waited on:
       // a sleep long enough for one theme's duration is a race in another.
-      `@layer astryx-theme { .${testCase.target} { color: ${SENTINEL}; } }
+      `@layer astryx-theme { .${testCase.target} { ${testCase.themeProperty}: ${SENTINEL}; } }
        *, *::before, *::after {
          transition-duration: 0s !important;
          animation-duration: 0s !important;

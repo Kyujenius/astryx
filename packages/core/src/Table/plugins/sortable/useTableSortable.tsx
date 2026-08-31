@@ -138,11 +138,23 @@ const sortStyles = stylex.create({
       ':is(:disabled,[aria-disabled="true"])': 'default',
     },
     font: 'inherit',
-    // The glyph reads this through `color="inherit"`, so a theme setting a
-    // colour on `astryx-table-sort-button` reaches the thing it is aiming at.
-    // The label carries the header's colour itself (see `label`) rather than
-    // inheriting it from here.
-    color: colorVars['--color-icon-secondary'],
+    // The glyph's colour travels as a custom property rather than as `color`
+    // on this button.
+    //
+    // `color` here would be inherited by BOTH children, and only one of them
+    // wants it. The label is the column name: it belongs to the header cell,
+    // whose own `astryx-table-header-cell` target already paints it. A `color`
+    // on this button overrode that — so a theme that recoloured its header
+    // cells left every sortable heading behind, still painting the raw token
+    // this file used to restate. The glyph, meanwhile, does want the
+    // affordance's colour.
+    //
+    // Declaring the var here keeps BOTH true and keeps the single target: the
+    // label inherits the header cell (nothing interrupts it now), and the
+    // glyph reads the var (see `iconWrapper`). A theme reaches the glyph by
+    // setting either the var or plain `color` on this target, because the var
+    // is registered as derived from `color` — see `derivedVarRegistry`.
+    '--table-sort-glyph-color': colorVars['--color-icon-secondary'],
     width: '100%',
     height: '100%',
     textAlign: 'inherit',
@@ -156,8 +168,11 @@ const sortStyles = stylex.create({
       ':active:where(:not(:disabled,[aria-disabled="true"]))':
         colorVars['--color-overlay-pressed'],
     },
-    transitionProperty: 'background-color, color',
-    transitionDuration: durationVars['--duration-fast'],
+    transitionProperty: 'background-color',
+    transitionDuration: {
+      default: durationVars['--duration-fast'],
+      '@media (prefers-reduced-motion: reduce)': '0s',
+    },
     transitionTimingFunction: easeVars['--ease-standard'],
   },
   // Guarded on `hover: hover` so a touch device does not stick in the hover
@@ -168,9 +183,11 @@ const sortStyles = stylex.create({
         ':hover:where(:not(:disabled,[aria-disabled="true"]))':
           colorVars['--color-overlay-hover'],
       },
-      color: {
-        // The glyph darkens a step as well, so the feedback survives a
-        // forced-colors mode that drops the background tint.
+      // The glyph darkens a step as well, so the feedback survives a
+      // forced-colors mode that drops the background tint. On the var, not on
+      // `color`: the column name is not part of the affordance and must not
+      // move when the pointer is over the heading.
+      '--table-sort-glyph-color': {
         ':hover:where(:not(:disabled,[aria-disabled="true"]))':
           colorVars['--color-text-primary'],
       },
@@ -179,16 +196,23 @@ const sortStyles = stylex.create({
   // Accent is the SORTED state and nothing else, so "this column is sorted"
   // never reads as "the pointer is here".
   buttonSorted: {
-    color: colorVars['--color-accent'],
+    '--table-sort-glyph-color': colorVars['--color-accent'],
   },
-  // The header text belongs to the cell, not to the affordance. It is pinned
-  // to the token the `<th>` sets so the button's icon colour cannot bleed into
-  // it — without this, colouring the sort target repaints the header label too.
-  label: {
-    color: colorVars['--color-text-secondary'],
-  },
+  // No `color`. The header text belongs to the cell, so it inherits the
+  // colour `TableHeaderCell` paints on the `<th>` — which is what the
+  // `astryx-table-header-cell` target themes. Restating the token here read
+  // as identical until someone themed that target, and then the heading
+  // stopped following it.
+  label: {},
   iconWrapper: {
     display: 'inline-flex',
+    color: 'var(--table-sort-glyph-color)',
+    transitionProperty: 'color',
+    transitionDuration: {
+      default: durationVars['--duration-fast'],
+      '@media (prefers-reduced-motion: reduce)': '0s',
+    },
+    transitionTimingFunction: easeVars['--ease-standard'],
   },
   rank: {
     fontSize: 10,
