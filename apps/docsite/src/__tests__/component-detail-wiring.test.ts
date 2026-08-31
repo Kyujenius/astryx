@@ -282,7 +282,7 @@ describe('component detail wiring', () => {
     expect(source).toContain('badge results');
   });
 
-  it('uses clear button-family contrast terminology', () => {
+  it('uses clear pressable-control contrast terminology', () => {
     const entries = Object.values(components).flat();
     for (const name of ['Button', 'IconButton', 'ButtonGroup']) {
       const component = entries.find(entry => entry.name === name);

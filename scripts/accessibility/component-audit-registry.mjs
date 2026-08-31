@@ -1,8 +1,10 @@
 // Copyright (c) Meta Platforms, Inc. and affiliates.
 
-import {buttonFamilyAuditModule} from './button-family-audit-module.mjs';
+import {pressableControlsAuditModule} from './pressable-controls-audit-module.mjs';
 
-export const componentAccessibilityAuditModules = [buttonFamilyAuditModule];
+export const componentAccessibilityAuditModules = [
+  pressableControlsAuditModule,
+];
 
 export const generatedCoverageUrl = new URL(
   '../../packages/core/src/accessibility/generatedThemeCoverage.mjs',

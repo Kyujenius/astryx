@@ -84,7 +84,7 @@ const SOURCE_PATHS = {
   ),
 };
 
-export const buttonFamilySource = Object.fromEntries(
+export const pressableControlsSource = Object.fromEntries(
   Object.entries(SOURCE_PATHS).map(([name, url]) => [
     name,
     fs.readFileSync(url, 'utf8'),
@@ -100,7 +100,7 @@ function sourceColorExpression(value) {
 }
 
 function readButtonDefaults() {
-  const variantsBlock = buttonFamilySource.Button.match(
+  const variantsBlock = pressableControlsSource.Button.match(
     /const variants = stylex\.create\(\{([\s\S]*?)\n\}\);/,
   )?.[1];
   if (variantsBlock == null) throw new Error('Button variants were not found');
@@ -137,7 +137,7 @@ function sourceToken(source, pattern, label) {
 }
 
 const FOCUS_OUTLINE_COLOR = sourceToken(
-  buttonFamilySource.Tokens,
+  pressableControlsSource.Tokens,
   /'--focus-outline-color':\s*'var\((--[^)]+)\)'/,
   'focus outline color',
 );
@@ -147,42 +147,42 @@ const resolve = createTokenResolver({
 });
 
 const HOVER_OVERLAY = sourceToken(
-  buttonFamilySource.InteractionOverlay,
+  pressableControlsSource.InteractionOverlay,
   /const hoverImage = [`']linear-gradient\(\$\{colorVars\['([^']+)'\]\}/,
   'hover overlay token',
 );
 const POINTER_DOWN_OVERLAY = sourceToken(
-  buttonFamilySource.InteractionOverlay,
+  pressableControlsSource.InteractionOverlay,
   /const pressedImage = [`']linear-gradient\(\$\{colorVars\['([^']+)'\]\}/,
   'pointer-down overlay token',
 );
 const TOGGLE_SELECTED_BACKGROUND = sourceToken(
-  buttonFamilySource.ToggleButton,
+  pressableControlsSource.ToggleButton,
   /const pressedStyles[\s\S]*?backgroundColor:[\s\S]*?default:\s*colorVars\['([^']+)'\]/,
   'ToggleButton selected background',
 );
 const SEGMENTED_TRACK_BACKGROUND = sourceToken(
-  buttonFamilySource.SegmentedControl,
+  pressableControlsSource.SegmentedControl,
   /const styles = stylex\.create\([\s\S]*?backgroundColor:\s*colorVars\['([^']+)'\]/,
   'SegmentedControl track background',
 );
 const SEGMENTED_UNSELECTED_FOREGROUND = sourceToken(
-  buttonFamilySource.SegmentedControlItem,
+  pressableControlsSource.SegmentedControlItem,
   /const styles = stylex\.create\([\s\S]*?\n\s+color:\s*colorVars\['([^']+)'\]/,
   'SegmentedControl unselected foreground',
 );
 const SEGMENTED_HOVER_BACKGROUND = sourceToken(
-  buttonFamilySource.SegmentedControlItem,
+  pressableControlsSource.SegmentedControlItem,
   /hover:[\s\S]*?'@media \(hover: hover\)':\s*colorVars\['([^']+)'\]/,
   'SegmentedControl hover background',
 );
 const SEGMENTED_SELECTED_FOREGROUND = sourceToken(
-  buttonFamilySource.SegmentedControlItem,
+  pressableControlsSource.SegmentedControlItem,
   /selected:[\s\S]*?\n\s+color:[\s\S]*?default:\s*colorVars\['([^']+)'\]/,
   'SegmentedControl selected foreground',
 );
 const SEGMENTED_SELECTED_BACKGROUND = sourceToken(
-  buttonFamilySource.SegmentedControlItem,
+  pressableControlsSource.SegmentedControlItem,
   /selected:[\s\S]*?backgroundColor:[\s\S]*?default:\s*colorVars\['([^']+)'\]/,
   'SegmentedControl selected background',
 );
@@ -201,7 +201,7 @@ function buttonMeasurements(textMinimum, includeBadges) {
   ];
 }
 
-export const buttonFamilyAuditProfiles = {
+export const pressableControlsAuditProfiles = {
   Button: {
     kind: 'button',
     measurements: buttonMeasurements(AA_TEXT, true),
@@ -372,11 +372,15 @@ function spinnerMeasurement(stateBackgrounds) {
 
 function loadingOpacity() {
   if (
-    buttonFamilySource.Button.includes('visuallyDisabled && styles.disabled')
+    pressableControlsSource.Button.includes(
+      'visuallyDisabled && styles.disabled',
+    )
   ) {
     return 1;
   }
-  if (buttonFamilySource.Button.includes('buttonDisabled && styles.disabled')) {
+  if (
+    pressableControlsSource.Button.includes('buttonDisabled && styles.disabled')
+  ) {
     return 0.5;
   }
   throw new Error('Could not determine the Button loading opacity behavior');
@@ -715,34 +719,36 @@ function segmentedMode(mode, profile) {
   };
 }
 
-export function buildButtonFamilyAccessibilityThemeCoverage() {
+export function buildPressableControlsAccessibilityThemeCoverage() {
   return Object.fromEntries(
-    Object.entries(buttonFamilyAuditProfiles).map(([component, profile]) => {
-      const modes = MODES.map(mode => {
-        if (profile.kind === 'button') return buttonMode(mode, profile);
-        if (profile.kind === 'toggle') return toggleMode(mode, profile);
-        if (profile.kind === 'segmented') return segmentedMode(mode, profile);
-        throw new Error(`Unsupported audit profile kind: ${profile.kind}`);
-      });
-      return [
-        component,
-        [
-          {
-            theme: profile.theme.name,
-            tables: [{modes}],
-            notMeasured: profile.theme.notMeasured,
-          },
-        ],
-      ];
-    }),
+    Object.entries(pressableControlsAuditProfiles).map(
+      ([component, profile]) => {
+        const modes = MODES.map(mode => {
+          if (profile.kind === 'button') return buttonMode(mode, profile);
+          if (profile.kind === 'toggle') return toggleMode(mode, profile);
+          if (profile.kind === 'segmented') return segmentedMode(mode, profile);
+          throw new Error(`Unsupported audit profile kind: ${profile.kind}`);
+        });
+        return [
+          component,
+          [
+            {
+              theme: profile.theme.name,
+              tables: [{modes}],
+              notMeasured: profile.theme.notMeasured,
+            },
+          ],
+        ];
+      },
+    ),
   );
 }
 
-export function getButtonFamilyAuditContract() {
-  const buttonVariantMap = buttonFamilySource.ButtonIndex.match(
+export function getPressableControlsAuditContract() {
+  const buttonVariantMap = pressableControlsSource.ButtonIndex.match(
     /export interface ButtonVariantMap \{([\s\S]*?)\n\}/,
   );
-  const badgeVariantMap = buttonFamilySource.BadgeIndex.match(
+  const badgeVariantMap = pressableControlsSource.BadgeIndex.match(
     /export interface BadgeVariantMap \{([\s\S]*?)\n\}/,
   );
   return {
@@ -762,8 +768,8 @@ export function getButtonFamilyAuditContract() {
   };
 }
 
-export const buttonFamilyAuditModule = {
-  id: 'button-family',
+export const pressableControlsAuditModule = {
+  id: 'pressable-controls',
   components: [
     {
       name: 'Button',
@@ -806,5 +812,5 @@ export const buttonFamilyAuditModule = {
       ),
     },
   ],
-  buildCoverage: buildButtonFamilyAccessibilityThemeCoverage,
+  buildCoverage: buildPressableControlsAccessibilityThemeCoverage,
 };

@@ -9,12 +9,12 @@ import {
   resultStatus,
 } from './accessibility/contrast-audit-engine.mjs';
 import {
-  buildButtonFamilyAccessibilityThemeCoverage,
-  buttonFamilyAuditModule,
-  buttonFamilyAuditProfiles,
-  buttonFamilySource,
-  getButtonFamilyAuditContract,
-} from './accessibility/button-family-audit-module.mjs';
+  buildPressableControlsAccessibilityThemeCoverage,
+  getPressableControlsAuditContract,
+  pressableControlsAuditModule,
+  pressableControlsAuditProfiles,
+  pressableControlsSource,
+} from './accessibility/pressable-controls-audit-module.mjs';
 import {
   buildRegisteredAccessibilityCoverage,
   componentAccessibilityAuditModules,
@@ -22,7 +22,7 @@ import {
 
 const docsByComponent = Object.fromEntries(
   await Promise.all(
-    buttonFamilyAuditModule.components.map(async component => [
+    pressableControlsAuditModule.components.map(async component => [
       component.name,
       (await import(component.docsUrl.href)).docs,
     ]),
@@ -30,7 +30,7 @@ const docsByComponent = Object.fromEntries(
 );
 
 const generatedByComponent = Object.fromEntries(
-  buttonFamilyAuditModule.components.map(component => [
+  pressableControlsAuditModule.components.map(component => [
     component.name,
     generatedCoverage[component.exportName],
   ]),
@@ -96,8 +96,8 @@ describe('registered component accessibility coverage', () => {
   });
 });
 
-describe('Button-family audit module', () => {
-  const calculated = buildButtonFamilyAccessibilityThemeCoverage();
+describe('Pressable controls audit module', () => {
+  const calculated = buildPressableControlsAccessibilityThemeCoverage();
 
   it('keeps representative rendered results stable', () => {
     const buttonLight = calculated.Button[0].tables[0].modes[0];
@@ -135,7 +135,7 @@ describe('Button-family audit module', () => {
   });
 
   it('covers every declared Button and Badge variant', () => {
-    const contract = getButtonFamilyAuditContract();
+    const contract = getPressableControlsAuditContract();
     expect(contract.buttonVariants).toEqual(contract.expectedButtonVariants);
     expect(contract.badgeVariants).toEqual(contract.expectedBadgeVariants);
     expect(contract.badgeVariants).toHaveLength(14);
@@ -143,29 +143,29 @@ describe('Button-family audit module', () => {
   });
 
   it('keeps profiles tied to the rendered component contracts', () => {
-    expect(buttonFamilySource.Button).toContain(
+    expect(pressableControlsSource.Button).toContain(
       'interactionOverlayStyles.backgroundImage',
     );
-    expect(buttonFamilySource.Button).toContain(
+    expect(pressableControlsSource.Button).toContain(
       'visuallyDisabled && styles.disabled',
     );
-    expect(buttonFamilySource.IconButton).toContain('<Button {...props}');
-    expect(buttonFamilySource.IconButton).toContain('isIconOnly');
-    expect(buttonFamilySource.ToggleButton).toContain('variant="ghost"');
-    expect(buttonFamilySource.ToggleButton).toContain(
+    expect(pressableControlsSource.IconButton).toContain('<Button {...props}');
+    expect(pressableControlsSource.IconButton).toContain('isIconOnly');
+    expect(pressableControlsSource.ToggleButton).toContain('variant="ghost"');
+    expect(pressableControlsSource.ToggleButton).toContain(
       "default: colorVars['--color-overlay-pressed']",
     );
-    expect(buttonFamilySource.ToggleButton).toContain('isInterruptible');
-    expect(buttonFamilySource.ButtonGroup).toContain(
+    expect(pressableControlsSource.ToggleButton).toContain('isInterruptible');
+    expect(pressableControlsSource.ButtonGroup).toContain(
       "borderInlineStartColor: colorVars['--color-border']",
     );
-    expect(buttonFamilySource.SegmentedControl).toContain(
+    expect(pressableControlsSource.SegmentedControl).toContain(
       "backgroundColor: colorVars['--color-neutral']",
     );
-    expect(buttonFamilySource.SegmentedControlItem).toContain(
+    expect(pressableControlsSource.SegmentedControlItem).toContain(
       "color: colorVars['--color-text-secondary']",
     );
-    expect(buttonFamilySource.SegmentedControlItem).toContain(
+    expect(pressableControlsSource.SegmentedControlItem).toContain(
       "'@media (hover: hover)': colorVars['--color-overlay-hover']",
     );
     expect(neutralTheme.components?.['button-group']).toBeUndefined();
@@ -202,16 +202,16 @@ describe('Button-family audit module', () => {
   });
 
   it('keeps theme intent in profiles and out of measured columns', () => {
-    expect(buttonFamilyAuditProfiles.ButtonGroup.theme.notMeasured).toContain(
-      'Divider — Decorative in Neutral.',
-    );
+    expect(
+      pressableControlsAuditProfiles.ButtonGroup.theme.notMeasured,
+    ).toContain('Divider — Decorative in Neutral.');
     expect(
       measurementsFor(generatedByComponent.ButtonGroup).map(item => item.label),
     ).not.toContain('Divider');
 
     for (const component of ['ToggleButton', 'SegmentedControl']) {
       expect(
-        buttonFamilyAuditProfiles[component].theme.notMeasured,
+        pressableControlsAuditProfiles[component].theme.notMeasured,
       ).toContainEqual(
         expect.stringContaining('Selected background — Supplemental'),
       );
@@ -228,9 +228,9 @@ describe('Button-family audit module', () => {
       'ToggleButton',
       'ButtonGroup',
     ]) {
-      expect(buttonFamilyAuditProfiles[component].theme.notMeasured).toContain(
-        'Spinner track — Decorative. The moving arc must meet 3:1.',
-      );
+      expect(
+        pressableControlsAuditProfiles[component].theme.notMeasured,
+      ).toContain('Spinner track — Decorative. The moving arc must meet 3:1.');
       const labels = measurementsFor(generatedByComponent[component]).map(
         item => item.label,
       );
