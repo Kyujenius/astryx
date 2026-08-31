@@ -4,9 +4,15 @@
  * @file Component doc loader — load and merge translations
  */
 
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {importUserModule} from '../fs/module-loader.mjs';
 import {parseDoc} from '../../authoring/doctypes/parse.mjs';
+import {
+  projectParentOwnedMemberDoc,
+  stripMemberProjectionMetadata,
+} from '../../authoring/doctypes/component/member-projection.mjs';
 
 /**
  * Load a component doc through the shared load/validation boundary.
@@ -54,6 +60,48 @@ export async function loadComponentDoc(
     return overlayComponentDoc(docs, translation);
   }
   return mergeTranslation(docs, translation);
+}
+
+/**
+ * Load a component's public documentation view. Extracted members are resolved
+ * against a sibling parent doc after both docs receive the same locale overlay.
+ * Parent ComponentRef projections are authoring metadata and never escape this
+ * boundary.
+ *
+ * @param {string} docPath absolute path to a component doc
+ * @param {{zh?: boolean, dense?: boolean, lang?: string}} [opts]
+ * @returns {Promise<any>}
+ */
+export async function loadResolvedComponentDoc(docPath, opts = {}) {
+  /** @type {any} */
+  const doc = await loadComponentDoc(docPath, opts);
+  if (!doc?.subComponentOf) return stripMemberProjectionMetadata(doc);
+
+  const parentPath = findSiblingParentDoc(docPath, doc.subComponentOf);
+  if (parentPath == null) return stripMemberProjectionMetadata(doc);
+
+  const parentDoc = await loadComponentDoc(parentPath, opts);
+  return stripMemberProjectionMetadata(
+    projectParentOwnedMemberDoc(parentDoc, doc),
+  );
+}
+
+/**
+ * @param {string} docPath
+ * @param {string} parentName
+ * @returns {string | null}
+ */
+function findSiblingParentDoc(docPath, parentName) {
+  const directory = path.dirname(docPath);
+  const currentSuffix = path.basename(docPath).match(/(\.doc\.(?:mjs|js|ts))$/)?.[1];
+  const suffixes = [currentSuffix, '.doc.mjs', '.doc.js', '.doc.ts'].filter(
+    (suffix, index, values) => suffix && values.indexOf(suffix) === index,
+  );
+  for (const suffix of suffixes) {
+    const candidate = path.join(directory, `${parentName}${suffix}`);
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
 }
 
 /**

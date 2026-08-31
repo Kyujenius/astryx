@@ -33,7 +33,9 @@ import {
   resolveImportPath,
 } from '../../foundation/discovery/component-discovery.mjs';
 import {Project} from '../../foundation/config/project.mjs';
-import {loadDocs} from '../../foundation/discovery/component-loader.mjs';
+import {
+  loadResolvedComponentDoc,
+} from '../../foundation/discovery/component-loader.mjs';
 import {searchComponents} from '../../foundation/text/string-utils.mjs';
 import {AstryxError} from '../error.mjs';
 
@@ -347,7 +349,10 @@ export async function resolveUnscopedDoc(dirName, {coreDir, cwd, name}) {
 export async function loadComponentDoc(docPath, opts = {}) {
   const {zh = false, dense = false, lang = null} = opts;
   return /** @type {LoadedComponentDoc} */ (
-    await loadDocs(docPath, /** @type {LoadDocsOpts} */ ({zh, dense, lang}))
+    await loadResolvedComponentDoc(
+      docPath,
+      /** @type {LoadDocsOpts} */ ({zh, dense, lang}),
+    )
   );
 }
 
