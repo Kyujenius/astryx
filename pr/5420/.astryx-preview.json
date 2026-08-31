@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5420,
+    "headSha": "db8c0fd06305a11925359dfc6bd012c3fe21df42",
+    "headRef": "feat/table-affordance-theme-targets",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33406289667,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5420/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5420/sandbox/",
+      "indexSha256": "0cab52c16768f525f8eb0a407104d79f68e960cfe56768de9389bdd76d2752b7"
+    }
+  }
+}

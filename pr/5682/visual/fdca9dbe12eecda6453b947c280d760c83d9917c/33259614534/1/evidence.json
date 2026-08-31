@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "repo": "facebook/astryx",
+  "pr": 5682,
+  "headSha": "fdca9dbe12eecda6453b947c280d760c83d9917c",
+  "testedSha": "fdca9dbe12eecda6453b947c280d760c83d9917c",
+  "baseSha": "c2ae093f4e82c23ae419602cdd2186c464e1e159",
+  "run": {
+    "id": 33259614534,
+    "attempt": 1
+  },
+  "capture": null,
+  "deltas": [],
+  "verdict": {
+    "version": 1,
+    "status": "skipped",
+    "generatedAt": "2026-08-30T15:47:46.449Z",
+    "reason": "Broad stable scope is deferred to the daily release gate. It covers 1964 trusted baseline shots instead of recapturing them for this PR.",
+    "context": {
+      "sha": "fdca9dbe12eecda6453b947c280d760c83d9917c",
+      "headSha": "fdca9dbe12eecda6453b947c280d760c83d9917c",
+      "baseSha": "c2ae093f4e82c23ae419602cdd2186c464e1e159",
+      "runId": "33259614534",
+      "runAttempt": "1",
+      "trustedScope": {
+        "hasStableVisual": true,
+        "broadStableVisual": true,
+        "stableComponents": [
+          "Typeahead"
+        ],
+        "stableCoreFiles": [
+          "packages/core/src/Typeahead/Typeahead.tsx",
+          "packages/core/src/theme/derivedVarRegistry.ts"
+        ],
+        "stableThemes": [],
+        "canaryPackages": []
+      }
+    },
+    "counts": {
+      "total": 1964,
+      "unchanged": 0,
+      "changed": 0,
+      "added": 0,
+      "removed": 0,
+      "failed": 0
+    },
+    "components": [
+      "Typeahead"
+    ],
+    "changes": [],
+    "added": [],
+    "removed": [],
+    "failures": []
+  }
+}

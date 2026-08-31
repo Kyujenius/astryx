@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "repo": "facebook/astryx",
+  "pr": 5783,
+  "headSha": "28da9a1d5d7dd88bcd6012894ab881577bed82b0",
+  "testedSha": "28da9a1d5d7dd88bcd6012894ab881577bed82b0",
+  "baseSha": "377296d7253bd0e36ab35a93d5f12a637eb55b70",
+  "run": {
+    "id": 33407463643,
+    "attempt": 1
+  },
+  "capture": null,
+  "deltas": [],
+  "verdict": {
+    "version": 1,
+    "status": "skipped",
+    "generatedAt": "2026-08-31T15:43:28.724Z",
+    "reason": "Broad stable scope is deferred to the daily release gate. It covers 3136 trusted baseline shots instead of recapturing them for this PR.",
+    "context": {
+      "sha": "28da9a1d5d7dd88bcd6012894ab881577bed82b0",
+      "headSha": "28da9a1d5d7dd88bcd6012894ab881577bed82b0",
+      "baseSha": "377296d7253bd0e36ab35a93d5f12a637eb55b70",
+      "runId": "33407463643",
+      "runAttempt": "1",
+      "trustedScope": {
+        "hasStableVisual": true,
+        "broadStableVisual": true,
+        "stableComponents": [
+          "Resizable"
+        ],
+        "stableCoreFiles": [
+          "packages/core/src/Resizable/useResizable.ts",
+          "packages/core/src/utils/sharedResizeObserver.ts"
+        ],
+        "stableThemes": [],
+        "canaryPackages": []
+      }
+    },
+    "counts": {
+      "total": 3136,
+      "unchanged": 0,
+      "changed": 0,
+      "added": 0,
+      "removed": 0,
+      "failed": 0
+    },
+    "components": [
+      "Resizable"
+    ],
+    "changes": [],
+    "added": [],
+    "removed": [],
+    "failures": []
+  }
+}

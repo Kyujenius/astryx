@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5547,
+    "headSha": "5531484d8705b7b3a08172203d1b96b50a5269b7",
+    "headRef": "fix/toast-shadow-clipped",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33371801448,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5547/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5547/sandbox/",
+      "indexSha256": "fcc945ae879c717c2356dd85e966985fdfa3eafcf1eb95eb34c27dc31c2585f9"
+    }
+  }
+}

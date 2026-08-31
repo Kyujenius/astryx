@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5652,
+    "headSha": "2762cc126d2a4d1a7d0926ae2b04ffdac6287a5b",
+    "headRef": "feat/drawer-nested-stack",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33371813447,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5652/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5652/sandbox/",
+      "indexSha256": "d7efc3b9d25b4b78f507906a502b741c8b25466fd9d64dad96bb1f8b3f77d16d"
+    }
+  }
+}

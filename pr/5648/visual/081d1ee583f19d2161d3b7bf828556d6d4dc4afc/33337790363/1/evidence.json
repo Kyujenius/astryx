@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "repo": "facebook/astryx",
+  "pr": 5648,
+  "headSha": "081d1ee583f19d2161d3b7bf828556d6d4dc4afc",
+  "testedSha": "081d1ee583f19d2161d3b7bf828556d6d4dc4afc",
+  "baseSha": "1e5db77c6e6a405891d204dd199ed5f910a5df82",
+  "run": {
+    "id": 33337790363,
+    "attempt": 1
+  },
+  "capture": {
+    "platform": "linux-arm64",
+    "browser": "chromium-149.0.7827.0",
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    }
+  },
+  "deltas": [],
+  "verdict": {
+    "version": 1,
+    "status": "pass",
+    "generatedAt": "2026-08-30T22:23:19.431Z",
+    "context": {
+      "sha": "081d1ee583f19d2161d3b7bf828556d6d4dc4afc",
+      "runId": "33337790363",
+      "runAttempt": "1",
+      "headSha": "081d1ee583f19d2161d3b7bf828556d6d4dc4afc",
+      "baseSha": "1e5db77c6e6a405891d204dd199ed5f910a5df82",
+      "ref": "refs/heads/main",
+      "trustedScope": {
+        "hasStableVisual": true,
+        "broadStableVisual": false,
+        "stableComponents": [
+          "Chat"
+        ],
+        "stableCoreFiles": [
+          "packages/core/src/Chat/ChatComposer.tsx"
+        ],
+        "stableThemes": [],
+        "canaryPackages": []
+      }
+    },
+    "platform": "linux-arm64",
+    "baseline": {
+      "capturedAt": "2026-08-30T19:31:54.975Z",
+      "sha": "0443933b693cb0d3987a5e6ad592826e673e1750",
+      "platform": "linux-arm64"
+    },
+    "counts": {
+      "total": 980,
+      "unchanged": 980,
+      "changed": 0,
+      "added": 0,
+      "removed": 0,
+      "failed": 0
+    },
+    "changes": [],
+    "added": [],
+    "removed": [],
+    "failures": [],
+    "targeting": {
+      "unexercisedOverrides": [],
+      "undeclaredTargets": [],
+      "uncoveredTargets": []
+    }
+  }
+}

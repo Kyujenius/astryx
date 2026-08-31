@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5772,
+    "headSha": "fe49e85a5b9a774c26c7461a750c90e9164cc507",
+    "headRef": "navi/docs/slop-54",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33376814410,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5772/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5772/sandbox/",
+      "indexSha256": "307d822529556cb9821ed60d3e9a72b61fdc7cd46fe89af3fd510948f02b7301"
+    }
+  }
+}

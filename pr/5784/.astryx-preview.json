@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5784,
+    "headSha": "32a554c7eb54c3b1010e94053b58c3c3181ce282",
+    "headRef": "guard/affordance-color-reach",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33407780254,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5784/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5784/sandbox/",
+      "indexSha256": "5e28fae47b9b211e66fee07794002650709e045ec5b12d92fb52a7dbe73f9c76"
+    }
+  }
+}

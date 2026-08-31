@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5671,
+    "headSha": "70b2d6adeb5d7c70a7b25c1c113fdf78e06a2aa1",
+    "headRef": "ernestt/semantic-status-icons",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33293627054,
+    "attempt": 3,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5671/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5671/sandbox/",
+      "indexSha256": "269c7443efef0e4979f6b6ff36b6bd35ccb29356db033dc044fb35cbf6060b0e"
+    }
+  }
+}

@@ -1,0 +1,2606 @@
+{
+  "version": 1,
+  "status": "changed",
+  "generatedAt": "2026-08-31T04:37:40.566Z",
+  "context": {
+    "sha": "70b2d6adeb5d7c70a7b25c1c113fdf78e06a2aa1",
+    "runId": "33293627054",
+    "runAttempt": "3",
+    "headSha": "70b2d6adeb5d7c70a7b25c1c113fdf78e06a2aa1",
+    "baseSha": "88fde9103f89a87b9709781123f21c43830a54ea",
+    "ref": "refs/heads/main",
+    "trustedScope": {
+      "hasStableVisual": true,
+      "broadStableVisual": false,
+      "stableComponents": [
+        "Chat",
+        "Table"
+      ],
+      "stableCoreFiles": [
+        "packages/core/src/Chat/ChatToolCalls.tsx",
+        "packages/core/src/Table/plugins/rowStatus/useTableRowStatus.tsx"
+      ],
+      "stableThemes": [],
+      "canaryPackages": []
+    }
+  },
+  "platform": "linux-arm64",
+  "baseline": {
+    "capturedAt": "2026-08-30T19:31:54.975Z",
+    "sha": "0443933b693cb0d3987a5e6ad592826e673e1750",
+    "platform": "linux-arm64"
+  },
+  "counts": {
+    "total": 1316,
+    "unchanged": 834,
+    "changed": 148,
+    "added": 334,
+    "removed": 0,
+    "failed": 0
+  },
+  "changes": [
+    {
+      "key": "core-chattoolcalls--single-call__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__y2k-dark",
+      "diffPixels": 204,
+      "diffRatio": 0.000259,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__y2k-dark",
+      "diffPixels": 194,
+      "diffRatio": 0.000247,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__y2k-dark",
+      "diffPixels": 194,
+      "diffRatio": 0.000247,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__y2k-dark",
+      "diffPixels": 194,
+      "diffRatio": 0.000247,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.000144,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__stone-light",
+      "diffPixels": 118,
+      "diffRatio": 0.00015,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000135,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000135,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__neutral-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__butter-light",
+      "diffPixels": 111,
+      "diffRatio": 0.000141,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__butter-light",
+      "diffPixels": 109,
+      "diffRatio": 0.000139,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__butter-light",
+      "diffPixels": 109,
+      "diffRatio": 0.000139,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__butter-light",
+      "diffPixels": 109,
+      "diffRatio": 0.000139,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__neutral-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__stone-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__neutral-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__stone-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__neutral-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__stone-light",
+      "diffPixels": 107,
+      "diffRatio": 0.000136,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__matcha-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__chocolate-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__matcha-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__chocolate-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__matcha-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__chocolate-light",
+      "diffPixels": 102,
+      "diffRatio": 0.00013,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__neutral-dark",
+      "diffPixels": 101,
+      "diffRatio": 0.000128,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__neutral-dark",
+      "diffPixels": 101,
+      "diffRatio": 0.000128,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__neutral-dark",
+      "diffPixels": 101,
+      "diffRatio": 0.000128,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chatlayout--full-ai-chat__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chatlayout--full-ai-chat",
+      "title": "Core/ChatLayout",
+      "name": "Full AI Chat",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__neutral-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "neutral",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__butter-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__gothic-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__gothic-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__stone-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__matcha-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__matcha-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__chocolate-light",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__chocolate-dark",
+      "diffPixels": 15,
+      "diffRatio": 0.000019,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--single-call__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--single-call",
+      "title": "Core/ChatToolCalls",
+      "name": "Single Call",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--multiple-calls__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--multiple-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Multiple Calls",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-nodes__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-nodes",
+      "title": "Core/ChatToolCalls",
+      "name": "With Nodes",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-stats__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-stats",
+      "title": "Core/ChatToolCalls",
+      "name": "With Stats",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__butter-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__gothic-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__gothic-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__stone-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--running__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--running",
+      "title": "Core/ChatToolCalls",
+      "name": "Running",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--many-calls__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--many-calls",
+      "title": "Core/ChatToolCalls",
+      "name": "Many Calls",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--interactive__y2k-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--interactive",
+      "title": "Core/ChatToolCalls",
+      "name": "Interactive",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__butter-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__gothic-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__gothic-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__stone-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__butter-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "butter",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__gothic-light",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__gothic-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "gothic",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__stone-dark",
+      "diffPixels": 14,
+      "diffRatio": 0.000018,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "stone",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__matcha-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__chocolate-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__matcha-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__chocolate-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__matcha-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "matcha",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__chocolate-dark",
+      "diffPixels": 13,
+      "diffRatio": 0.000017,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "chocolate",
+      "mode": "dark",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--with-errors__y2k-light",
+      "diffPixels": 8,
+      "diffRatio": 0.00001,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--with-errors",
+      "title": "Core/ChatToolCalls",
+      "name": "With Errors",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--error-with-detail__y2k-light",
+      "diffPixels": 8,
+      "diffRatio": 0.00001,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--error-with-detail",
+      "title": "Core/ChatToolCalls",
+      "name": "Error With Detail",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    },
+    {
+      "key": "core-chattoolcalls--all-statuses__y2k-light",
+      "diffPixels": 8,
+      "diffRatio": 0.00001,
+      "sizeChanged": false,
+      "storyId": "core-chattoolcalls--all-statuses",
+      "title": "Core/ChatToolCalls",
+      "name": "All Statuses",
+      "component": "Chat",
+      "theme": "y2k",
+      "mode": "light",
+      "reasons": [
+        "trusted:pr-scope"
+      ]
+    }
+  ],
+  "added": [
+    "core-table--default__butter-light",
+    "core-table--default__butter-dark",
+    "core-table--default__gothic-light",
+    "core-table--default__gothic-dark",
+    "core-table--default__stone-light",
+    "core-table--default__stone-dark",
+    "core-table--default__y2k-light",
+    "core-table--default__y2k-dark",
+    "core-table--default__matcha-light",
+    "core-table--default__matcha-dark",
+    "core-table--default__chocolate-light",
+    "core-table--default__chocolate-dark",
+    "core-table--compact__neutral-light",
+    "core-table--compact__neutral-dark",
+    "core-table--compact__butter-light",
+    "core-table--compact__butter-dark",
+    "core-table--compact__gothic-light",
+    "core-table--compact__gothic-dark",
+    "core-table--compact__stone-light",
+    "core-table--compact__stone-dark",
+    "core-table--compact__y2k-light",
+    "core-table--compact__y2k-dark",
+    "core-table--compact__matcha-light",
+    "core-table--compact__matcha-dark",
+    "core-table--compact__chocolate-light",
+    "core-table--compact__chocolate-dark",
+    "core-table--spacious__neutral-light",
+    "core-table--spacious__neutral-dark",
+    "core-table--spacious__butter-light",
+    "core-table--spacious__butter-dark",
+    "core-table--spacious__gothic-light",
+    "core-table--spacious__gothic-dark",
+    "core-table--spacious__stone-light",
+    "core-table--spacious__stone-dark",
+    "core-table--spacious__y2k-light",
+    "core-table--spacious__y2k-dark",
+    "core-table--spacious__matcha-light",
+    "core-table--spacious__matcha-dark",
+    "core-table--spacious__chocolate-light",
+    "core-table--spacious__chocolate-dark",
+    "core-table--striped-with-hover__neutral-light",
+    "core-table--striped-with-hover__neutral-dark",
+    "core-table--striped-with-hover__butter-light",
+    "core-table--striped-with-hover__butter-dark",
+    "core-table--striped-with-hover__gothic-light",
+    "core-table--striped-with-hover__gothic-dark",
+    "core-table--striped-with-hover__stone-light",
+    "core-table--striped-with-hover__stone-dark",
+    "core-table--striped-with-hover__y2k-light",
+    "core-table--striped-with-hover__y2k-dark",
+    "core-table--striped-with-hover__matcha-light",
+    "core-table--striped-with-hover__matcha-dark",
+    "core-table--striped-with-hover__chocolate-light",
+    "core-table--striped-with-hover__chocolate-dark",
+    "core-table--grid-dividers__neutral-light",
+    "core-table--grid-dividers__neutral-dark",
+    "core-table--grid-dividers__butter-light",
+    "core-table--grid-dividers__butter-dark",
+    "core-table--grid-dividers__gothic-light",
+    "core-table--grid-dividers__gothic-dark",
+    "core-table--grid-dividers__stone-light",
+    "core-table--grid-dividers__stone-dark",
+    "core-table--grid-dividers__y2k-light",
+    "core-table--grid-dividers__y2k-dark",
+    "core-table--grid-dividers__matcha-light",
+    "core-table--grid-dividers__matcha-dark",
+    "core-table--grid-dividers__chocolate-light",
+    "core-table--grid-dividers__chocolate-dark",
+    "core-table--column-dividers__neutral-light",
+    "core-table--column-dividers__neutral-dark",
+    "core-table--column-dividers__butter-light",
+    "core-table--column-dividers__butter-dark",
+    "core-table--column-dividers__gothic-light",
+    "core-table--column-dividers__gothic-dark",
+    "core-table--column-dividers__stone-light",
+    "core-table--column-dividers__stone-dark",
+    "core-table--column-dividers__y2k-light",
+    "core-table--column-dividers__y2k-dark",
+    "core-table--column-dividers__matcha-light",
+    "core-table--column-dividers__matcha-dark",
+    "core-table--column-dividers__chocolate-light",
+    "core-table--column-dividers__chocolate-dark",
+    "core-table--no-dividers__neutral-light",
+    "core-table--no-dividers__neutral-dark",
+    "core-table--no-dividers__butter-light",
+    "core-table--no-dividers__butter-dark",
+    "core-table--no-dividers__gothic-light",
+    "core-table--no-dividers__gothic-dark",
+    "core-table--no-dividers__stone-light",
+    "core-table--no-dividers__stone-dark",
+    "core-table--no-dividers__y2k-light",
+    "core-table--no-dividers__y2k-dark",
+    "core-table--no-dividers__matcha-light",
+    "core-table--no-dividers__matcha-dark",
+    "core-table--no-dividers__chocolate-light",
+    "core-table--no-dividers__chocolate-dark",
+    "core-table--auto-columns__neutral-light",
+    "core-table--auto-columns__neutral-dark",
+    "core-table--auto-columns__butter-light",
+    "core-table--auto-columns__butter-dark",
+    "core-table--auto-columns__gothic-light",
+    "core-table--auto-columns__gothic-dark",
+    "core-table--auto-columns__stone-light",
+    "core-table--auto-columns__stone-dark",
+    "core-table--auto-columns__y2k-light",
+    "core-table--auto-columns__y2k-dark",
+    "core-table--auto-columns__matcha-light",
+    "core-table--auto-columns__matcha-dark",
+    "core-table--auto-columns__chocolate-light",
+    "core-table--auto-columns__chocolate-dark",
+    "core-table--custom-cell-renderer__neutral-light",
+    "core-table--custom-cell-renderer__neutral-dark",
+    "core-table--custom-cell-renderer__butter-light",
+    "core-table--custom-cell-renderer__butter-dark",
+    "core-table--custom-cell-renderer__gothic-light",
+    "core-table--custom-cell-renderer__gothic-dark",
+    "core-table--custom-cell-renderer__stone-light",
+    "core-table--custom-cell-renderer__stone-dark",
+    "core-table--custom-cell-renderer__y2k-light",
+    "core-table--custom-cell-renderer__y2k-dark",
+    "core-table--custom-cell-renderer__matcha-light",
+    "core-table--custom-cell-renderer__matcha-dark",
+    "core-table--custom-cell-renderer__chocolate-light",
+    "core-table--custom-cell-renderer__chocolate-dark",
+    "core-table--children-mode__neutral-light",
+    "core-table--children-mode__neutral-dark",
+    "core-table--children-mode__butter-light",
+    "core-table--children-mode__butter-dark",
+    "core-table--children-mode__gothic-light",
+    "core-table--children-mode__gothic-dark",
+    "core-table--children-mode__stone-light",
+    "core-table--children-mode__stone-dark",
+    "core-table--children-mode__y2k-light",
+    "core-table--children-mode__y2k-dark",
+    "core-table--children-mode__matcha-light",
+    "core-table--children-mode__matcha-dark",
+    "core-table--children-mode__chocolate-light",
+    "core-table--children-mode__chocolate-dark",
+    "core-table--all-densities__neutral-light",
+    "core-table--all-densities__neutral-dark",
+    "core-table--all-densities__butter-light",
+    "core-table--all-densities__butter-dark",
+    "core-table--all-densities__gothic-light",
+    "core-table--all-densities__gothic-dark",
+    "core-table--all-densities__stone-light",
+    "core-table--all-densities__stone-dark",
+    "core-table--all-densities__y2k-light",
+    "core-table--all-densities__y2k-dark",
+    "core-table--all-densities__matcha-light",
+    "core-table--all-densities__matcha-dark",
+    "core-table--all-densities__chocolate-light",
+    "core-table--all-densities__chocolate-dark",
+    "core-table--kitchen-sink__neutral-light",
+    "core-table--kitchen-sink__neutral-dark",
+    "core-table--kitchen-sink__butter-light",
+    "core-table--kitchen-sink__butter-dark",
+    "core-table--kitchen-sink__gothic-light",
+    "core-table--kitchen-sink__gothic-dark",
+    "core-table--kitchen-sink__stone-light",
+    "core-table--kitchen-sink__stone-dark",
+    "core-table--kitchen-sink__y2k-light",
+    "core-table--kitchen-sink__y2k-dark",
+    "core-table--kitchen-sink__matcha-light",
+    "core-table--kitchen-sink__matcha-dark",
+    "core-table--kitchen-sink__chocolate-light",
+    "core-table--kitchen-sink__chocolate-dark",
+    "core-table--overflow-behavior__neutral-light",
+    "core-table--overflow-behavior__neutral-dark",
+    "core-table--overflow-behavior__butter-light",
+    "core-table--overflow-behavior__butter-dark",
+    "core-table--overflow-behavior__gothic-light",
+    "core-table--overflow-behavior__gothic-dark",
+    "core-table--overflow-behavior__stone-light",
+    "core-table--overflow-behavior__stone-dark",
+    "core-table--overflow-behavior__y2k-light",
+    "core-table--overflow-behavior__y2k-dark",
+    "core-table--overflow-behavior__matcha-light",
+    "core-table--overflow-behavior__matcha-dark",
+    "core-table--overflow-behavior__chocolate-light",
+    "core-table--overflow-behavior__chocolate-dark",
+    "core-table--in-card__neutral-light",
+    "core-table--in-card__neutral-dark",
+    "core-table--in-card__butter-light",
+    "core-table--in-card__butter-dark",
+    "core-table--in-card__gothic-light",
+    "core-table--in-card__gothic-dark",
+    "core-table--in-card__stone-light",
+    "core-table--in-card__stone-dark",
+    "core-table--in-card__y2k-light",
+    "core-table--in-card__y2k-dark",
+    "core-table--in-card__matcha-light",
+    "core-table--in-card__matcha-dark",
+    "core-table--in-card__chocolate-light",
+    "core-table--in-card__chocolate-dark",
+    "core-table--in-card-with-heading__neutral-light",
+    "core-table--in-card-with-heading__neutral-dark",
+    "core-table--in-card-with-heading__butter-light",
+    "core-table--in-card-with-heading__butter-dark",
+    "core-table--in-card-with-heading__gothic-light",
+    "core-table--in-card-with-heading__gothic-dark",
+    "core-table--in-card-with-heading__stone-light",
+    "core-table--in-card-with-heading__stone-dark",
+    "core-table--in-card-with-heading__y2k-light",
+    "core-table--in-card-with-heading__y2k-dark",
+    "core-table--in-card-with-heading__matcha-light",
+    "core-table--in-card-with-heading__matcha-dark",
+    "core-table--in-card-with-heading__chocolate-light",
+    "core-table--in-card-with-heading__chocolate-dark",
+    "core-table--in-card-with-layout__neutral-light",
+    "core-table--in-card-with-layout__neutral-dark",
+    "core-table--in-card-with-layout__butter-light",
+    "core-table--in-card-with-layout__butter-dark",
+    "core-table--in-card-with-layout__gothic-light",
+    "core-table--in-card-with-layout__gothic-dark",
+    "core-table--in-card-with-layout__stone-light",
+    "core-table--in-card-with-layout__stone-dark",
+    "core-table--in-card-with-layout__y2k-light",
+    "core-table--in-card-with-layout__y2k-dark",
+    "core-table--in-card-with-layout__matcha-light",
+    "core-table--in-card-with-layout__matcha-dark",
+    "core-table--in-card-with-layout__chocolate-light",
+    "core-table--in-card-with-layout__chocolate-dark",
+    "core-table--in-card-with-section__neutral-light",
+    "core-table--in-card-with-section__neutral-dark",
+    "core-table--in-card-with-section__butter-light",
+    "core-table--in-card-with-section__butter-dark",
+    "core-table--in-card-with-section__gothic-light",
+    "core-table--in-card-with-section__gothic-dark",
+    "core-table--in-card-with-section__stone-light",
+    "core-table--in-card-with-section__stone-dark",
+    "core-table--in-card-with-section__y2k-light",
+    "core-table--in-card-with-section__y2k-dark",
+    "core-table--in-card-with-section__matcha-light",
+    "core-table--in-card-with-section__matcha-dark",
+    "core-table--in-card-with-section__chocolate-light",
+    "core-table--in-card-with-section__chocolate-dark",
+    "core-table--in-card-densities__neutral-light",
+    "core-table--in-card-densities__neutral-dark",
+    "core-table--in-card-densities__butter-light",
+    "core-table--in-card-densities__butter-dark",
+    "core-table--in-card-densities__gothic-light",
+    "core-table--in-card-densities__gothic-dark",
+    "core-table--in-card-densities__stone-light",
+    "core-table--in-card-densities__stone-dark",
+    "core-table--in-card-densities__y2k-light",
+    "core-table--in-card-densities__y2k-dark",
+    "core-table--in-card-densities__matcha-light",
+    "core-table--in-card-densities__matcha-dark",
+    "core-table--in-card-densities__chocolate-light",
+    "core-table--in-card-densities__chocolate-dark",
+    "core-table--standalone-vs-container__neutral-light",
+    "core-table--standalone-vs-container__neutral-dark",
+    "core-table--standalone-vs-container__butter-light",
+    "core-table--standalone-vs-container__butter-dark",
+    "core-table--standalone-vs-container__gothic-light",
+    "core-table--standalone-vs-container__gothic-dark",
+    "core-table--standalone-vs-container__stone-light",
+    "core-table--standalone-vs-container__stone-dark",
+    "core-table--standalone-vs-container__y2k-light",
+    "core-table--standalone-vs-container__y2k-dark",
+    "core-table--standalone-vs-container__matcha-light",
+    "core-table--standalone-vs-container__matcha-dark",
+    "core-table--standalone-vs-container__chocolate-light",
+    "core-table--standalone-vs-container__chocolate-dark",
+    "core-table--column-alignment__neutral-light",
+    "core-table--column-alignment__neutral-dark",
+    "core-table--column-alignment__butter-light",
+    "core-table--column-alignment__butter-dark",
+    "core-table--column-alignment__gothic-light",
+    "core-table--column-alignment__gothic-dark",
+    "core-table--column-alignment__stone-light",
+    "core-table--column-alignment__stone-dark",
+    "core-table--column-alignment__y2k-light",
+    "core-table--column-alignment__y2k-dark",
+    "core-table--column-alignment__matcha-light",
+    "core-table--column-alignment__matcha-dark",
+    "core-table--column-alignment__chocolate-light",
+    "core-table--column-alignment__chocolate-dark",
+    "core-table--vertical-alignment__neutral-light",
+    "core-table--vertical-alignment__neutral-dark",
+    "core-table--vertical-alignment__butter-light",
+    "core-table--vertical-alignment__butter-dark",
+    "core-table--vertical-alignment__gothic-light",
+    "core-table--vertical-alignment__gothic-dark",
+    "core-table--vertical-alignment__stone-light",
+    "core-table--vertical-alignment__stone-dark",
+    "core-table--vertical-alignment__y2k-light",
+    "core-table--vertical-alignment__y2k-dark",
+    "core-table--vertical-alignment__matcha-light",
+    "core-table--vertical-alignment__matcha-dark",
+    "core-table--vertical-alignment__chocolate-light",
+    "core-table--vertical-alignment__chocolate-dark",
+    "core-table--responsive-scroll__neutral-light",
+    "core-table--responsive-scroll__neutral-dark",
+    "core-table--responsive-scroll__butter-light",
+    "core-table--responsive-scroll__butter-dark",
+    "core-table--responsive-scroll__gothic-light",
+    "core-table--responsive-scroll__gothic-dark",
+    "core-table--responsive-scroll__stone-light",
+    "core-table--responsive-scroll__stone-dark",
+    "core-table--responsive-scroll__y2k-light",
+    "core-table--responsive-scroll__y2k-dark",
+    "core-table--responsive-scroll__matcha-light",
+    "core-table--responsive-scroll__matcha-dark",
+    "core-table--responsive-scroll__chocolate-light",
+    "core-table--responsive-scroll__chocolate-dark",
+    "core-table--responsive-scroll-in-card__neutral-light",
+    "core-table--responsive-scroll-in-card__neutral-dark",
+    "core-table--responsive-scroll-in-card__butter-light",
+    "core-table--responsive-scroll-in-card__butter-dark",
+    "core-table--responsive-scroll-in-card__gothic-light",
+    "core-table--responsive-scroll-in-card__gothic-dark",
+    "core-table--responsive-scroll-in-card__stone-light",
+    "core-table--responsive-scroll-in-card__stone-dark",
+    "core-table--responsive-scroll-in-card__y2k-light",
+    "core-table--responsive-scroll-in-card__y2k-dark",
+    "core-table--responsive-scroll-in-card__matcha-light",
+    "core-table--responsive-scroll-in-card__matcha-dark",
+    "core-table--responsive-scroll-in-card__chocolate-light",
+    "core-table--responsive-scroll-in-card__chocolate-dark",
+    "core-table--props-table-pattern__neutral-light",
+    "core-table--props-table-pattern__neutral-dark",
+    "core-table--props-table-pattern__butter-light",
+    "core-table--props-table-pattern__butter-dark",
+    "core-table--props-table-pattern__gothic-light",
+    "core-table--props-table-pattern__gothic-dark",
+    "core-table--props-table-pattern__stone-light",
+    "core-table--props-table-pattern__stone-dark",
+    "core-table--props-table-pattern__y2k-light",
+    "core-table--props-table-pattern__y2k-dark",
+    "core-table--props-table-pattern__matcha-light",
+    "core-table--props-table-pattern__matcha-dark",
+    "core-table--props-table-pattern__chocolate-light",
+    "core-table--props-table-pattern__chocolate-dark"
+  ],
+  "removed": [],
+  "failures": [],
+  "targeting": {
+    "unexercisedOverrides": [],
+    "undeclaredTargets": [],
+    "uncoveredTargets": []
+  }
+}

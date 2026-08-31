@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "status": "skipped",
+  "generatedAt": "2026-08-31T04:13:36.158Z",
+  "reason": "Broad stable scope is deferred to the daily release gate. It covers 3136 trusted baseline shots instead of recapturing them for this PR.",
+  "context": {
+    "sha": "c7d5e5737016733e32a36cd2f4e50c763f704505",
+    "headSha": "c7d5e5737016733e32a36cd2f4e50c763f704505",
+    "baseSha": "039852fc059df1b36aeb29d2398d71e1b3776dcd",
+    "runId": "33354923670",
+    "runAttempt": "1",
+    "trustedScope": {
+      "hasStableVisual": true,
+      "broadStableVisual": true,
+      "stableComponents": [
+        "ComplexSelector",
+        "DateInput",
+        "DateRangeInput",
+        "Field",
+        "FieldStatus",
+        "FileInput",
+        "MultiSelector",
+        "NumberInput",
+        "PowerSearch",
+        "Selector",
+        "TextArea",
+        "TextInput",
+        "TimeInput",
+        "Tokenizer",
+        "Typeahead"
+      ],
+      "stableCoreFiles": [
+        "packages/core/src/ComplexSelector/ComplexSelector.tsx",
+        "packages/core/src/DateInput/DateInput.tsx",
+        "packages/core/src/DateRangeInput/DateRangeInput.tsx",
+        "packages/core/src/Field/Field.tsx",
+        "packages/core/src/Field/index.ts",
+        "packages/core/src/FieldStatus/FieldStatus.tsx",
+        "packages/core/src/FieldStatus/index.ts",
+        "packages/core/src/FileInput/FileInput.tsx",
+        "packages/core/src/MultiSelector/MultiSelector.tsx",
+        "packages/core/src/NumberInput/NumberInput.tsx",
+        "packages/core/src/PowerSearch/PowerSearch.tsx",
+        "packages/core/src/Selector/Selector.tsx",
+        "packages/core/src/TextArea/TextArea.tsx",
+        "packages/core/src/TextInput/TextInput.tsx",
+        "packages/core/src/TimeInput/TimeInput.tsx",
+        "packages/core/src/Tokenizer/Tokenizer.tsx",
+        "packages/core/src/Typeahead/Typeahead.tsx",
+        "packages/core/src/hooks/useInputStatusIcon.tsx"
+      ],
+      "stableThemes": [],
+      "canaryPackages": [
+        "@astryxdesign/lab",
+        "@astryxdesign/richtext"
+      ]
+    }
+  },
+  "counts": {
+    "total": 3136,
+    "unchanged": 0,
+    "changed": 0,
+    "added": 0,
+    "removed": 0,
+    "failed": 0
+  },
+  "components": [
+    "ComplexSelector",
+    "DateInput",
+    "DateRangeInput",
+    "Field",
+    "FieldStatus",
+    "FileInput",
+    "MultiSelector",
+    "NumberInput",
+    "PowerSearch",
+    "Selector",
+    "TextArea",
+    "TextInput",
+    "TimeInput",
+    "Tokenizer",
+    "Typeahead"
+  ],
+  "changes": [],
+  "added": [],
+  "removed": [],
+  "failures": []
+}

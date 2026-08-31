@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5752,
+    "headSha": "99f0dd669d62fe64305ad6cb7d19593f344aa7d2",
+    "headRef": "codex/neutral-theme-gold-star-colors",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33359088409,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5752/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5752/sandbox/",
+      "indexSha256": "09b1180e4e6473db17a7a33f0ca6899013a3e615f91ead3c952ec17ccc754634"
+    }
+  }
+}

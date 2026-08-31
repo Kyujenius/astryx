@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "repository": "facebook/astryx",
+  "pullRequest": {
+    "number": 5495,
+    "headSha": "d6badf2169412461663da1f38682256f0da56c80",
+    "headRef": "feat/step-connector-segment",
+    "headRepository": "facebook/astryx",
+    "headRepositoryId": "1131202426"
+  },
+  "sourceRun": {
+    "id": 33371809315,
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "targets": {
+    "storybook": {
+      "available": true,
+      "path": "pr/5495/",
+      "indexSha256": "b1897f3f4703faf8ebc0206d5d9223d232a0528f87b91aed5b2877c19b7952cd"
+    },
+    "sandbox": {
+      "available": true,
+      "path": "pr/5495/sandbox/",
+      "indexSha256": "f9d668e94e9386cc6d765c63cfbd44015b4e6770e8caf0d9feca78c97a8e4922"
+    }
+  }
+}

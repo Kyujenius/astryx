@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "repo": "facebook/astryx",
+  "pr": 5547,
+  "headSha": "5531484d8705b7b3a08172203d1b96b50a5269b7",
+  "testedSha": "5531484d8705b7b3a08172203d1b96b50a5269b7",
+  "baseSha": "5e8fab8cdb71fe2419a7f9afee68b1d2a469cadf",
+  "run": {
+    "id": 33371801448,
+    "attempt": 1
+  },
+  "capture": {
+    "platform": "linux-arm64",
+    "browser": "chromium-149.0.7827.0",
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    }
+  },
+  "deltas": [],
+  "verdict": {
+    "version": 1,
+    "status": "pass",
+    "generatedAt": "2026-08-31T08:52:03.651Z",
+    "context": {
+      "sha": "5531484d8705b7b3a08172203d1b96b50a5269b7",
+      "runId": "33371801448",
+      "runAttempt": "1",
+      "headSha": "5531484d8705b7b3a08172203d1b96b50a5269b7",
+      "baseSha": "5e8fab8cdb71fe2419a7f9afee68b1d2a469cadf",
+      "ref": "refs/heads/main",
+      "trustedScope": {
+        "hasStableVisual": true,
+        "broadStableVisual": false,
+        "stableComponents": [
+          "Toast"
+        ],
+        "stableCoreFiles": [
+          "packages/core/src/Toast/ToastViewport.tsx"
+        ],
+        "stableThemes": [],
+        "canaryPackages": []
+      }
+    },
+    "platform": "linux-arm64",
+    "baseline": {
+      "capturedAt": "2026-08-30T19:31:54.975Z",
+      "sha": "0443933b693cb0d3987a5e6ad592826e673e1750",
+      "platform": "linux-arm64"
+    },
+    "counts": {
+      "total": 238,
+      "unchanged": 238,
+      "changed": 0,
+      "added": 0,
+      "removed": 0,
+      "failed": 0
+    },
+    "changes": [],
+    "added": [],
+    "removed": [],
+    "failures": [],
+    "targeting": {
+      "unexercisedOverrides": [],
+      "undeclaredTargets": [],
+      "uncoveredTargets": []
+    }
+  }
+}
