@@ -7,4 +7,14 @@
  * this file into the resolved version folder.
  */
 
-export default [];
+import renameFieldStatusPresentationType, {
+  meta as renameFieldStatusPresentationTypeMeta,
+} from './rename-field-status-presentation-type.mjs';
+
+export default [
+  {
+    name: 'rename-field-status-presentation-type',
+    transform: renameFieldStatusPresentationType,
+    meta: renameFieldStatusPresentationTypeMeta,
+  },
+];

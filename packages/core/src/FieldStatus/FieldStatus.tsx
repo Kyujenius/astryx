@@ -129,9 +129,7 @@ export interface FieldStatusProps extends BaseProps<HTMLDivElement> {
  * decorative for assistive tech (`aria-hidden`): the message text already names
  * the status in words and is announced through the live region. The `attached`
  * variant keeps its status affordance on the bordered input, so it renders no
- * icon here to avoid a duplicate. The `tooltip` variant renders no message box
- * at all — the input surfaces the status through a tooltip on its on-field
- * icon — so callers skip rendering FieldStatus for it.
+ * icon here to avoid a duplicate.
  *
  * Screen-reader announcements go through the persistent `useAnnounce` live
  * regions (assertive for errors, polite otherwise) rather than `role`/

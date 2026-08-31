@@ -45,7 +45,7 @@ import {
   inputStatusBorderStyles,
   inputStatusHoverShadowStyles,
   inputStatusFocusWithinStyles,
-  type FieldStatusVariant,
+  type FieldStatusPresentation,
 } from '../Field';
 import {Icon, renderIconSlot, type IconType} from '../Icon';
 import {VisuallyHidden} from '../VisuallyHidden';
@@ -301,7 +301,7 @@ interface NumberInputPropsBase extends Omit<
    * - 'tooltip': no message box; the status icon becomes a focusable info-tip button that reveals the message on hover, keyboard focus, or tap
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /**
    * The size of the input.
    * - 'sm': Compact size (28px height)

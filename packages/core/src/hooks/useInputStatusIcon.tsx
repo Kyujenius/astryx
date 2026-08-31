@@ -36,7 +36,7 @@ import {useCallback, useEffect, useState} from 'react';
 import type {ReactNode} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import {Icon, type IconName, type IconSize} from '../Icon';
-import type {FieldStatusVariant} from '../FieldStatus/FieldStatus';
+import type {FieldStatusPresentation} from '../Field/Field';
 import type {InputStatus, InputStatusType} from '../Field/types';
 import {useTooltip} from '../Tooltip';
 import {useTranslator} from '../i18n';
@@ -103,7 +103,7 @@ export interface UseInputStatusIconOptions {
   /** The input's status, or undefined when there is none. */
   status?: InputStatus;
   /** How the status is presented relative to the input. */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /** Whether the input is inside an InputGroup (which owns status rendering). */
   isInGroup?: boolean;
   /** Size of the on-field icon. @default 'md' */

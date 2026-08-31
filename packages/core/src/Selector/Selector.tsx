@@ -39,7 +39,7 @@ import {
   inputStatusBorderStyles,
   inputStatusHoverShadowStyles,
   inputWrapperStyles,
-  type FieldStatusVariant,
+  type FieldStatusPresentation,
 } from '../Field';
 import {Divider} from '../Divider';
 import {layerAnimations} from '../Layer/layerAnimations.stylex';
@@ -577,7 +577,7 @@ interface SelectorPropsBase<
    * - 'tooltip': message is exposed from the on-field status icon
    * @default 'attached' for input selectors; 'detached' for ghost selectors
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
 
   /**
    * Width of the field. Numbers are treated as pixels, strings are used as-is

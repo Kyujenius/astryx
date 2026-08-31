@@ -15,6 +15,7 @@ export {Field} from './Field';
 export type {
   FieldProps,
   FieldStatusInput,
+  FieldStatusPresentation,
   FieldStatusType,
 } from './Field';
 export {FieldLabel} from './FieldLabel';

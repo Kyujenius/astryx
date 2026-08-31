@@ -25,7 +25,6 @@
 export interface FieldStatusVariantMap {
   attached: true;
   detached: true;
-  tooltip: true;
 }
 
 export {FieldStatus} from './FieldStatus';

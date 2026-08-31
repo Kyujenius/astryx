@@ -37,7 +37,7 @@ import {layerAnimations} from '../Layer/layerAnimations.stylex';
 import {Icon} from '../Icon';
 import type {IconType} from '../Icon';
 import type {IconName} from '../Icon/globalIconRegistry';
-import type {InputStatus, FieldStatusVariant} from '../Field';
+import type {InputStatus, FieldStatusPresentation} from '../Field';
 import {usePopover} from '../Popover/usePopover';
 import {useAnnounce} from '../hooks/useAnnounce';
 import {
@@ -409,7 +409,7 @@ export interface PowerSearchProps extends Omit<
    * - 'detached': message floats below as a separate element with spacing
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /** Max width for dropdown menu. */
   menuWidth?: number;
   /** Max display length for filter token values. @default 40 */

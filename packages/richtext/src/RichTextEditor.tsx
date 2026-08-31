@@ -50,7 +50,7 @@ import {
   inputStatusBorderStyles,
   inputStatusHoverShadowStyles,
   inputStatusFocusWithinStyles,
-  type FieldStatusVariant,
+  type FieldStatusPresentation,
 } from '@astryxdesign/core/Field';
 import type {BaseProps} from '@astryxdesign/core';
 import {useInputStatusIcon} from '@astryxdesign/core/hooks';
@@ -348,7 +348,7 @@ export interface RichTextEditorProps extends Omit<
    *   info-tip button that reveals the message
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /**
    * Width of the field. Numbers are treated as pixels, strings are used as-is
    * (e.g. `'100%'`).

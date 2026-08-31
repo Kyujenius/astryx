@@ -40,7 +40,7 @@ import {
   Field,
   InputClearButton,
   type InputStatus,
-  type FieldStatusVariant,
+  type FieldStatusPresentation,
 } from '../Field';
 import {Icon} from '../Icon';
 import {Spinner} from '../Spinner';
@@ -374,7 +374,7 @@ export interface FileInputProps extends Omit<
    * - 'tooltip': no message box; the status icon becomes a focusable info-tip button that reveals the message on hover, keyboard focus, or tap
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /**
    * Description text displayed below the label.
    */

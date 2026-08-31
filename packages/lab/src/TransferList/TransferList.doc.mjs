@@ -224,7 +224,7 @@ export const docs = {
     },
     {
       name: 'statusVariant',
-      type: 'FieldStatusVariant',
+      type: 'FieldStatusPresentation',
       description: 'Placement treatment for the status message.',
     },
     {

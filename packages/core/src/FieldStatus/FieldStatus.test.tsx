@@ -13,6 +13,7 @@ import {describe, it, expect, vi, afterEach} from 'vitest';
 import {render, screen, waitFor} from '@testing-library/react';
 import * as stylex from '@stylexjs/stylex';
 import {FieldStatus} from './FieldStatus';
+import type {FieldStatusVariant} from './FieldStatus';
 import {__resetLiveRegionsForTest} from '../hooks/useAnnounce';
 
 const testStyles = stylex.create({
@@ -32,6 +33,12 @@ afterEach(() => {
 
 describe('FieldStatus', () => {
   it('renders the message text', () => {
+    const directVariants: FieldStatusVariant[] = ['attached', 'detached'];
+    // @ts-expect-error tooltip is a Field-family sentinel, not a FieldStatus variant
+    const tooltip: FieldStatusVariant = 'tooltip';
+    expect(directVariants).toEqual(['attached', 'detached']);
+    expect(tooltip).toBe('tooltip');
+
     render(<FieldStatus type="error" message="This field is required" />);
     expect(screen.getByText('This field is required')).toBeInTheDocument();
   });

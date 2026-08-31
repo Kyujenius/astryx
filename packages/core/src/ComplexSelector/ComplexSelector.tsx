@@ -28,7 +28,11 @@ import React, {
 import * as stylex from '@stylexjs/stylex';
 import type {StyleXStyles} from '@stylexjs/stylex';
 import type {BaseProps} from '../BaseProps';
-import {Field, inputWrapperStyles, type FieldStatusVariant} from '../Field';
+import {
+  Field,
+  inputWrapperStyles,
+  type FieldStatusPresentation,
+} from '../Field';
 import {Icon, renderIconSlot, type IconType} from '../Icon';
 import {Spinner} from '../Spinner';
 import {useTranslator} from '../i18n';
@@ -260,7 +264,7 @@ export interface ComplexSelectorProps<Value> extends Omit<
   /** Validation status. */
   status?: ComplexSelectorStatus;
   /** Status placement. */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /** Tooltip text displayed next to the label. */
   labelTooltip?: string;
   /** Trigger and field size. */

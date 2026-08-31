@@ -37,7 +37,7 @@ import {
   inputStatusBorderStyles,
   inputStatusHoverShadowStyles,
   inputStatusFocusWithinStyles,
-  type FieldStatusVariant,
+  type FieldStatusPresentation,
 } from '../Field';
 import {Token} from '../Token';
 import {renderIconSlot, type IconType} from '../Icon';
@@ -118,7 +118,7 @@ export interface TokenizerProps<T extends SearchableItem> extends Omit<
    * - 'detached': message floats below as a separate element with spacing
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /**
    * Icon to display at the start of the input.
    * Accepts a ReactNode (e.g. `<Icon icon={SearchIcon} />`) or an SVG icon component directly.

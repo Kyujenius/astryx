@@ -65,6 +65,12 @@ export type {SizeValue} from '../utils/types';
 
 export type FieldStatusType = 'warning' | 'error' | 'success';
 
+/**
+ * Status presentation used by Field-family components. `tooltip` is a sentinel
+ * consumed by the field composition before it renders FieldStatus.
+ */
+export type FieldStatusPresentation = FieldStatusVariant | 'tooltip';
+
 export interface FieldStatusInput {
   /**
    * The type of status to display.
@@ -160,7 +166,7 @@ export interface FieldProps extends Omit<
    * - 'tooltip': No message box; the input surfaces status through a tooltip on its on-field icon
    * @default 'attached'
    */
-  statusVariant?: FieldStatusVariant;
+  statusVariant?: FieldStatusPresentation;
   /**
    * Width of the field. Numbers are treated as pixels, strings are used as-is
    * (e.g. `'100%'`). Sizes the whole field — label, control, and status — so

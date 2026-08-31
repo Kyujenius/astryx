@@ -10,7 +10,7 @@ import {DateInput} from '../DateInput/DateInput';
 import {DateRangeInput} from '../DateRangeInput/DateRangeInput';
 import {TimeInput} from '../TimeInput/TimeInput';
 import {FileInput} from '../FileInput/FileInput';
-import type {FieldStatusVariant} from '../FieldStatus/FieldStatus';
+import type {FieldStatusPresentation} from '../Field/Field';
 
 // Every id referenced by an aria-describedby must resolve to an element in the
 // document (WCAG 1.3.1) — a described-by pointing at a non-rendered node is a
@@ -28,9 +28,9 @@ function expectNoDanglingDescribedBy(root: HTMLElement) {
   }
 }
 
-const VARIANTS: FieldStatusVariant[] = ['attached', 'detached', 'tooltip'];
+const VARIANTS: FieldStatusPresentation[] = ['attached', 'detached', 'tooltip'];
 
-const INPUTS: [string, (variant: FieldStatusVariant) => ReactElement][] = [
+const INPUTS: [string, (variant: FieldStatusPresentation) => ReactElement][] = [
   [
     'TextInput',
     v => (
