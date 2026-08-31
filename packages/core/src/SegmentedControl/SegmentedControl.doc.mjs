@@ -2,6 +2,30 @@
 
 import {segmentedControlAccessibilityThemeCoverage} from '../accessibility/generatedThemeCoverage.mjs';
 
+/** @type {import('@astryxdesign/cli/authoring').ComponentAnatomyElement[]} */
+const anatomy = [
+  {
+    name: 'Control',
+    required: true,
+    description: 'Container for the mutually exclusive segment choices.',
+  },
+  {
+    name: 'Segment',
+    required: true,
+    description: 'Individual choice within the control.',
+  },
+  {
+    name: 'Label',
+    required: false,
+    description: 'Visible text identifying a segment when its label is not hidden.',
+  },
+  {
+    name: 'Icon',
+    required: false,
+    description: 'Optional caller-supplied icon shown inside a segment.',
+  },
+];
+
 /** @type {import('@astryxdesign/cli/authoring').ComponentDoc} */
 
 export const docs = {
@@ -98,6 +122,7 @@ export const docs = {
     {name: 'SegmentedControlItem'},
   ],
   usage: {
+    anatomy,
     description:
       'A segmented button group that allows users to make a single selection from a small set of mutually exclusive options. Use SegmentedControl when all options should be visible at once and the selection controls a value or mode, not page navigation.',
     accessibility: [
@@ -170,6 +195,7 @@ export const docs = {
 /** @type {import('@astryxdesign/cli/authoring').ComponentTranslationDoc} */
 export const docsZh = {
   usage: {
+    anatomy,
     description:
       'A segmented button group that allows users to make a single selection from a small set of mutually exclusive options. Use SegmentedControl when all options should be visible at once and the selection controls a value or mode, not page navigation.',
     bestPractices: [
@@ -185,6 +211,7 @@ export const docsZh = {
 /** @type {import('@astryxdesign/cli/authoring').ComponentTranslationDoc} */
 export const docsDense = {
   usage: {
+    anatomy,
     description:
       'A segmented button group that allows users to make a single selection from a small set of mutually exclusive options. Use SegmentedControl when all options should be visible at once and the selection controls a value or mode, not page navigation.',
     bestPractices: [

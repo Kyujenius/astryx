@@ -7,6 +7,7 @@ it governs. Consumer documentation remains in component `.doc.mjs` files and
 ## Placement
 
 - `architecture/`: the shipped system, its boundaries, and invariants.
+- `contributing/`: practical contributor workflows that project current owner records without replacing them.
 - `design/`: human-owned visual and interaction specifications.
 - `families/`: contracts shared by sibling components.
 - `specs/`: consequential proposed or shipped system changes and their decisions.
@@ -53,7 +54,8 @@ aligned. They are intentionally separate:
   schema change therefore includes an active-record migration. Archived records
   may retain an older schema that remains checked in.
 
-Run `pnpm check:knowledge` to validate templates and records.
+Run `pnpm check:knowledge` to validate templates and records. Pure spec-record
+pull requests do not add Changesets because they do not publish package changes.
 
 ## Visibility
 
