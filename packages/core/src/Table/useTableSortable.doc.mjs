@@ -11,14 +11,6 @@ export const docs = {
     targets: [
       {className: 'astryx-table-sort-button', visualProps: ['direction']},
     ],
-    vars: [
-      {
-        name: '--table-sort-glyph-color',
-        description:
-          "Colour of the sort glyph. Carried as a var rather than as `color` on the button because the button also holds the column name, which belongs to the header cell and follows `astryx-table-header-cell` instead. Setting `color` on this target paints the whole button, the column name included; the var paints the glyph alone.",
-        default: 'var(--color-icon-secondary)',
-      },
-    ],
   },
   usage: {
     description: 'Call useTableSortable with a config object containing sort state and callback. Pass the returned plugin to Table via the plugins prop.',

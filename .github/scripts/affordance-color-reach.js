@@ -63,7 +63,7 @@ const CASES = [
     // `astryx-table-header-cell`, so an inherited `color` here would drag it
     // along. The documented way to paint this affordance's glyph is the var,
     // so the var is what gets asserted.
-    themeProperty: '--table-sort-glyph-color',
+    themeProperty: '--_table-sort-glyph-color',
     // The header label shares the button with the glyph, so it has to keep the
     // cell's colour rather than follow the affordance's.
     unchanged: 'the header label',

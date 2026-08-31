@@ -151,10 +151,15 @@ const sortStyles = stylex.create({
     //
     // Declaring the var here keeps BOTH true and keeps the single target: the
     // label inherits the header cell (nothing interrupts it now), and the
-    // glyph reads the var (see `iconWrapper`). A theme reaches the glyph by
-    // setting either the var or plain `color` on this target, because the var
-    // is registered as derived from `color` — see `derivedVarRegistry`.
-    '--table-sort-glyph-color': colorVars['--color-icon-secondary'],
+    // glyph reads the var (see `iconWrapper`).
+    //
+    // Underscored, so internal. A public var is a promise
+    // `theme-var-reachability.js` has to be able to check, and it finds a
+    // component's stories by matching the doc name against story titles — a
+    // plugin has none of its own (its behaviour is exercised through
+    // `Core/TableFiltering`), so the promise would be undocumentable by
+    // construction. Themes reach this affordance through the target itself.
+    '--_table-sort-glyph-color': colorVars['--color-icon-secondary'],
     width: '100%',
     height: '100%',
     textAlign: 'inherit',
@@ -187,7 +192,7 @@ const sortStyles = stylex.create({
       // forced-colors mode that drops the background tint. On the var, not on
       // `color`: the column name is not part of the affordance and must not
       // move when the pointer is over the heading.
-      '--table-sort-glyph-color': {
+      '--_table-sort-glyph-color': {
         ':hover:where(:not(:disabled,[aria-disabled="true"]))':
           colorVars['--color-text-primary'],
       },
@@ -196,7 +201,7 @@ const sortStyles = stylex.create({
   // Accent is the SORTED state and nothing else, so "this column is sorted"
   // never reads as "the pointer is here".
   buttonSorted: {
-    '--table-sort-glyph-color': colorVars['--color-accent'],
+    '--_table-sort-glyph-color': colorVars['--color-accent'],
   },
   // No `color`. The header text belongs to the cell, so it inherits the
   // colour `TableHeaderCell` paints on the `<th>` — which is what the
@@ -206,7 +211,7 @@ const sortStyles = stylex.create({
   label: {},
   iconWrapper: {
     display: 'inline-flex',
-    color: 'var(--table-sort-glyph-color)',
+    color: 'var(--_table-sort-glyph-color)',
     transitionProperty: 'color',
     transitionDuration: {
       default: durationVars['--duration-fast'],
