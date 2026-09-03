@@ -9,6 +9,26 @@ export const docs = {
   isHiddenFromOverview: true,
   description:
     'A single-select group of radio menu items (role="group" of menuitemradio). Owns the selected value and lays its items out with the menu\'s inter-item gap.',
+  playground: {
+    wrapper: {
+      component: 'DropdownMenu',
+      props: {button: {label: 'Sort'}, presentation: 'popover'},
+    },
+    defaults: {
+      value: 'newest',
+      label: 'Sort by',
+      children: [
+        {
+          __element: 'DropdownMenuRadioItem',
+          props: {value: 'newest', label: 'Newest'},
+        },
+        {
+          __element: 'DropdownMenuRadioItem',
+          props: {value: 'oldest', label: 'Oldest'},
+        },
+      ],
+    },
+  },
   props: [
     {
       name: 'value',
