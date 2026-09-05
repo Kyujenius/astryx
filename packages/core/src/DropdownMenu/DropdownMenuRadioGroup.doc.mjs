@@ -12,7 +12,14 @@ export const docs = {
   playground: {
     wrapper: {
       component: 'DropdownMenu',
-      props: {button: {label: 'Sort'}, presentation: 'popover'},
+      // Open on first load so the radio choices are visible without a click;
+      // the preview bridges `onOpenChange` back so selecting still closes the
+      // menu and the trigger reopens it.
+      props: {
+        button: {label: 'Sort'},
+        presentation: 'popover',
+        isMenuOpen: true,
+      },
     },
     defaults: {
       value: 'newest',

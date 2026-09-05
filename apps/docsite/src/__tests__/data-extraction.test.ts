@@ -312,9 +312,16 @@ describe('componentRegistry', () => {
     const radioGroup = core.find(c => c.name === 'DropdownMenuRadioGroup');
 
     expect(radioGroup).toBeDefined();
+    // The menu opens on first load so both choices are visible immediately;
+    // the preview bridges DropdownMenu's `onOpenChange` back to this prop so
+    // selecting still closes the menu and the trigger reopens it.
     expect(radioGroup!.playground?.wrapper).toMatchObject({
       component: 'DropdownMenu',
-      props: {button: {label: 'Sort'}, presentation: 'popover'},
+      props: {
+        button: {label: 'Sort'},
+        presentation: 'popover',
+        isMenuOpen: true,
+      },
     });
     expect(radioGroup!.playground?.defaults).toMatchObject({
       value: 'newest',
