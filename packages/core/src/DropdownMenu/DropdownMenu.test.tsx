@@ -907,6 +907,110 @@ describe('DropdownMenu controlled mode', () => {
     expect(HTMLElement.prototype.showPopover).toHaveBeenCalled();
   });
 
+  it('does not move focus into a menu that mounts already open', () => {
+    const raf = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation(callback => {
+        callback(0);
+        return 0;
+      });
+
+    try {
+      render(
+        <DropdownMenu
+          button={{label: 'Sort'}}
+          isMenuOpen
+          onOpenChange={vi.fn()}>
+          <DropdownMenuItem label="Newest" />
+          <DropdownMenuItem label="Oldest" />
+        </DropdownMenu>,
+      );
+
+      // Nobody opened the menu, so nobody is dropped into it (#5976).
+      expect(
+        screen.getByRole('menuitem', {name: 'Newest', hidden: true}),
+      ).toBeInTheDocument();
+      expect(document.body).toHaveFocus();
+    } finally {
+      raf.mockRestore();
+    }
+  });
+
+  it('still focuses the first item when a mounted menu opens later', async () => {
+    const raf = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation(callback => {
+        callback(0);
+        return 0;
+      });
+
+    try {
+      const {rerender} = render(
+        <DropdownMenu
+          button={{label: 'Sort'}}
+          isMenuOpen={false}
+          onOpenChange={vi.fn()}>
+          <DropdownMenuItem label="Newest" />
+          <DropdownMenuItem label="Oldest" />
+        </DropdownMenu>,
+      );
+
+      rerender(
+        <DropdownMenu
+          button={{label: 'Sort'}}
+          isMenuOpen
+          onOpenChange={vi.fn()}>
+          <DropdownMenuItem label="Newest" />
+          <DropdownMenuItem label="Oldest" />
+        </DropdownMenu>,
+      );
+
+      // A programmatic open after mount keeps the first-item focus (#4594).
+      await waitFor(() =>
+        expect(
+          screen.getByRole('menuitem', {name: 'Newest', hidden: true}),
+        ).toHaveFocus(),
+      );
+    } finally {
+      raf.mockRestore();
+    }
+  });
+
+  it('focuses the first item once a mounted-open menu is closed and reopened', async () => {
+    const raf = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation(callback => {
+        callback(0);
+        return 0;
+      });
+
+    try {
+      const menu = (isMenuOpen: boolean) => (
+        <DropdownMenu
+          button={{label: 'Sort'}}
+          isMenuOpen={isMenuOpen}
+          onOpenChange={vi.fn()}>
+          <DropdownMenuItem label="Newest" />
+          <DropdownMenuItem label="Oldest" />
+        </DropdownMenu>
+      );
+      const {rerender} = render(menu(true));
+      expect(document.body).toHaveFocus();
+
+      // The mount-open exemption ends with the first close; the next open is
+      // a real one and lands on the first item again.
+      rerender(menu(false));
+      rerender(menu(true));
+      await waitFor(() =>
+        expect(
+          screen.getByRole('menuitem', {name: 'Newest', hidden: true}),
+        ).toHaveFocus(),
+      );
+    } finally {
+      raf.mockRestore();
+    }
+  });
+
   it('calls onOpenChange when button is clicked', async () => {
     const user = userEvent.setup();
     const handleToggle = vi.fn();

@@ -688,14 +688,25 @@ function DropdownMenuPopover({
       ),
   });
 
+  // Mounting already open (`isMenuOpen` true on the first render) is not an
+  // open anyone asked for, so it must not move focus into the menu — that
+  // drops keyboard users mid-page (#5976). The flag is decided once at mount
+  // rather than per effect run, because the layer may defer the first show
+  // until its popover element mounts; it clears once the consumer closes the
+  // menu, so every later open follows the modality rules above.
+  const isMountedOpenRef = useRef(isControlled && controlledIsOpen === true);
+
   // Sync controlled open state → popover.
   useEffect(() => {
     if (isControlled) {
       if (controlledIsOpen && !popover.isOpen) {
-        shouldFocusOnOpenRef.current = true;
+        shouldFocusOnOpenRef.current = !isMountedOpenRef.current;
         popover.show();
-      } else if (!controlledIsOpen && popover.isOpen) {
-        popover.hide();
+      } else if (!controlledIsOpen) {
+        isMountedOpenRef.current = false;
+        if (popover.isOpen) {
+          popover.hide();
+        }
       }
     }
   }, [controlledIsOpen, isControlled, popover]);

@@ -200,7 +200,8 @@ export const docs = {
     {
       name: 'isMenuOpen',
       type: 'boolean',
-      description: 'Controlled open state for the menu.',
+      description:
+        'Controlled open state for the menu. Mounting with true renders the menu open without moving focus into it; focus moves to the first item only when the menu opens after mount.',
     },
     {
       name: 'onOpenChange',
