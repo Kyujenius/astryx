@@ -820,10 +820,21 @@ function DropdownMenuPopover({
           e.preventDefault();
           openAndFocus();
         }
+        return;
       }
-      // When open, key events go to the menu container via useListFocus
+      // Open with focus still on the trigger — a menu that mounted open, or
+      // a pointer open followed by Shift+Tab — has nothing in the tab order
+      // to reach its items, so ArrowDown walks in the way a keyboard open
+      // would land (#5976). Enter/Space keep toggling the menu closed, and
+      // once focus is inside, key events go to the menu container instead.
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!focusFirst()) {
+          listRef.current?.focus();
+        }
+      }
     },
-    [popover.isOpen, openAndFocus],
+    [popover.isOpen, openAndFocus, focusFirst, listRef],
   );
 
   // Icon-only

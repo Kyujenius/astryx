@@ -976,6 +976,40 @@ describe('DropdownMenu controlled mode', () => {
     }
   });
 
+  it('walks into a mounted-open menu with ArrowDown from the focused trigger', () => {
+    const raf = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation(callback => {
+        callback(0);
+        return 0;
+      });
+
+    try {
+      render(
+        <DropdownMenu
+          button={{label: 'Sort'}}
+          isMenuOpen
+          onOpenChange={vi.fn()}>
+          <DropdownMenuItem label="Newest" />
+          <DropdownMenuItem label="Oldest" />
+        </DropdownMenu>,
+      );
+
+      // The items sit outside the tab order, so the trigger is the only
+      // keyboard way in; ArrowDown must not require closing and reopening.
+      const trigger = screen.getByRole('button', {name: /Sort/});
+      trigger.focus();
+      fireEvent.keyDown(trigger, {key: 'ArrowDown'});
+
+      expect(
+        screen.getByRole('menuitem', {name: 'Newest', hidden: true}),
+      ).toHaveFocus();
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    } finally {
+      raf.mockRestore();
+    }
+  });
+
   it('focuses the first item once a mounted-open menu is closed and reopened', async () => {
     const raf = vi
       .spyOn(window, 'requestAnimationFrame')

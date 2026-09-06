@@ -319,7 +319,7 @@ export const Controlled: Story = {
 
 // Mounted already open: the menu is visible on first render, but focus stays
 // where it was. Only an open the user initiates moves focus into the first
-// item (#5976).
+// item; from the focused trigger, ArrowDown walks into the open menu (#5976).
 export const MountedOpen: Story = {
   render: function MountedOpenStory() {
     const [isOpen, setIsOpen] = useState(true);
@@ -337,7 +337,7 @@ export const MountedOpen: Story = {
     docs: {
       description: {
         story:
-          'A controlled menu mounted with `isMenuOpen` true renders open without taking focus; `document.activeElement` stays on the page until the user opens the menu themselves.',
+          'A controlled menu mounted with `isMenuOpen` true renders open without taking focus; `document.activeElement` stays on the page until the user opens the menu themselves. Tab to the trigger, then ArrowDown enters the already-open menu at the first item.',
       },
     },
   },
