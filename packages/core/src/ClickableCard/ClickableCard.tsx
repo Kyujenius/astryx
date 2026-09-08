@@ -20,10 +20,17 @@
  * container tokens, theming). Adds an interactive wrapper with
  * useClickableContainer for safe nested interactive elements.
  *
- * A hidden <button> or <a> inside the card provides the accessible role,
+ * An invisible <button> or <a> inside the card provides the accessible role,
  * label, and focus ring — the card surface itself has no role/tabIndex.
  * This gives screen readers a real interactive element to announce while
  * keeping the visual hover/active overlay on the full card.
+ *
+ * The control is stretched over the whole card (not clipped to 1×1) so a
+ * pointer press aimed at the element that carries the role — speech input,
+ * assistive technology, automation — lands on it. Nested interactive
+ * elements stay reachable because positioned descendants that follow the
+ * control in DOM order paint above it; Astryx interactive components are
+ * positioned, so they need nothing extra. Plain text content stays below.
  *
  * For static display, use Card.
  * For toggle selection, use SelectableCard.
@@ -123,16 +130,20 @@ const styles = stylex.create({
     cursor: 'default',
     opacity: 0.5,
   },
-  srOnly: {
+  // The accessible control covers the card so a pointer press aimed at the
+  // element carrying the role lands on it. Invisible, not clipped: it keeps
+  // its geometry for hit-testing and stays in the accessibility tree.
+  control: {
     position: 'absolute',
-    width: '1px',
-    height: '1px',
+    inset: 0,
+    margin: 0,
     padding: 0,
-    margin: '-1px',
-    overflow: 'hidden',
-    clip: 'rect(0, 0, 0, 0)',
-    whiteSpace: 'nowrap',
     borderWidth: 0,
+    opacity: 0,
+    cursor: {
+      default: 'inherit',
+      ':is(:disabled,[aria-disabled="true"])': 'default',
+    },
   },
 });
 
@@ -225,9 +236,9 @@ export interface ClickableCardProps extends BaseProps {
  * links, inputs) work independently — clicking them does NOT trigger
  * the card's onClick or navigation.
  *
- * A visually-hidden <button> or <a> inside the card provides the
- * accessible role and label. The card surface is a plain <div> —
- * no role or tabIndex on the container.
+ * An invisible <button> or <a> stretched over the card provides the
+ * accessible role and label and receives pointer activation. The card
+ * surface is a plain <div> — no role or tabIndex on the container.
  *
  * @compositionHint Use for cards that navigate to a detail page or trigger an action.
  * For toggle selection cards, use SelectableCard instead.
@@ -273,10 +284,13 @@ export function ClickableCard({
   const interactiveRef = useRef<HTMLElement | null>(null);
   const LinkComponent = useLinkComponent();
 
+  // The control owns `onClick`. Pointer presses land on it directly; the
+  // container hook only proxies clicks from positioned, non-interactive
+  // descendants that paint above the control, so it must not also run the
+  // handler or the action would fire twice.
   const {onClick, onMouseUp} = useClickableContainer({
     containerRef,
     interactiveRef,
-    onClick: onClickProp,
     href,
     target,
     disabled: isDisabled,
@@ -333,7 +347,8 @@ export function ClickableCard({
           aria-label={label}
           aria-disabled={isDisabled || undefined}
           tabIndex={isDisabled ? -1 : 0}
-          {...stylex.props(styles.srOnly)}
+          onClick={!isDisabled ? onClickProp : undefined}
+          {...stylex.props(styles.control)}
         />
       ) : (
         <button
@@ -342,7 +357,7 @@ export function ClickableCard({
           aria-label={label}
           disabled={isDisabled}
           onClick={onClickProp}
-          {...stylex.props(styles.srOnly)}
+          {...stylex.props(styles.control)}
         />
       )}
       {children}

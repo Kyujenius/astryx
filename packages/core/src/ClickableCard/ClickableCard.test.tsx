@@ -47,6 +47,41 @@ describe('ClickableCard', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
+  it('calls onClick once when the accessible control itself is clicked', () => {
+    const handleClick = vi.fn();
+    render(
+      <ClickableCard label="Test card" onClick={handleClick}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    // Pointer activation aimed at the element carrying the role — what
+    // speech input, assistive technology, and automation dispatch.
+    fireEvent.click(screen.getByRole('button', {name: 'Test card'}));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClick once when the accessible link itself is clicked', () => {
+    const handleClick = vi.fn(e => e.preventDefault());
+    render(
+      <ClickableCard label="Nav card" href="/settings" onClick={handleClick}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    fireEvent.click(screen.getByRole('link', {name: 'Nav card'}));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClick once when the surface of an href card is clicked', () => {
+    const handleClick = vi.fn(e => e.preventDefault());
+    render(
+      <ClickableCard label="Nav card" href="/settings" onClick={handleClick}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    fireEvent.click(screen.getByText('Content'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
   it('does NOT call onClick when a nested button is clicked', () => {
     const handleCardClick = vi.fn();
     const handleButtonClick = vi.fn();
