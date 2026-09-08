@@ -61,7 +61,9 @@ describe('ClickableCard', () => {
   });
 
   it('calls onClick once when the accessible link itself is clicked', () => {
-    const handleClick = vi.fn(e => e.preventDefault());
+    const handleClick = vi.fn((e: {preventDefault: () => void}) => {
+      e.preventDefault();
+    });
     render(
       <ClickableCard label="Nav card" href="/settings" onClick={handleClick}>
         <span>Content</span>
@@ -72,7 +74,9 @@ describe('ClickableCard', () => {
   });
 
   it('calls onClick once when the surface of an href card is clicked', () => {
-    const handleClick = vi.fn(e => e.preventDefault());
+    const handleClick = vi.fn((e: {preventDefault: () => void}) => {
+      e.preventDefault();
+    });
     render(
       <ClickableCard label="Nav card" href="/settings" onClick={handleClick}>
         <span>Content</span>
