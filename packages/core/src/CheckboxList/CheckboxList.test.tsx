@@ -640,17 +640,17 @@ describe('CheckboxListItem accessible name', () => {
     );
   });
 
-  it('does not reference the visible label when aria-label is given', () => {
+  it('does not reference the visible label when a conforming aria-label is given', () => {
     render(
       <CheckboxList label="Plans" value={[]} onChange={() => {}}>
         <CheckboxListItem
           label={<span>Pro plan</span>}
-          aria-label="Pro"
+          aria-label="Pro plan option"
           value="pro"
         />
       </CheckboxList>,
     );
-    const checkbox = screen.getByRole('checkbox', {name: 'Pro'});
+    const checkbox = screen.getByRole('checkbox', {name: 'Pro plan option'});
     expect(checkbox).not.toHaveAttribute('aria-labelledby');
   });
 });

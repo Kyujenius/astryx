@@ -14,14 +14,14 @@ export const docs = {
       name: 'label',
       type: 'ReactNode',
       description:
-        'Primary text label for the item. Rich labels may contain links or buttons, which keep their own behavior without toggling the item. A ReactNode label names the checkbox from its visible text; pass aria-label when that text is absent or reads badly.',
+        'Primary text label for the item. Rich labels may contain links or buttons, which keep their own behavior without toggling the item. A ReactNode label names the checkbox from its visible text; pass aria-label only when that text is absent, or include all visible label words in the override.',
       required: true,
     },
     {
       name: 'aria-label',
       type: 'string',
       description:
-        'Plain-text accessible name for the checkbox, replacing the one derived from label. Applied to the checkbox control. Use it when a rich label\'s visible text is absent or reads badly.',
+        'Plain-text accessible name for the checkbox, replacing the one derived from label. Applied to the checkbox control. Use it when a rich label has no visible text; otherwise the value must retain every visible label word.',
     },
     {
       name: 'value',
@@ -100,14 +100,14 @@ export const docsZh = {
       name: 'label',
       type: 'ReactNode',
       description:
-        '选项的主标签。富内容标签可包含链接或按钮，它们保留自身行为且不会切换该选项。ReactNode 标签会以其可见文本为复选框命名；当该文本缺失或不适合朗读时再传入 aria-label。',
+        '选项的主标签。富内容标签可包含链接或按钮，它们保留自身行为且不会切换该选项。ReactNode 标签会以其可见文本为复选框命名；仅当可见文本缺失时使用 aria-label，否则覆盖值必须保留全部可见文字。',
       required: true,
     },
     {
       name: 'aria-label',
       type: 'string',
       description:
-        '复选框的纯文本无障碍名称，会替换由 label 推导出的名称。当富标签的可见文本缺失或不适合朗读时使用。',
+        '复选框的纯文本无障碍名称，会替换由 label 推导出的名称。仅当富标签没有可见文本时才完全替代；否则必须保留全部可见文字。',
     },
     {
       name: 'value',
