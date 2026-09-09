@@ -75,6 +75,41 @@ describe('ClickableCard', () => {
     expect(seen[0]).toBe(screen.getByText('Content').parentElement);
   });
 
+  it('passes the card surface as currentTarget when the accessible control is clicked', () => {
+    const seen: EventTarget[] = [];
+    render(
+      <ClickableCard
+        label="Test card"
+        onClick={e => seen.push(e.currentTarget)}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    fireEvent.click(screen.getByRole('button', {name: 'Test card'}));
+    expect(seen).toHaveLength(1);
+    expect(seen[0]).toBe(screen.getByText('Content').parentElement);
+  });
+
+  it('runs onClick against the card surface when the accessible link is clicked and lets it cancel navigation', () => {
+    const seen: EventTarget[] = [];
+    render(
+      <ClickableCard
+        label="Nav card"
+        href="/settings"
+        onClick={e => {
+          seen.push(e.currentTarget);
+          e.preventDefault();
+        }}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    const proceeded = fireEvent.click(
+      screen.getByRole('link', {name: 'Nav card'}),
+    );
+    expect(seen).toHaveLength(1);
+    expect(seen[0]).toBe(screen.getByText('Content').parentElement);
+    expect(proceeded).toBe(false);
+  });
+
   it('seals the disabled link control from the pointer', () => {
     const {rerender} = render(
       <ClickableCard label="Link" href="/settings">

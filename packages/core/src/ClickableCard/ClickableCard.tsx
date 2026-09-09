@@ -35,7 +35,13 @@
  * For toggle selection, use SelectableCard.
  */
 
-import {type ReactNode, type MouseEvent, useRef, type Ref} from 'react';
+import {
+  type ReactNode,
+  type MouseEvent,
+  useCallback,
+  useRef,
+  type Ref,
+} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import type {StyleXStyles} from '@stylexjs/stylex';
 import {
@@ -309,6 +315,28 @@ export function ClickableCard({
     disabled: isDisabled,
   });
 
+  // A press that lands on the role-bearing control itself — a pointer aimed
+  // at the element that is the button/link, or Enter/Space on it — is still a
+  // card activation. Run the consumer's callback here, on the surface, so
+  // `currentTarget` is the card and `preventDefault()` cancels the control's
+  // own default action (link navigation); the container hook would otherwise
+  // treat the control as a nested interactive element and skip the callback.
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      const control = interactiveRef.current;
+      if (
+        control != null &&
+        event.target instanceof Node &&
+        control.contains(event.target)
+      ) {
+        onClickProp?.(event);
+        return;
+      }
+      onClick(event);
+    },
+    [onClick, onClickProp],
+  );
+
   const handleMouseUp = onMouseUpProp
     ? (e: MouseEvent<HTMLElement>) => {
         onMouseUp(e);
@@ -349,7 +377,7 @@ export function ClickableCard({
           xstyleProp,
         ] as unknown as StyleXStyles
       }
-      onClick={!isDisabled ? onClick : undefined}
+      onClick={!isDisabled ? handleClick : undefined}
       onMouseUp={!isDisabled ? handleMouseUp : undefined}
       {...props}>
       {isLink ? (
@@ -372,7 +400,6 @@ export function ClickableCard({
           type="button"
           aria-label={label}
           disabled={isDisabled}
-          onClick={onClickProp}
           {...stylex.props(styles.control, hasBorder && styles.controlBordered)}
         />
       )}
