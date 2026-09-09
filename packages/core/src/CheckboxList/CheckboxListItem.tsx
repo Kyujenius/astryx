@@ -26,6 +26,7 @@ import {ListItem} from '../List/ListItem';
 import {ListContext} from '../List/ListContext';
 import {CheckboxListContext} from './CheckboxListContext';
 import {useTranslator} from '../i18n';
+import {isRenderable} from '../utils';
 
 // =============================================================================
 // Styles
@@ -85,6 +86,9 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
   value?: string;
   /**
    * Secondary content below the label. Accepts a plain string or a ReactNode.
+   * Exposed as the checkbox's accessible description through
+   * `aria-describedby`, so assistive technology can tell it is the explanation
+   * for this choice rather than unrelated row text.
    */
   description?: ReactNode;
   /**
@@ -180,6 +184,14 @@ export function CheckboxListItem({
   const isRichLabel = typeof label !== 'string';
   const labelID = useId();
   const namesFromVisibleLabel = isRichLabel && ariaLabel == null;
+
+  // The visible row description is the checkbox's accessible description,
+  // as RadioListItem does: wrap it in an id'd span and point the control at
+  // it with `aria-describedby`. One predicate drives both the wrapper and the
+  // attribute; a ReactNode description can be `false` or `''`, which render
+  // nothing — a `!= null` check would leave the link dangling.
+  const descriptionID = useId();
+  const hasDescription = isRenderable(description);
   const checkboxLabel =
     ariaLabel ??
     (isRichLabel ? t('@astryx.checkboxList.item.checkbox') : label);
@@ -251,7 +263,13 @@ export function CheckboxListItem({
       {...restProps}
       ref={ref}
       label={namesFromVisibleLabel ? <span id={labelID}>{label}</span> : label}
-      description={description}
+      description={
+        hasDescription ? (
+          <span id={descriptionID}>{description}</span>
+        ) : (
+          description
+        )
+      }
       endContent={endContent}
       isDisabled={effectiveDisabled}
       // Delegate row clicks to the checkbox instead of wiring onClick (which
@@ -277,6 +295,7 @@ export function CheckboxListItem({
           ref={checkboxRef}
           label={checkboxLabel}
           aria-labelledby={namesFromVisibleLabel ? labelID : undefined}
+          aria-describedby={hasDescription ? descriptionID : undefined}
           isLabelHidden
           value={resolvedChecked}
           onChange={() => handleToggle()}
