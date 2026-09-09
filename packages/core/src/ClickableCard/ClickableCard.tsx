@@ -321,8 +321,17 @@ export function ClickableCard({
   // `currentTarget` is the card and `preventDefault()` cancels the control's
   // own default action (link navigation); the container hook would otherwise
   // treat the control as a nested interactive element and skip the callback.
+  //
+  // A surface click on an href card is proxied by the hook to `link.click()`,
+  // and that synthetic click bubbles back through this handler while the hook
+  // is still running. It is the same activation, already delivered to the
+  // consumer, so it is ignored — otherwise `onClick` would run twice.
+  const proxyingRef = useRef(false);
   const handleClick = useCallback(
     (event: MouseEvent<HTMLElement>) => {
+      if (proxyingRef.current) {
+        return;
+      }
       const control = interactiveRef.current;
       if (
         control != null &&
@@ -332,7 +341,12 @@ export function ClickableCard({
         onClickProp?.(event);
         return;
       }
-      onClick(event);
+      proxyingRef.current = true;
+      try {
+        onClick(event);
+      } finally {
+        proxyingRef.current = false;
+      }
     },
     [onClick, onClickProp],
   );

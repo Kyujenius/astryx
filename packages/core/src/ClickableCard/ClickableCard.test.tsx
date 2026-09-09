@@ -110,6 +110,20 @@ describe('ClickableCard', () => {
     expect(proceeded).toBe(false);
   });
 
+  it('calls onClick exactly once when the surface of an href card is clicked without preventDefault', () => {
+    const handleClick = vi.fn();
+    render(
+      <ClickableCard label="Nav card" href="/settings" onClick={handleClick}>
+        <span>Content</span>
+      </ClickableCard>,
+    );
+    // The container hook proxies the surface click to the link with
+    // `link.click()`; that synthetic click bubbles back through the card and
+    // must not run the consumer callback a second time.
+    fireEvent.click(screen.getByText('Content'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
   it('seals the disabled link control from the pointer', () => {
     const {rerender} = render(
       <ClickableCard label="Link" href="/settings">
