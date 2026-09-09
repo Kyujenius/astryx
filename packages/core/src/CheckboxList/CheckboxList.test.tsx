@@ -593,7 +593,7 @@ describe('CheckboxListItem accessible name', () => {
     ).toBeInTheDocument();
   });
 
-  it('names the checkbox from aria-label when the label is a ReactNode', () => {
+  it('names the checkbox from a conforming aria-label when the label is a ReactNode', () => {
     render(
       <CheckboxList label="Plans" value={[]} onChange={() => {}}>
         <CheckboxListItem
@@ -602,13 +602,13 @@ describe('CheckboxListItem accessible name', () => {
               Pro plan <em>(recommended)</em>
             </span>
           }
-          aria-label="Pro plan"
+          aria-label="Pro plan (recommended) option"
           value="pro"
         />
       </CheckboxList>,
     );
     expect(
-      screen.getByRole('checkbox', {name: 'Pro plan'}),
+      screen.getByRole('checkbox', {name: 'Pro plan (recommended) option'}),
     ).toBeInTheDocument();
   });
 

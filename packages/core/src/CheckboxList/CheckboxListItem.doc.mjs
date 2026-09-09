@@ -82,7 +82,7 @@ export const docs = {
       label: 'Rich label with an overriding aria-label',
       code: `<CheckboxListItem
   label={<span>Pro plan <Badge label="Recommended" /></span>}
-  aria-label="Pro plan"
+  aria-label="Pro plan Recommended option"
   value="pro"
 />`,
     },

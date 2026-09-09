@@ -52,8 +52,9 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
    * delegate to the checkbox.
    *
    * A string names the checkbox directly. A ReactNode names it from its
-   * visible text through `aria-labelledby`; if that text is absent or reads
-   * badly, pass `aria-label`.
+   * visible text through `aria-labelledby`; if that text is absent, pass
+   * `aria-label`. When visible text is present, an override must retain every
+   * visible word so speech-input users can say what they see.
    */
   label: ReactNode;
   /**
@@ -62,15 +63,16 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
    *
    * A string `label` names the checkbox directly, and a rich (ReactNode)
    * `label` names it from its visible text through `aria-labelledby`. Pass
-   * `aria-label` when that flattened text is absent or reads badly — it
-   * replaces the derived name rather than adding to it. Applied to the
-   * checkbox control, not the row.
+   * `aria-label` when that text is absent. When visible text is present, the
+   * override must retain every visible word so speech-input users can say what
+   * they see. It replaces the derived name and applies to the checkbox control,
+   * not the row.
    *
    * @example
    * ```
    * <CheckboxListItem
    *   label={<span>Pro plan <Badge label="Recommended" /></span>}
-   *   aria-label="Pro plan"
+   *   aria-label="Pro plan Recommended option"
    *   value="pro"
    * />
    * ```
