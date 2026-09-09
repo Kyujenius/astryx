@@ -16,12 +16,11 @@
  * - /packages/cli/assets/templates/blocks/components/CheckboxList/ (showcase blocks)
  */
 
-import {use, useRef, type ReactNode} from 'react';
+import {use, useRef, type ReactNode, useId} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import type {StyleXStyles} from '@stylexjs/stylex';
 import {colorVars} from '../theme/tokens.stylex';
 import type {BaseProps} from '../BaseProps';
-import {useDevWarning} from '../hooks/useDevWarning';
 import {CheckboxInput} from '../CheckboxInput/CheckboxInput';
 import {ListItem} from '../List/ListItem';
 import {ListContext} from '../List/ListContext';
@@ -54,13 +53,14 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
    */
   label: ReactNode;
   /**
-   * Plain-text accessible name for the checkbox when `label` is a ReactNode.
+   * Plain-text accessible name for the checkbox, replacing the one derived
+   * from `label`.
    *
-   * A string `label` names the checkbox automatically. A rich (ReactNode)
-   * `label` cannot, so pass a concise string equivalent via the standard
-   * `aria-label` — otherwise the checkbox falls back to the generic name
-   * "Checkbox" and every rich-label item in a list announces identically to
-   * screen readers. Applied to the checkbox control, not the row.
+   * A string `label` names the checkbox directly, and a rich (ReactNode)
+   * `label` names it from its visible text through `aria-labelledby`. Pass
+   * `aria-label` when that flattened text is absent or reads badly — it
+   * replaces the derived name rather than adding to it. Applied to the
+   * checkbox control, not the row.
    *
    * @example
    * ```
@@ -164,24 +164,17 @@ export function CheckboxListItem({
     );
   }
 
-  // Accessible name for the (visually hidden) checkbox label. A string
-  // `label` names it directly; a rich label needs `aria-label`.
+  // Accessible name for the checkbox. A string `label` (or an explicit
+  // `aria-label`) becomes the text of its visually hidden label. A rich
+  // label instead names the checkbox from the visible label element through
+  // `aria-labelledby`, the same route RadioListItem takes; the hidden label
+  // then only carries the generic word, which `aria-labelledby` outranks.
+  const isRichLabel = typeof label !== 'string';
+  const labelID = useId();
+  const namesFromVisibleLabel = isRichLabel && ariaLabel == null;
   const checkboxLabel =
     ariaLabel ??
-    (typeof label === 'string'
-      ? label
-      : t('@astryx.checkboxList.item.checkbox'));
-
-  // Dev-time guardrail: a rich label without `aria-label` leaves the
-  // checkbox with the generic name "Checkbox".
-  useDevWarning(
-    'CheckboxListItem',
-    '`label` is a ReactNode, so the checkbox falls ' +
-      'back to the generic accessible name "Checkbox". Pass ' +
-      '`aria-label` with a concise string equivalent of the visible ' +
-      'label so screen readers can tell items apart.',
-    typeof label !== 'string' && ariaLabel == null,
-  );
+    (isRichLabel ? t('@astryx.checkboxList.item.checkbox') : label);
 
   // Density from list context for checkbox sizing
   const listCtx = use(ListContext);
@@ -249,7 +242,7 @@ export function CheckboxListItem({
     <ListItem
       {...restProps}
       ref={ref}
-      label={label}
+      label={isRichLabel ? <span id={labelID}>{label}</span> : label}
       description={description}
       endContent={endContent}
       isDisabled={effectiveDisabled}
@@ -275,6 +268,7 @@ export function CheckboxListItem({
         <CheckboxInput
           ref={checkboxRef}
           label={checkboxLabel}
+          aria-labelledby={namesFromVisibleLabel ? labelID : undefined}
           isLabelHidden
           value={resolvedChecked}
           onChange={() => handleToggle()}

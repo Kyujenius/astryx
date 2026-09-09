@@ -616,33 +616,46 @@ describe('CheckboxListItem accessible name', () => {
     warnSpy.mockRestore();
   });
 
-  it('warns once when a ReactNode label has no aria-label', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const richLabel = (
-      <span>
-        Pro plan <em>(recommended)</em>
-      </span>
-    );
-    const {rerender} = render(
+  it('names the checkbox from the visible text of a ReactNode label', () => {
+    render(
       <CheckboxList label="Plans" value={[]} onChange={() => {}}>
-        <CheckboxListItem label={richLabel} value="pro" />
+        <CheckboxListItem
+          label={
+            <span>
+              Pro plan <em>(recommended)</em>
+            </span>
+          }
+          value="pro"
+        />
       </CheckboxList>,
     );
-    // Falls back to the generic name, and tells the developer how to fix it.
+    const checkbox = screen.getByRole('checkbox', {
+      name: 'Pro plan (recommended)',
+    });
+    expect(checkbox).toBeInTheDocument();
     expect(
-      screen.getByRole('checkbox', {name: 'Checkbox'}),
-    ).toBeInTheDocument();
-    expect(warnSpy).toHaveBeenCalledTimes(1);
-    expect(String(warnSpy.mock.calls[0]?.[0])).toContain('aria-label');
+      screen.queryByRole('checkbox', {name: 'Checkbox'}),
+    ).not.toBeInTheDocument();
+    // The name comes from the visible label element itself.
+    const labelledBy = checkbox.getAttribute('aria-labelledby');
+    expect(labelledBy).toBeTruthy();
+    expect(document.getElementById(labelledBy!)).toHaveTextContent(
+      'Pro plan (recommended)',
+    );
+  });
 
-    // Warn once per item instance — re-renders don't repeat it.
-    rerender(
-      <CheckboxList label="Plans" value={['pro']} onChange={() => {}}>
-        <CheckboxListItem label={richLabel} value="pro" />
+  it('does not reference the visible label when aria-label is given', () => {
+    render(
+      <CheckboxList label="Plans" value={[]} onChange={() => {}}>
+        <CheckboxListItem
+          label={<span>Pro plan</span>}
+          aria-label="Pro"
+          value="pro"
+        />
       </CheckboxList>,
     );
-    expect(warnSpy).toHaveBeenCalledTimes(1);
-    warnSpy.mockRestore();
+    const checkbox = screen.getByRole('checkbox', {name: 'Pro'});
+    expect(checkbox).not.toHaveAttribute('aria-labelledby');
   });
 });
 

@@ -14,14 +14,14 @@ export const docs = {
       name: 'label',
       type: 'ReactNode',
       description:
-        'Primary text label for the item. Rich labels may contain links or buttons, which keep their own behavior without toggling the item. Pair a ReactNode label with aria-label so screen readers get a concise checkbox name.',
+        'Primary text label for the item. Rich labels may contain links or buttons, which keep their own behavior without toggling the item. A ReactNode label names the checkbox from its visible text; pass aria-label when that text is absent or reads badly.',
       required: true,
     },
     {
       name: 'aria-label',
       type: 'string',
       description:
-        'Plain-text accessible name for the checkbox when label is a ReactNode. Applied to the checkbox control. Without it, rich-label items all announce as the generic "Checkbox" to screen readers.',
+        'Plain-text accessible name for the checkbox, replacing the one derived from label. Applied to the checkbox control. Use it when a rich label\'s visible text is absent or reads badly.',
     },
     {
       name: 'value',
@@ -100,14 +100,14 @@ export const docsZh = {
       name: 'label',
       type: 'ReactNode',
       description:
-        '选项的主标签。富内容标签可包含链接或按钮，它们保留自身行为且不会切换该选项。ReactNode 标签应同时传入 aria-label，为屏幕阅读器提供简洁的复选框名称。',
+        '选项的主标签。富内容标签可包含链接或按钮，它们保留自身行为且不会切换该选项。ReactNode 标签会以其可见文本为复选框命名；当该文本缺失或不适合朗读时再传入 aria-label。',
       required: true,
     },
     {
       name: 'aria-label',
       type: 'string',
       description:
-        '当 label 是 ReactNode 时，复选框的纯文本无障碍名称。缺少它时，富标签选项都会向屏幕阅读器播报为通用的 "Checkbox"。',
+        '复选框的纯文本无障碍名称，会替换由 label 推导出的名称。当富标签的可见文本缺失或不适合朗读时使用。',
     },
     {
       name: 'value',
@@ -160,7 +160,7 @@ export const docsDense = {
     label:
       'Primary label. String or ReactNode; nested controls keep their behavior.',
     'aria-label':
-      'Plain-text checkbox name when label is a ReactNode. Without it, rich-label items all announce as "Checkbox".',
+      'Plain-text checkbox name replacing the one derived from label. Use when a rich label\'s visible text is absent or reads badly.',
     value: 'Identity key (required inside CheckboxList).',
     description: 'Secondary content below label. String or ReactNode.',
     endContent: 'Content rendered after label area.',
