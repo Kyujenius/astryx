@@ -25,12 +25,11 @@
  * This gives screen readers a real interactive element to announce while
  * keeping the visual hover/active overlay on the full card.
  *
- * The control is stretched over the whole card (not clipped to 1×1) so a
- * pointer press aimed at the element that carries the role — speech input,
- * assistive technology, automation — lands on it. Nested interactive
- * elements stay reachable because positioned descendants that follow the
- * control in DOM order paint above it; Astryx interactive components are
- * positioned, so they need nothing extra. Plain text content stays below.
+ * The control is not clipped to 1×1: it occupies the card's top padding
+ * band, so a pointer press aimed at the element that carries the role —
+ * speech input, assistive technology, automation — lands on it. It never
+ * overlaps the content box, so nested controls, inputs, and text selection
+ * behave exactly as they would in a plain Card.
  *
  * For static display, use Card.
  * For toggle selection, use SelectableCard.
@@ -130,12 +129,17 @@ const styles = stylex.create({
     cursor: 'default',
     opacity: 0.5,
   },
-  // The accessible control covers the card so a pointer press aimed at the
-  // element carrying the role lands on it. Invisible, not clipped: it keeps
-  // its geometry for hit-testing and stays in the accessibility tree.
+  // The accessible control lives in the card's top padding band — the frame,
+  // never the content box — so a pointer press aimed at the element carrying
+  // the role lands on it without covering anything a consumer rendered.
+  // Invisible, not clipped: it keeps real geometry for hit-testing and stays
+  // in the accessibility tree. `minHeight` keeps it hit-testable at padding 0.
   control: {
     position: 'absolute',
-    inset: 0,
+    top: 0,
+    insetInline: 0,
+    height: 'var(--container-padding-block-start)',
+    minHeight: '1px',
     margin: 0,
     padding: 0,
     borderWidth: 0,
@@ -144,6 +148,18 @@ const styles = stylex.create({
       default: 'inherit',
       ':is(:disabled,[aria-disabled="true"])': 'default',
     },
+  },
+  // The bordered variant draws its border inside the padding variable, so the
+  // real padding band is one border-width shorter; match it exactly so the
+  // control never overlaps the first row of content.
+  controlBordered: {
+    height: `calc(var(--container-padding-block-start) - ${borderVars['--border-width']})`,
+  },
+  // A disabled link card keeps `href` for its role. Sealing the control from
+  // the pointer covers every path that would follow it — click, middle-click,
+  // context menu, drag — and the surface runs nothing while disabled.
+  controlDisabled: {
+    pointerEvents: 'none',
   },
 });
 
@@ -236,7 +252,7 @@ export interface ClickableCardProps extends BaseProps {
  * links, inputs) work independently — clicking them does NOT trigger
  * the card's onClick or navigation.
  *
- * An invisible <button> or <a> stretched over the card provides the
+ * An invisible <button> or <a> in the card's top padding band provides the
  * accessible role and label and receives pointer activation. The card
  * surface is a plain <div> — no role or tabIndex on the container.
  *
@@ -284,13 +300,10 @@ export function ClickableCard({
   const interactiveRef = useRef<HTMLElement | null>(null);
   const LinkComponent = useLinkComponent();
 
-  // The control owns `onClick`. Pointer presses land on it directly; the
-  // container hook only proxies clicks from positioned, non-interactive
-  // descendants that paint above the control, so it must not also run the
-  // handler or the action would fire twice.
   const {onClick, onMouseUp} = useClickableContainer({
     containerRef,
     interactiveRef,
+    onClick: onClickProp,
     href,
     target,
     disabled: isDisabled,
@@ -347,8 +360,11 @@ export function ClickableCard({
           aria-label={label}
           aria-disabled={isDisabled || undefined}
           tabIndex={isDisabled ? -1 : 0}
-          onClick={!isDisabled ? onClickProp : undefined}
-          {...stylex.props(styles.control)}
+          {...stylex.props(
+            styles.control,
+            hasBorder && styles.controlBordered,
+            isDisabled && styles.controlDisabled,
+          )}
         />
       ) : (
         <button
@@ -357,7 +373,7 @@ export function ClickableCard({
           aria-label={label}
           disabled={isDisabled}
           onClick={onClickProp}
-          {...stylex.props(styles.control)}
+          {...stylex.props(styles.control, hasBorder && styles.controlBordered)}
         />
       )}
       {children}

@@ -11,7 +11,7 @@ export const docs = {
     description: 'An interactive card for navigation or action targets. Nested interactive elements work independently.',
     bestPractices: [
       {guidance: true, description: 'Use for cards that navigate to a detail page or trigger a single action.'},
-      {guidance: true, description: 'Nest buttons or links freely inside; they handle their own events. The invisible control covers the card, so a raw nested element must be positioned (`position: relative`) to stay clickable — Astryx components already are.'},
+      {guidance: true, description: 'Nest buttons or links freely inside; they handle their own events.'},
       {guidance: false, description: 'Use for toggling selection; use SelectableCard for that.'},
     ],
     anatomy: [
@@ -62,7 +62,7 @@ export const docsDense = {
     description: 'Interactive card for navigation/action targets. Nested interactive elements work independently.',
     bestPractices: [
       {guidance: true, description: 'Use for cards navigating to detail page or triggering single action.'},
-      {guidance: true, description: 'Nest buttons/links freely inside; they handle own events. Raw nested elements must be positioned (`position: relative`) to stay above the invisible control; Astryx components already are.'},
+      {guidance: true, description: 'Nest buttons/links freely inside; they handle own events.'},
       {guidance: false, description: 'Use for toggling selection; use SelectableCard instead.'},
     ],
   },
