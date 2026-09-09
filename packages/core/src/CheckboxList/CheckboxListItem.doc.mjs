@@ -79,7 +79,7 @@ export const docs = {
   ],
   examples: [
     {
-      label: 'Rich label with an accessible name',
+      label: 'Rich label with an overriding aria-label',
       code: `<CheckboxListItem
   label={<span>Pro plan <Badge label="Recommended" /></span>}
   aria-label="Pro plan"
@@ -158,7 +158,7 @@ export const docsDense = {
     'Individual checkbox item w/ label, description, end content slot.',
   propDescriptions: {
     label:
-      'Primary label. String or ReactNode; nested controls keep their behavior.',
+      'Primary label. String or ReactNode; nested controls keep their behavior. A ReactNode names the checkbox from its visible text.',
     'aria-label':
       'Plain-text checkbox name replacing the one derived from label. Use when a rich label\'s visible text is absent or reads badly.',
     value: 'Identity key (required inside CheckboxList).',

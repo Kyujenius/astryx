@@ -377,7 +377,7 @@
   },
   "@astryx.checkboxList.item.checkbox": {
     "defaultMessage": "Checkbox",
-    "description": "Screen-reader-only last-ditch fallback name for a checkbox inside a list item when no label is provided. Should almost never render — consumers should supply a real label."
+    "description": "Screen-reader-only placeholder text of the hidden label for a checkbox inside a list item whose visible label is rich content. The checkbox normally takes its name from that visible content via aria-labelledby, which outranks this text; it becomes the name only when the rich label has no text and no aria-label."
   },
   "@astryx.commandPalette.emptySearch": {
     "defaultMessage": "No results",

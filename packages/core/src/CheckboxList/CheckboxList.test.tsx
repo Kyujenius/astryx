@@ -594,7 +594,6 @@ describe('CheckboxListItem accessible name', () => {
   });
 
   it('names the checkbox from aria-label when the label is a ReactNode', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <CheckboxList label="Plans" value={[]} onChange={() => {}}>
         <CheckboxListItem
@@ -611,9 +610,6 @@ describe('CheckboxListItem accessible name', () => {
     expect(
       screen.getByRole('checkbox', {name: 'Pro plan'}),
     ).toBeInTheDocument();
-    // A named checkbox needs no dev guidance.
-    expect(warnSpy).not.toHaveBeenCalled();
-    warnSpy.mockRestore();
   });
 
   it('names the checkbox from the visible text of a ReactNode label', () => {

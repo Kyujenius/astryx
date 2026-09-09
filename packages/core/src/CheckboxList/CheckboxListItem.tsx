@@ -16,7 +16,7 @@
  * - /packages/cli/assets/templates/blocks/components/CheckboxList/ (showcase blocks)
  */
 
-import {use, useRef, type ReactNode, useId} from 'react';
+import {use, useId, useRef, type ReactNode} from 'react';
 import * as stylex from '@stylexjs/stylex';
 import type {StyleXStyles} from '@stylexjs/stylex';
 import {colorVars} from '../theme/tokens.stylex';
@@ -50,6 +50,10 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
    * child components control their own text behavior). Links and buttons in
    * the label keep their own behavior; only non-interactive row clicks
    * delegate to the checkbox.
+   *
+   * A string names the checkbox directly. A ReactNode names it from its
+   * visible text through `aria-labelledby`; if that text is absent or reads
+   * badly, pass `aria-label`.
    */
   label: ReactNode;
   /**
@@ -165,10 +169,12 @@ export function CheckboxListItem({
   }
 
   // Accessible name for the checkbox. A string `label` (or an explicit
-  // `aria-label`) becomes the text of its visually hidden label. A rich
-  // label instead names the checkbox from the visible label element through
-  // `aria-labelledby`, the same route RadioListItem takes; the hidden label
-  // then only carries the generic word, which `aria-labelledby` outranks.
+  // `aria-label`) becomes the text of CheckboxInput's visually hidden
+  // `<label>`, which only accepts a string. A rich label instead names the
+  // checkbox from the visible label element through `aria-labelledby`, as
+  // RadioListItem does; the hidden label then carries only the generic word,
+  // which `aria-labelledby` outranks. Strings are left unwrapped on purpose:
+  // Item single-line-truncates a raw string label but not a node.
   const isRichLabel = typeof label !== 'string';
   const labelID = useId();
   const namesFromVisibleLabel = isRichLabel && ariaLabel == null;
@@ -242,7 +248,7 @@ export function CheckboxListItem({
     <ListItem
       {...restProps}
       ref={ref}
-      label={isRichLabel ? <span id={labelID}>{label}</span> : label}
+      label={namesFromVisibleLabel ? <span id={labelID}>{label}</span> : label}
       description={description}
       endContent={endContent}
       isDisabled={effectiveDisabled}

@@ -731,8 +731,7 @@ describe('RadioList', () => {
         </RadioList>,
       );
       // The radio points at its visible label, so the name is computed from
-      // the rich node's own text — unlike CheckboxListItem, whose control has
-      // a separate hidden label and needs aria-label to say anything useful.
+      // the rich node's own text.
       expect(
         screen.getByRole('radio', {name: 'Pro plan (recommended)'}),
       ).toBeInTheDocument();
