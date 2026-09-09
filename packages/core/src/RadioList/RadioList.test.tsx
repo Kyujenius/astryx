@@ -705,13 +705,13 @@ describe('RadioList', () => {
             label="Option A"
             value="a"
             data-testid="item-a"
-            aria-label="First option"
+            aria-label="Option A, first option"
           />
         </RadioList>,
       );
       expect(screen.getByTestId('item-a')).not.toHaveAttribute('aria-label');
       expect(
-        screen.getByRole('radio', {name: 'First option'}),
+        screen.getByRole('radio', {name: 'Option A, first option'}),
       ).toBeInTheDocument();
     });
   });
@@ -746,12 +746,14 @@ describe('RadioList', () => {
                 Pro plan <em>(recommended)</em>
               </span>
             }
-            aria-label="Pro plan"
+            aria-label="Pro plan (recommended) option"
             value="pro"
           />
         </RadioList>,
       );
-      expect(screen.getByRole('radio', {name: 'Pro plan'})).toBeInTheDocument();
+      expect(
+        screen.getByRole('radio', {name: 'Pro plan (recommended) option'}),
+      ).toBeInTheDocument();
     });
 
     it('selects the option when a ReactNode label is clicked', async () => {
@@ -777,12 +779,14 @@ describe('RadioList', () => {
                 Pro plan <a href="#pricing">pricing details</a>
               </>
             }
-            aria-label="Pro plan"
+            aria-label="Pro plan pricing details"
             value="pro"
           />
         </RadioList>,
       );
-      const radio = screen.getByRole('radio', {name: 'Pro plan'});
+      const radio = screen.getByRole('radio', {
+        name: 'Pro plan pricing details',
+      });
       const link = screen.getByRole('link', {name: 'pricing details'});
       await user.tab();
       expect(radio).toHaveFocus();

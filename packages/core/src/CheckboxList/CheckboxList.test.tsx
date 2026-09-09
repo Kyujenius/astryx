@@ -369,12 +369,14 @@ describe('CheckboxList', () => {
               Pro plan <a href="#pricing">pricing details</a>
             </>
           }
-          aria-label="Pro plan"
+          aria-label="Pro plan pricing details"
           value="pro"
         />
       </CheckboxList>,
     );
-    const checkbox = screen.getByRole('checkbox', {name: 'Pro plan'});
+    const checkbox = screen.getByRole('checkbox', {
+      name: 'Pro plan pricing details',
+    });
     const link = screen.getByRole('link', {name: 'pricing details'});
     await user.tab();
     expect(checkbox).toHaveFocus();
