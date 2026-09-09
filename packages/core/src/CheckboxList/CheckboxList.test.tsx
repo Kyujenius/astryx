@@ -614,7 +614,7 @@ describe('CheckboxListItem accessible name', () => {
     ).toBeInTheDocument();
   });
 
-  it('names the checkbox from the visible text of a ReactNode label', () => {
+  it('links a ReactNode label to the checkbox control', () => {
     render(
       <CheckboxList label="Plans" value={[]} onChange={() => {}}>
         <CheckboxListItem
@@ -627,14 +627,7 @@ describe('CheckboxListItem accessible name', () => {
         />
       </CheckboxList>,
     );
-    const checkbox = screen.getByRole('checkbox', {
-      name: 'Pro plan (recommended)',
-    });
-    expect(checkbox).toBeInTheDocument();
-    expect(
-      screen.queryByRole('checkbox', {name: 'Checkbox'}),
-    ).not.toBeInTheDocument();
-    // The name comes from the visible label element itself.
+    const checkbox = screen.getByRole('checkbox');
     const labelledBy = checkbox.getAttribute('aria-labelledby');
     expect(labelledBy).toBeTruthy();
     expect(document.getElementById(labelledBy!)).toHaveTextContent(

@@ -160,7 +160,7 @@ export const docsDense = {
     label:
       'Primary label. String or ReactNode; nested controls keep their behavior. A ReactNode names the checkbox from its visible text.',
     'aria-label':
-      'Plain-text checkbox name replacing the one derived from label. Use when a rich label\'s visible text is absent or reads badly.',
+      'Plain-text checkbox name replacing the one derived from label. Use when visible text is absent; otherwise retain every visible label word.',
     value: 'Identity key (required inside CheckboxList).',
     description: 'Secondary content below label. String or ReactNode.',
     endContent: 'Content rendered after label area.',
