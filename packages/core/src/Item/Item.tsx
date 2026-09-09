@@ -444,8 +444,10 @@ export function Item({
 
   // The description element's id, published through ItemDescriptionContext so a
   // control Item renders in a slot can point at it with `aria-describedby`.
-  // `isRenderable` rather than `!= null`: a `false` or `''` description renders
-  // nothing, and a reference to an empty element describes nothing.
+  // `isRenderable` rather than `!= null` so the common empty values — `null`,
+  // `undefined`, `false`, `''` — publish no id and leave a consumer with no
+  // dangling reference. It is a shallow check: content that renders nothing
+  // only once React runs it, such as an empty fragment, still publishes an id.
   const descriptionID = useId();
   const hasRenderableDescription = isRenderable(description);
 

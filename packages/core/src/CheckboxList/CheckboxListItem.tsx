@@ -130,6 +130,28 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
 // =============================================================================
 
 /**
+ * The row's visible description is the checkbox's accessible description. Item
+ * renders that element and owns its id, and publishes the id through
+ * ItemDescriptionContext; this reads it from inside the slot Item renders. The
+ * row cannot wrap the description in an id'd element instead — that turns a
+ * plain string into a ReactNode and drops the single-line truncation ListItem
+ * documents — and a public `descriptionId` prop would fail
+ * `spec:AST-002/DEC-1`, since the caller decides nothing Item cannot derive.
+ *
+ * This component owns `aria-describedby`, so the prop is omitted rather than
+ * accepted and overwritten: a caller passing one would otherwise lose the id
+ * silently.
+ */
+function DescribedCheckboxInput(
+  props: Omit<CheckboxInputProps, 'aria-describedby'>,
+) {
+  const describedBy = use(ItemDescriptionContext);
+  return (
+    <CheckboxInput {...props} aria-describedby={describedBy ?? undefined} />
+  );
+}
+
+/**
  * A checkbox item for use within CheckboxList (collection mode)
  * or List (standalone mode).
  *
@@ -149,22 +171,6 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
  * />
  * ```
  */
-/**
- * The row's visible description is the checkbox's accessible description. Item
- * renders that element and owns its id, and publishes the id through
- * ItemDescriptionContext; this reads it from inside the slot Item renders. The
- * row cannot wrap the description in an id'd element instead — that turns a
- * plain string into a ReactNode and drops the single-line truncation ListItem
- * documents — and a public `descriptionId` prop would fail
- * `spec:AST-002/DEC-1`, since the caller decides nothing Item cannot derive.
- */
-function DescribedCheckboxInput(props: CheckboxInputProps) {
-  const describedBy = use(ItemDescriptionContext);
-  return (
-    <CheckboxInput {...props} aria-describedby={describedBy ?? undefined} />
-  );
-}
-
 export function CheckboxListItem({
   label,
   'aria-label': ariaLabel,
