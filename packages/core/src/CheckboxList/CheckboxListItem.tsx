@@ -22,11 +22,12 @@ import type {StyleXStyles} from '@stylexjs/stylex';
 import {colorVars} from '../theme/tokens.stylex';
 import type {BaseProps} from '../BaseProps';
 import {CheckboxInput} from '../CheckboxInput/CheckboxInput';
+import type {CheckboxInputProps} from '../CheckboxInput/CheckboxInput';
 import {ListItem} from '../List/ListItem';
 import {ListContext} from '../List/ListContext';
 import {CheckboxListContext} from './CheckboxListContext';
 import {useTranslator} from '../i18n';
-import {isRenderable} from '../utils';
+import {ItemDescriptionContext} from '../Item/ItemDescriptionContext';
 
 // =============================================================================
 // Styles
@@ -148,6 +149,22 @@ export interface CheckboxListItemProps extends BaseProps<HTMLLIElement> {
  * />
  * ```
  */
+/**
+ * The row's visible description is the checkbox's accessible description. Item
+ * renders that element and owns its id, and publishes the id through
+ * ItemDescriptionContext; this reads it from inside the slot Item renders. The
+ * row cannot wrap the description in an id'd element instead — that turns a
+ * plain string into a ReactNode and drops the single-line truncation ListItem
+ * documents — and a public `descriptionId` prop would fail
+ * `spec:AST-002/DEC-1`, since the caller decides nothing Item cannot derive.
+ */
+function DescribedCheckboxInput(props: CheckboxInputProps) {
+  const describedBy = use(ItemDescriptionContext);
+  return (
+    <CheckboxInput {...props} aria-describedby={describedBy ?? undefined} />
+  );
+}
+
 export function CheckboxListItem({
   label,
   'aria-label': ariaLabel,
@@ -185,13 +202,6 @@ export function CheckboxListItem({
   const labelID = useId();
   const namesFromVisibleLabel = isRichLabel && ariaLabel == null;
 
-  // The visible row description is the checkbox's accessible description,
-  // as RadioListItem does: wrap it in an id'd span and point the control at
-  // it with `aria-describedby`. One predicate drives both the wrapper and the
-  // attribute; a ReactNode description can be `false` or `''`, which render
-  // nothing — a `!= null` check would leave the link dangling.
-  const descriptionID = useId();
-  const hasDescription = isRenderable(description);
   const checkboxLabel =
     ariaLabel ??
     (isRichLabel ? t('@astryx.checkboxList.item.checkbox') : label);
@@ -263,13 +273,7 @@ export function CheckboxListItem({
       {...restProps}
       ref={ref}
       label={namesFromVisibleLabel ? <span id={labelID}>{label}</span> : label}
-      description={
-        hasDescription ? (
-          <span id={descriptionID}>{description}</span>
-        ) : (
-          description
-        )
-      }
+      description={description}
       endContent={endContent}
       isDisabled={effectiveDisabled}
       // Delegate row clicks to the checkbox instead of wiring onClick (which
@@ -291,11 +295,10 @@ export function CheckboxListItem({
       className={className}
       style={style}
       startContent={
-        <CheckboxInput
+        <DescribedCheckboxInput
           ref={checkboxRef}
           label={checkboxLabel}
           aria-labelledby={namesFromVisibleLabel ? labelID : undefined}
-          aria-describedby={hasDescription ? descriptionID : undefined}
           isLabelHidden
           value={resolvedChecked}
           onChange={() => handleToggle()}
