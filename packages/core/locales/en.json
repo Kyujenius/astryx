@@ -377,7 +377,7 @@
   },
   "@astryx.checkboxList.item.checkbox": {
     "defaultMessage": "Checkbox",
-    "description": "Screen-reader-only placeholder text of the hidden label for a checkbox inside a list item whose visible label is rich content. The checkbox normally takes its name from that visible content via aria-labelledby, which outranks this text; it becomes the name only when the rich label has no text and no aria-label."
+    "description": "Localized hidden text used internally when a rich visible label names the checkbox through aria-labelledby. It does not become the computed name; callers must provide aria-label when rich content has no text."
   },
   "@astryx.commandPalette.emptySearch": {
     "defaultMessage": "No results",

@@ -786,7 +786,7 @@ describe('CheckboxListItem ARIA props', () => {
         <CheckboxListItem
           label="Custom aria"
           aria-describedby="help-text"
-          aria-label="custom label"
+          aria-label="Custom aria label"
         />
       </List>,
     );
@@ -796,7 +796,7 @@ describe('CheckboxListItem ARIA props', () => {
     // ...but aria-label names the checkbox control, not the row.
     expect(item).not.toHaveAttribute('aria-label');
     expect(
-      screen.getByRole('checkbox', {name: 'custom label'}),
+      screen.getByRole('checkbox', {name: 'Custom aria label'}),
     ).toBeInTheDocument();
   });
 
