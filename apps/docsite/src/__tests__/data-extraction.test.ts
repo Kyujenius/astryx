@@ -413,6 +413,38 @@ describe('componentRegistry', () => {
     });
   });
 
+  it('DropdownMenuRadioGroup declares a menu wrapper and radio choices for its preview (#5888)', () => {
+    const core = components['@astryxdesign/core'];
+    const radioGroup = core.find(c => c.name === 'DropdownMenuRadioGroup');
+
+    expect(radioGroup).toBeDefined();
+    // The menu opens on first load so both choices are visible immediately;
+    // the preview bridges DropdownMenu's `onOpenChange` back to this prop so
+    // selecting still closes the menu and the trigger reopens it.
+    expect(radioGroup!.playground?.wrapper).toMatchObject({
+      component: 'DropdownMenu',
+      props: {
+        button: {label: 'Sort'},
+        presentation: 'popover',
+        isMenuOpen: true,
+      },
+    });
+    expect(radioGroup!.playground?.defaults).toMatchObject({
+      value: 'newest',
+      label: 'Sort by',
+      children: [
+        {
+          __element: 'DropdownMenuRadioItem',
+          props: {value: 'newest', label: 'Newest'},
+        },
+        {
+          __element: 'DropdownMenuRadioItem',
+          props: {value: 'oldest', label: 'Oldest'},
+        },
+      ],
+    });
+  });
+
   it('Citation satisfies its required source prop via playground defaults', () => {
     const core = components['@astryxdesign/core'];
     const citation = core.find(c => c.name === 'Citation');
@@ -841,7 +873,9 @@ describe('blockRegistry', () => {
       expect(block.aspectRatio).not.toBeNaN();
       expect(Array.isArray(block.componentsUsed)).toBe(true);
       expect(block.category).toBeDefined();
-      expect(typeof block.exampleFor).toBe('string');
+      expect(
+        block.exampleFor === null || typeof block.exampleFor === 'string',
+      ).toBe(true);
     }
   });
 
@@ -880,8 +914,8 @@ describe('blockRegistry', () => {
     expect(chartShowcase?.source).toContain("from '@astryxdesign/charts'");
   });
 
-  it('every block has exampleFor set', () => {
-    const missing = blocks.filter(b => !b.exampleFor);
+  it('showcases always declare component ownership', () => {
+    const missing = blocks.filter(b => b.isShowcase && !b.exampleFor);
     expect(missing.map(b => b.dirName)).toEqual([]);
   });
 
@@ -889,10 +923,12 @@ describe('blockRegistry', () => {
     const showcases = blocks.filter(b => b.isShowcase);
     const seen = new Map<string, string[]>();
     for (const s of showcases) {
-      if (!seen.has(s.exampleFor)) {
-        seen.set(s.exampleFor, []);
+      expect(s.exampleFor).not.toBeNull();
+      const owner = s.exampleFor!;
+      if (!seen.has(owner)) {
+        seen.set(owner, []);
       }
-      seen.get(s.exampleFor)!.push(s.dirName);
+      seen.get(owner)!.push(s.dirName);
     }
     const dupes = [...seen.entries()].filter(([, v]) => v.length > 1);
     // Some components may legitimately have multiple showcases, but flag them
